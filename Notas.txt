@@ -1,0 +1,8 @@
+-Cada que realice cambios
+git pull origin master
+*Para evitar borrar cambios de terceros*
+
+-Para subir cambios
+Git add . 
+Git commit -m "Explicación"
+git push -u origin master 
