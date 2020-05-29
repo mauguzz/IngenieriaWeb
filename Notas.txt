@@ -1,4 +1,5 @@
 -Cada que realice cambios
+Git add . 
 git pull origin master
 *Para evitar borrar cambios de terceros*
 
@@ -6,3 +7,12 @@ git pull origin master
 Git add . 
 Git commit -m "Explicación"
 git push -u origin master 
+
+
+MysqlServer
+
+Database: SistemaMigratorio
+User: WebApplication
+Password: 123456
+
+Otros datos: Default
