@@ -1,0 +1,51 @@
+/*Tabla actividades*/
+.tabla_actividades{
+  display: grid;
+  grid-template-columns: 2fr repeat(2, 1fr);
+  border-top: 1px solid #1D459A;
+  border-right: 1px solid #1D459A;
+  justify-content: center;
+  align-items: center;
+}
+.tabla_actividades > span{
+  border-left: 1px solid #1D459A;
+  border-bottom: 1px solid #1D459A;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Tabla trabajos*/
+.tabla_trabajos{
+  display: grid;
+  grid-template-columns: 2fr repeat(2, 1fr);
+  border-top: 1px solid #1D459A;
+  border-right: 1px solid #1D459A;
+  justify-content: center;
+  align-items: center;
+}
+.tabla_trabajos > span{
+  border-left: 1px solid #1D459A;
+  border-bottom: 1px solid #1D459A;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Tabla general*/
+.tabla_general{
+  display: grid;
+  grid-template-columns: 2fr repeat(2, 1fr);
+  border-top: 1px solid #1D459A;
+  border-right: 1px solid #1D459A;
+  justify-content: center;
+  align-items: center;
+}
+.tabla_general > span{
+  border-left: 1px solid #1D459A;
+  border-bottom: 1px solid #1D459A;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+}

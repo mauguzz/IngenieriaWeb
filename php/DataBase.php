@@ -83,12 +83,12 @@ class DataBase{
         return ['Asistencia_Oferta_Laboral'=>$Asistencia_Oferta_Laboral->fetchAll(PDO::FETCH_ASSOC)];
     }
 
-    public static function Mostrar_Asistencia_Oferta_Laboral($mysqli){
+    public static function Mostrar_Funcionario($mysqli){
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-        $query="SELECT * FROM Asistencia_Oferta_Laboral";//Introduzco la consulta
-        $Asistencia_Oferta_Laboral = $Conexion->prepare($query); //
-        $Asistencia_Oferta_Laboral->execute();  //Ejecuto la consulta
-        return ['Asistencia_Oferta_Laboral'=>$Asistencia_Oferta_Laboral->fetchAll(PDO::FETCH_ASSOC)];
+        $query="SELECT Id_Funcionario,Apellido_Paterno,Apellido_Materno,Id_Punto_Control,Correo_Electronico FROM Funcionario";//Introduzco la consulta
+        $Funcionario = $Conexion->prepare($query); //
+        $Funcionario->execute();  //Ejecuto la consulta
+        return ['Funcionario'=>$Funcionario->fetchAll(PDO::FETCH_ASSOC)];
     }
 
 
