@@ -9,9 +9,9 @@ require_once('DataBase.php');
 
 //$result=DataBase::Mostrar_Migrante_Detalles($id);
 
-$result=array(["datos generales"=> array(["Nombre"=>"Mauricio", "Edad"=>"20", "Punto"=> "2"]), 
-        "trabajos"=>array(["Fecha"=>"30 de mayo de 2020","Detalles"=>"Backend Developer","Requisitos"=>"PHP","Direccion"=>"Jiutepec"]) , 
-        "actividades_culturales"=>array(["Fecha"=>"23 de mayo de 2020", "Nombre"=> "Guitarra", "Detalles"=>"Clases básicas", "Requisitos"=>"Ninguno", "Activo"=>"Si"])]);
+$result=array("datos generales"=> array("Nombre"=>"Mauricio", "Edad"=>"20", "Punto"=> "2"), 
+        "trabajos"=>array("Fecha"=>"30 de mayo de 2020","Detalles"=>"Backend Developer","Requisitos"=>"PHP","Direccion"=>"Jiutepec") , 
+        "actividades_culturales"=>array("Fecha"=>"23 de mayo de 2020", "Nombre"=> "Guitarra", "Detalles"=>"Clases básicas", "Requisitos"=>"Ninguno", "Activo"=>"Si"));
 echo json_encode(($result),JSON_UNESCAPED_UNICODE);
 
 ?>
