@@ -1,9 +1,9 @@
 
-content = document.getElementById('content'); //Div del contenido principal (tablas, etc)
-btn_consultar =document.getElementById('btn_consultar');
-tbody_general= document.getElementById('tbody-general');
-tbody_actividades = document.getElementById('tbody-actividades');
-tbody_trabajos = document.getElementById('tbody-trabajos');
+const content = document.getElementById('content'); //Div del contenido principal (tablas, etc)
+const btn_consultar =document.getElementById('btn_consultar');
+const tbody_general= document.getElementById('tbody-general');
+const tbody_actividades = document.getElementById('tbody-actividades');
+const tbody_trabajos = document.getElementById('tbody-trabajos');
 
 btn_consultar.addEventListener("click", ()=>{ 
     leerMigrante(); 
