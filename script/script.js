@@ -5,10 +5,7 @@ const tbody_general= document.getElementById('tbody-general');
 const tbody_actividades = document.getElementById('tbody-actividades');
 const tbody_trabajos = document.getElementById('tbody-trabajos');
 
-btn_consultar.addEventListener("click", ()=>{ 
-    leerMigrante(); 
-    console.log("Presionado");
-});
+
 
 
 
@@ -83,3 +80,8 @@ function registrarMigrante(){
 function modificarMigrante(){
 
 }
+
+btn_consultar.addEventListener("click", ()=>{ 
+    leerMigrante(); 
+    console.log("Presionado");
+});
