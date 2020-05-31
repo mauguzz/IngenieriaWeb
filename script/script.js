@@ -3,6 +3,7 @@ content = document.getElementById('content'); //Div del contenido principal (tab
 btn_consultar =document.getElementById('btn_consultar').then(
     btn_consultar.addEventListener("click", ()=>{ 
         leerMigrante(); 
+        console.log("Boton presionado");
     })
 );
 
