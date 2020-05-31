@@ -1,6 +1,6 @@
 
-content = document.getElementById('content'); //Div del contenido principal (tablas, etc)
-btn_consultar =document.getElementById('btn_consultar').then(
+const content = document.getElementById('content'); //Div del contenido principal (tablas, etc)
+const btn_consultar =document.getElementById('btn_consultar').then(
     
 );
 
