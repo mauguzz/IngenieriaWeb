@@ -18,7 +18,7 @@ function leerMigrante(){
         body: JSON.stringify({id: 1})
     })
     .then(res=>{
-        return res.json();
+        return res.text();
     })
     .then(res_json=>{
         console.log(res_json);
