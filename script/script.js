@@ -52,10 +52,10 @@ function leerMigrante(){
 
             tbody_trabajos.innerHTML += `
                 <tr>
-                    <td>${value.Fecha}</td>
-                    <td>${value.Detalles}</td>
-                    <td>${value.Requisitos}</td>
-                    <td>${value.Direccion}</td>
+                    <td>${value['Fecha']}</td>
+                    <td>${value['Detalles']}</td>
+                    <td>${value['Requisitos']}</td>
+                    <td>${value['Direccion']}</td>
                 </tr>
             `;
         });
@@ -66,11 +66,11 @@ function leerMigrante(){
 
             tbody_actividades.innerHTML += `
                 <tr>
-                    <td>${value.Fecha}</td>
-                    <td>${value.Nombre}</td>
-                    <td>${value.Detalles}</td>
-                    <td>${value.Requisitos}</td>
-                    <td>${value.Activo}</td>
+                    <td>${value['Fecha']}</td>
+                    <td>${value['Nombre']}</td>
+                    <td>${value['Detalles']}</td>
+                    <td>${value['Requisitos']}</td>
+                    <td>${value['Activo']}</td>
                 </tr>
             `;   
         });
