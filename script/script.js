@@ -36,7 +36,7 @@ function leerMigrante(){
             let var_general = document.createElement('td');
             let val_general = document.createElement('td');
             
-            var_general.innerHTML=key.
+            var_general.innerHTML=key;
             val_general.innerHTML=value;
             row_general.innerHTML= `${var_general} ${val_general}`;
             tbody_general.innerHTML += `${row_general}`;
