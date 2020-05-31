@@ -23,7 +23,7 @@ class DataBase{
         $result = $Conexion->prepare($query); //Agrego variables (Si es el caso)
         $result->execute();  //Ejecuto la consulta
         //return ['Migrantes'=>$result->fetchAll(PDO::FETCH_ASSOC)] //Retorno la matriz en el formato
-        return $result->fetchAll(PDO::FETCH_ASSOC)];
+        return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function Mostrar_Migrante_Detallle ($mysqli){//Recibe objeto de conexión
