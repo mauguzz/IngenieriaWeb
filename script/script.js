@@ -32,9 +32,9 @@ function leerMigrante(){
 
 
         Object.keys(general).forEach((key, value)=>{
-            row_general = document.createElement('tr');
-            var_general = document.createElement('td');
-            val_general = document.createElement('td');
+            let row_general = document.createElement('tr');
+            let var_general = document.createElement('td');
+            let val_general = document.createElement('td');
             
             var_general.innerHTML=key.
             val_general.innerHTML=value;
