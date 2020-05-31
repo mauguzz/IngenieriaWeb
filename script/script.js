@@ -1,13 +1,8 @@
 
 const content = document.getElementById('content'); //Div del contenido principal (tablas, etc)
-const btn_consultar =document.getElementById('btn_consultar').then(
-    
-);
+const btn_consultar =document.getElementById('btn_consultar');
 
-btn_consultar.addEventListener("click", ()=>{ 
-    leerMigrante();
-    console.log("Boton presionado");
-});
+
 
 function leerMigrante(){
     fetch("migrantes_details.php", {
@@ -101,3 +96,9 @@ function registrarMigrante(){
 function modificarMigrante(){
 
 }
+
+
+btn_consultar.addEventListener("click", ()=>{ 
+    leerMigrante();
+    console.log("Boton presionado");
+});
