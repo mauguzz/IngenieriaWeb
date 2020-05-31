@@ -1,5 +1,5 @@
 
-const content = document.getElementById('content'); //Div del contenido principal (tablas, etc)
+const mcontent = document.getElementById('content'); //Div del contenido principal (tablas, etc)
 const btn_consultar =document.getElementById('btn_consultar');
 const tbody_general= document.getElementById('tbody-general');
 const tbody_actividades = document.getElementById('tbody-actividades');
