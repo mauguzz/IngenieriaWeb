@@ -7,6 +7,7 @@ const tbody_trabajos = document.getElementById('tbody-trabajos');
 
 btn_consultar.addEventListener("click", ()=>{ 
     leerMigrante(); 
+    console.log("Presionado");
 });
 
 
