@@ -22,9 +22,9 @@ function leerMigrante(){
         console.log(res_json);
 
         
-        general=res_json['datos_generales'];
-        trabajos=res_json['trabajos'];
-        actividades=res_json['actividades_culturales'];
+        general=res_json.datos_generales;
+        trabajos=res_json.trabajos;
+        actividades=res_json.actividades_culturales;
 
         console.log(general);
         console.log(trabajos);
