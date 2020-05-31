@@ -46,7 +46,7 @@ function leerMigrante(){
 
         });
 
-        Object.keys(trabajos).forEach((key,value) => {
+        Object.entries(trabajos).forEach((key,value) => {
             //console.log(trabajos[n]);
             console.log(key + " " + value);
 
@@ -60,7 +60,7 @@ function leerMigrante(){
             `;
         });
 
-        Object.keys(actividades).forEach((key, value) => {
+        Object.entries(actividades).forEach((key, value) => {
             //console.log(trabajos[n]);
             console.log(key + " " + value);
 
