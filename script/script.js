@@ -31,7 +31,7 @@ function leerMigrante(){
         console.log(actividades);
 
 
-        Object.keys(general).forEach((key, value)=>{
+        Object.entries(general).forEach((key, value)=>{
 
             console.log(key + " " + value);
             let row_general = document.createElement('tr');
