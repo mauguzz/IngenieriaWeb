@@ -1,13 +1,13 @@
 
 content = document.getElementById('content'); //Div del contenido principal (tablas, etc)
 btn_consultar =document.getElementById('btn_consultar').then(
-    btn_consultar.addEventListener("click", ()=>{ 
-        leerMigrante(); 
-        console.log("Boton presionado");
-    })
+    
 );
 
-
+btn_consultar.addEventListener("click", ()=>{ 
+    leerMigrante();
+    console.log("Boton presionado");
+});
 
 function leerMigrante(){
     fetch("migrantes_details.php", {
