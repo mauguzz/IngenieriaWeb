@@ -38,10 +38,11 @@ function leerMigrante(){
             let var_general = document.createElement('td');
             let val_general = document.createElement('td');
             
-            var_general.innerHTML=key;
-            val_general.innerHTML=value;
-            row_general.innerHTML= `${var_general} ${val_general}`;
-            tbody_general.innerHTML += `${row_general}`;
+            var_general.innerHTML=`${key}`;
+            val_general.innerHTML=`${value}`;
+            row_general.appendChild(var_general);
+            row_general.appendChild(val_general);
+            tbody_general.appendChild(row_general);
 
         });
 
