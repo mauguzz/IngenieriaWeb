@@ -16,7 +16,7 @@ function leerMigrante(){
         //body: JSON.stringify({id: 1}) //Corregir URL con "php/migrantes_details.php?id="...""
     })
     .then(res=>{
-        return res.text();
+        return res.json();
     })
     .then(res_json=>{
         console.log(res_json);
