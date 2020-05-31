@@ -16,10 +16,12 @@ function leerMigrante(){
         //body: JSON.stringify({id: 1}) //Corregir URL con "php/migrantes_details.php?id="...""
     })
     .then(res=>{
-        return res.json();
+        return res.text();
     })
     .then(res_json=>{
         console.log(res_json);
+
+        /*
         general=res_json['datos_generales'];
         trabajos=res_json['trabajos'];
         actividades=res_json['actividades_culturales'];
@@ -63,6 +65,7 @@ function leerMigrante(){
                 </tr>
             `;   
         });
+        */
     })
     .catch(e=>{
         console.log(e);
