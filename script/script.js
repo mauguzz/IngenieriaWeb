@@ -13,7 +13,7 @@ btn_consultar.addEventListener("click", ()=>{
 
 
 function leerMigrante(){
-    fetch("migrantes_details.php", {
+    fetch("php/migrantes_details.php", {
         method: 'GET',
         body: JSON.stringify({id: 1})
     })
