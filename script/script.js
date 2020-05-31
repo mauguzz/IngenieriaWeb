@@ -32,6 +32,8 @@ function leerMigrante(){
 
 
         Object.keys(general).forEach((key, value)=>{
+
+            console.log(key + " " + value);
             let row_general = document.createElement('tr');
             let var_general = document.createElement('td');
             let val_general = document.createElement('td');
@@ -45,6 +47,7 @@ function leerMigrante(){
 
         Object.keys(trabajos).forEach((key,value) => {
             //console.log(trabajos[n]);
+            console.log(key + " " + value);
 
             tbody_trabajos.innerHTML += `
                 <tr>
@@ -58,6 +61,7 @@ function leerMigrante(){
 
         Object.keys(actividades).forEach((key, value) => {
             //console.log(trabajos[n]);
+            console.log(key + " " + value);
 
             tbody_actividades.innerHTML += `
                 <tr>
