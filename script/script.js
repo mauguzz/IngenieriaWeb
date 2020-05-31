@@ -65,7 +65,7 @@ function leerMigrante(){
         });
     })
     .catch(e=>{
-
+        console.log(e);
     })
 
 }
