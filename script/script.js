@@ -26,6 +26,10 @@ function leerMigrante(){
         trabajos=res_json['trabajos'];
         actividades=res_json['actividades_culturales'];
 
+        console.log(general);
+        console.log(trabajos);
+        console.log(actividades);
+
 
         Object.keys(general).forEach((key, value)=>{
             row_general = document.createElement('tr');
