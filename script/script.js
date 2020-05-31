@@ -31,7 +31,7 @@ function leerMigrante(){
         console.log(actividades);
 
 
-        Object.entries(general).forEach((key, value)=>{
+        Object.entries(general).forEach(([key, value])=>{
 
             console.log(key + " " + value);
             let row_general = document.createElement('tr');
@@ -46,7 +46,7 @@ function leerMigrante(){
 
         });
 
-        Object.entries(trabajos).forEach((key,value) => {
+        Object.entries(trabajos).forEach(([key,value]) => {
             //console.log(trabajos[n]);
             console.log(key + " " + value);
 
@@ -60,7 +60,7 @@ function leerMigrante(){
             `;
         });
 
-        Object.entries(actividades).forEach((key, value) => {
+        Object.entries(actividades).forEach(([key, value]) => {
             //console.log(trabajos[n]);
             console.log(key + " " + value);
 
