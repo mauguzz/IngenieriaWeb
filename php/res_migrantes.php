@@ -10,19 +10,22 @@ $result=["Data"=>"error"]; //Borrar
 
 function res_get($uri){
         $uri=explode("/",$uri);
-        array_shift($uri);
-        array_shift($uri);
-        array_shift($uri);
-        //$resource = array_shift($uri);
+        array_shift($uri); // primer slash
+        array_shift($uri); // ingenieriaweb
+        array_shift($uri); // php
+        
         if($uri[0] == 'res_migrantes.php'){
             array_shift($uri);
-            if(empty($uri)){ //Si no se especifica un id
-                 header('HTTP/1.1 400 Bad Request'); //De manera temporal       
-            } else { //Si se especifica un id
-                    $result=array("uri"=>$uri,"datos_generales"=> array("Nombre"=>"Mauricio", "Edad"=>"20", "Punto"=> "2"), 
-                    "trabajos"=>array("1"=> array("Fecha"=>"30 de mayo de 2020","Detalles"=>"Backend Developer","Requisitos"=>"PHP","Direccion"=>"Jiutepec") ), 
-                    "actividades_culturales"=>array("1"=> array("Fecha"=>"23 de mayo de 2020", "Nombre"=> "Guitarra", "Detalles"=>"Clases básicas", "Requisitos"=>"Ninguno", "Activo"=>"Si")));
+            if($uri){
+                if($uri==""){ //Si no se especifica un id
+                    header('HTTP/1.1 400 Bad Request'); //De manera temporal       
+                } else { //Si se especifica un id
+                       $result=array("uri"=>$uri,"datos_generales"=> array("Nombre"=>"Mauricio", "Edad"=>"20", "Punto"=> "2"), 
+                       "trabajos"=>array("1"=> array("Fecha"=>"30 de mayo de 2020","Detalles"=>"Backend Developer","Requisitos"=>"PHP","Direccion"=>"Jiutepec") ), 
+                       "actividades_culturales"=>array("1"=> array("Fecha"=>"23 de mayo de 2020", "Nombre"=> "Guitarra", "Detalles"=>"Clases básicas", "Requisitos"=>"Ninguno", "Activo"=>"Si")));
                 }
+            }
+            
         } else {
             // Sólo se aceptan resources desde 'clients'
             $result=["uri"=>$uri];
