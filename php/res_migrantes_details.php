@@ -3,10 +3,9 @@
 require_once('DataBase.php');
 
 //Obtención de datos de la solicitud
-try{
-        $data=file_get_contents('php://input');
+if($data=file_get_contents('php://input')){
         $id=$data->id;
-}catch(Exception $e){
+}else{
         header('HTTP/1.1 400 Bad Request');
 }
 
