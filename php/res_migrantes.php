@@ -26,7 +26,8 @@ function res_get($uri){
             }
         }else{
             //CASO: Obtener todos los migrantes
-            $result=["migrantes"=>"todos"];
+            $result=["migrantes"=>["1"=>["Nombre"=>"Mauricio", "Apellido_Paterno"=>"Gutiérrez", "Apellido_Materno"=>"Montor", "Ciudad"=>"Jiutepec"], 
+            "2"=>["Nombre"=>"Fabián", "Apellido_Paterno"=>"Sánchez", "Apellido_Materno"=>"Moreno", "Ciudad"=>"Ecatepec"]]];
         }
             
     } else {

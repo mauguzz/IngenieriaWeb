@@ -1,8 +1,11 @@
 const mcontent = document.getElementById('content'); //Div del contenido principal (tablas, etc)
 const btn_consultar =document.getElementById('btn_consultar');
+const btn_todos = document.getElementById('btn_todos');
+
 const tbody_general= document.getElementById('tbody-general');
 const tbody_actividades = document.getElementById('tbody-actividades');
 const tbody_trabajos = document.getElementById('tbody-trabajos');
+const tbody_migrantes = document.getElementById('tbody-migrantes');
 let id =1;
 
 
@@ -17,13 +20,10 @@ function handleHttpErrors(response) { //Maneja los códigos de error de HTTP cua
 
 function migrante_consultar(){
     fetch("php/res_migrantes.php/"+id, {
-        method: 'GET',
-        //body: JSON.stringify({id: 1}) //Corregir URL con "php/migrantes_details.php?id="...""
+        method: 'GET'
     })
     .then(handleHttpErrors)
-    .then(res=>
-        res.json() //Cambiar a .text() para pruebas, y a .json() para funcionamiento
-    )
+    .then(res=>res.json()) //Cambiar a .text() para pruebas, y a .json() para funcionamiento
     .then(res_json=>{
         console.log(res_json); 
 
@@ -67,7 +67,6 @@ function migrante_consultar(){
         });
 
         Object.entries(actividades).forEach(([key, value]) => {
-            //console.log(trabajos[n]);
             console.log(key + " " + value);
 
             tbody_actividades.innerHTML += `
@@ -82,9 +81,7 @@ function migrante_consultar(){
         });
         
     })
-    .catch(e=>{
-        console.log(e);
-    })
+    .catch(e=>console.log(e))
 
 }
 
@@ -95,6 +92,26 @@ function migrante_consultar_todos(){
     })
     .then(handleHttpErrors)
     .then(res=>res.json())
+    .then(res_json=>{
+        console.log(res_json);
+        migrantes=res_json.migrantes;
+        console.log(migrantes);
+
+        Object.entries(migrantes).forEach(([key,value]) => {
+            //console.log(trabajos[n]);
+            console.log(key + " " + value);
+
+            tbody_migrantes.innerHTML += `
+                <tr>
+                    <td>${value['Nombre']}</td>
+                    <td>${value['Apellido_Paterno']}</td>
+                    <td>${value['Apellido_Materno']}</td>
+                    <td>${value['Ciudad']}</td>
+                </tr>
+            `;
+        });
+
+    })
 }
 
 
@@ -110,3 +127,8 @@ btn_consultar.addEventListener("click", ()=>{
     migrante_consultar(); 
     console.log("Presionado");
 });
+
+btn_todos.addEventListener("click", ()=>{
+    migrante_consultar_todos();
+    console.log("Presionado");
+})
