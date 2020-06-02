@@ -32,6 +32,10 @@ function migrante_consultar(){
         trabajos=res_json.trabajos;
         actividades=res_json.actividades_culturales;
 
+        tbody_general.innerHTML="";
+        tbody_actividades.innerHTML="";
+        tbody_trabajos.innerHTML="";
+
         console.log(general);
         console.log(trabajos);
         console.log(actividades);
@@ -96,6 +100,8 @@ function migrante_consultar_todos(){
         console.log(res_json);
         migrantes=res_json.migrantes;
         console.log(migrantes);
+
+        tbody_migrantes.innerHTML="";
 
         Object.entries(migrantes).forEach(([key,value]) => {
             //console.log(trabajos[n]);
