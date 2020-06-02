@@ -12,6 +12,7 @@ function res_get($uri){
         $uri=explode("/",$uri);
         array_shift($uri);
         array_shift($uri);
+        array_shift($uri);
         //$resource = array_shift($uri);
         if($uri[0] == 'res_migrantes.php'){
             array_shift($uri);
