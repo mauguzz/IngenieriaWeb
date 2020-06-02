@@ -8,9 +8,9 @@ $uri=$_SERVER['REQUEST_URI'];
 $result=["Data"=>"error"]; //Borrar
 
 
-function res_get(){
+function res_get($uri){
         $resource = array_shift($uri);
-        $resource = array_shift($uri);
+        //$resource = array_shift($uri);
         if($resource == 'res_migrantes.php'){
             $id = array_shift($uri);
             if(empty($id)){ //Si no se especifica un id
@@ -26,13 +26,13 @@ function res_get(){
             //header('HTTP/1.1 404 Not Found');
         }
 }
-function res_post(){
+function res_post($uri){
 
 }
-function res_put(){
+function res_put($uri){
 
 }
-function res_delete(){
+function res_delete($uri){
 
 }
 
@@ -40,16 +40,16 @@ function res_delete(){
 
 switch($method){
         case 'GET':
-                res_get();
+                res_get($uri);
         break;
         case 'POST':
-                res_post();
+                res_post($uri);
         break;
         case 'PUT':
-                res_put();
+                res_put($uri);
         break;
         case 'DELETE':
-                res_delete();
+                res_delete($uri);
         break;
         default:
                 header('HTTP/1.1 405 Method not allowed');
