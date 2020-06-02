@@ -9,7 +9,7 @@ $result=["Data"=>"error"]; //Borrar
 
 
 function res_get($uri){
-        $uri=explode("/",$uri)
+        $uri=explode("/",$uri);
         $resource = array_shift($uri);
         //$resource = array_shift($uri);
         if($resource == 'res_migrantes.php'){
