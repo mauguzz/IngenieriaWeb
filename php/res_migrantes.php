@@ -26,6 +26,7 @@ function res_get($uri){
             $result=["uri"=>$resource];
             //header('HTTP/1.1 404 Not Found');
         }
+        return $result;
 }
 function res_post($uri){
 
@@ -41,7 +42,7 @@ function res_delete($uri){
 
 switch($method){
         case 'GET':
-                res_get($uri);
+                $result=res_get($uri);
         break;
         case 'POST':
                 res_post($uri);
