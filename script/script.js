@@ -3,9 +3,10 @@ const btn_consultar =document.getElementById('btn_consultar');
 const tbody_general= document.getElementById('tbody-general');
 const tbody_actividades = document.getElementById('tbody-actividades');
 const tbody_trabajos = document.getElementById('tbody-trabajos');
+let id =1;
 
 
-function handleHttpErrors(response) {
+function handleHttpErrors(response) { //Maneja los códigos de error de HTTP cuando se hace una solicitud.
     if (!response.ok) {
         throw Error(response.statusText);
     }
@@ -15,7 +16,7 @@ function handleHttpErrors(response) {
 
 
 function leerMigrante(){
-    fetch("php/res_migrantes_details.php", {
+    fetch("php/res_migrantes_details.php?id="+id, {
         method: 'GET',
         //body: JSON.stringify({id: 1}) //Corregir URL con "php/migrantes_details.php?id="...""
     })
