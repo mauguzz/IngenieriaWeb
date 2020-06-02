@@ -23,7 +23,7 @@ function res_get($uri){
                 }
         } else {
             // Sólo se aceptan resources desde 'clients'
-            $result=["uri"=>$resource];
+            $result=["uri"=>$uri];
             //header('HTTP/1.1 404 Not Found');
         }
         return $result;
