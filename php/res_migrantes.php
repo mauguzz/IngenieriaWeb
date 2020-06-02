@@ -26,7 +26,7 @@ function res_get($uri){
             }
         }else{
             //CASO: Obtener todos los migrantes
-            header('HTTP/1.1 400 Bad Request'); //De manera temporal 
+            $result=["migrantes"=>"todos"];
         }
             
     } else {
