@@ -15,14 +15,14 @@ function handleHttpErrors(response) { //Maneja los códigos de error de HTTP cua
 
 
 
-function leerMigrante(){
-    fetch("php/res_migrantes.php/", {
+function migrante_consultar(){
+    fetch("php/res_migrantes.php", {
         method: 'GET',
         //body: JSON.stringify({id: 1}) //Corregir URL con "php/migrantes_details.php?id="...""
     })
     .then(handleHttpErrors)
     .then(res=>{
-        return res.text(); //Cambiar a .text() para pruebas, y a .json() para funcionamiento
+        return res.json(); //Cambiar a .text() para pruebas, y a .json() para funcionamiento
     })
     .then(res_json=>{
         console.log(res_json); 
@@ -88,18 +88,21 @@ function leerMigrante(){
 
 }
 
+/*
+function migrante_consultar_todos(){
+    fetch('php/res_migrantes.php')
+}
+*/
 
-
-
-function registrarMigrante(){
+function migrante_registrar(){
 
 }
 
-function modificarMigrante(){
+function migrante_modificar(){
 
 }
 
 btn_consultar.addEventListener("click", ()=>{ 
-    leerMigrante(); 
+    migrante_consultar(); 
     console.log("Presionado");
 });

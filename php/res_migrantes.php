@@ -2,49 +2,55 @@
 
 require_once('DataBase.php');
 
-$method=$_SERVER['REQUEST_METHOD'];
-$uri=$_SERVER['REQUEST_URI'];
-
-$result=["Data"=>"error"]; //Borrar
+$method=$_SERVER['REQUEST_METHOD']; //Capturar método utilizado
+$uri=$_SERVER['REQUEST_URI']; //Capturar URI utilizada
 
 
+//MÉTODO HTTP GET
 function res_get($uri){
-        $uri=explode("/",$uri);
-        array_shift($uri); // primer slash
-        array_shift($uri); // ingenieriaweb
-        array_shift($uri); // php
+    $uri=explode("/",$uri);
+    array_shift($uri); // primer slash
+    array_shift($uri); // ingenieriaweb
+    array_shift($uri); // php
         
-        if($uri[0] == 'res_migrantes.php'){
-            array_shift($uri);
-            if($uri){
-                if($uri[0]==""){ //Si no se especifica un id
-                    header('HTTP/1.1 400 Bad Request'); //De manera temporal       
-                } else { //Si se especifica un id
-                       $result=array("uri"=>$uri,"datos_generales"=> array("Nombre"=>"Mauricio", "Edad"=>"20", "Punto"=> "2"), 
-                       "trabajos"=>array("1"=> array("Fecha"=>"30 de mayo de 2020","Detalles"=>"Backend Developer","Requisitos"=>"PHP","Direccion"=>"Jiutepec") ), 
-                       "actividades_culturales"=>array("1"=> array("Fecha"=>"23 de mayo de 2020", "Nombre"=> "Guitarra", "Detalles"=>"Clases básicas", "Requisitos"=>"Ninguno", "Activo"=>"Si")));
-                }
+    if($uri[0] == 'res_migrantes.php'){
+        array_shift($uri);
+        if($uri){
+            if($uri[0]==""){ //Si no se especifica un id
+                //CASO: Obtener todos los migrantes
+                //header('HTTP/1.1 400 Bad Request'); //De manera temporal       
+            } else { //Si se especifica un id
+                //CASO: Obtener detalles de un migrante
+                $result=array("uri"=>$uri,"datos_generales"=> array("Nombre"=>"Mauricio", "Edad"=>"20", "Punto"=> "2"), 
+                "trabajos"=>array("1"=> array("Fecha"=>"30 de mayo de 2020","Detalles"=>"Backend Developer","Requisitos"=>"PHP","Direccion"=>"Jiutepec") ), 
+                "actividades_culturales"=>array("1"=> array("Fecha"=>"23 de mayo de 2020", "Nombre"=> "Guitarra", "Detalles"=>"Clases básicas", "Requisitos"=>"Ninguno", "Activo"=>"Si")));
             }
-            
-        } else {
-            // Sólo se aceptan resources desde 'clients'
-            $result=["uri"=>$uri];
-            //header('HTTP/1.1 404 Not Found');
         }
-        return $result;
+            
+    } else {
+        // Sólo se aceptan resources desde 'clients'
+        header('HTTP/1.1 404 Not Found');
+    }
+    return $result;
 }
+
+//MÉTODO HTTP POST
 function res_post($uri){
 
 }
+
+//MÉTODO HTTP PUT
 function res_put($uri){
 
 }
+
+//MÉTODO HTTP DELETE
 function res_delete($uri){
 
 }
 
 
-
+//
 switch($method){
         case 'GET':
                 $result=res_get($uri);
