@@ -10,11 +10,12 @@ $result=["Data"=>"error"]; //Borrar
 
 function res_get($uri){
         $uri=explode("/",$uri);
-        $resource = array_shift($uri);
+        array_shift($uri);
+        array_shift($uri);
         //$resource = array_shift($uri);
-        if($resource == 'res_migrantes.php'){
-            $id = array_shift($uri);
-            if(empty($id)){ //Si no se especifica un id
+        if($uri[0] == 'res_migrantes.php'){
+            array_shift($uri);
+            if(empty($uri)){ //Si no se especifica un id
                  header('HTTP/1.1 400 Bad Request'); //De manera temporal       
             } else { //Si se especifica un id
                     $result=array("datos_generales"=> array("Nombre"=>"Mauricio", "Edad"=>"20", "Punto"=> "2"), 
@@ -23,7 +24,7 @@ function res_get($uri){
                 }
         } else {
             // Sólo se aceptan resources desde 'clients'
-            $result=["uri"=>$resource];
+            $result=["uri"=>$uri];
             //header('HTTP/1.1 404 Not Found');
         }
         return $result;
