@@ -17,7 +17,7 @@ function res_get($uri){
         if($uri[0] == 'res_migrantes.php'){
             array_shift($uri);
             if($uri){
-                if($uri==""){ //Si no se especifica un id
+                if($uri[0]==""){ //Si no se especifica un id
                     header('HTTP/1.1 400 Bad Request'); //De manera temporal       
                 } else { //Si se especifica un id
                        $result=array("uri"=>$uri,"datos_generales"=> array("Nombre"=>"Mauricio", "Edad"=>"20", "Punto"=> "2"), 
