@@ -16,14 +16,14 @@ function handleHttpErrors(response) { //Maneja los códigos de error de HTTP cua
 
 
 function migrante_consultar(){
-    fetch("php/res_migrantes.php/", {
+    fetch("php/res_migrantes.php/"+id, {
         method: 'GET',
         //body: JSON.stringify({id: 1}) //Corregir URL con "php/migrantes_details.php?id="...""
     })
     .then(handleHttpErrors)
-    .then(res=>{
-        return res.text(); //Cambiar a .text() para pruebas, y a .json() para funcionamiento
-    })
+    .then(res=>
+        res.json() //Cambiar a .text() para pruebas, y a .json() para funcionamiento
+    )
     .then(res_json=>{
         console.log(res_json); 
 
@@ -88,11 +88,15 @@ function migrante_consultar(){
 
 }
 
-/*
+
 function migrante_consultar_todos(){
-    fetch('php/res_migrantes.php')
+    fetch('php/res_migrantes.php', {
+        method: 'POST'
+    })
+    .then(handleHttpErrors)
+    .then(res=>res.json())
 }
-*/
+
 
 function migrante_registrar(){
 
