@@ -2,6 +2,8 @@
 
 require_once('DataBase.php');
 
+
+
 //Obtención de datos de la solicitud
 if($data=file_get_contents('php://input')){
         $id=$data->id;

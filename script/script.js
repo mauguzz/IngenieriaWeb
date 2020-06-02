@@ -16,7 +16,7 @@ function handleHttpErrors(response) { //Maneja los códigos de error de HTTP cua
 
 
 function leerMigrante(){
-    fetch("php/res_migrantes_details.php?id="+id, {
+    fetch("php/res_migrantes.php/"+id, {
         method: 'GET',
         //body: JSON.stringify({id: 1}) //Corregir URL con "php/migrantes_details.php?id="...""
     })
