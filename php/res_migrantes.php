@@ -17,7 +17,8 @@ function res_get($uri){
         array_shift($uri);
         if($uri){
             if($uri[0]==""){ //Si no se especifica un id pero si se puso un slash
-                header('HTTP/1.1 400 Bad Request');       
+                header('HTTP/1.1 400 Bad Request');   
+                $result=["bad"=>"request"];
             } else { //Si se especifica un id
                 //CASO: Obtener detalles de un migrante
                 $result=array("uri"=>$uri,"datos_generales"=> array("Nombre"=>"Mauricio", "Edad"=>"20", "Punto"=> "2"), 
