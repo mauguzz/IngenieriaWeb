@@ -7,6 +7,7 @@ if($data=file_get_contents('php://input')){
         $id=$data->id;
 }else{
         header('HTTP/1.1 400 Bad Request');
+        return;
 }
 
 
