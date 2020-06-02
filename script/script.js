@@ -91,7 +91,7 @@ function migrante_consultar_todos(){
         method: 'GET'
     })
     .then(handleHttpErrors)
-    .then(res=>res.text())
+    .then(res=>res.json())
     .then(res_json=>{
         console.log(res_json);
         migrantes=res_json.migrantes;
