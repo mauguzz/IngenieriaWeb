@@ -22,7 +22,7 @@ function migrante_consultar(){
     })
     .then(handleHttpErrors)
     .then(res=>{
-        return res.json(); //Cambiar a .text() para pruebas, y a .json() para funcionamiento
+        return res.text(); //Cambiar a .text() para pruebas, y a .json() para funcionamiento
     })
     .then(res_json=>{
         console.log(res_json); 
