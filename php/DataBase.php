@@ -58,6 +58,7 @@ class DataBase{
         return ['Actividades'=>$Actividades->fetchAll(PDO::FETCH_ASSOC)];
     }
    
+    //ESTA POSIBLEMENTE NO SE UTILICE, YA QUE SE HACE UNA CONSULTA SELECTIVA EN DETALLES DEL MIGRANTE//
     public static function Mostrar_Asistencia_Actividad_Cultural($mysqli){
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
         $query="SELECT * FROM Asistencia_Actividad_Cultural";//Introduzco la consulta
@@ -75,6 +76,7 @@ class DataBase{
         return ['Ofertas_de_Trabajo'=>$Ofertas_de_Trabajo->fetchAll(PDO::FETCH_ASSOC)];
     }
  
+    //ESTA POSIBLEMENTE NO SE UTILICE, YA QUE SE HACE UNA CONSULTA SELECTIVA EN DETALLES DEL MIGRANTE//
     public static function Mostrar_Asistencia_Oferta_Laboral($mysqli){
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
         $query="SELECT * FROM Asistencia_Oferta_Laboral";//Introduzco la consulta

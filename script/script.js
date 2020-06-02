@@ -10,7 +10,7 @@ const tbody_trabajos = document.getElementById('tbody-trabajos');
 
 
 function leerMigrante(){
-    fetch("php/migrantes_details.php", {
+    fetch("php/res_migrantes_details.php", {
         method: 'GET',
         //body: JSON.stringify({id: 1}) //Corregir URL con "php/migrantes_details.php?id="...""
     })

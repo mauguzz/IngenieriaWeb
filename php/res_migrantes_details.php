@@ -3,9 +3,13 @@
 require_once('DataBase.php');
 
 //Obtención de datos de la solicitud
-//$json=file_get_contents('php://input');
-//$data=json_decode($json);
-//$id=$data->id;
+try{
+        $data=file_get_contents('php://input');
+        $id=$data->id;
+}catch(Exception $e){
+        header('HTTP/1.1 400 Bad Request');
+}
+
 
 //$result=DataBase::Mostrar_Migrante_Detalles($id);
 
