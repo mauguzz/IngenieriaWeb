@@ -22,10 +22,10 @@ function leerMigrante(){
     })
     .then(handleHttpErrors)
     .then(res=>{
-        return res.json();
+        return res.text(); //Cambiar a .text() para pruebas, y a .json() para funcionamiento
     })
     .then(res_json=>{
-        console.log(res_json);
+        console.log(res_json); 
 
         
         general=res_json.datos_generales;

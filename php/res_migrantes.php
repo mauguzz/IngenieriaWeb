@@ -22,7 +22,8 @@ function res_get(){
                 }
         } else {
             // Sólo se aceptan resources desde 'clients'
-            header('HTTP/1.1 404 Not Found');
+            $result=["uri"=>$resource];
+            //header('HTTP/1.1 404 Not Found');
         }
 }
 function res_post(){
