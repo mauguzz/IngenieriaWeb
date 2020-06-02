@@ -5,7 +5,12 @@ const tbody_actividades = document.getElementById('tbody-actividades');
 const tbody_trabajos = document.getElementById('tbody-trabajos');
 
 
-
+function handleHttpErrors(response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
+}
 
 
 
@@ -14,6 +19,7 @@ function leerMigrante(){
         method: 'GET',
         //body: JSON.stringify({id: 1}) //Corregir URL con "php/migrantes_details.php?id="...""
     })
+    .then(handleHttpErrors)
     .then(res=>{
         return res.json();
     })
