@@ -88,7 +88,7 @@ function migrante_consultar(){
 
 function migrante_consultar_todos(){
     fetch("php/res_migrantes.php", {
-        method: 'POST'
+        method: 'GET'
     })
     .then(handleHttpErrors)
     .then(res=>res.text())
