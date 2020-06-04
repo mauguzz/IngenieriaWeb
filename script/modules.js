@@ -1,22 +1,5 @@
-import {migrante_consultar as cons, migrante_consultar_todos as consall} from './script/modules.js';
 
 
-const mcontent = document.getElementById('content'); //Div del contenido principal (tablas, etc), todas las páginas
-const btn_consultar =document.getElementById('btn_consultar');
-const btn_todos = document.getElementById('btn_todos');
-
-/*Script de detalles.html */
-const tbody_general= document.getElementById('tbody_general');
-const tbody_actividades = document.getElementById('tbody_actividades');
-const tbody_trabajos = document.getElementById('tbody_trabajos');
-
-/*Script de migrantes.html */
-const tbody_migrantes = document.getElementById('tbody_migrantes');
-
-
-let id =1; //Variable de prueba
-
-/*Inserar en los scripts de cada una de las páginas HTML */
 function handleHttpErrors(response) { //Maneja los códigos de error de HTTP cuando se hace una solicitud.
     if (!response.ok) {
         throw Error(response.statusText);
@@ -26,7 +9,7 @@ function handleHttpErrors(response) { //Maneja los códigos de error de HTTP cua
 
 
 /*Script de detalles.html */
-function migrante_consultar(){
+export function migrante_consultar(tbody_general, tbody_actividades, tbody_trabajos){
     fetch("php/res_migrantes.php/"+id, {
         method: 'GET'
     })
@@ -98,7 +81,7 @@ function migrante_consultar(){
 }
 
 /*Script de migrantes.html */
-function migrante_consultar_todos(){
+export function migrante_consultar_todos(tbody_migrantes){
     fetch("php/res_migrantes.php", {
         method: 'GET'
     })
@@ -129,23 +112,10 @@ function migrante_consultar_todos(){
 }
 
 
-function migrante_registrar(){
+export function migrante_registrar(){
 
 }
 
-function migrante_modificar(){
+export function migrante_modificar(){
 
 }
-
-btn_consultar.addEventListener("click", ()=>{ 
-    //migrante_consultar(); 
-    cons(tbody_general,tbody_actividades,tbody_trabajos);
-
-    console.log("Presionado");
-});
-
-btn_todos.addEventListener("click", ()=>{
-    //migrante_consultar_todos();
-    consall(tbody_migrantes);
-    console.log("Presionado");
-})
