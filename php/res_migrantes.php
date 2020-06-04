@@ -3,19 +3,14 @@
 require_once('DataBase.php');
 
 $method=$_SERVER['REQUEST_METHOD']; //Capturar método utilizado
-$uri=$_SERVER['REQUEST_URI']; //Capturar URI utilizada
+$uri=$_SERVER['REQUEST_URI'];       //Capturar URI utilizada
 
 
 //MÉTODO HTTP GET
 function res_get($uri){
-    $uri=explode("/",$uri);
-    $uri=array_slice($uri,3); //Elimina las primeras tres partes irrelevantes de la uri
-    //array_shift($uri); // primer slash
-    //array_shift($uri); // ingenieriaweb
-    //array_shift($uri); // php
-        
-    if($uri[0] == 'res_migrantes.php'){
-        array_shift($uri);
+          
+    //if($uri[0] == 'res_migrantes.php'){
+        //array_shift($uri);
         if($uri){
             if($uri[0]==""){ //Si no se especifica un id pero si se puso un slash
                 header('HTTP/1.1 400 Bad Request');
@@ -31,16 +26,18 @@ function res_get($uri){
             "2"=>array("Nombre"=>"Fabián", "Apellido_Paterno"=>"Sánchez", "Apellido_Materno"=>"Moreno", "Ciudad"=>"Ecatepec")));
         }
             
-    } else {
+    //} else {
         // Sólo se aceptan resources desde 'clients'
-        header('HTTP/1.1 404 Not Found');
-    }
+      //  header('HTTP/1.1 404 Not Found');
+    //}
     return $result;
 }
 
 //MÉTODO HTTP POST
 function res_post($uri){
+    if($uri[0] == 'res_migrantes.php'){
 
+    }
 }
 
 //MÉTODO HTTP PUT
@@ -53,9 +50,24 @@ function res_delete($uri){
 
 }
 
-
-//
-switch($method){
+$uri=explode("/",$uri);
+$uri=array_slice($uri,3); //Elimina las primeras tres partes irrelevantes de la uri (""/"projectfolder"/"php")
+if($uri[0] == 'res_migrantes.php'){
+    array_shift($uri);  //Eliminar después
+    /*
+    if($uri=array_slice($uri,1)){
+        if($uri[0]==""){ //Si no se especifica un id pero si se puso un slash
+            header('HTTP/1.1 400 Bad Request');
+        } else { //Si se especifica un id
+            //CASO: Obtener detalles de un migrante
+            
+        }
+    }else{
+        //CASO: Obtener todos los migrantes
+       
+    }
+    */
+    switch($method){
         case 'GET':
                 $result=res_get($uri);
         break;
@@ -72,7 +84,21 @@ switch($method){
                 header('HTTP/1.1 405 Method not allowed');
                 header('Allow: GET, POST, PUT, DELETE');
         break;
+    }
+        
+} else {
+    // Sólo se aceptan resources desde 'clients'
+    header('HTTP/1.1 404 Not Found');
 }
+
+
+
+
+
+
+
+//
+
 
 /*
 //Obtención de datos de la solicitud
