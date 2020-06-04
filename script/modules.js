@@ -190,7 +190,7 @@ export function migrante_consultar_todos(tbody_migrantes){
 */
 
 export function migrante_registrar(jsonData){
-   table_registrar("php/res_migrante.php", jsonData);
+   table_registrar("php/res_migrantes.php", jsonData);
 }
 
 /*
