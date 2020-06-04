@@ -17,12 +17,12 @@ function res_get(){
         //Se pasó el id. //CASO: Obtener una única oferta laboral
 
         //OJO: Prototipo del array a pasar, verificar que el resultado del método correspondiente en DataBase.php devuelva un array con la misma estructura
-        $result=array("trabajos"=>array("Fecha"=>"30 de mayo de 2020","Detalles"=>"Backend Developer","Requisitos"=>"PHP","Direccion"=>"Jiutepec"));
+        $result=array("laborales"=>array("Fecha"=>"30 de mayo de 2020","Detalles"=>"Backend Developer","Requisitos"=>"PHP","Direccion"=>"Jiutepec"));
     }else{
         //No se pasó el id. //CASO: Obtener todas las ofertas laborales
 
         //OJO: Prototipo del array a pasar, verificar que el resultado del método correspondiente en DataBase.php devuelva un array con la misma estructura
-        $result=array("trabajos"=>array("1"=>array("Fecha"=>"30 de mayo de 2020","Detalles"=>"Backend Developer","Requisitos"=>"PHP","Direccion"=>"Jiutepec"), 
+        $result=array("laborales"=>array("1"=>array("Fecha"=>"30 de mayo de 2020","Detalles"=>"Backend Developer","Requisitos"=>"PHP","Direccion"=>"Jiutepec"), 
         "2"=>array("Fecha"=>"2 de junio de 2020","Detalles"=>"Frontend Developer","Requisitos"=>"CSS","Direccion"=>"Ecatepec")));
     }
           
