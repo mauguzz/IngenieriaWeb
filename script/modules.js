@@ -7,7 +7,7 @@ function handleHttpErrors(response) { //Maneja los códigos de error de HTTP cua
     return response;
 }
 
-function table_consultar_todos(uri, tbody, columnformat){
+function table_consultar_todos(uri, tbody, columnformat, arrayname){
     fetch(uri, {
         method: 'GET'
     })
@@ -15,7 +15,7 @@ function table_consultar_todos(uri, tbody, columnformat){
     .then(res=>res.json())
     .then(res_json=>{
         console.log(res_json);
-        let rows=res_json['migrantes'];  //Cambiar en su momento
+        let rows=res_json[arrayname];  //Cambiar en su momento
         console.log(rows);
 
         tbody.innerHTML="";
@@ -111,7 +111,8 @@ export function migrante_consultar_todos(tbody_migrantes){
         "        <td>${value['Apellido_Paterno']}</td> "    +
         "        <td>${value['Apellido_Materno']}</td> "    +
         "      <td>${value['Ciudad']}</td> "                +
-        "    </tr> "
+        "    </tr> ",
+        "migrantes"
         
     )
 }
