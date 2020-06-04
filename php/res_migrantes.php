@@ -9,15 +9,16 @@ $uri=$_SERVER['REQUEST_URI']; //Capturar URI utilizada
 //MÉTODO HTTP GET
 function res_get($uri){
     $uri=explode("/",$uri);
-    array_shift($uri); // primer slash
-    array_shift($uri); // ingenieriaweb
-    array_shift($uri); // php
+    $uri=array_slice($uri,3); //Elimina las primeras tres partes irrelevantes de la uri
+    //array_shift($uri); // primer slash
+    //array_shift($uri); // ingenieriaweb
+    //array_shift($uri); // php
         
     if($uri[0] == 'res_migrantes.php'){
         array_shift($uri);
         if($uri){
             if($uri[0]==""){ //Si no se especifica un id pero si se puso un slash
-                header('HTTP/1.1 400 Bad Request');   
+                header('HTTP/1.1 400 Bad Request');
             } else { //Si se especifica un id
                 //CASO: Obtener detalles de un migrante
                 $result=array("uri"=>$uri,"datos_generales"=> array("Nombre"=>"Mauricio", "Edad"=>"20", "Punto"=> "2"), 
