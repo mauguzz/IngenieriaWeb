@@ -23,7 +23,24 @@ function table_consultar_todos(uri, tbody, columnformat, arrayname){
         Object.entries(rows).forEach(([key,value]) => {
             //console.log(trabajos[n]);
             console.log(key + " " + value);
-            tbody.innerHTML += `${columnformat}`;
+
+            row = document.createElement('tr');
+
+            arrayname.forEach(function(element, index, array){
+                col = document.createElement('td');
+                col.innerHTML=`${value[element]}`;
+                row.appendChild(col);
+            })
+            tbody.appendChild(row);
+            /*
+            tbody.innerHTML += `   
+                <tr>                                           
+                    <td>${value['Nombre']}</td>                
+                    <td>${value['Apellido_Paterno']}</td>     
+                    <td>${value['Apellido_Materno']}</td>     
+                    <td>${value['Ciudad']}</td>                 
+                </tr>`;
+            */
         });
     })
     .catch(e=>console.log(e))
@@ -105,15 +122,8 @@ export function migrante_consultar(id, tbody_general, tbody_actividades, tbody_t
 export function migrante_consultar_todos(tbody_migrantes){
 
     table_consultar_todos("php/res_migrantes.php", tbody_migrantes,
-        
-        "   <tr> "                                          +
-        "       <td>${value['Nombre']}</td> "               +
-        "        <td>${value['Apellido_Paterno']}</td> "    +
-        "        <td>${value['Apellido_Materno']}</td> "    +
-        "      <td>${value['Ciudad']}</td> "                +
-        "    </tr> ",
+        ['Nombre', 'Apellido_Paterno', 'Apellido_Materno', 'Ciudad'],
         "migrantes"
-        
     )
 }
 /*
