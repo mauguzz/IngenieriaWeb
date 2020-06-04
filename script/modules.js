@@ -29,7 +29,7 @@ function table_consultar_todos(uri, tbody, columnformat, arrayname){
             Object.keys(columnformat).forEach(function(key){
                 console.log(key);
                 let col = document.createElement('td');
-                col.innerHTML=`${value[`"${key}"`]}`;
+                col.innerHTML=`${value[key]}`;
                 row.appendChild(col);
             })
             tbody.appendChild(row);
