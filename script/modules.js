@@ -119,7 +119,7 @@ export function migrante_registrar(jsonData){
         body: jsonData
     })
     .then(handleHttpErrors)
-    .then(res=>res.json())
+    .then(res=>res.text()) //Cambiar a json() para version final
     .then(res_json=>{
         console.log(res_json);
     })
@@ -132,7 +132,7 @@ export function migrante_modificar(id, jsonData){
         body: jsonData
     })
     .then(handleHttpErrors)
-    .then(res=>res.json())
+    .then(res=>res.text()) //Cambiar a json() para version final
     .then(res_json=>{
         console.log(res_json);
     })
@@ -144,7 +144,7 @@ export function migrante_eliminar(id){
         method: 'DELETE',
     })
     .then(handleHttpErrors)
-    .then(res=>res.json())
+    .then(res=>res.text()) //Cambiar a json() para version final
     .then(res_json=>{
         console.log(res_json);
     })
