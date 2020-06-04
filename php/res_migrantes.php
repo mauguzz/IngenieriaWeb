@@ -53,7 +53,7 @@ function res_post(){
     $Oficio = $data->oficio;
     $Contacto_Telefono = $data->contacto_telefono;
     $Nivel_Educativo = $data->nivel_educativo; //entero (opción de combobox)
-    $Situacion_Familiar = $dato->situacion_familiar; //entero (opción de combobox)
+    $Situacion_Familiar = $data->situacion_familiar; //entero (opción de combobox)
     $Causa_Migracion = $data->causa_migracion; //entero (opción de combobox)
     $Llave = "123456"; //Crear una llave de migrante aleatoria
     
@@ -84,7 +84,7 @@ function res_put($id){
     $Oficio = $data->oficio;
     $Contacto_Telefono = $data->contacto_telefono;
     $Nivel_Educativo = $data->nivel_educativo; //entero (opción de combobox)
-    $Situacion_Familiar = $dato->situacion_familiar; //entero (opción de combobox)
+    $Situacion_Familiar = $data->situacion_familiar; //entero (opción de combobox)
     $Causa_Migracion = $data->causa_migracion; //entero (opción de combobox)
     $Llave = "123456"; //Cambiar la llave de migrante aleatoria
     
