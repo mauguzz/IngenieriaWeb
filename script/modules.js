@@ -15,7 +15,7 @@ function table_consultar_todos(uri, tbody, columnformat, arrayname){
     .then(res=>res.json())
     .then(res_json=>{
         console.log(res_json);
-        let rows=res_json[arrayname];  //Cambiar en su momento
+        let rows=res_json.migrantes;  //Cambiar en su momento
         console.log(rows);
 
         tbody.innerHTML="";
