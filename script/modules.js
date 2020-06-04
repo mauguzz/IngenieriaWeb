@@ -8,7 +8,7 @@ function handleHttpErrors(response) { //Maneja los códigos de error de HTTP cua
 }
 
 
-/*Script de detalles.html */
+//FUNCIONES DE MIGRANTE//
 export function migrante_consultar(id, tbody_general, tbody_actividades, tbody_trabajos){
     fetch("php/res_migrantes.php/"+id, {
         method: 'GET'
@@ -80,7 +80,7 @@ export function migrante_consultar(id, tbody_general, tbody_actividades, tbody_t
 
 }
 
-/*Script de migrantes.html */
+
 export function migrante_consultar_todos(tbody_migrantes){
     fetch("php/res_migrantes.php", {
         method: 'GET'
@@ -109,13 +109,55 @@ export function migrante_consultar_todos(tbody_migrantes){
         });
 
     })
+    .catch(e=>console.log(e))
 }
 
 
-export function migrante_registrar(){
-
+export function migrante_registrar(jsonData){
+    fetch("php/res_migrantes.php", {
+        method: 'POST',
+        body: jsonData
+    })
+    .then(handleHttpErrors)
+    .then(res=>res.json())
+    .then(res_json=>{
+        console.log(res_json);
+    })
+    .catch(e=>console.log(e))
 }
 
-export function migrante_modificar(){
-
+export function migrante_modificar(id, jsonData){
+    fetch("php/res_migrantes.php/"+id, {
+        method: 'PUT',
+        body: jsonData
+    })
+    .then(handleHttpErrors)
+    .then(res=>res.json())
+    .then(res_json=>{
+        console.log(res_json);
+    })
+    .catch(e=>console.log(e))
 }
+
+export function migrante_eliminar(id){
+    fetch("php/res_migrantes.php/"+id, {
+        method: 'DELETE',
+    })
+    .then(handleHttpErrors)
+    .then(res=>res.json())
+    .then(res_json=>{
+        console.log(res_json);
+    })
+    .catch(e=>console.log(e))
+}
+
+
+
+//FUNCIONES DE ADMINISTRADOR//
+
+//FUNCIONES DE FUNCIONARIOS//
+
+//FUNCIONES DE TRABAJOS//
+
+
+//FUNCIONES DE ACTIVIDADES CULTURALES//

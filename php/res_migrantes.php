@@ -61,7 +61,8 @@ function res_post(){
     //Datos derivados en la BD, que no es necesario insertar: ID_Migrante, Edad, Id_Estado (migrando o establecido).
 
     //DataBase::Crear_Migrante($Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion, $Llave);
-
+    $result=["POST"=>"Correcto, insertado correctamente"];
+    return $result;
 
 }
 
@@ -93,7 +94,8 @@ function res_put($id){
     //A diferencia de DataBase::Crear_Migrante(), se pasa adicionalmente un ID
     //DataBase::Modificar_Migrante($id, $Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion, $Llave);
 
-
+    $result=["PUT"=>"Correcto, modificado correctamente", "ID"=>$id];
+    return $result;
 }
 
 //MÉTODO HTTP DELETE
@@ -101,6 +103,9 @@ function res_delete($id){
     //USO: Es necesario pasar un único argumento $id, para conocer cual row se va a eliminar. No se considera implementar la opción de eliminar todos.
     
     //DataBase::Eliminar_Migrante($id);
+
+    $result=["DELETE"=>"Correcto, eliminado correctamente", "ID"=>$id];
+    return $result;
 }
 
 
