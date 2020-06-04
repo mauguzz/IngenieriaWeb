@@ -76,6 +76,10 @@ function table_eliminar(uri){
     })
     .catch(e=>console.log(e))
 }
+
+
+
+
 //FUNCIONES DE MIGRANTE//
 export function migrante_consultar(id, tbody_general, tbody_actividades, tbody_trabajos){
     fetch("php/res_migrantes.php/"+id, {
@@ -156,93 +160,19 @@ export function migrante_consultar_todos(tbody_migrantes){
         "migrantes"
     )
 }
-/*
-export function migrante_consultar_todos(tbody_migrantes){
-    fetch("php/res_migrantes.php", {
-        method: 'GET'
-    })
-    .then(handleHttpErrors)
-    .then(res=>res.json())
-    .then(res_json=>{
-        console.log(res_json);
-        let migrantes=res_json.migrantes;
-        console.log(migrantes);
-
-        tbody_migrantes.innerHTML="";
-
-        Object.entries(migrantes).forEach(([key,value]) => {
-            //console.log(trabajos[n]);
-            console.log(key + " " + value);
-
-            tbody_migrantes.innerHTML += `
-                <tr>
-                    <td>${value['Nombre']}</td>
-                    <td>${value['Apellido_Paterno']}</td>
-                    <td>${value['Apellido_Materno']}</td>
-                    <td>${value['Ciudad']}</td>
-                </tr>
-            `;
-        });
-
-    })
-    .catch(e=>console.log(e))
-}
-*/
 
 export function migrante_registrar(jsonData){
    table_registrar("php/res_migrantes.php", jsonData);
 }
 
-/*
-export function migrante_registrar(jsonData){
-    fetch("php/res_migrantes.php", {
-        method: 'POST',
-        body: jsonData
-    })
-    .then(handleHttpErrors)
-    .then(res=>res.text()) //Cambiar a json() para version final
-    .then(res_json=>{
-        console.log(res_json);
-    })
-    .catch(e=>console.log(e))
-}
-*/
 export function migrante_modificar(id, jsonData){
     table_modificar("php/res_migrantes.php/"+id, jsonData);
 }
 
-/*
-export function migrante_modificar(id, jsonData){
-    fetch("php/res_migrantes.php/"+id, {
-        method: 'PUT',
-        body: jsonData
-    })
-    .then(handleHttpErrors)
-    .then(res=>res.text()) //Cambiar a json() para version final
-    .then(res_json=>{
-        console.log(res_json);
-    })
-    .catch(e=>console.log(e))
-}
-*/
 
 export function migrante_eliminar(id){
     table_eliminar("php/res_migrantes.php/"+id);
 }
-/*
-export function migrante_eliminar(id){
-    fetch("php/res_migrantes.php/"+id, {
-        method: 'DELETE',
-    })
-    .then(handleHttpErrors)
-    .then(res=>res.text()) //Cambiar a json() para version final
-    .then(res_json=>{
-        console.log(res_json);
-    })
-    .catch(e=>console.log(e))
-}
-*/
-
 
 
 //FUNCIONES DE ADMINISTRADOR//
@@ -254,6 +184,12 @@ export function migrante_eliminar(id){
 
 //FUNCIONES DE TRABAJOS//
 export function laborales_consultar_todos(tbody_laborales){
+
+    table_consultar_todos("php/res_laborales.php", tbody_laborales,
+        {'Fecha':"", 'Detalles':"", 'Requisitos':"", 'Direccion':""},
+        "laborales"
+    )
+    /*
     fetch("php/res_laborales.php", {
         method: 'GET'
     })
@@ -282,6 +218,7 @@ export function laborales_consultar_todos(tbody_laborales){
 
     })
     .catch(e=>console.log(e))
+    */
 }
 
 export function laborales_registrar(jsonData){
