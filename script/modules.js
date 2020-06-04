@@ -26,9 +26,9 @@ function table_consultar_todos(uri, tbody, columnformat, arrayname){
 
             let row = document.createElement('tr');
 
-            arrayname.forEach(function(element, index, array){
+            Object.keys(arrayname).forEach(function(key){
                 let col = document.createElement('td');
-                col.innerHTML=`${value[element]}`;
+                col.innerHTML=`${value[key]}`;
                 row.appendChild(col);
             })
             tbody.appendChild(row);
@@ -122,7 +122,7 @@ export function migrante_consultar(id, tbody_general, tbody_actividades, tbody_t
 export function migrante_consultar_todos(tbody_migrantes){
 
     table_consultar_todos("php/res_migrantes.php", tbody_migrantes,
-        ['Nombre', 'Apellido_Paterno', 'Apellido_Materno', 'Ciudad'],
+        {'Nombre':"", 'Apellido_Paterno':"", 'Apellido_Materno':"", 'Ciudad':""},
         "migrantes"
     )
 }
