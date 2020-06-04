@@ -139,7 +139,7 @@ function migrante_modificar(){
 
 btn_consultar.addEventListener("click", ()=>{ 
     //migrante_consultar(); 
-    cons(tbody_general,tbody_actividades,tbody_trabajos);
+    cons(id,tbody_general,tbody_actividades,tbody_trabajos);
 
     console.log("Presionado");
 });

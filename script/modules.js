@@ -9,7 +9,7 @@ function handleHttpErrors(response) { //Maneja los códigos de error de HTTP cua
 
 
 /*Script de detalles.html */
-export function migrante_consultar(tbody_general, tbody_actividades, tbody_trabajos){
+export function migrante_consultar(id, tbody_general, tbody_actividades, tbody_trabajos){
     fetch("php/res_migrantes.php/"+id, {
         method: 'GET'
     })
@@ -19,9 +19,9 @@ export function migrante_consultar(tbody_general, tbody_actividades, tbody_traba
         console.log(res_json); 
 
         
-        general=res_json.datos_generales;
-        trabajos=res_json.trabajos;
-        actividades=res_json.actividades_culturales;
+        let general=res_json.datos_generales;
+        let trabajos=res_json.trabajos;
+        let actividades=res_json.actividades_culturales;
 
         tbody_general.innerHTML="";
         tbody_actividades.innerHTML="";
@@ -89,7 +89,7 @@ export function migrante_consultar_todos(tbody_migrantes){
     .then(res=>res.json())
     .then(res_json=>{
         console.log(res_json);
-        migrantes=res_json.migrantes;
+        let migrantes=res_json.migrantes;
         console.log(migrantes);
 
         tbody_migrantes.innerHTML="";
