@@ -69,7 +69,7 @@ export function migrante_consultar(id, tbody_general, tbody_actividades, tbody_t
                     <td>${value['Fecha']}</td>
                     <td>${value['Nombre']}</td>
                     <td>${value['Detalles']}</td>
-                    <td>${value['Requisitos']}</td>
+                    <td>${value['Direccion']}</td>
                     <td>${value['Activo']}</td>
                 </tr>
             `;   
