@@ -1,4 +1,4 @@
-import {migrante_consultar as cons, migrante_consultar_todos as consall} from './script/modules.js';
+import {migrante_consultar as cons, migrante_consultar_todos as consall} from './modules.js';
 
 
 const mcontent = document.getElementById('content'); //Div del contenido principal (tablas, etc), todas las páginas
