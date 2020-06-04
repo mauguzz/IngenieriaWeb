@@ -4,6 +4,7 @@ require_once('DataBase.php');
 
 $method=$_SERVER['REQUEST_METHOD']; //Capturar método utilizado
 $uri=$_SERVER['REQUEST_URI'];       //Capturar URI utilizada
+$result = "";
 
 
 //MÉTODO HTTP GET
@@ -14,6 +15,8 @@ function res_get(){
 
     if (count($args)==1){
         //Se pasó el id. //CASO: Obtener detalles de un migrante
+
+        //$result=DataBase::Mostrar_Migrante_Detalles($id);
 
         //OJO: Prototipo del array a pasar, verificar que el resultado del método correspondiente en DataBase.php devuelva un array con la misma estructura
         $result=array("id"=>$args[0],"datos_generales"=> array("Nombre"=>"Mauricio", "Edad"=>"20", "Punto"=> "2"), 
@@ -122,13 +125,13 @@ if($uri[0] == 'res_migrantes.php'){
                 $id_specified ? ($result=res_get($id)) : ($result=res_get());
         break;
         case 'POST':
-                res_post($uri);
+                $id_specified ? header('HTTP/1.1 400 Bad Request') : ($result = res_post());
         break;
         case 'PUT':
-                res_put($uri);
+                $id_specified ? ($result=res_put($id)) : header('HTTP/1.1 400 Bad Request');
         break;
         case 'DELETE':
-                res_delete($uri);
+                $id_specified ? ($result=res_delete($id)) : header('HTTP/1.1 400 Bad Request');
         break;
         default:
                 header('HTTP/1.1 405 Method not allowed');
@@ -144,23 +147,6 @@ if($uri[0] == 'res_migrantes.php'){
 
 
 
-
-
-
-//
-
-
-/*
-//Obtención de datos de la solicitud
-if($data=file_get_contents('php://input')){
-        $id=$data->id;
-}else{
-        header('HTTP/1.1 400 Bad Request');
-        return;
-}
-*/
-
-//$result=DataBase::Mostrar_Migrante_Detalles($id);
 
 
 echo json_encode(($result),JSON_UNESCAPED_UNICODE);
