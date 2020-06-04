@@ -24,10 +24,10 @@ function table_consultar_todos(uri, tbody, columnformat, arrayname){
             //console.log(trabajos[n]);
             console.log(key + " " + value);
 
-            row = document.createElement('tr');
+            let row = document.createElement('tr');
 
             arrayname.forEach(function(element, index, array){
-                col = document.createElement('td');
+                let col = document.createElement('td');
                 col.innerHTML=`${value[element]}`;
                 row.appendChild(col);
             })
