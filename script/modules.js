@@ -1,4 +1,4 @@
-
+//FUNCIONES GENERALES//
 
 function handleHttpErrors(response) { //Maneja los códigos de error de HTTP cuando se hace una solicitud.
     if (!response.ok) {
@@ -15,7 +15,7 @@ function table_consultar_todos(uri, tbody, columnformat, arrayname){
     .then(res=>res.json())
     .then(res_json=>{
         console.log(res_json);
-        let rows=res_json[arrayname];  //Cambiar en su momento
+        let rows=res_json[arrayname]; 
         console.log(rows);
 
         tbody.innerHTML="";
@@ -76,6 +76,8 @@ function table_eliminar(uri){
     })
     .catch(e=>console.log(e))
 }
+
+
 
 
 
@@ -152,7 +154,6 @@ export function migrante_consultar(id, tbody_general, tbody_actividades, tbody_t
 
 }
 
-
 export function migrante_consultar_todos(tbody_migrantes){
 
     table_consultar_todos("php/res_migrantes.php", tbody_migrantes,
@@ -184,152 +185,42 @@ export function migrante_eliminar(id){
 
 //FUNCIONES DE TRABAJOS//
 export function laborales_consultar_todos(tbody_laborales){
-
     table_consultar_todos("php/res_laborales.php", tbody_laborales,
         {'Fecha':"", 'Detalles':"", 'Requisitos':"", 'Direccion':""},
         "laborales"
     )
-    /*
-    fetch("php/res_laborales.php", {
-        method: 'GET'
-    })
-    .then(handleHttpErrors)
-    .then(res=>res.json())
-    .then(res_json=>{
-        console.log(res_json);
-        let laborales=res_json.laborales;
-        console.log(laborales);
-
-        tbody_laborales.innerHTML="";
-
-        Object.entries(laborales).forEach(([key,value]) => {
-            //console.log(trabajos[n]);
-            console.log(key + " " + value);
-
-            tbody_laborales.innerHTML += `
-                <tr>
-                    <td>${value['Fecha']}</td>
-                    <td>${value['Detalles']}</td>
-                    <td>${value['Requisitos']}</td>
-                    <td>${value['Direccion']}</td>
-                </tr>
-            `;
-        });
-
-    })
-    .catch(e=>console.log(e))
-    */
 }
 
 export function laborales_registrar(jsonData){
-    fetch("php/res_laborales.php", {
-        method: 'POST',
-        body: jsonData
-    })
-    .then(handleHttpErrors)
-    .then(res=>res.text()) //Cambiar a json() para version final
-    .then(res_json=>{
-        console.log(res_json);
-    })
-    .catch(e=>console.log(e))
+    table_registrar("php/res_laborales.php", jsonData);
 }
 
 export function laborales_modificar(id, jsonData){
-    fetch("php/res_laborales.php/"+id, {
-        method: 'PUT',
-        body: jsonData
-    })
-    .then(handleHttpErrors)
-    .then(res=>res.text()) //Cambiar a json() para version final
-    .then(res_json=>{
-        console.log(res_json);
-    })
-    .catch(e=>console.log(e))
+    table_modificar("php/res_laborales/"+id, jsonData);
 }
 
 export function laborales_eliminar(id){
-    fetch("php/res_laborales.php/"+id, {
-        method: 'DELETE',
-    })
-    .then(handleHttpErrors)
-    .then(res=>res.text()) //Cambiar a json() para version final
-    .then(res_json=>{
-        console.log(res_json);
-    })
-    .catch(e=>console.log(e))
+    table_eliminar("php/res_laborales.php/"+id);
 }
-
-
-
 
 
 
 //FUNCIONES DE ACTIVIDADES CULTURALES//
 export function culturales_consultar_todos(tbody_culturales){
-    fetch("php/res_culturales.php", {
-        method: 'GET'
-    })
-    .then(handleHttpErrors)
-    .then(res=>res.json())
-    .then(res_json=>{
-        console.log(res_json);
-        let culturales=res_json.culturales;
-        console.log(migrantes);
-
-        tbody_culturales.innerHTML="";
-
-        Object.entries(culturales).forEach(([key,value]) => {
-            //console.log(trabajos[n]);
-            console.log(key + " " + value);
-
-            tbody_culturales.innerHTML += `
-                <tr>
-                    <td>${value['Fecha']}</td>
-                    <td>${value['Nombre']}</td>
-                    <td>${value['Detalles']}</td>
-                    <td>${value['Direccion']}</td>
-                </tr>
-            `;
-        });
-
-    })
-    .catch(e=>console.log(e))
+    table_consultar_todos("php/res_culturales.php", tbody_culturales,
+        {'Fecha':"", 'Nombre':"", 'Detalles':"", 'Direccion':""},
+        "culturales"
+    )
 }
 
 export function culturales_registrar(jsonData){
-    fetch("php/res_culturales.php", {
-        method: 'POST',
-        body: jsonData
-    })
-    .then(handleHttpErrors)
-    .then(res=>res.text()) //Cambiar a json() para version final
-    .then(res_json=>{
-        console.log(res_json);
-    })
-    .catch(e=>console.log(e))
+    table_registrar("php/res_culturales.php", jsonData);
 }
 
 export function culturales_modificar(id, jsonData){
-    fetch("php/res_culturales.php/"+id, {
-        method: 'PUT',
-        body: jsonData
-    })
-    .then(handleHttpErrors)
-    .then(res=>res.text()) //Cambiar a json() para version final
-    .then(res_json=>{
-        console.log(res_json);
-    })
-    .catch(e=>console.log(e))
+    table_modificar("php/res_culturales.php/"+id, jsonData);
 }
 
 export function culturales_eliminar(id){
-    fetch("php/res_culturales.php/"+id, {
-        method: 'DELETE',
-    })
-    .then(handleHttpErrors)
-    .then(res=>res.text()) //Cambiar a json() para version final
-    .then(res_json=>{
-        console.log(res_json);
-    })
-    .catch(e=>console.log(e))
+    table_eliminar("php/res_culturales.php/"+id);
 }
