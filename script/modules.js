@@ -33,20 +33,49 @@ function table_consultar_todos(uri, tbody, columnformat, arrayname){
                 row.appendChild(col);
             })
             tbody.appendChild(row);
-            /*
-            tbody.innerHTML += `   
-                <tr>                                           
-                    <td>${value['Nombre']}</td>                
-                    <td>${value['Apellido_Paterno']}</td>     
-                    <td>${value['Apellido_Materno']}</td>     
-                    <td>${value['Ciudad']}</td>                 
-                </tr>`;
-            */
+        
         });
     })
     .catch(e=>console.log(e))
 }
 
+function table_registrar(uri, jsonData){
+    fetch(uri, {
+        method: 'POST',
+        body: jsonData
+    })
+    .then(handleHttpErrors)
+    .then(res=>res.text()) //Cambiar a json() para version final
+    .then(res_json=>{
+        console.log(res_json);
+    })
+    .catch(e=>console.log(e))
+}
+
+function table_modificar(uri, jsonData){
+    fetch(uri, {
+        method: 'PUT',
+        body: jsonData
+    })
+    .then(handleHttpErrors)
+    .then(res=>res.text()) //Cambiar a json() para version final
+    .then(res_json=>{
+        console.log(res_json);
+    })
+    .catch(e=>console.log(e))
+}
+
+function table_eliminar(uri){
+    fetch(uri, {
+        method: 'DELETE',
+    })
+    .then(handleHttpErrors)
+    .then(res=>res.text()) //Cambiar a json() para version final
+    .then(res_json=>{
+        console.log(res_json);
+    })
+    .catch(e=>console.log(e))
+}
 //FUNCIONES DE MIGRANTE//
 export function migrante_consultar(id, tbody_general, tbody_actividades, tbody_trabajos){
     fetch("php/res_migrantes.php/"+id, {
@@ -161,6 +190,11 @@ export function migrante_consultar_todos(tbody_migrantes){
 */
 
 export function migrante_registrar(jsonData){
+   table_registrar("php/res_migrante.php", jsonData);
+}
+
+/*
+export function migrante_registrar(jsonData){
     fetch("php/res_migrantes.php", {
         method: 'POST',
         body: jsonData
@@ -172,7 +206,12 @@ export function migrante_registrar(jsonData){
     })
     .catch(e=>console.log(e))
 }
+*/
+export function migrante_modificar(id, jsonData){
+    table_modificar("php/res_migrantes.php/"+id, jsonData);
+}
 
+/*
 export function migrante_modificar(id, jsonData){
     fetch("php/res_migrantes.php/"+id, {
         method: 'PUT',
@@ -185,7 +224,12 @@ export function migrante_modificar(id, jsonData){
     })
     .catch(e=>console.log(e))
 }
+*/
 
+export function migrante_eliminar(id){
+    table_eliminar("php/res_migrantes.php/"+id);
+}
+/*
 export function migrante_eliminar(id){
     fetch("php/res_migrantes.php/"+id, {
         method: 'DELETE',
@@ -197,7 +241,7 @@ export function migrante_eliminar(id){
     })
     .catch(e=>console.log(e))
 }
-
+*/
 
 
 
