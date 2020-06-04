@@ -70,7 +70,7 @@ function res_delete($uri){
 $uri=explode("/",$uri);
 $uri=array_slice($uri,3); //Elimina las primeras tres partes irrelevantes de la uri (""/"projectfolder"/"php")
 if($uri[0] == 'res_migrantes.php'){
-    array_shift($uri);  //Eliminar después
+    //array_shift($uri);  //Eliminar después
     
 
 
