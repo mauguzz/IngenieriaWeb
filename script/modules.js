@@ -7,6 +7,27 @@ function handleHttpErrors(response) { //Maneja los códigos de error de HTTP cua
     return response;
 }
 
+function table_consultar_todos(uri, tbody, columnformat){
+    fetch(uri, {
+        method: 'GET'
+    })
+    .then(handleHttpErrors)
+    .then(res=>res.json())
+    .then(res_json=>{
+        console.log(res_json);
+        let rows=res_json[0];
+        console.log(rows);
+
+        tbody.innerHTML="";
+
+        Object.entries(rows).forEach(([key,value]) => {
+            //console.log(trabajos[n]);
+            console.log(key + " " + value);
+            tbody.innerHTML += columnformat;
+        });
+    })
+    .catch(e=>console.log(e))
+}
 
 //FUNCIONES DE MIGRANTE//
 export function migrante_consultar(id, tbody_general, tbody_actividades, tbody_trabajos){
@@ -82,6 +103,20 @@ export function migrante_consultar(id, tbody_general, tbody_actividades, tbody_t
 
 
 export function migrante_consultar_todos(tbody_migrantes){
+
+    table_consultar_todos("php/res_migrantes.php", tbody_migrantes,
+        `
+            <tr>
+                <td>${value['Nombre']}</td>
+                <td>${value['Apellido_Paterno']}</td>
+                <td>${value['Apellido_Materno']}</td>
+                <td>${value['Ciudad']}</td>
+            </tr>
+        `  
+    )
+}
+/*
+export function migrante_consultar_todos(tbody_migrantes){
     fetch("php/res_migrantes.php", {
         method: 'GET'
     })
@@ -111,7 +146,7 @@ export function migrante_consultar_todos(tbody_migrantes){
     })
     .catch(e=>console.log(e))
 }
-
+*/
 
 export function migrante_registrar(jsonData){
     fetch("php/res_migrantes.php", {
