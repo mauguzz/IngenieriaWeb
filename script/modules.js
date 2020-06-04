@@ -27,6 +27,7 @@ function table_consultar_todos(uri, tbody, columnformat, arrayname){
             let row = document.createElement('tr');
 
             Object.keys(arrayname).forEach(function(key){
+                console.log(key);
                 let col = document.createElement('td');
                 col.innerHTML=`${value[`"${key}"`]}`;
                 row.appendChild(col);
