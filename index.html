@@ -8,18 +8,19 @@
 
     <body>
        
-
+         <!--Esto es solo una prueba de otra tabla, después se van a hacer varias páginas-->
         <div class="content" id="content">
 
+            <!--Página detalles.html-->
             <button id="btn_consultar">Consultar Migrante 1</button>
             <p>Detalles del migrante</p>
 
-            <table id="t-general">     
-                <tbody id="tbody-general">
+            <table id="t_general">     
+                <tbody id="tbody_general">
                 </tbody>
             </table>
 
-            <table id="t-trabajos">
+            <table id="t_trabajos">
                 <thead>
                     <tr>
                         <th>Fecha</th>
@@ -28,11 +29,11 @@
                         <th>Dirección</th>
                     </tr>
                 </thead>
-                <tbody id="tbody-trabajos">
+                <tbody id="tbody_trabajos">
                 </tbody>
             </table>
 
-            <table id="t-actividades">
+            <table id="t_actividades">
                 <thead>
                     <tr>
                         <th>Fecha</th>
@@ -42,22 +43,77 @@
                         <th>Activo</th>
                     </tr>
                 </thead>
-                <tbody id="tbody-actividades">  
+                <tbody id="tbody_actividades">  
                 </tbody>
             </table>
 
-            <!--Esto es solo una prueba de otra tabla, después se van a hacer varias páginas-->
+
+            <!--Página migrantes.html-->
             <button id="btn_todos">Ver todos los migrantes</button>
-            <table id="t-migrantes">
+            <table id="t_migrantes">
                 <thead>
                     <th>Nombre</th>
                     <th>Apellido Paterno</th>
                     <th>Apellido Materno</th>
                     <th>Ciudad</th>
                 </thead>
-                <tbody id="tbody-migrantes">
+                <tbody id="tbody_migrantes">
                 </tbody>
             </table>
+
+            <!--Página crearmigrantes.html y modificarmigrantes.html (en este último, el id se obtiene desde JS)-->
+            <form id="f_migrantes">
+                <p>
+                    <label for="nombre">Nombre: </label>
+                    <input type="text" name="nombre" id="nombre" placeholder="Nombre (s)" required>
+                </p>
+                <p>
+                    <label for="apellido_paterno">Apellido paterno: </label>
+                    <input type="text" name="apellido_paterno" id="apellido_paterno" placeholder="Apellido paterno" required>
+                </p>
+                <p>
+                    <label for="apellido_materno">Apellido materno: </label>
+                    <input type="text" name="apellido_materno" id="apellido_materno" placeholder="Apellido materno" required>
+                </p>
+                <p>
+                    <label for="fecha_nacimiento">Fecha de nacimiento </label>
+                    <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" placeholder="" required>
+                </p>
+                <p>
+                    <label for="ciudad">Ciudad de origen:</label>
+                    <input type="text"  name="ciudad" id="ciudad" placeholder="" required>
+                </p>
+                <p>
+                    <label for="pais">País de origen:</label>
+                    <input type="select"  name="pais" id="pais" placeholder="" required>
+                </p>
+                <p>
+                    <label for="oficio">Oficio:</label>
+                    <input type="text"  name="oficio" id="oficio" placeholder="" required>
+                </p>
+                <p>
+                    <label for="contacto_telefono">Teléfono de contacto:</label>
+                    <input type="text"  name="contacto_telefono" id="contacto_telefono" placeholder="" required>
+                </p>
+                <p>
+                    <label for="nivel_educativo">Nivel educativo:</label>
+                    <input type="select"  name="nivel_educativo" id="nivel_educativo" placeholder="" required>
+                </p>
+                <p>
+                    <label for="situacion_familiar">Situación familiar:</label>
+                    <input type="select"  name="situacion_familiar" id="situacion_familiar" placeholder="" required>
+                </p>
+                <p>
+                    <label for="causa_migracion">Causa de migración:</label>
+                    <input type="select"  name="causa_migracion" id="causa_migracion" placeholder="" required>
+                </p>
+                <p>
+                    <input type="submit" value="Registrarme">
+                </p>
+            </form>
+
+            
+
 
         </div>
 

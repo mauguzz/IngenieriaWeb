@@ -2,10 +2,10 @@ const mcontent = document.getElementById('content'); //Div del contenido princip
 const btn_consultar =document.getElementById('btn_consultar');
 const btn_todos = document.getElementById('btn_todos');
 
-const tbody_general= document.getElementById('tbody-general');
-const tbody_actividades = document.getElementById('tbody-actividades');
-const tbody_trabajos = document.getElementById('tbody-trabajos');
-const tbody_migrantes = document.getElementById('tbody-migrantes');
+const tbody_general= document.getElementById('tbody_general');
+const tbody_actividades = document.getElementById('tbody_actividades');
+const tbody_trabajos = document.getElementById('tbody_trabajos');
+const tbody_migrantes = document.getElementById('tbody_migrantes');
 let id =1;
 
 
