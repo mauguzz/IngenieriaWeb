@@ -9,8 +9,8 @@ const mcontent = document.getElementById('content'); //Div del contenido princip
 /*Script de detalles.html */
 const btn_consultar =document.getElementById('btn_consultar');
 const tbody_general= document.getElementById('tbody_general');
-const tbody_actividades = document.getElementById('tbody_actividades');
-const tbody_trabajos = document.getElementById('tbody_trabajos');
+const tbody_culturales = document.getElementById('tbody_culturales');
+const tbody_laborales = document.getElementById('tbody_laborales');
 
 /*Script de migrantes.html */
 const btn_todos = document.getElementById('btn_todos');
@@ -33,7 +33,7 @@ let id =1; //Variable de prueba, id de migrante que se aplica la acción
 
 /*Script de detalles.html */
 btn_consultar.addEventListener("click", ()=>{ 
-    migrante_consultar(id,tbody_general,tbody_actividades,tbody_trabajos);
+    migrante_consultar(id,tbody_general,tbody_culturales,tbody_laborales);
     console.log("Presionado");
 });
 

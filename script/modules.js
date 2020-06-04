@@ -83,7 +83,7 @@ function table_eliminar(uri){
 
 
 //FUNCIONES DE MIGRANTE//
-export function migrante_consultar(id, tbody_general, tbody_actividades, tbody_trabajos){
+export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_laborales){
     fetch("php/res_migrantes.php/"+id, {
         method: 'GET'
     })
@@ -94,16 +94,16 @@ export function migrante_consultar(id, tbody_general, tbody_actividades, tbody_t
 
         
         let general=res_json.datos_generales;
-        let trabajos=res_json.trabajos;
-        let actividades=res_json.actividades_culturales;
+        let laborales=res_json.laborales;
+        let culturales=res_json.culturales;
 
         tbody_general.innerHTML="";
-        tbody_actividades.innerHTML="";
-        tbody_trabajos.innerHTML="";
+        tbody_culturales.innerHTML="";
+        tbody_laborales.innerHTML="";
 
         console.log(general);
-        console.log(trabajos);
-        console.log(actividades);
+        console.log(laborales);
+        console.log(culturales);
 
 
         Object.entries(general).forEach(([key, value])=>{
@@ -121,11 +121,11 @@ export function migrante_consultar(id, tbody_general, tbody_actividades, tbody_t
 
         });
 
-        Object.entries(trabajos).forEach(([key,value]) => {
+        Object.entries(laborales).forEach(([key,value]) => {
             //console.log(trabajos[n]);
             console.log(key + " " + value);
 
-            tbody_trabajos.innerHTML += `
+            tbody_laborales.innerHTML += `
                 <tr>
                     <td>${value['Fecha']}</td>
                     <td>${value['Detalles']}</td>
@@ -135,10 +135,10 @@ export function migrante_consultar(id, tbody_general, tbody_actividades, tbody_t
             `;
         });
 
-        Object.entries(actividades).forEach(([key, value]) => {
+        Object.entries(culturales).forEach(([key, value]) => {
             console.log(key + " " + value);
 
-            tbody_actividades.innerHTML += `
+            tbody_culturales.innerHTML += `
                 <tr>
                     <td>${value['Fecha']}</td>
                     <td>${value['Nombre']}</td>
@@ -180,10 +180,14 @@ export function migrante_eliminar(id){
 
 //FUNCIONES DE FUNCIONARIOS//
 
+//FUNCIONES DE TABLA MIGRANTES-CULTURALES//
+
+//FUNCIONES DE TABLA MIGRANTES-LABORALES//
+
+//FUNCIONES DE TABLA MIGRANTES-PUNTO DE CONTROL//
 
 
-
-//FUNCIONES DE TRABAJOS//
+//FUNCIONES DE ACTIVIDADES LABORALES//
 export function laborales_consultar_todos(tbody_laborales){
     table_consultar_todos("php/res_laborales.php", tbody_laborales,
         {'Fecha':"", 'Detalles':"", 'Requisitos':"", 'Direccion':""},
