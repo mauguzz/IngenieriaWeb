@@ -157,7 +157,7 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
 export function migrante_consultar_todos(tbody_migrantes){
 
     table_consultar_todos("php/res_migrantes.php", tbody_migrantes,
-        {'Nombre':"", 'Apellido_Paterno':"", 'Apellido_Materno':"", 'Pais':"", 'Punto de Control':"", 'Estado': ""},
+        {'Nombre':"", 'Apellido_Paterno':"", 'Apellido_Materno':"", 'Pais':"", 'Estado': ""},
         "migrantes"
     )
 }
