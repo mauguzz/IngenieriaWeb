@@ -24,10 +24,8 @@ function res_get(){
             "culturales"=>array("1"=> array("Fecha"=>"23 de mayo de 2020", "Nombre"=> "Guitarra", "Detalles"=>"Clases básicas", "Direccion"=>"Jiutepec", "Activo"=>"1")));
     }else{
         //No se pasó el id. //CASO: Obtener todos los migrantes
-
-        //OJO: Prototipo del array a pasar, verificar que el resultado del método correspondiente en DataBase.php devuelva un array con la misma estructura
-        $result=array("migrantes"=>array(array("Nombre"=>"Mauricio", "Apellido_Paterno"=>"Gutiérrez", "Apellido_Materno"=>"Montor", "Ciudad"=>"Jiutepec"), 
-        array("Nombre"=>"Fabián", "Apellido_Paterno"=>"Sánchez", "Apellido_Materno"=>"Moreno", "Ciudad"=>"Ecatepec")));
+        $conexion= new Database();
+        $result = ["migrantes"=>$conexion->Mostrar_Migrantes_Todos($conexion)];
     }
           
 
@@ -110,6 +108,11 @@ function res_delete($id){
 
 
 //CÓDIGO EJECUTADO AL MOMENTO DE LLAMAR AL ARCHIVO PHP
+
+
+
+
+
 $uri=explode("/",$uri);
 $uri=array_slice($uri,3); //Elimina las primeras tres partes irrelevantes de la uri (""/"projectfolder"/"php")
 if($uri[0] == 'res_migrantes.php'){
