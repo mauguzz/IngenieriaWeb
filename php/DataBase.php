@@ -3,12 +3,12 @@ class DataBase{
 
     public static function Conectar() {        
         define('Server', 'localhost');
-        define('DataBase', 'SistemaMigratorio');
+        define('DataBase', 'Sistema_Migracion');
         define('user', 'WebApplication');
         define('password', '123456');					        
         $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');			
         try{
-            $Conexion = new PDO("mysql:host=".Servidor."; dbname=".DataBase, user, password, $options);			
+            $Conexion = new PDO("mysql:host=".Server."; dbname=".DataBase, user, password, $options);			
             return $Conexion;
         }catch (Exception $e){
             die("Hubo un error al conectar: ". $e->getMessage());
