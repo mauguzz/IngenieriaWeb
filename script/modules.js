@@ -93,7 +93,7 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
         console.log(res_json); 
 
         
-        let general=res_json['datos_generales'];
+        let general=res_json.datos_generales[0];
         let laborales=res_json.laborales;
         let culturales=res_json.culturales;
 
