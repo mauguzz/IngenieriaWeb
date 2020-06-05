@@ -7,6 +7,16 @@ function handleHttpErrors(response) { //Maneja los códigos de error de HTTP cua
     return response;
 }
 
+function table_simple_fetch(uri, parameters){
+    fetch(uri, parameters)
+    .then(handleHttpErrors)
+    .then(res=>res.text()) //Cambiar a json() para version final
+    .then(res_json=>{
+        console.log(res_json);
+    })
+    .catch(e=>console.log(e))
+}
+
 function table_consultar_todos(uri, tbody, columnformat, arrayname){
     fetch(uri, {
         method: 'GET'
@@ -32,55 +42,18 @@ function table_consultar_todos(uri, tbody, columnformat, arrayname){
     .catch(e=>console.log(e))
 }
 
-function table_simple_fetch(uri, parameters){
-    fetch(uri, parameters)
-    .then(handleHttpErrors)
-    .then(res=>res.text()) //Cambiar a json() para version final
-    .then(res_json=>{
-        console.log(res_json);
-    })
-    .catch(e=>console.log(e))
-}
-
 function table_registrar(uri, jsonData){
-    fetch(uri, {
-        method: 'POST',
-        body: jsonData
-    })
-    .then(handleHttpErrors)
-    .then(res=>res.text()) //Cambiar a json() para version final
-    .then(res_json=>{
-        console.log(res_json);
-    })
-    .catch(e=>console.log(e))
+    table_simple_fetch(uri, {method: 'POST', body: jsonData})
 }
 
 function table_modificar(uri, jsonData){
-    fetch(uri, {
-        method: 'PUT',
-        body: jsonData
-    })
-    .then(handleHttpErrors)
-    .then(res=>res.text()) //Cambiar a json() para version final
-    .then(res_json=>{
-        console.log(res_json);
-    })
-    .catch(e=>console.log(e))
+    table_simple_fetch(uri, {method: 'PUT', body: jsonData}) 
 }
 
 function table_eliminar(uri){
-    /*fetch(uri, {
-        method: 'DELETE',
-    })
-    .then(handleHttpErrors)
-    .then(res=>res.text()) //Cambiar a json() para version final
-    .then(res_json=>{
-        console.log(res_json);
-    })
-    .catch(e=>console.log(e))
-    */
    table_simple_fetch(uri, {method: 'DELETE'});
 }
+
 
 
 
