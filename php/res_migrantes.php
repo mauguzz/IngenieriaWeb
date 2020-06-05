@@ -17,7 +17,7 @@ function res_get(){
     if (count($args)==1){
         //Se pasó el id. //CASO: Obtener detalles de un migrante
 
-        $result=$conexion->Mostrar_Migrante_Detalles($conexion, $id);
+        $result=$conexion->Mostrar_Migrante_Detalle($conexion, $id);
 
         //OJO: Prototipo del array a pasar, verificar que el resultado del método correspondiente en DataBase.php devuelva un array con la misma estructura
         //$result=array("id"=>$args[0],"datos_generales"=> array("Nombre"=>"Mauricio", "Edad"=>"20", "Punto"=> "2"), 
