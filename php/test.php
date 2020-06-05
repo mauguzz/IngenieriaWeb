@@ -3,10 +3,10 @@
 include('DataBase.php');
 
 $Conexion= new Database();
-$result=$Conexion->Mostrar_Migrantes_Todos($Conexion);
+$result=$Conexion->Mostrar_Migrantes_Detalle($Conexion);
 
 
-
+/*
 foreach($result as $Fila){
 
 <tr>
@@ -17,7 +17,7 @@ foreach($result as $Fila){
 <td><?php echo $Fila['NoEmpleado']?></td> 
 <td><?php echo $Fila['State']?></td> 
 </tr>
-
+*/
 
 
 ?>
