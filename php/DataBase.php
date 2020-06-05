@@ -19,7 +19,7 @@ class DataBase{
 
         //$mysqli = new DataBase(); //Inicializo mi objeto
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-        $query="SELECT Id_Migrante,Nombre,Apellido_Paterno,Apellido_Materno,Id_Pais,Ciudad FROM Migrante";//Introduzco la consulta
+        $query="SELECT * FROM Migrantes_Todos";//Introduzco la consulta
         $result = $Conexion->prepare($query); //Agrego variables (Si es el caso)
         $result->execute();  //Ejecuto la consulta
         //return ['Migrantes'=>$result->fetchAll(PDO::FETCH_ASSOC)] //Retorno la matriz en el formato
@@ -30,16 +30,16 @@ class DataBase{
 
         $Id_Migrante=$_POST['Id_Migrante']; //Se hace el cast de HTML a un variable PHP por el metodo POST 
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-        $query="SELECT * FROM Migrante where Id_Migrante='".$Id_Migrante."'";//Introduzco la consulta
+        $query="SELECT * FROM Migrantes_Detalle where Id_Migrante='".$Id_Migrante."'";//Introduzco la consulta
         $Migrante = $Conexion->prepare($query); //Agrego la variable $Id_Migrante
         $Migrante->execute();  //Ejecuto la consulta
-        $query="SELECT * FROM Registro where Id_Migrante='".$Id_Migrante."'";
+        $query="SELECT  Id_Punto_Control,'Punto de control',Fecha_Entrada,Fecha_Salida,Alimentacion FROM Migrantes_Registro where Id_Migrante='".$Id_Migrante."'";
         $Registro = $Conexion->prepare($query); //Agrego la variable $Id_Migrante
         $Registro->execute();  //Ejecuto la consulta
-        $query="SELECT * FROM  Asistencia_Actividad_Cultural where Id_Migrante='".$Id_Migrante."'";
+        $query="SELECT Id_Actividad,Actividad,Direccion,fecha FROM  Asistencia_Actividad_Cultural_View where Id_Migrante='".$Id_Migrante."'";
         $Asistencia_Actividad_Cultural = $Conexion->prepare($query); //Agrego la variable $Id_Migrante
         $Asistencia_Actividad_Cultural->execute();  //Ejecuto la consulta
-        $query="SELECT * FROM  Asistencia_Oferta_Laboral where Id_Migrante='".$Id_Migrante."'";
+        $query="SELECT Id_Trabajo,Actividad,Direccion,fecha FROM  Asistencia_Oferta_Laboral_View where Id_Migrante='".$Id_Migrante."'";
         $Asistencia_Oferta_Laboral = $Conexion->prepare($query); //Agrego la variable $Id_Migrante
         $Asistencia_Oferta_Laboral->execute();  //Ejecuto la consulta
         return ['DetallesMigrante'=>$DetallesMigrante->fetchAll(PDO::FETCH_ASSOC),
@@ -61,7 +61,7 @@ class DataBase{
     //ESTA POSIBLEMENTE NO SE UTILICE, YA QUE SE HACE UNA CONSULTA SELECTIVA EN DETALLES DEL MIGRANTE//
     public static function Mostrar_Asistencia_Actividad_Cultural($mysqli){
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-        $query="SELECT * FROM Asistencia_Actividad_Cultural";//Introduzco la consulta
+        $query="SELECT * FROM Asistencia_Actividad_Cultural_View";//Introduzco la consulta
         $Asistencia_Actividad_Cultural = $Conexion->prepare($query); //
         $Asistencia_Actividad_Cultural->execute();  //Ejecuto la consulta
         return ['Asistencia_Actividad_Cultural'=>$Asistencia_Actividad_Cultural->fetchAll(PDO::FETCH_ASSOC)];
@@ -79,7 +79,7 @@ class DataBase{
     //ESTA POSIBLEMENTE NO SE UTILICE, YA QUE SE HACE UNA CONSULTA SELECTIVA EN DETALLES DEL MIGRANTE//
     public static function Mostrar_Asistencia_Oferta_Laboral($mysqli){
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-        $query="SELECT * FROM Asistencia_Oferta_Laboral";//Introduzco la consulta
+        $query="SELECT * FROM Asistencia_Oferta_Laboral_View";//Introduzco la consulta
         $Asistencia_Oferta_Laboral = $Conexion->prepare($query); //
         $Asistencia_Oferta_Laboral->execute();  //Ejecuto la consulta
         return ['Asistencia_Oferta_Laboral'=>$Asistencia_Oferta_Laboral->fetchAll(PDO::FETCH_ASSOC)];
@@ -87,7 +87,7 @@ class DataBase{
 
     public static function Mostrar_Funcionario($mysqli){
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-        $query="SELECT Id_Funcionario,Apellido_Paterno,Apellido_Materno,Id_Punto_Control,Correo_Electronico FROM Funcionario";//Introduzco la consulta
+        $query="SELECT * FROM Mostrar_Funcionarios";//Introduzco la consulta
         $Funcionario = $Conexion->prepare($query); //
         $Funcionario->execute();  //Ejecuto la consulta
         return ['Funcionario'=>$Funcionario->fetchAll(PDO::FETCH_ASSOC)];
