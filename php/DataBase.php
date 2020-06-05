@@ -93,8 +93,6 @@ class DataBase{
         return ['Funcionario'=>$Funcionario->fetchAll(PDO::FETCH_ASSOC)];
     }
 
-
-
 }
 
 ?>
