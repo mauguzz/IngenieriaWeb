@@ -137,6 +137,7 @@ ALTER TABLE municipios
         Apellido_Materno varchar (20),
 		Telefono_Contacto varchar (12), 
         Correo_Electronico varchar (30),
+        Contrasenia varchar (20),
 		primary key (Id_Funcionario),
 		foreign key (Id_Punto_Control) references  Puntos_De_Control(Id_Punto_Control)
 		);
@@ -2808,12 +2809,13 @@ select Migrante.Id_Migrante,
 	
 select * from Migrantes_Todos where Id_Migrante=1;
 
-Create view Migrantes_Detalle As
+create view Migrantes_Detalle As
 select Migrante.Id_Migrante,
 		Migrante.Nombre, 
         Migrante.Apellido_Paterno,
         Migrante.Apellido_Materno,
         Pais.Nombre as 'Pais',
+        Migrante.Ciudad,
         Migrante.Edad,
         Nivel_Educativo.Nivel,
         Migrante.Telefono_Contacto,
@@ -2828,12 +2830,11 @@ select Migrante.Id_Migrante,
         
 Select * from Migrantes_Detalle where Id_Migrante=1;
 
-
 create view Migrantes_Registro As
 select 
 		Migrante.ID_Migrante,
         Registro.Id_Punto_Control,
-        Puntos_de_control.Nombre As 'Punto de Control',
+        Puntos_de_control.Nombre As 'Punto_de_Control',
 		Registro.Fecha_Entrada,
         Registro.Fecha_Salida,
         Registro.Alimentacion
@@ -2844,7 +2845,7 @@ select
 		Puntos_de_Control.Id_Punto_Control=Registro.ID_Punto_Control
         order by Fecha_Entrada;
         
-select Id_Punto_Control,'Punto de control',Fecha_Entrada,Fecha_Salida,Alimentacion from Migrantes_Registro where Id_Migrante=1;
+select Id_Punto_Control,'Punto_de_control',Fecha_Entrada,Fecha_Salida,Alimentacion from Migrantes_Registro where Id_Migrante=1;
 
 create view Asistencia_Actividad_Cultural_View as 
 select 
@@ -2884,6 +2885,21 @@ select
 select *from Asistencia_Oferta_Laboral_View where Id_Migrante=1; /*Vista de asistencia de actividades*/
 select Id_Trabajo,Actividad,Direccion,fecha FROM Asistencia_Oferta_Laboral_View where Id_Migrante=1; /*VISTA PARA DETALLE MIGRANTE*/
 
-
-
+	
+create view Mostrar_Funcionarios as 
+select 
+	  Funcionario.Id_Funcionario,
+	  Puntos_de_control.Nombre as "Punto_De_Control",
+      Funcionario.Nombre as "Nombre",
+      Estados.Nombre as "Estado",
+      Funcionario.Apellido_Paterno,
+      Funcionario.Apellido_Materno,
+      Funcionario.Correo_electronico
+      from Funcionario
+      inner join Puntos_de_control ON
+      Puntos_de_control.Id_Punto_Control=Funcionario.Id_Punto_Control
+      inner join Estados ON
+      Estados.Id=Puntos_de_control.Id_Estado;
+      
+      select * from Mostrar_FUncionarios;
 
