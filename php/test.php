@@ -3,7 +3,7 @@
 include('DataBase.php');
 
 $Conexion= new Database();
-$result=$Conexion->Mostrar_Migrantes_Detalle($Conexion);
+$result=$Conexion->Mostrar_Migrante_Detalle($Conexion);
 
 
 /*
