@@ -42,7 +42,7 @@ class DataBase{
         $query="SELECT Id_Trabajo,Actividad,Direccion,fecha FROM  Asistencia_Oferta_Laboral_View where Id_Migrante='".$Id_Migrante."'";
         $Asistencia_Oferta_Laboral = $Conexion->prepare($query); //Agrego la variable $Id_Migrante
         $Asistencia_Oferta_Laboral->execute();  //Ejecuto la consulta
-        return ['DetallesMigrante'=>$DetallesMigrante->fetchAll(PDO::FETCH_ASSOC),
+        return ['DetallesMigrante'=>$Migrante->fetchAll(PDO::FETCH_ASSOC),
                 'Registro'=>$Registro->fetchAll(PDO::FETCH_ASSOC),
                 'Asistencia_Actividad_Cultural'=>$Asistencia_Actividad_Cultural->fetchAll(PDO::FETCH_ASSOC),
                 'Asistencia_Oferta_Laboral'=>$Asistencia_Oferta_Laboral->fetchAll(PDO::FETCH_ASSOC)
