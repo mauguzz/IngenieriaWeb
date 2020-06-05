@@ -14,27 +14,30 @@ function table_consultar_todos(uri, tbody, columnformat, arrayname){
     .then(handleHttpErrors)
     .then(res=>res.json())
     .then(res_json=>{
-        console.log(res_json);
         let rows=res_json[arrayname]; 
-        console.log(rows);
-
         tbody.innerHTML="";
 
         Object.entries(rows).forEach(([key,value]) => {
-            //console.log(trabajos[n]);
-            console.log(key + " " + value);
 
             let row = document.createElement('tr');
 
             Object.keys(columnformat).forEach(function(key){
-                console.log(key);
                 let col = document.createElement('td');
                 col.innerHTML=`${value[key]}`;
                 row.appendChild(col);
             })
             tbody.appendChild(row);
-        
         });
+    })
+    .catch(e=>console.log(e))
+}
+
+function table_simple_fetch(uri, parameters){
+    fetch(uri, parameters)
+    .then(handleHttpErrors)
+    .then(res=>res.text()) //Cambiar a json() para version final
+    .then(res_json=>{
+        console.log(res_json);
     })
     .catch(e=>console.log(e))
 }
@@ -66,7 +69,7 @@ function table_modificar(uri, jsonData){
 }
 
 function table_eliminar(uri){
-    fetch(uri, {
+    /*fetch(uri, {
         method: 'DELETE',
     })
     .then(handleHttpErrors)
@@ -75,6 +78,8 @@ function table_eliminar(uri){
         console.log(res_json);
     })
     .catch(e=>console.log(e))
+    */
+   table_simple_fetch(uri, {method: 'DELETE'});
 }
 
 
