@@ -25,7 +25,7 @@ function res_get(){
     }else{
         //No se pasó el id. //CASO: Obtener todos los migrantes
         $conexion= new Database();
-        $result = $conexion->Mostrar_Migrantes_Todos($conexion);
+        $result = ["migrantes"=>$conexion->Mostrar_Migrantes_Todos($conexion)];
         //OJO: Prototipo del array a pasar, verificar que el resultado del método correspondiente en DataBase.php devuelva un array con la misma estructura
         //$result=array("migrantes"=>array(array("Nombre"=>"Mauricio", "Apellido_Paterno"=>"Gutiérrez", "Apellido_Materno"=>"Montor", "Ciudad"=>"Jiutepec"), 
         //array("Nombre"=>"Fabián", "Apellido_Paterno"=>"Sánchez", "Apellido_Materno"=>"Moreno", "Ciudad"=>"Ecatepec")));
