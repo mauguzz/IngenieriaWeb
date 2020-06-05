@@ -88,7 +88,7 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
         method: 'GET'
     })
     .then(handleHttpErrors)
-    .then(res=>res.text()) //Cambiar a .text() para pruebas, y a .json() para funcionamiento
+    .then(res=>res.json()) //Cambiar a .text() para pruebas, y a .json() para funcionamiento
     .then(res_json=>{
         console.log(res_json); 
 
