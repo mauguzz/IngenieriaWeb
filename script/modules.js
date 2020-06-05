@@ -68,9 +68,7 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
     .then(handleHttpErrors)
     .then(res=>res.json()) //Cambiar a .text() para pruebas, y a .json() para funcionamiento
     .then(res_json=>{
-        console.log(res_json); 
-
-        
+ 
         let general=res_json.datos_generales[0];
         let laborales=res_json.laborales;
         let culturales=res_json.culturales;
@@ -79,14 +77,7 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
         tbody_culturales.innerHTML="";
         tbody_laborales.innerHTML="";
 
-        console.log(general);
-        console.log(laborales);
-        console.log(culturales);
-
-
         Object.entries(general).forEach(([key, value])=>{
-
-            console.log(key + " " + value);
             let row_general = document.createElement('tr');
             let var_general = document.createElement('td');
             let val_general = document.createElement('td');
@@ -96,13 +87,9 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
             row_general.appendChild(var_general);
             row_general.appendChild(val_general);
             tbody_general.appendChild(row_general);
-
         });
 
         Object.entries(laborales).forEach(([key,value]) => {
-            //console.log(trabajos[n]);
-            console.log(key + " " + value);
-
             tbody_laborales.innerHTML += `
                 <tr>
                     <td>${value['Fecha']}</td>
@@ -114,8 +101,6 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
         });
 
         Object.entries(culturales).forEach(([key, value]) => {
-            console.log(key + " " + value);
-
             tbody_culturales.innerHTML += `
                 <tr>
                     <td>${value['Fecha']}</td>
