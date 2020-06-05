@@ -7,6 +7,7 @@ require_once('DataBase.php');
 $Conexion= new Database();
 $result=$Conexion->Mostrar_Migrantes_Todos($Conexion);
 
-echo($result);
+//foreach($result)
+echo(json_encode($result));
 
 ?>
