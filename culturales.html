@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Mejora el escalamiento en móviles-->
+        <meta charset="UTF-8">
+    </head>
+
+    <body>
+       
+         
+        <div class="content" id="content">
+            <!--Página culturales.html-->
+            <button id="btn_culturales_consultar_todos">Consultar</button>
+            <table id="t_culturales">
+                <thead>
+                    
+                    <th>Fecha de registro</th>
+                    <th>Nombre</th>
+                    <th>Detalles</th>
+                    <th>Dirección</th>
+                </thead>
+                <tbody id="tbody_culturales">
+                </tbody>
+            </table>
+
+            <!--Poner dentro de una ventana modal en Bootstrap-->
+            <form id="f_culturales_registrar">
+                <p>
+                    <label for="nombre">Nombre: </label>
+                    <input type="text" name="nombre" id="nombre" placeholder="Nombre (s)" required>
+                </p>
+                <p>
+                    <label for="detalles">Detalles: </label>
+                    <input type="text" name="detalles" id="detalles" placeholder="Apellido paterno" required>
+                </p>
+                <p>
+                    <label for="direccion">Dirección: </label>
+                    <input type="text" name="direccion" id="direccion" placeholder="Apellido materno" required>
+                </p>
+                <p>
+                    <input type="submit" value="Registrar">
+                </p>
+            </form>
+        </div>
+
+        <script type="module" src="script/culturales.js"></script>
+    </body>
+</html>

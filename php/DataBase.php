@@ -23,7 +23,7 @@ class DataBase{
         $result = $Conexion->prepare($query); //Agrego variables (Si es el caso)
         $result->execute();  //Ejecuto la consulta
         //return ['Migrantes'=>$result->fetchAll(PDO::FETCH_ASSOC)] //Retorno la matriz en el formato
-        return $result->fetchAll(PDO::FETCH_ASSOC)];
+        return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function Mostrar_Migrante_Detallle ($mysqli){//Recibe objeto de conexión
@@ -58,6 +58,7 @@ class DataBase{
         return ['Actividades'=>$Actividades->fetchAll(PDO::FETCH_ASSOC)];
     }
    
+    //ESTA POSIBLEMENTE NO SE UTILICE, YA QUE SE HACE UNA CONSULTA SELECTIVA EN DETALLES DEL MIGRANTE//
     public static function Mostrar_Asistencia_Actividad_Cultural($mysqli){
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
         $query="SELECT * FROM Asistencia_Actividad_Cultural";//Introduzco la consulta
@@ -75,6 +76,7 @@ class DataBase{
         return ['Ofertas_de_Trabajo'=>$Ofertas_de_Trabajo->fetchAll(PDO::FETCH_ASSOC)];
     }
  
+    //ESTA POSIBLEMENTE NO SE UTILICE, YA QUE SE HACE UNA CONSULTA SELECTIVA EN DETALLES DEL MIGRANTE//
     public static function Mostrar_Asistencia_Oferta_Laboral($mysqli){
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
         $query="SELECT * FROM Asistencia_Oferta_Laboral";//Introduzco la consulta
