@@ -191,3 +191,14 @@ export function culturales_modificar(id, jsonData){
 export function culturales_eliminar(id){
     table_eliminar("php/res_culturales.php/"+id);
 }
+
+
+/*------------------------------------------------Sesiones----------------------------------------------------*/
+export function Iniciar_Sesion(User,Pass){
+    
+    fetch("php/test.php/"+User.text,Pass.text, { //Envío datos via POST a PHP
+        method: 'GET'
+    })
+    .then(handleHttpErrors)
+
+}
