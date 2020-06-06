@@ -96,7 +96,7 @@ class DataBase{
 /*------------------------------------------------Sesiones--------------------------------------------------*/
     public static function IniciarSesion ($mysqli){
         
-        if (empty($_POST['User']) || empty ($_POST['Pass'];)){
+        if (empty($_POST['User']) || empty ($_POST['Pass'])){
            
             echo '
 					<script type="text/javascript">	
@@ -111,10 +111,10 @@ class DataBase{
             $query="SELECT * FROM Funcionario where Correo_Electronico='".$User."'";//Introduzco la consulta
             $result  = $Conexion->prepare($query); //
             $result->execute();
-            $res=fetchAll(PDO::FETCH_ASSOC)];
-            if (($res>0){//Verifico la existencia de un usuario funcinoario -----------Comprobar funcionamiento
+            $res=fetchAll(PDO::FETCH_ASSOC);
+            if ($res>0){//Verifico la existencia de un usuario funcinoario -----------Comprobar funcionamiento
                 
-                if(password_verify($pass,$res["Contrasenia"])){
+                if (password_verify($pass,$res["Contrasenia"])) {
                     session_start(); /*Inicializamos los valores de la sesión*/
                     $_SESSION['USERNAME']=$res["Nombre"];
                     $_SESSION['USERID']=$res["Id_Funcionario"];
@@ -135,8 +135,8 @@ class DataBase{
                 $query="SELECT * FROM Administrador where Correo_Electronico='".$User."'";//Introduzco la consulta
                 $result  = $Conexion->prepare($query); //
                 $result->execute();
-                $res=fetchAll(PDO::FETCH_ASSOC)];
-                if (($res>0){//--------------------------------------------Comprobar funcionamiento
+                $res=fetchAll(PDO::FETCH_ASSOC);
+                if ($res>0){//--------------------------------------------Comprobar funcionamiento
                     if(password_verify($pass,$res["Contraseña"])){
                         session_start(); /*Inicializamos los valores de la sesión*/
                         $_SESSION['USERNAME']=$res["Nombre"];
