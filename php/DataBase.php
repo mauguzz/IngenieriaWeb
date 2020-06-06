@@ -1,6 +1,6 @@
 <?php
 class DataBase{	
-
+/*-------------------------------------------------Conexión-------------------------------------------------*/
     public static function Conectar() {        
         define('Server', 'localhost');
         define('DataBase', 'Sistema_Migracion');
@@ -14,7 +14,7 @@ class DataBase{
             die("Hubo un error al conectar: ". $e->getMessage());
         }
     }
-
+/*--------------------------------------------------Views---------------------------------------------------*/
     public static function Mostrar_Migrantes_Todos ($mysqli){//Recibe objeto de conexión
 
         //$mysqli = new DataBase(); //Inicializo mi objeto
@@ -91,6 +91,79 @@ class DataBase{
         $Funcionario = $Conexion->prepare($query); //
         $Funcionario->execute();  //Ejecuto la consulta
         return ['Funcionario'=>$Funcionario->fetchAll(PDO::FETCH_ASSOC)];
+    }
+
+/*------------------------------------------------Sesiones--------------------------------------------------*/
+    public static function IniciarSesion ($mysqli){
+        
+        if (empty($_POST['User']) || empty ($_POST['Pass'];)){
+           
+            echo '
+					<script type="text/javascript">	
+					alert("Por favor llene ambos campos");
+					window.history.back();
+					</script>';
+        }   
+        else {
+            $User=$_POST['User'];        
+            $Pass=$_POST['Pass'];
+            $Conexion = $mysqli ->Conectar();
+            $query="SELECT * FROM Funcionario where Correo_Electronico='".$User."'";//Introduzco la consulta
+            $result  = $Conexion->prepare($query); //
+            $result->execute();
+            $res=fetchAll(PDO::FETCH_ASSOC)];
+            if (($res>0){//Verifico la existencia de un usuario funcinoario -----------Comprobar funcionamiento
+                
+                if(password_verify($pass,$res["Contrasenia"])){
+                    session_start(); /*Inicializamos los valores de la sesión*/
+                    $_SESSION['USERNAME']=$res["Nombre"];
+                    $_SESSION['USERID']=$res["Id_Funcionario"];
+                    header("location:../Funcionario.html");  
+
+                }else{
+                    echo '
+					<script type="text/javascript">	
+					alert("La contraseña es incorrecta, por favor intente de nuevo");
+					window.history.back();
+					</script>';
+                }            
+
+
+
+            }else {//Si no existe un usuario funcionario, lo verifico con un usuario Administrador 
+                $Conexion = $mysqli ->Conectar();
+                $query="SELECT * FROM Administrador where Correo_Electronico='".$User."'";//Introduzco la consulta
+                $result  = $Conexion->prepare($query); //
+                $result->execute();
+                $res=fetchAll(PDO::FETCH_ASSOC)];
+                if (($res>0){//--------------------------------------------Comprobar funcionamiento
+                    if(password_verify($pass,$res["Contraseña"])){
+                        session_start(); /*Inicializamos los valores de la sesión*/
+                        $_SESSION['USERNAME']=$res["Nombre"];
+                        $_SESSION['USERID']=$res["Id_Administrador"];
+                        header("location:../Funcionario.html");  
+
+                    }else{
+                        echo '
+                        <script type="text/javascript">	
+                        alert("La contraseña es incorrecta, por favor intente de nuevo");
+                        window.history.back();
+                        </script>';
+                    }     
+
+
+                }else{
+                    echo '
+					<script type="text/javascript">	
+					alert("El usuario o contraseña no es valido, por favor verifique sus datos");
+					window.history.back();
+					</script>';
+                }
+                
+            }
+
+        }
+
     }
 
 }
