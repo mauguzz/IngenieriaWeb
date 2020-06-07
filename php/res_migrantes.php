@@ -17,12 +17,12 @@ function res_get(){
     if (count($args)==1){
         //Se pasó el id. //CASO: Obtener detalles de un migrante
 
-        $result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0]);
+        //$result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0]); //Descomentar para version final
 
         //OJO: Prototipo del array a pasar, verificar que el resultado del método correspondiente en DataBase.php devuelva un array con la misma estructura
-        //$result=array("id"=>$args[0],"datos_generales"=> array("Nombre"=>"Mauricio", "Edad"=>"20", "Punto"=> "2"), 
-         //   "laborales"=>array("1"=> array("Fecha"=>"30 de mayo de 2020","Detalles"=>"Backend Developer","Requisitos"=>"PHP","Direccion"=>"Jiutepec") ), 
-         //   "culturales"=>array("1"=> array("Fecha"=>"23 de mayo de 2020", "Nombre"=> "Guitarra", "Detalles"=>"Clases básicas", "Direccion"=>"Jiutepec", "Activo"=>"1")));
+        $result=array("id"=>$args[0],"datos_generales"=> array("Nombre"=>"Mauricio", "Edad"=>"20", "Punto"=> "2"), 
+            "laborales"=>array("1"=> array("Fecha"=>"30 de mayo de 2020","Detalles"=>"Backend Developer","Requisitos"=>"PHP","Direccion"=>"Jiutepec") ), 
+            "culturales"=>array("1"=> array("Fecha"=>"23 de mayo de 2020", "Nombre"=> "Guitarra", "Detalles"=>"Clases básicas", "Direccion"=>"Jiutepec", "Activo"=>"1")));
     }else{
         //No se pasó el id. //CASO: Obtener todos los migrantes
         

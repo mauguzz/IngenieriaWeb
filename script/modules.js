@@ -41,20 +41,7 @@ function table_consultar_todos(uri, tbody, columnformat, arrayname){
     .then(res_json=>{
         let rows=res_json[arrayname]; 
         tbody.innerHTML="";
-        /*
-        Object.entries(rows).forEach(([key,value]) => {
-
-            let row = document.createElement('tr');
-
-            Object.keys(columnformat).forEach(function(key){
-                let col = document.createElement('td');
-                col.innerHTML=`${value[key]}`;
-                row.appendChild(col);
-            })
-            tbody.appendChild(row);
-        });
-        */
-       table_generate_RowsAndCols("a", tbody, rows, columnformat);
+        table_generate_RowsAndCols("a", tbody, rows, columnformat);
     })
     .catch(e=>console.log(e))
 }
