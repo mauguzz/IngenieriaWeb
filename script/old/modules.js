@@ -19,44 +19,29 @@ function table_simple_fetch(uri, parameters){
 
 function table_generate_rowsandcols(thead, tbody, rows, columns){
     //Object:={key: value, key: value, key:value}
-    //Esta función crea los nombres de columnas de las tablas y llena el contenido de la tabla.
-    let th_row;
-    let first;
-    Object.entries(rows).forEach(([rowname,row]) => { //rowname es un key de Object, row es un value de Object
-        if(th_row===undefined){
-            th_row= document.createElement('tr');
-            first=true;
-        }else{
-            first=false;
-        } 
-        let td_row = document.createElement('tr');
+    Object.entries(rows).forEach(([key,row]) => { //key es un key de Object, row es un value de Object
 
-        Object.entries(columns).forEach(([colname,col])=>{ //colname es un key de Object, col es un value de Object
-            if(first){
-                let th_col = document.createElement('th');
-                th_col.innerHTML=`${colname}`;
-                th_row.appendChild(th_col);
-            }
-            let td_col = document.createElement('td');
-            td_col.innerHTML=`${row[col]}`;
-            td_row.appendChild(td_col);
+        let trow = document.createElement('tr');
+
+        Object.keys(columns).forEach(function(col){ //col es un key de Object
+            let tcol = document.createElement('td');
+            tcol.innerHTML=`${row[col]}`;
+            trow.appendChild(tcol);
         })
-        if(first)thead.appendChild(th_row);
-        tbody.appendChild(td_row);
+        tbody.appendChild(trow);
     });
-    
 }
 
-function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
+function table_consultar_todos(uri, tbody, columnformat, arrayname){
     fetch(uri, {
         method: 'GET'
     })
     .then(handleHttpErrors)
     .then(res=>res.json())
     .then(res_json=>{
-        let rows=res_json[rowsindex]; 
+        let rows=res_json[arrayname]; 
         tbody.innerHTML="";
-        table_generate_rowsandcols(thead, tbody, rows, columns);
+        table_generate_rowsandcols("a", tbody, rows, columnformat);
     })
     .catch(e=>console.log(e))
 }
@@ -82,7 +67,7 @@ function table_eliminar(uri){
 
 
 //FUNCIONES DE MIGRANTE//
-export function migrante_consultar(id, thead_general, thead_culturales, thead_laborales, tbody_general, tbody_culturales, tbody_laborales){
+export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_laborales){
     fetch("php/res_migrantes.php/"+id, {
         method: 'GET'
     })
@@ -91,6 +76,8 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
     .then(res_json=>{
  
         let general=res_json.general[0];
+        
+
         let laborales=res_json.laborales;
         let culturales=res_json.culturales;
 
@@ -111,22 +98,47 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
             tbody_general.appendChild(row_general);
         });
         
-    
-        table_generate_rowsandcols(thead_laborales, tbody_laborales, laborales, 
-        {'Fecha':'Fecha', 'Detalles':'Detalles', 'Requisitos': 'Requisitos', 'Direccion':'Direccion'});
+       
+        /*
+        Object.entries(laborales).forEach(([key,value]) => {
+            tbody_laborales.innerHTML += `
+                <tr>
+                    <td>${value['Fecha']}</td>
+                    <td>${value['Detalles']}</td>
+                    <td>${value['Requisitos']}</td>
+                    <td>${value['Direccion']}</td>
+                </tr>
+            `;
+        });
+        */
+        table_generate_rowsandcols("thead", tbody_laborales, laborales, 
+        {'Fecha':'', 'Detalles':'', 'Requisitos': '', 'Direccion':''});
 
-        table_generate_rowsandcols(thead_culturales, tbody_culturales, culturales, 
-        {'Fecha':'Fecha', 'Nombre':'Nombre', 'Detalles':'Detalles', 'Direccion':'Direccion', 'Activo':'Activo'})
+        /*
+        Object.entries(culturales).forEach(([key, value]) => {
+            tbody_culturales.innerHTML += `
+                <tr>
+                    <td>${value['Fecha']}</td>
+                    <td>${value['Nombre']}</td>
+                    <td>${value['Detalles']}</td>
+                    <td>${value['Direccion']}</td>
+                    <td>${value['Activo']}</td>
+                </tr>
+            `;   
+        });
+        */
+        table_generate_rowsandcols("thead", tbody_culturales, culturales, 
+        {'Fecha':'', 'Nombre':'', 'Detalles':'', 'Direccion':'', 'Activo':''})
         
     })
     .catch(e=>console.log(e))
 
 }
 
-export function migrante_consultar_todos(thead_migrantes, tbody_migrantes){
+export function migrante_consultar_todos(tbody_migrantes){
 
-    table_consultar_todos("php/res_migrantes.php", thead_migrantes, tbody_migrantes,
-        {'Nombre':'Nombre', 'Apellido Paterno':'Apellido_Paterno', 'Apellido Materno':'Apellido_Materno', 'Pais':'Pais', 'Punto de Control':'Punto_de_Control', 'Estado':'Estado'},
+    table_consultar_todos("php/res_migrantes.php", tbody_migrantes,
+        {'Nombre':"", 'Apellido_Paterno':"", 'Apellido_Materno':"", 'Pais':"", 'Punto de Control':"", 'Estado': ""},
         "migrantes"
     )
 }
@@ -157,9 +169,9 @@ export function migrante_eliminar(id){
 
 
 //FUNCIONES DE ACTIVIDADES LABORALES//
-export function laborales_consultar_todos(thead_laborales, tbody_laborales){
-    table_consultar_todos("php/res_laborales.php", thead_laborales, tbody_laborales,
-        {'Fecha':'Fecha', 'Detalles':'Detalles', 'Requisitos':'Requisitos', 'Direccion':'Direccion'},
+export function laborales_consultar_todos(tbody_laborales){
+    table_consultar_todos("php/res_laborales.php", tbody_laborales,
+        {'Fecha':"", 'Detalles':"", 'Requisitos':"", 'Direccion':""},
         "laborales"
     )
 }
@@ -179,9 +191,9 @@ export function laborales_eliminar(id){
 
 
 //FUNCIONES DE ACTIVIDADES CULTURALES//
-export function culturales_consultar_todos(thead_culturales, tbody_culturales){
-    table_consultar_todos("php/res_culturales.php", thead_culturales, tbody_culturales,
-        {'Fecha':'Fecha', 'Nombre':'Nombre', 'Detalles':'Detalles', 'Direccion':'Direccion'},
+export function culturales_consultar_todos(tbody_culturales){
+    table_consultar_todos("php/res_culturales.php", tbody_culturales,
+        {'Fecha':"", 'Nombre':"", 'Detalles':"", 'Direccion':""},
         "culturales"
     )
 }
@@ -200,15 +212,11 @@ export function culturales_eliminar(id){
 
 
 /*------------------------------------------------Sesiones----------------------------------------------------*/
-
-export function Iniciar_Sesion(formJson){
-    console.log(formJson);//Imprimo mi Json
-    fetch("php/res_sesion.php/",{method: 'POST', body: formJson})   ///
-    .then(res=>res.json()) // .Then son las promesas de esta función. -- Cambiar a Json para funcionamiento
-    .then(res_json=>{
-        console.log(res_json);
+export function Iniciar_Sesion(User,Pass){
+    
+    fetch("php/test.php/"+User.text,Pass.text, { //Envío datos via POST a PHP
+        method: 'GET'
     })
-    //.catch(e=>console.log(e))  
-    //.then(handleHttpErrors)
+    .then(handleHttpErrors)
 
 }
