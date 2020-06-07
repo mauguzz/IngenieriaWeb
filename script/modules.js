@@ -194,11 +194,15 @@ export function culturales_eliminar(id){
 
 
 /*------------------------------------------------Sesiones----------------------------------------------------*/
-export function Iniciar_Sesion(User,Pass){
-    
-    fetch("php/test.php/"+User.text,Pass.text, { //Envío datos via POST a PHP
-        method: 'GET'
+
+export function Iniciar_Sesion(formJson){
+    console.log(formJson);//Imprimo mi Json
+    fetch("php/res_sesion.php/",{method: 'POST', body: formJson})   ///
+    .then(res=>res.json()) // .Then son las promesas de esta función. -- Cambiar a Json para funcionamiento
+    .then(res_json=>{
+        console.log(res_json);
     })
-    .then(handleHttpErrors)
+    //.catch(e=>console.log(e))  
+    //.then(handleHttpErrors)
 
 }

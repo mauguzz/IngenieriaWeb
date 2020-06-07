@@ -94,9 +94,10 @@ class DataBase{
     }
 
 /*------------------------------------------------Sesiones--------------------------------------------------*/
-    public static function IniciarSesion ($mysqli){
+    public static function IniciarSesion ($mysqli,$User, $Pass){
         
-        if (empty($_POST['User']) || empty ($_POST['Pass'])){
+
+        if (empty($User) || empty ($Pass)){
            
             echo '
 					<script type="text/javascript">	
@@ -105,19 +106,17 @@ class DataBase{
 					</script>';
         }   
         else {
-            $User=$_POST['User'];        
-            $Pass=$_POST['Pass'];
             $Conexion = $mysqli ->Conectar();
-            $query="SELECT * FROM Funcionario where Correo_Electronico='".$User."'";//Introduzco la consulta
+            $query="SELECT Nombre,Apellido_Paterno,Apellido_Materno,Correo_Electronico,Contrasenia FROM Funcionario where Correo_Electronico='".$User."'";//Introduzco la consulta
             $result  = $Conexion->prepare($query); //
             $result->execute();
-            $res=fetchAll(PDO::FETCH_ASSOC);
-            if ($res>0){//Verifico la existencia de un usuario funcinoario -----------Comprobar funcionamiento
-                
-                if (password_verify($pass,$res["Contrasenia"])) {
+            $res=$result->fetchAll(PDO::FETCH_ASSOC);
+            var_dump($res);
+            if (!empty($res)){//Verifico la existencia de un usuario funcinoario -----------Comprobar funcionamiento    
+                if (password_verify($Pass,$res[0]["Contrasenia"])) {
                     session_start(); /*Inicializamos los valores de la sesión*/
-                    $_SESSION['USERNAME']=$res["Nombre"];
-                    $_SESSION['USERID']=$res["Id_Funcionario"];
+                    $_SESSION['USERNAME']=$res[0]["Nombre"];
+                    $_SESSION['USERID']=$res[0]["Id_Funcionario"];
                     header("location:../Funcionario.html");  
 
                 }else{
@@ -131,16 +130,16 @@ class DataBase{
 
 
             }else {//Si no existe un usuario funcionario, lo verifico con un usuario Administrador 
-                $Conexion = $mysqli ->Conectar();
-                $query="SELECT * FROM Administrador where Correo_Electronico='".$User."'";//Introduzco la consulta
+                $query="SELECT Nombre,Apellido_Paterno,Apellido_Materno,Correo_Electronico,Contraseña FROM Administrador where Correo_Electronico='".$User."'";//Introduzco la consulta
                 $result  = $Conexion->prepare($query); //
                 $result->execute();
-                $res=fetchAll(PDO::FETCH_ASSOC);
-                if ($res>0){//--------------------------------------------Comprobar funcionamiento
-                    if(password_verify($pass,$res["Contraseña"])){
+                $res=$result->fetchAll(PDO::FETCH_ASSOC);
+                
+                if (!empty($res)){//--------------------------------------------Comprobar funcionamiento
+                    if(password_verify($Pass,$res[0]["Contraseña"])){
                         session_start(); /*Inicializamos los valores de la sesión*/
-                        $_SESSION['USERNAME']=$res["Nombre"];
-                        $_SESSION['USERID']=$res["Id_Administrador"];
+                        $_SESSION['USERNAME']=$res[0]["Nombre"];
+                        $_SESSION['USERID']=$res[0]["Id_Administrador"];
                         header("location:../Funcionario.html");  
 
                     }else{
@@ -155,7 +154,7 @@ class DataBase{
                 }else{
                     echo '
 					<script type="text/javascript">	
-					alert("El usuario o contraseña no es valido, por favor verifique sus datos");
+					alert("El usuario no es valido");
 					window.history.back();
 					</script>';
                 }
