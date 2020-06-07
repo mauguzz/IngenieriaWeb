@@ -138,7 +138,7 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
 export function migrante_consultar_todos(tbody_migrantes){
 
     table_consultar_todos("php/res_migrantes.php", tbody_migrantes,
-        {'Nombre':"", 'Apellido_Paterno':"", 'Apellido_Materno':"", 'Pais':"", 'Punto de Control':"", 'Estado': ""},
+        {'Nombre':'Nombre', 'Apellido Paterno':'Apellido_Paterno', 'Apellido Materno':'Apellido_Materno', 'Pais':'Pais', 'Punto_de_Control':'Punto de Control', 'Estado':'Estado'},
         "migrantes"
     )
 }
@@ -171,7 +171,7 @@ export function migrante_eliminar(id){
 //FUNCIONES DE ACTIVIDADES LABORALES//
 export function laborales_consultar_todos(tbody_laborales){
     table_consultar_todos("php/res_laborales.php", tbody_laborales,
-        {'Fecha':"", 'Detalles':"", 'Requisitos':"", 'Direccion':""},
+        {'Fecha':'Fecha', 'Detalles':'Detalles', 'Requisitos':'Requisitos', 'Direccion':'Direccion'},
         "laborales"
     )
 }
@@ -193,7 +193,7 @@ export function laborales_eliminar(id){
 //FUNCIONES DE ACTIVIDADES CULTURALES//
 export function culturales_consultar_todos(tbody_culturales){
     table_consultar_todos("php/res_culturales.php", tbody_culturales,
-        {'Fecha':"", 'Nombre':"", 'Detalles':"", 'Direccion':""},
+        {'Fecha':'Fecha', 'Nombre':'Nombre', 'Detalles':'Detalles', 'Direccion':'Direccion'},
         "culturales"
     )
 }
