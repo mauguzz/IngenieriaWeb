@@ -126,7 +126,7 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
 export function migrante_consultar_todos(thead_migrantes, tbody_migrantes){
 
     table_consultar_todos("php/res_migrantes.php", thead_migrantes, tbody_migrantes,
-        {'Nombre':'Nombre', 'Apellido Paterno':'Apellido_Paterno', 'Apellido Materno':'Apellido_Materno', 'Pais':'Pais', 'Punto_de_Control':'Punto de Control', 'Estado':'Estado'},
+        {'Nombre':'Nombre', 'Apellido Paterno':'Apellido_Paterno', 'Apellido Materno':'Apellido_Materno', 'Pais':'Pais', 'Punto de Control':'Punto_de_Control', 'Estado':'Estado'},
         "migrantes"
     )
 }
