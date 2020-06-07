@@ -17,7 +17,7 @@ function table_simple_fetch(uri, parameters){
     .catch(e=>console.log(e))
 }
 
-function table_generate_RowsAndCols(thead, tbody, rows, columns){
+function table_generate_rowsandcols(thead, tbody, rows, columns){
     //Object:={key: value, key: value, key:value}
     Object.entries(rows).forEach(([key,row]) => { //key es un key de Object, row es un value de Object
 
@@ -41,7 +41,7 @@ function table_consultar_todos(uri, tbody, columnformat, arrayname){
     .then(res_json=>{
         let rows=res_json[arrayname]; 
         tbody.innerHTML="";
-        table_generate_RowsAndCols("a", tbody, rows, columnformat);
+        table_generate_rowsandcols("a", tbody, rows, columnformat);
     })
     .catch(e=>console.log(e))
 }
@@ -85,7 +85,7 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
         tbody_culturales.innerHTML="";
         tbody_laborales.innerHTML="";
 
-        
+        //Object:={key: value, key: value, key:value}
         Object.entries(general).forEach(([key, value])=>{
             let row_general = document.createElement('tr');
             let var_general = document.createElement('td');
@@ -111,10 +111,10 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
             `;
         });
         */
-        table_generate_RowsAndCols("thead", tbody_laborales, laborales, 
+        table_generate_rowsandcols("thead", tbody_laborales, laborales, 
         {'Fecha':'', 'Detalles':'', 'Requisitos': '', 'Direccion':''});
 
-        
+        /*
         Object.entries(culturales).forEach(([key, value]) => {
             tbody_culturales.innerHTML += `
                 <tr>
@@ -126,6 +126,9 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
                 </tr>
             `;   
         });
+        */
+        table_generate_rowsandcols("thead", tbody_culturales, culturales, 
+        {'Fecha':'', 'Nombre':'', 'Detalles':'', 'Direccion':'', 'Activo':''})
         
     })
     .catch(e=>console.log(e))
