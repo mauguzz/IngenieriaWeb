@@ -112,7 +112,7 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
         });
         */
         table_generate_rowsandcols("thead", tbody_laborales, laborales, 
-        {'Fecha':'', 'Detalles':'', 'Requisitos': '', 'Direccion':''});
+        {'Fecha':'Fecha', 'Detalles':'Detalles', 'Requisitos': 'Requisitos', 'Direccion':'Direccion'});
 
         /*
         Object.entries(culturales).forEach(([key, value]) => {
@@ -128,7 +128,7 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
         });
         */
         table_generate_rowsandcols("thead", tbody_culturales, culturales, 
-        {'Fecha':'', 'Nombre':'', 'Detalles':'', 'Direccion':'', 'Activo':''})
+        {'Fecha':'Fecha', 'Nombre':'Nombre', 'Detalles':'Detalles', 'Direccion':'Direccion', 'Activo':'Activo'})
         
     })
     .catch(e=>console.log(e))
