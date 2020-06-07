@@ -85,6 +85,7 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
         tbody_culturales.innerHTML="";
         tbody_laborales.innerHTML="";
 
+        
         Object.entries(general).forEach(([key, value])=>{
             let row_general = document.createElement('tr');
             let var_general = document.createElement('td');
@@ -96,7 +97,9 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
             row_general.appendChild(val_general);
             tbody_general.appendChild(row_general);
         });
-
+        
+       
+        /*
         Object.entries(laborales).forEach(([key,value]) => {
             tbody_laborales.innerHTML += `
                 <tr>
@@ -107,7 +110,11 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
                 </tr>
             `;
         });
+        */
+        table_generate_RowsAndCols("thead", tbody_laborales, laborales, 
+        {'Fecha':'', 'Detalles':'', 'Requisitos': '', 'Direccion':''});
 
+        
         Object.entries(culturales).forEach(([key, value]) => {
             tbody_culturales.innerHTML += `
                 <tr>
