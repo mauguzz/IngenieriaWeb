@@ -23,7 +23,7 @@ function table_generate_rowsandcols(thead, tbody, rows, columns){
 
         let trow = document.createElement('tr');
 
-        Object.entries(columns).forEach(([colname,col])=>{ //colname es un key de Object, col es un value de Object
+        Object.keys(columns).forEach(function(col){ //col es un key de Object
             let tcol = document.createElement('td');
             tcol.innerHTML=`${row[col]}`;
             trow.appendChild(tcol);
