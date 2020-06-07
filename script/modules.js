@@ -20,20 +20,31 @@ function table_simple_fetch(uri, parameters){
 function table_generate_rowsandcols(thead, tbody, rows, columns){
     //Object:={key: value, key: value, key:value}
     //Esta función crea los nombres de columnas de las tablas y llena el contenido de la tabla.
+    let th_row;
+    let first;
     Object.entries(rows).forEach(([rowname,row]) => { //rowname es un key de Object, row es un value de Object
-        let th_row= document.createElement('tr');
+        if(th_row===undefined){
+            th_row= document.createElement('tr');
+            first=true;
+        }else{
+            first=false;
+        } 
         let td_row = document.createElement('tr');
+
         Object.entries(columns).forEach(([colname,col])=>{ //colname es un key de Object, col es un value de Object
-            let th_col = document.createElement('th');
+            if(first){
+                let th_col = document.createElement('th');
+                th_col.innerHTML=`${colname}`;
+                th_row.appendChild(th_col);
+            }
             let td_col = document.createElement('td');
-            th_col.innerHTML=`${colname}`;
             td_col.innerHTML=`${row[col]}`;
-            th_row.appendChild(th_col);
             td_row.appendChild(td_col);
         })
-        thead.appendChild(th_row);
+        if(first)thead.appendChild(th_row);
         tbody.appendChild(td_row);
     });
+    
 }
 
 function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
