@@ -19,29 +19,33 @@ function table_simple_fetch(uri, parameters){
 
 function table_generate_rowsandcols(thead, tbody, rows, columns){
     //Object:={key: value, key: value, key:value}
-    Object.entries(rows).forEach(([key,row]) => { //key es un key de Object, row es un value de Object
-
-        let trow = document.createElement('tr');
-
+    //Esta función crea los nombres de columnas de las tablas y llena el contenido de la tabla.
+    Object.entries(rows).forEach(([rowname,row]) => { //rowname es un key de Object, row es un value de Object
+        let th_row= document.createElement('tr');
+        let td_row = document.createElement('tr');
         Object.entries(columns).forEach(([colname,col])=>{ //colname es un key de Object, col es un value de Object
-            let tcol = document.createElement('td');
-            tcol.innerHTML=`${row[col]}`;
-            trow.appendChild(tcol);
+            let th_col = document.createElement('th');
+            let td_col = document.createElement('td');
+            th_col.innerHTML=`${colname}`;
+            td_col.innerHTML=`${row[col]}`;
+            th_row.appendChild(th_col);
+            td_row.appendChild(td_col);
         })
-        tbody.appendChild(trow);
+        thead.appendChild(th_row);
+        tbody.appendChild(td_row);
     });
 }
 
-function table_consultar_todos(uri, tbody, columnformat, arrayname){
+function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
     fetch(uri, {
         method: 'GET'
     })
     .then(handleHttpErrors)
     .then(res=>res.json())
     .then(res_json=>{
-        let rows=res_json[arrayname]; 
+        let rows=res_json[rowsindex]; 
         tbody.innerHTML="";
-        table_generate_rowsandcols("a", tbody, rows, columnformat);
+        table_generate_rowsandcols(thead, tbody, rows, columns);
     })
     .catch(e=>console.log(e))
 }
@@ -67,7 +71,7 @@ function table_eliminar(uri){
 
 
 //FUNCIONES DE MIGRANTE//
-export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_laborales){
+export function migrante_consultar(id, thead_general, thead_culturales, thead_laborales, tbody_general, tbody_culturales, tbody_laborales){
     fetch("php/res_migrantes.php/"+id, {
         method: 'GET'
     })
@@ -76,8 +80,6 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
     .then(res_json=>{
  
         let general=res_json.general[0];
-        
-
         let laborales=res_json.laborales;
         let culturales=res_json.culturales;
 
@@ -98,36 +100,11 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
             tbody_general.appendChild(row_general);
         });
         
-       
-        /*
-        Object.entries(laborales).forEach(([key,value]) => {
-            tbody_laborales.innerHTML += `
-                <tr>
-                    <td>${value['Fecha']}</td>
-                    <td>${value['Detalles']}</td>
-                    <td>${value['Requisitos']}</td>
-                    <td>${value['Direccion']}</td>
-                </tr>
-            `;
-        });
-        */
-        table_generate_rowsandcols("thead", tbody_laborales, laborales, 
+    
+        table_generate_rowsandcols(thead_laborales, tbody_laborales, laborales, 
         {'Fecha':'Fecha', 'Detalles':'Detalles', 'Requisitos': 'Requisitos', 'Direccion':'Direccion'});
 
-        /*
-        Object.entries(culturales).forEach(([key, value]) => {
-            tbody_culturales.innerHTML += `
-                <tr>
-                    <td>${value['Fecha']}</td>
-                    <td>${value['Nombre']}</td>
-                    <td>${value['Detalles']}</td>
-                    <td>${value['Direccion']}</td>
-                    <td>${value['Activo']}</td>
-                </tr>
-            `;   
-        });
-        */
-        table_generate_rowsandcols("thead", tbody_culturales, culturales, 
+        table_generate_rowsandcols(thead_culturales, tbody_culturales, culturales, 
         {'Fecha':'Fecha', 'Nombre':'Nombre', 'Detalles':'Detalles', 'Direccion':'Direccion', 'Activo':'Activo'})
         
     })
@@ -135,9 +112,9 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
 
 }
 
-export function migrante_consultar_todos(tbody_migrantes){
+export function migrante_consultar_todos(thead_migrantes, tbody_migrantes){
 
-    table_consultar_todos("php/res_migrantes.php", tbody_migrantes,
+    table_consultar_todos("php/res_migrantes.php", thead_migrantes, tbody_migrantes,
         {'Nombre':'Nombre', 'Apellido Paterno':'Apellido_Paterno', 'Apellido Materno':'Apellido_Materno', 'Pais':'Pais', 'Punto_de_Control':'Punto de Control', 'Estado':'Estado'},
         "migrantes"
     )
@@ -169,8 +146,8 @@ export function migrante_eliminar(id){
 
 
 //FUNCIONES DE ACTIVIDADES LABORALES//
-export function laborales_consultar_todos(tbody_laborales){
-    table_consultar_todos("php/res_laborales.php", tbody_laborales,
+export function laborales_consultar_todos(thead_laborales, tbody_laborales){
+    table_consultar_todos("php/res_laborales.php", thead_laborales, tbody_laborales,
         {'Fecha':'Fecha', 'Detalles':'Detalles', 'Requisitos':'Requisitos', 'Direccion':'Direccion'},
         "laborales"
     )
@@ -191,8 +168,8 @@ export function laborales_eliminar(id){
 
 
 //FUNCIONES DE ACTIVIDADES CULTURALES//
-export function culturales_consultar_todos(tbody_culturales){
-    table_consultar_todos("php/res_culturales.php", tbody_culturales,
+export function culturales_consultar_todos(thead_culturales, tbody_culturales){
+    table_consultar_todos("php/res_culturales.php", thead_culturales, tbody_culturales,
         {'Fecha':'Fecha', 'Nombre':'Nombre', 'Detalles':'Detalles', 'Direccion':'Direccion'},
         "culturales"
     )

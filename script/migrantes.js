@@ -4,6 +4,11 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
 
 const mcontent = document.getElementById('content'); //Div del contenido principal (tablas, etc), todas las páginas
 
+const thead_general = document.getElementById('thead_general');
+const thead_culturales = document.getElementById('thead_culturales');
+const thead_laborales = document.getElementById('thead_laborales');
+const thead_migrantes = document.getElementById('thead_migrantes');
+
 const tbody_general= document.getElementById('tbody_general');
 const tbody_culturales = document.getElementById('tbody_culturales');
 const tbody_laborales = document.getElementById('tbody_laborales');
@@ -20,11 +25,11 @@ let id =1; //Variable de prueba, id de migrante que se aplica la acción
 
 
 btn_consultar.addEventListener("click", ()=>{ 
-    migrante_consultar(id,tbody_general,tbody_culturales,tbody_laborales);
+    migrante_consultar(id,thead_general, thead_culturales, thead_laborales, tbody_general,tbody_culturales,tbody_laborales);
 });
 
 btn_todos.addEventListener("click", ()=>{
-    migrante_consultar_todos(tbody_migrantes);
+    migrante_consultar_todos(thead_migrantes, tbody_migrantes);
 })
 
 btn_migrante_eliminar.addEventListener("click", ()=>{

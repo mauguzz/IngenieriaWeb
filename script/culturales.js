@@ -2,6 +2,7 @@
 import {culturales_consultar_todos, culturales_eliminar, culturales_modificar, culturales_registrar} from './modules.js';
 
 const btn_culturales_consultar_todos = document.getElementById("btn_culturales_consultar_todos");
+const thead_culturales = document.getElementById('thead_culturales');
 const tbody_culturales = document.getElementById("tbody_culturales");
 const form_culturales_registrar = document.getElementById('f_culturales_registrar');
 
