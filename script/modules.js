@@ -17,6 +17,21 @@ function table_simple_fetch(uri, parameters){
     .catch(e=>console.log(e))
 }
 
+function table_generate_RowsAndCols(thead, tbody, rows, columns){
+    //Object:={key: value, key: value, key:value}
+    Object.entries(rows).forEach(([key,row]) => { //key es un key de Object, row es un value de Object
+
+        let trow = document.createElement('tr');
+
+        Object.keys(columns).forEach(function(col){ //col es un key de Object
+            let tcol = document.createElement('td');
+            html_col.innerHTML=`${row[col]}`;
+            trow.appendChild(tcol);
+        })
+        tbody.appendChild(trow);
+    });
+}
+
 function table_consultar_todos(uri, tbody, columnformat, arrayname){
     fetch(uri, {
         method: 'GET'
@@ -26,7 +41,7 @@ function table_consultar_todos(uri, tbody, columnformat, arrayname){
     .then(res_json=>{
         let rows=res_json[arrayname]; 
         tbody.innerHTML="";
-
+        /*
         Object.entries(rows).forEach(([key,value]) => {
 
             let row = document.createElement('tr');
@@ -38,9 +53,13 @@ function table_consultar_todos(uri, tbody, columnformat, arrayname){
             })
             tbody.appendChild(row);
         });
+        */
+       table_generate_RowsAndCols("a", tbody, rows, columnformat);
     })
     .catch(e=>console.log(e))
 }
+
+
 
 function table_registrar(uri, jsonData){
     table_simple_fetch(uri, {method: 'POST', body: jsonData})
