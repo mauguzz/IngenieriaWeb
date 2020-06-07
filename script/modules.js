@@ -75,7 +75,9 @@ export function migrante_consultar(id, tbody_general, tbody_culturales, tbody_la
     .then(res=>res.json()) //Cambiar a .text() para pruebas, y a .json() para funcionamiento
     .then(res_json=>{
  
-        let general=res_json.datos_generales[0];
+        let general=res_json.general[0];
+        
+
         let laborales=res_json.laborales;
         let culturales=res_json.culturales;
 
