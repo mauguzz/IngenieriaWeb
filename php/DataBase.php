@@ -143,7 +143,7 @@ class DataBase{
         }   
         else {
             $Conexion = $mysqli ->Conectar();
-            $query="SELECT Nombre,Apellido_Paterno,Apellido_Materno,Correo_Electronico,Contrasenia FROM Funcionario where Correo_Electronico='".$User."'";//Introduzco la consulta
+            $query="SELECT Id_Funcionario, Nombre,Apellido_Paterno,Apellido_Materno,Correo_Electronico,Contrasenia FROM Funcionario where Correo_Electronico='".$User."'";//Introduzco la consulta
             $result  = $Conexion->prepare($query); //
             $result->execute();
             $res=$result->fetchAll(PDO::FETCH_ASSOC);
