@@ -8,11 +8,13 @@ const thead_general = document.getElementById('thead_general');
 const thead_culturales = document.getElementById('thead_culturales');
 const thead_laborales = document.getElementById('thead_laborales');
 const thead_migrantes = document.getElementById('thead_migrantes');
+const thead_registros = document.getElementById('thead_registros')
 
 const tbody_general= document.getElementById('tbody_general');
 const tbody_culturales = document.getElementById('tbody_culturales');
 const tbody_laborales = document.getElementById('tbody_laborales');
 const tbody_migrantes = document.getElementById('tbody_migrantes');
+const tbody_registros = document.getElementById('tbody_registros');
 
 const btn_consultar =document.getElementById('btn_consultar');
 const btn_todos = document.getElementById('btn_todos');
@@ -25,7 +27,16 @@ let id =1; //Variable de prueba, id de migrante que se aplica la acción
 
 
 btn_consultar.addEventListener("click", ()=>{ 
-    migrante_consultar(id,thead_general, thead_culturales, thead_laborales, tbody_general,tbody_culturales,tbody_laborales);
+    migrante_consultar(id,
+        thead_general, 
+        thead_culturales, 
+        thead_laborales, 
+        thead_registros, 
+        tbody_general,
+        tbody_culturales,
+        tbody_laborales, 
+        tbody_registros
+    );
 });
 
 btn_todos.addEventListener("click", ()=>{

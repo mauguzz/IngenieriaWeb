@@ -57,7 +57,6 @@ function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
     .then(res=>res.json())
     .then(res_json=>{
         let rows=res_json[rowsindex]; 
-        //tbody.innerHTML="";
         table_generate_rowsandcols(thead, tbody, rows, columns);
     })
     .catch(e=>console.log(e))
@@ -84,7 +83,7 @@ function table_eliminar(uri){
 
 
 //FUNCIONES DE MIGRANTE//
-export function migrante_consultar(id, thead_general, thead_culturales, thead_laborales, tbody_general, tbody_culturales, tbody_laborales){
+export function migrante_consultar(id, thead_general, thead_culturales, thead_laborales, thead_registros, tbody_general, tbody_culturales, tbody_laborales, tbody_registros){
     fetch("php/res_migrantes.php/"+id, {
         method: 'GET'
     })
@@ -95,10 +94,9 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
         let general=res_json.general[0];
         let laborales=res_json.laborales;
         let culturales=res_json.culturales;
+        let registros=res_json.registros;
 
         tbody_general.innerHTML="";
-        //tbody_culturales.innerHTML="";
-        //tbody_laborales.innerHTML="";
 
         //Object:={key: value, key: value, key:value}
         Object.entries(general).forEach(([key, value])=>{
@@ -114,12 +112,29 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
         });
         
     
-        table_generate_rowsandcols(thead_laborales, tbody_laborales, laborales, 
-        {'Fecha':'Fecha', 'Detalles':'Detalles', 'Requisitos': 'Requisitos', 'Direccion':'Direccion'});
+        table_generate_rowsandcols(thead_laborales, tbody_laborales, laborales, {
+            'Fecha':'Fecha', 
+            'Detalles':'Detalles', 
+            'Requisitos': 'Requisitos', 
+            'Direccion':'Direccion'
+        });
 
-        table_generate_rowsandcols(thead_culturales, tbody_culturales, culturales, 
-        {'Fecha':'Fecha', 'Nombre':'Nombre', 'Detalles':'Detalles', 'Direccion':'Direccion', 'Activo':'Activo'})
-        
+        table_generate_rowsandcols(thead_culturales, tbody_culturales, culturales, {
+            'Fecha':'Fecha', 
+            'Nombre':'Nombre', 
+            'Detalles':'Detalles', 
+            'Direccion':'Direccion', 
+            'Activo':'Activo'
+        })
+
+        table_generate_rowsandcols(thead_registros, tbody_registros, registros, {
+            'Punto de control':'Punto_De_Control', 
+            'Estado': 'Estado', 
+            'Municipio':'Municipio', 
+            'Fecha de Entrada':'Fecha_De_Entrada', 
+            'Fecha de salida': 'Fecha_De_Salida', 
+            'Alimentación':'Alimentación'
+        })
     })
     .catch(e=>console.log(e))
 
@@ -127,8 +142,14 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
 
 export function migrante_consultar_todos(thead_migrantes, tbody_migrantes){
 
-    table_consultar_todos("php/res_migrantes.php", thead_migrantes, tbody_migrantes,
-        {'Nombre':'Nombre', 'Apellido Paterno':'Apellido_Paterno', 'Apellido Materno':'Apellido_Materno', 'Pais':'Pais', 'Punto de Control':'Punto_de_Control', 'Estado':'Estado'},
+    table_consultar_todos("php/res_migrantes.php", thead_migrantes, tbody_migrantes,{
+        'Nombre':'Nombre', 
+        'Apellido Paterno':'Apellido_Paterno', 
+        'Apellido Materno':'Apellido_Materno', 
+        'Pais':'Pais', 
+        'Punto de Control':'Punto_de_Control', 
+        'Estado':'Estado'
+    },
         "migrantes"
     )
 }
@@ -160,8 +181,12 @@ export function migrante_eliminar(id){
 
 //FUNCIONES DE ACTIVIDADES LABORALES//
 export function laborales_consultar_todos(thead_laborales, tbody_laborales){
-    table_consultar_todos("php/res_laborales.php", thead_laborales, tbody_laborales,
-        {'Fecha':'Fecha', 'Detalles':'Detalles', 'Requisitos':'Requisitos', 'Direccion':'Direccion'},
+    table_consultar_todos("php/res_laborales.php", thead_laborales, tbody_laborales,{
+        'Fecha':'Fecha', 
+        'Detalles':'Detalles', 
+        'Requisitos':'Requisitos', 
+        'Direccion':'Direccion'
+    },
         "laborales"
     )
 }
@@ -182,8 +207,12 @@ export function laborales_eliminar(id){
 
 //FUNCIONES DE ACTIVIDADES CULTURALES//
 export function culturales_consultar_todos(thead_culturales, tbody_culturales){
-    table_consultar_todos("php/res_culturales.php", thead_culturales, tbody_culturales,
-        {'Fecha':'Fecha', 'Nombre':'Nombre', 'Detalles':'Detalles', 'Direccion':'Direccion'},
+    table_consultar_todos("php/res_culturales.php", thead_culturales, tbody_culturales,{
+        'Fecha':'Fecha', 
+        'Nombre':'Nombre', 
+        'Detalles':'Detalles', 
+        'Direccion':'Direccion'
+    },
         "culturales"
     )
 }

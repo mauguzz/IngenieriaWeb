@@ -26,7 +26,7 @@ function res_get(){
     }else{
         //No se pasó el id. //CASO: Obtener todos los migrantes
         
-        $result = ["migrantes"=>$conexion->Mostrar_Migrantes_Todos($conexion)];
+        $result = $conexion->Mostrar_Migrantes_Todos($conexion);
     }
           
 

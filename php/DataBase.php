@@ -23,7 +23,7 @@ class DataBase{
         $result = $Conexion->prepare($query); //Agrego variables (Si es el caso)
         $result->execute();  //Ejecuto la consulta
         //return ['Migrantes'=>$result->fetchAll(PDO::FETCH_ASSOC)] //Retorno la matriz en el formato
-        return $result->fetchAll(PDO::FETCH_ASSOC);
+        return ["migrantes"=>$result->fetchAll(PDO::FETCH_ASSOC)];
     }
 
     public static function Mostrar_Migrante_Detalle ($mysqli, $Id_Migrante){//Recibe objeto de conexión
@@ -42,8 +42,8 @@ class DataBase{
         $query="SELECT Id_Trabajo,Actividad,Direccion,fecha FROM  Asistencia_Oferta_Laboral_View where Id_Migrante='".$Id_Migrante."'";
         $Asistencia_Oferta_Laboral = $Conexion->prepare($query); //Agrego la variable $Id_Migrante
         $Asistencia_Oferta_Laboral->execute();  //Ejecuto la consulta
-        return array('datos_generales'=>$Migrante->fetchAll(PDO::FETCH_ASSOC),
-                'Registro'=>$Registro->fetchAll(PDO::FETCH_ASSOC),
+        return array('general'=>$Migrante->fetchAll(PDO::FETCH_ASSOC),
+                'registros'=>$Registro->fetchAll(PDO::FETCH_ASSOC),
                 'culturales'=>$Asistencia_Actividad_Cultural->fetchAll(PDO::FETCH_ASSOC),
                 'laborales'=>$Asistencia_Oferta_Laboral->fetchAll(PDO::FETCH_ASSOC)
     )       ; //Retorno las matrices
