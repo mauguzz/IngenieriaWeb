@@ -4,6 +4,7 @@ import {Iniciar_Sesion,
 
 
 const btn_Login = document.getElementById('btn_Login'); //  HTML to JS
+const Form_Iniciar_Sesion = document.getElementById('Form_Iniciar_Sesion');
     
 
 Form_Iniciar_Sesion.onsubmit = function(e){ //Registro el evento a mi objeto botón, en este caso es a un click
