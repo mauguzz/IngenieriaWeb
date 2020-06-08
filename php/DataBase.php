@@ -122,9 +122,9 @@ class DataBase{
             '".$Estado_Por_Defecto."');";
             $Funcionario = $Conexion->prepare($query); 
             $Funcionario->execute();  //Ejecuto la consulta
-            return ["POST"=>"Correcto, insertado correctamente";
+            return ["POST"=>"Correcto, insertado correctamente"];
          }catch(PDOException $e){
-             return ["POST"=>"$query ."<br>". $e->getMessage()";
+             return ["POST"=>"$e->getMessage()"];
          }
 
     }
