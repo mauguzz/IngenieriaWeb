@@ -133,7 +133,7 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
             'Municipio':'Municipio', 
             'Fecha de Entrada':'Fecha_De_Entrada', 
             'Fecha de salida': 'Fecha_De_Salida', 
-            'Alimentación':'Alimentación'
+            'Alimentación':'Alimentacion'
         })
     })
     .catch(e=>console.log(e))

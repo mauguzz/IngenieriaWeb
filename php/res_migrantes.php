@@ -22,7 +22,8 @@ function res_get(){
         //OJO: Prototipo del array a pasar, verificar que el resultado del método correspondiente en DataBase.php devuelva un array con la misma estructura
         $result=array("id"=>$args[0],"general"=> array(array("Nombre"=>"Mauricio", "Edad"=>"20", "Punto"=> "2")), 
             "laborales"=>array("1"=> array("Fecha"=>"30 de mayo de 2020","Detalles"=>"Backend Developer","Requisitos"=>"PHP","Direccion"=>"Jiutepec") ), 
-            "culturales"=>array("1"=> array("Fecha"=>"23 de mayo de 2020", "Nombre"=> "Guitarra", "Detalles"=>"Clases básicas", "Direccion"=>"Jiutepec", "Activo"=>"1")));
+            "culturales"=>array("1"=> array("Fecha"=>"23 de mayo de 2020", "Nombre"=> "Guitarra", "Detalles"=>"Clases básicas", "Direccion"=>"Jiutepec", "Activo"=>"1")),
+            "registros"=>array("1"=>array("Punto_De_Control"=>"Tapachula", "Estado"=>"Chiapas", "Municipio"=>"Tapachula", "Fecha_De_Entrada"=>"Enero","Fecha_De_Salida"=>"Mayo", "Alimentacion"=>"Completa")));
     }else{
         //No se pasó el id. //CASO: Obtener todos los migrantes
         
