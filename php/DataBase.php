@@ -92,6 +92,48 @@ class DataBase{
         $Funcionario->execute();  //Ejecuto la consulta
         return ['Funcionario'=>$Funcionario->fetchAll(PDO::FETCH_ASSOC)];
     }
+/*----------------------------------------------Insercciones------------------------------------------------ */
+
+    public static function Crear_Migrante ($mysqli,$Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion, $Llave){
+        if($jsonData=file_get_contents('php://input')){
+            $data=json_decode($jsonData);
+        }else{
+            header('HTTP/1.1 400 Bad Request');
+            return;
+        }
+    
+        $Pais=int ($Pais);
+        $Edad=int ($Edad);
+        $Nivel_Educativo=int ($Nivel_Educativo);
+        $Situacion_Familia=int($Situacion_Familia);
+        $Estado_Por_Defecto= 1;
+        try {
+            $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+            $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $query="insert into Migrante values (
+            NULL,
+            '".$Nombre."',
+            '".$Apellido_Paterno."',
+            '".$Apellido_Materno."',
+            '".$Ciudad."',
+            '".$Pais."',
+            '".$Oficio."',
+            '".$Fecha_Nacimiento."',
+            '".$Edad."',
+            '".$Contacto_Telefono."',
+            '".$Nivel_Educativo."',
+            '".$Situacion_Familia."',
+            '".$Llave."',
+            '".$Causa_Migracion."',
+            '".$Estado_Por_Defecto."');";
+            $Funcionario = $Conexion->prepare($query); 
+            $Funcionario->execute();  //Ejecuto la consulta
+            return ["POST"=>"Correcto, insertado correctamente";
+         }catch(PDOException $e){
+             return ["POST"=>"$query ."<br>". $e->getMessage()";
+         }
+
+    }
 
 /*------------------------------------------------Sesiones--------------------------------------------------*/
     public static function IniciarSesion ($mysqli,$User, $Pass){

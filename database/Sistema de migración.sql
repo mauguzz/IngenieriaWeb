@@ -137,7 +137,7 @@ ALTER TABLE municipios
         Apellido_Materno varchar (20),
 		Telefono_Contacto varchar (12), 
         Correo_Electronico varchar (30),
-        Contrasenia varchar (20),
+        Contrasenia varchar (100),
 		primary key (Id_Funcionario),
 		foreign key (Id_Punto_Control) references  Puntos_De_Control(Id_Punto_Control)
 		);
@@ -204,7 +204,7 @@ ALTER TABLE municipios
         Apellido_Materno varchar (20),
 		Telefono_Contacto varchar (12), 
         Correo_Electronico varchar (50),
-        Contraseña varchar (20),
+        Contraseña varchar (100),
         primary key (Id_Administrador)
         );
     
@@ -2778,7 +2778,7 @@ insert into Registro values (1,1,'2020-06-04',NULL,1);
 select * from Registro;
 
 /*Agregamos funcionarios*/
-insert into Funcionario values (1,1,'Noe','Torres','Cruz','5044389781','Noe@hotmail.com');
+insert into Funcionario values (1,1,'Noe','Torres','Cruz','5044389781','Noe@hotmail.com','123456');
 /*Corroboramos la información*/
 select* from Funcionario;
 
@@ -2794,7 +2794,7 @@ select Migrante.Id_Migrante,
         Migrante.Apellido_Paterno,
         Migrante.Apellido_Materno,
         Pais.Nombre as 'Pais',
-        Puntos_de_control.Nombre As 'Punto de Control',
+        Puntos_de_control.Nombre As 'Punto_de_Control',
         Estados.nombre As 'Estado'
         from Migrante 
         Inner join Pais ON 
@@ -2901,5 +2901,12 @@ select
       inner join Estados ON
       Estados.Id=Puntos_de_control.Id_Estado;
       
-      select * from Mostrar_FUncionarios;
+      select * from Funcionario;
+      
+      select * from Administrador;
+      
+      update Funcionario 
+      set Contrasenia='$2y$10$W8meY..MFwROZEnsOYzgr.qX6CjI.bLKbffmLmpL2BhnZof2lYjXm'
+      where Id_Funcionario=1;
+      
 
