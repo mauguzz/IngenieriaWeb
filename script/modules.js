@@ -235,10 +235,6 @@ export function Iniciar_Sesion(formJson){
     console.log(formJson);//Imprimo mi Json
     fetch("php/res_sesion.php/",{method: 'POST', body: formJson})   ///
     .then(handleHttpErrors)
-    .then(res=>res.text()) // .Then son las promesas de esta función. -- Cambiar a Json para funcionamiento
-    .then(res_json=>{
-        console.log(res_json);
-    })
     .catch(e=>console.log(e))  
     //.then(handleHttpErrors)
 
