@@ -12,18 +12,19 @@ function res_get(){
     //USO: Pasar un único argumento entero id si se va a aplicar la acción a un elemento específico
     //Si no, no es necesario pasar argumentos.
     $args=func_get_args();
+    $conexion= new Database();
 
     if (count($args)==1){
         //Se pasó el id. //CASO: Obtener una única oferta laboral
-
+        
         //OJO: Prototipo del array a pasar, verificar que el resultado del método correspondiente en DataBase.php devuelva un array con la misma estructura
         $result=array("laborales"=>array("Fecha"=>"30 de mayo de 2020","Detalles"=>"Backend Developer","Requisitos"=>"PHP","Direccion"=>"Jiutepec"));
     }else{
         //No se pasó el id. //CASO: Obtener todas las ofertas laborales
-
+        $result=$conexion->Mostrar_Ofertas_de_Trabajo($conexion);
         //OJO: Prototipo del array a pasar, verificar que el resultado del método correspondiente en DataBase.php devuelva un array con la misma estructura
-        $result=array("laborales"=>array("1"=>array("Fecha"=>"30 de mayo de 2020","Detalles"=>"Backend Developer","Requisitos"=>"PHP","Direccion"=>"Jiutepec"), 
-        "2"=>array("Fecha"=>"2 de junio de 2020","Detalles"=>"Frontend Developer","Requisitos"=>"CSS","Direccion"=>"Ecatepec")));
+        //$result=array("laborales"=>array("1"=>array("Fecha"=>"30 de mayo de 2020","Detalles"=>"Backend Developer","Requisitos"=>"PHP","Direccion"=>"Jiutepec"), 
+        //"2"=>array("Fecha"=>"2 de junio de 2020","Detalles"=>"Frontend Developer","Requisitos"=>"CSS","Direccion"=>"Ecatepec")));
     }
           
 

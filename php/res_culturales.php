@@ -12,6 +12,7 @@ function res_get(){
     //USO: Pasar un único argumento entero id si se va a aplicar la acción a un elemento específico
     //Si no, no es necesario pasar argumentos.
     $args=func_get_args();
+    $conexion= new Database();
 
     if (count($args)==1){
         //Se pasó el id. //CASO: Obtener una única actividad cultural
@@ -20,10 +21,10 @@ function res_get(){
         $result=array("culturales"=>array("Fecha"=>"23 de mayo de 2020", "Nombre"=> "Guitarra", "Detalles"=>"Clases básicas", "Direccion"=>"Jiutepec", "Activo"=>"1"));
     }else{
         //No se pasó el id. //CASO: Obtener todos las actividades culturales
-
+        $result=$conexion->Mostrar_Actividades_Culturales($conexion);
         //OJO: Prototipo del array a pasar, verificar que el resultado del método correspondiente en DataBase.php devuelva un array con la misma estructura
-        $result=array("culturales"=>array("1"=>array("Fecha"=>"23 de mayo de 2020", "Nombre"=> "Guitarra", "Detalles"=>"Clases básicas", "Direccion"=>"Jiutepec", "Activo"=>"1"), 
-        "2"=>array("Fecha"=>"02 de febrero de 2020", "Nombre"=> "Pintura", "Detalles"=>"Clases básicas", "Direccion"=>"Jonacatepec", "Activo"=>"1")));
+        //$result=array("culturales"=>array("1"=>array("Fecha"=>"23 de mayo de 2020", "Nombre"=> "Guitarra", "Detalles"=>"Clases básicas", "Direccion"=>"Jiutepec", "Activo"=>"1"), 
+        //"2"=>array("Fecha"=>"02 de febrero de 2020", "Nombre"=> "Pintura", "Detalles"=>"Clases básicas", "Direccion"=>"Jonacatepec", "Activo"=>"1")));
     }
           
 
