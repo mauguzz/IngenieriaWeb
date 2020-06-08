@@ -95,12 +95,6 @@ class DataBase{
 /*----------------------------------------------Insercciones------------------------------------------------ */
 
     public static function Crear_Migrante ($mysqli,$Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion, $Llave){
-        if($jsonData=file_get_contents('php://input')){
-            $data=json_decode($jsonData);
-        }else{
-            header('HTTP/1.1 400 Bad Request');
-            return;
-        }
     
         $Pais=int ($Pais);
         $Edad=int ($Edad);
