@@ -55,7 +55,7 @@ class DataBase{
         $query="SELECT * FROM Actividades";//Introduzco la consulta
         $Actividades = $Conexion->prepare($query); //
         $Actividades->execute();  //Ejecuto la consulta
-        return ['Actividades'=>$Actividades->fetchAll(PDO::FETCH_ASSOC)];
+        return ['culturales'=>$Actividades->fetchAll(PDO::FETCH_ASSOC)];
     }
    
     //ESTA POSIBLEMENTE NO SE UTILICE, YA QUE SE HACE UNA CONSULTA SELECTIVA EN DETALLES DEL MIGRANTE//
@@ -73,7 +73,7 @@ class DataBase{
         $query="SELECT * FROM Ofertas_de_Trabajo";//Introduzco la consulta
         $Ofertas_de_Trabajo = $Conexion->prepare($query); //
         $Ofertas_de_Trabajo->execute();  //Ejecuto la consulta
-        return ['Ofertas_de_Trabajo'=>$Ofertas_de_Trabajo->fetchAll(PDO::FETCH_ASSOC)];
+        return ['laborales'=>$Ofertas_de_Trabajo->fetchAll(PDO::FETCH_ASSOC)];
     }
  
     //ESTA POSIBLEMENTE NO SE UTILICE, YA QUE SE HACE UNA CONSULTA SELECTIVA EN DETALLES DEL MIGRANTE//
