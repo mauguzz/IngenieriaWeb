@@ -147,7 +147,7 @@ class DataBase{
             $result  = $Conexion->prepare($query); //
             $result->execute();
             $res=$result->fetchAll(PDO::FETCH_ASSOC);
-            var_dump($res);
+            //var_dump($res);
             if (!empty($res)){//Verifico la existencia de un usuario funcinoario -----------Comprobar funcionamiento    
                 if (password_verify($Pass,$res[0]["Contrasenia"])) {
                     session_start(); /*Inicializamos los valores de la sesión*/
