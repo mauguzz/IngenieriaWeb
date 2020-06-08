@@ -153,7 +153,7 @@ class DataBase{
                     session_start(); /*Inicializamos los valores de la sesión*/
                     $_SESSION['USERNAME']=$res[0]["Nombre"];
                     $_SESSION['USERID']=$res[0]["Id_Funcionario"];
-                    header("Location: "."../ingenieriaweb/Funcionario.html");  
+                    header("Location: "."../../Funcionario.html");  
 
                 }else{
                     echo '
