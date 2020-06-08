@@ -235,7 +235,10 @@ export function Iniciar_Sesion(formJson){
     console.log(formJson);//Imprimo mi Json
     fetch("php/res_sesion.php/",{method: 'POST', body: formJson})   ///
     .then(handleHttpErrors)
-    .catch(e=>console.log(e))  
+    .catch(e=>{
+        console.log(e);
+        console.log("Catching");
+    })  
     //.then(handleHttpErrors)
 
 }
