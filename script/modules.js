@@ -235,6 +235,11 @@ export function Iniciar_Sesion(formJson){
     console.log(formJson);//Imprimo mi Json
     fetch("php/res_sesion.php/",{method: 'POST', body: formJson})   ///
     .then(handleHttpErrors)
+    .then(response=>{
+        if (response.redirected) {
+            window.location.href = response.url;
+        }
+    })
     .catch(e=>{
         console.log(e);
         console.log("Catching");
