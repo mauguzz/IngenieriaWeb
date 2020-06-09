@@ -39,9 +39,15 @@ btn_consultar.addEventListener("click", ()=>{
     );
 });
 
+/*
 btn_todos.addEventListener("click", ()=>{
     migrante_consultar_todos(thead_migrantes, tbody_migrantes);
 })
+*/
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    migrante_consultar_todos(thead_migrantes, tbody_migrantes);
+});
 
 btn_migrante_eliminar.addEventListener("click", ()=>{
     migrante_eliminar(id);
