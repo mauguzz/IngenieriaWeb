@@ -59,6 +59,12 @@ function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
     .then(res=>res.json())
     .then(res_json=>{
         let rows=res_json[rowsindex]; 
+
+        //Prueba
+        console.log(rows);
+        console.log(JSON.parse(rows));
+
+
         table_generate_rowsandcols(thead, tbody, rows, columns);
     })
     .catch(e=>console.log(e))
@@ -113,8 +119,7 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
             tbody_general.appendChild(row_general);
         });
         
-        console.log(laborales);
-        console.log(JSON.parse(laborales));
+        
 
         
     
