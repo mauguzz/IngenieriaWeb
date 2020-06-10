@@ -49,6 +49,8 @@ function table_generate_rowsandcols(thead, tbody, rows, columns){
     
 }
 
+//function table_generate(tablename, rows, columns)
+
 function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
     fetch(uri, {
         method: 'GET'
@@ -111,6 +113,10 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
             tbody_general.appendChild(row_general);
         });
         
+        console.log(laborales);
+        console.log(JSON.parse(laborales));
+
+        })
     
         table_generate_rowsandcols(thead_laborales, tbody_laborales, laborales, {
             'Fecha':'Fecha', 
@@ -131,7 +137,7 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
             'Alimentación':'Alimentacion'
         })
     })
-    .catch(e=>console.log(e))
+    .catch(e=>console.log(e));
 
 }
 
