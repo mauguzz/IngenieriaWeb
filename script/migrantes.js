@@ -48,9 +48,13 @@ btn_todos.addEventListener("click", ()=>{
 */
 
 document.addEventListener("DOMContentLoaded", function(event) {
-
-    migrante_consultar_todos(thead_migrantes, tbody_migrantes)
-    .then(e=>{
+    let tablePromise = new Promise((resolve, reject)=>{
+        migrante_consultar_todos(thead_migrantes, tbody_migrantes);
+        while(thead_migrantes.innerHTML!=""){};
+        resolve("Lleno");
+    })
+    
+    tablePromise.then(e=>{
         $('t_migrantes').DataTable();
     });
     
