@@ -4,7 +4,7 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
 
 const mcontent = document.getElementById('content'); //Div del contenido principal (tablas, etc), todas las páginas
 
-const s_migrantes = document.getElementById('s_migrantes');
+
 const t_migrantes = document.getElementById('t_migrantes');
 
 const thead_general = document.getElementById('thead_general');
@@ -20,7 +20,6 @@ const tbody_migrantes = document.getElementById('tbody_migrantes');
 const tbody_registros = document.getElementById('tbody_registros');
 
 const btn_consultar =document.getElementById('btn_consultar');
-const btn_todos = document.getElementById('btn_todos');
 const btn_migrante_eliminar = document.getElementById('btn_migrante_eliminar');
 
 const form_migrantes_registrar = document.getElementById('f_migrantes_registrar');
@@ -42,11 +41,7 @@ btn_consultar.addEventListener("click", ()=>{
     );
 });
 
-/*
-btn_todos.addEventListener("click", ()=>{
-    migrante_consultar_todos(thead_migrantes, tbody_migrantes);
-})
-*/
+
 document.addEventListener("DOMContentLoaded", function(event) {
     
         migrante_consultar_todos('#t_migrantes');  //thead_migrantes, tbody_migrantes
@@ -54,46 +49,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
    
     
 });
-/*
-document.addEventListener("DOMContentLoaded", function(event) {
-    let tablePromise = new Promise((resolve, reject)=>{
-        migrante_consultar_todos(thead_migrantes, tbody_migrantes);
-        console.log(thead_migrantes.rows);
-        while(!thead_migrantes.hasChildNodes()){};
-        resolve("Lleno");
-    })
-    
-    tablePromise.then(e=>{
-        $('#t_migrantes').DataTable();
-    });
-    
-});
 
-*/
 
-function filter(tableReg, searchText) {
-    
-    searchText.value.toLowerCase();
-    for (var i = 0; i <= tableReg.rows.length-1; i++) {
-        var cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
-        var found = false;
-        for (var j = 0; j < cellsOfRow.length && !found; j++) {
-            var compareWith = cellsOfRow[j].innerHTML.toLowerCase();
-            if (searchText.length == 0 || (compareWith.indexOf(searchText) > -1)) {
-                found = true;
-            }
-        }
-        if (found) {
-            tableReg.rows[i].style.display = 'initial';
-        } else {
-            tableReg.rows[i].style.display = 'none';
-        }
-    }
-}
 
-s_migrantes.onkeyup = function (e){
-    filter(t_migrantes, s_migrantes);
-}
 
 btn_migrante_eliminar.addEventListener("click", ()=>{
     migrante_eliminar(id);
