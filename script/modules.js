@@ -62,7 +62,10 @@ function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
 
         //Prueba
         console.log(rows);
-        console.log(JSON.parse(rows));
+        rows.forEach((valor, clave)=>{
+            console.log(JSON.parse(valor));
+        })
+        
 
 
         table_generate_rowsandcols(thead, tbody, rows, columns);
