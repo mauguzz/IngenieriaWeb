@@ -50,7 +50,6 @@ btn_todos.addEventListener("click", ()=>{
 document.addEventListener("DOMContentLoaded", function(event) {
 
     migrante_consultar_todos(thead_migrantes, tbody_migrantes);
-    t_migrantes.DataTable();
 });
 
 
