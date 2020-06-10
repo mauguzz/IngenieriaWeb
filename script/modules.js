@@ -72,7 +72,7 @@ function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
             console.log(result);
             data.push(result);
         })
-        console.log(data);
+        console.log(data.text());
         
 
 
