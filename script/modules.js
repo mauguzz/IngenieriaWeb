@@ -49,6 +49,22 @@ function table_generate_rowsandcols(thead, tbody, rows, columns){
     
 }
 
+function table_generate_datatables(tablename, rows, cols){
+    let result = [];
+    let dataSet = [];
+    rows.forEach((valor)=>{
+        for(var i in valor){
+            result.push(valor[i]);
+        }
+        dataSet.push(result);
+    })
+    //dataSet es la variable que se le pasa al dataSet de DataTable
+    $(tablename).DataTable( {
+        data: dataSet,
+        columns: cols
+    } );
+}
+
 function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
     fetch(uri, {
         method: 'GET'
@@ -58,6 +74,20 @@ function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
     .then(res_json=>{
         let rows=res_json[rowsindex]; 
         table_generate_rowsandcols(thead, tbody, rows, columns);
+    })
+    .catch(e=>console.log(e))
+}
+
+
+function datatable_consultar_todos(uri, table, columns, rowsindex){
+    fetch(uri, {
+        method: 'GET'
+    })
+    .then(handleHttpErrors)
+    .then(res=>res.json())
+    .then(res_json=>{
+        let rows=res_json[rowsindex]; 
+        table_generate_datatables(table, rows, columns);
     })
     .catch(e=>console.log(e))
 }
@@ -111,6 +141,9 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
             tbody_general.appendChild(row_general);
         });
         
+        
+
+        
     
         table_generate_rowsandcols(thead_laborales, tbody_laborales, laborales, {
             'Fecha':'Fecha', 
@@ -131,12 +164,25 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
             'Alimentación':'Alimentacion'
         })
     })
-    .catch(e=>console.log(e))
+    .catch(e=>console.log(e));
 
 }
 
-export function migrante_consultar_todos(thead_migrantes, tbody_migrantes){
+export function migrante_consultar_todos(table){  //thead_migrantes, tbody_migrantes
 
+    datatable_consultar_todos("php/res_migrantes.php", table, 
+        [
+            { title: "Nombre" },
+            { title: "Apellido Paterno" },
+            { title: "Apellido Materno" },
+            { title: "País" },
+            { title: "Punto de control" },
+            { title: "Estado" }
+        ],
+     "migrantes"
+     )
+
+     /*
     table_consultar_todos("php/res_migrantes.php", thead_migrantes, tbody_migrantes,{
        
         'Nombre':'Nombre', 
@@ -148,6 +194,7 @@ export function migrante_consultar_todos(thead_migrantes, tbody_migrantes){
     },
         "migrantes"
     )
+    */
 }
 
 export function migrante_registrar(jsonData){

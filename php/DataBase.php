@@ -155,7 +155,7 @@ class DataBase{
                     $_SESSION['USERID']=$res[0]["Id_Funcionario"];
                     header("location:http://localhost/IngenieriaWeb/Funcionario.html");  
                     //header('Content-Type: text/html; charset=utf-8');
-                    header("Location: "."../../Funcionario.html");  
+                    header("Location: "."../../migrantes.html");  
 
                 }else{
                     echo '

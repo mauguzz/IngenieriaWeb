@@ -4,6 +4,9 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
 
 const mcontent = document.getElementById('content'); //Div del contenido principal (tablas, etc), todas las páginas
 
+
+const t_migrantes = document.getElementById('t_migrantes');
+
 const thead_general = document.getElementById('thead_general');
 const thead_culturales = document.getElementById('thead_culturales');
 const thead_laborales = document.getElementById('thead_laborales');
@@ -17,7 +20,6 @@ const tbody_migrantes = document.getElementById('tbody_migrantes');
 const tbody_registros = document.getElementById('tbody_registros');
 
 const btn_consultar =document.getElementById('btn_consultar');
-const btn_todos = document.getElementById('btn_todos');
 const btn_migrante_eliminar = document.getElementById('btn_migrante_eliminar');
 
 const form_migrantes_registrar = document.getElementById('f_migrantes_registrar');
@@ -39,12 +41,21 @@ btn_consultar.addEventListener("click", ()=>{
     );
 });
 
-btn_todos.addEventListener("click", ()=>{
-    migrante_consultar_todos(thead_migrantes, tbody_migrantes);
-})
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    
+        migrante_consultar_todos('#t_migrantes');  //thead_migrantes, tbody_migrantes
+        //$('#t_migrantes').DataTable();
+   
+    
+});
+
+
+
 
 btn_migrante_eliminar.addEventListener("click", ()=>{
     migrante_eliminar(id);
+
 })
 
 form_migrantes_registrar.onsubmit = function(e){
