@@ -116,7 +116,7 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
         console.log(laborales);
         console.log(JSON.parse(laborales));
 
-        })
+        
     
         table_generate_rowsandcols(thead_laborales, tbody_laborales, laborales, {
             'Fecha':'Fecha', 
