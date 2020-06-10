@@ -44,6 +44,8 @@
             <button id="btn_todos">Ver todos los migrantes</button>
             <button id="btn_migrante_eliminar">Eliminar</button>
 
+            <input id="search" type="text" onkeyup="filter('t_migrantes', 'search')" />
+
             <!--Tabla de información de todos los migrantes (resumen)-->
             <table id="t_migrantes">
                 <thead id="thead_migrantes">
@@ -204,11 +206,6 @@
         <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
-        <script>
-            $(document).ready(function() {
-                $('t_migrantes').DataTable();
-            } );
-        </script>
         
 
     </body>
