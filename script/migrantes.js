@@ -47,7 +47,14 @@ btn_todos.addEventListener("click", ()=>{
     migrante_consultar_todos(thead_migrantes, tbody_migrantes);
 })
 */
-
+document.addEventListener("DOMContentLoaded", function(event) {
+    
+        migrante_consultar_todos(thead_migrantes, tbody_migrantes); 
+        $('#t_migrantes').DataTable();
+   
+    
+});
+/*
 document.addEventListener("DOMContentLoaded", function(event) {
     let tablePromise = new Promise((resolve, reject)=>{
         migrante_consultar_todos(thead_migrantes, tbody_migrantes);
@@ -62,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
 });
 
-
+*/
 
 function filter(tableReg, searchText) {
     
