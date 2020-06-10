@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     })
     
     tablePromise.then(e=>{
-        $('t_migrantes').DataTable();
+        $('#t_migrantes').DataTable();
     });
     
 });
