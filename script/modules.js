@@ -63,7 +63,7 @@ function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
         //Prueba
         console.log(rows);
         rows.forEach((valor, clave)=>{
-            console.log(JSON.parse(valor));
+            console.log(valor);
         })
         
 
