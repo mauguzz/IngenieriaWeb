@@ -234,11 +234,16 @@ export function culturales_eliminar(id){
 export function Iniciar_Sesion(formJson){
     console.log(formJson);//Imprimo mi Json
     fetch("php/res_sesion.php/",{method: 'POST', body: formJson})   ///
-    .then(res=>res.text()) // .Then son las promesas de esta función. -- Cambiar a Json para funcionamiento
-    .then(res_json=>{
-        console.log(res_json);
+    .then(handleHttpErrors)
+    .then(response=>{
+        if (response.redirected) {
+            window.location.href = response.url;
+        }
     })
-    //.catch(e=>console.log(e))  
+    .catch(e=>{
+        console.log(e);
+        console.log("Catching");
+    })  
     //.then(handleHttpErrors)
 
 }

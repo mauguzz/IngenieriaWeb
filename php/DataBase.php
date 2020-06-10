@@ -143,17 +143,19 @@ class DataBase{
         }   
         else {
             $Conexion = $mysqli ->Conectar();
-            $query="SELECT Nombre,Apellido_Paterno,Apellido_Materno,Correo_Electronico,Contrasenia FROM Funcionario where Correo_Electronico='".$User."'";//Introduzco la consulta
+            $query="SELECT Id_Funcionario, Nombre,Apellido_Paterno,Apellido_Materno,Correo_Electronico,Contrasenia FROM Funcionario where Correo_Electronico='".$User."'";//Introduzco la consulta
             $result  = $Conexion->prepare($query); //
             $result->execute();
             $res=$result->fetchAll(PDO::FETCH_ASSOC);
-            var_dump($res);
+            //var_dump($res);
             if (!empty($res)){//Verifico la existencia de un usuario funcinoario -----------Comprobar funcionamiento    
                 if (password_verify($Pass,$res[0]["Contrasenia"])) {
                     session_start(); /*Inicializamos los valores de la sesión*/
                     $_SESSION['USERNAME']=$res[0]["Nombre"];
                     $_SESSION['USERID']=$res[0]["Id_Funcionario"];
                     header("location:http://localhost/IngenieriaWeb/Funcionario.html");  
+                    //header('Content-Type: text/html; charset=utf-8');
+                    header("Location: "."../../Funcionario.html");  
 
                 }else{
                     echo '
