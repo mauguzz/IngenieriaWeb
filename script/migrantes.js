@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let tablePromise = new Promise((resolve, reject)=>{
         migrante_consultar_todos(thead_migrantes, tbody_migrantes);
         console.log(thead_migrantes.rows);
-        while(thead_migrantes.innerHTML==""){};
+        while(thead_migrantes.columns.length == 0){};
         resolve("Lleno");
     })
     
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 function filter(tableReg, searchText) {
     
     searchText.value.toLowerCase();
-    for (var i = 1; i < tableReg.rows.length; i++) {
+    for (var i = 0; i <= tableReg.rows.length-1; i++) {
         var cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
         var found = false;
         for (var j = 0; j < cellsOfRow.length && !found; j++) {
