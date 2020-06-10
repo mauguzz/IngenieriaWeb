@@ -51,7 +51,7 @@ btn_todos.addEventListener("click", ()=>{
 document.addEventListener("DOMContentLoaded", function(event) {
     let tablePromise = new Promise((resolve, reject)=>{
         migrante_consultar_todos(thead_migrantes, tbody_migrantes);
-        console.log(thead_migrantes.innerHTML);
+        console.log(thead_migrantes.rows);
         while(thead_migrantes.innerHTML==""){};
         resolve("Lleno");
     })
