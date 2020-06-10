@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let tablePromise = new Promise((resolve, reject)=>{
         migrante_consultar_todos(thead_migrantes, tbody_migrantes);
         console.log(thead_migrantes.rows);
-        //while(thead_migrantes.columns.length == 0){};
+        while(!thead_migrantes.hasChildNodes()){};
         resolve("Lleno");
     })
     
