@@ -66,7 +66,7 @@ function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
         rows.forEach((valor, clave)=>{
             //console.log(valor);
             for(var i in valor){
-                result.push([valor[i]]);
+                result.push(valor[i]);
             }
             console.log(result);
         })
