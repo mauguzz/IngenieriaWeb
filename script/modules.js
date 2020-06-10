@@ -70,7 +70,9 @@ function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
         rows.forEach((valor, clave)=>{
             //console.log(valor);
             
-            console.log(Array.from(valor).values());
+            valor.map((val, i)=>{
+                result.push(val[i]);
+            })
             /*
             for(var i in valor){
                 result.push(valor[i]);
