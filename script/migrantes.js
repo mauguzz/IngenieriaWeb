@@ -4,6 +4,7 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
 
 const mcontent = document.getElementById('content'); //Div del contenido principal (tablas, etc), todas las páginas
 
+const s_migrantes = document.getElementById('s_migrantes');
 const t_migrantes = document.getElementById('t_migrantes');
 
 const thead_general = document.getElementById('thead_general');
@@ -60,6 +61,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
 });
 
+
+
 function filter(tableReg, searchText) {
     
     searchText.value.toLowerCase();
@@ -78,6 +81,10 @@ function filter(tableReg, searchText) {
             tableReg.rows[i].style.display = 'none';
         }
     }
+}
+
+s_migrantes.onkeyup = function (e){
+    filter(t_migrantes, s_migrantes);
 }
 
 btn_migrante_eliminar.addEventListener("click", ()=>{
