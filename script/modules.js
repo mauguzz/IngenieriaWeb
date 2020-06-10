@@ -60,6 +60,7 @@ function table_generate_datatables(tablename, rows, cols){
     })
     //dataSet es la variable que se le pasa al dataSet de DataTable
     $(tablename).DataTable( {
+        select: true,
         data: dataSet,
         columns: cols
     } );
