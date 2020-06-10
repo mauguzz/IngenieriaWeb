@@ -76,7 +76,7 @@ function filter(tableReg, searchText) {
             }
         }
         if (found) {
-            tableReg.rows[i].style.display = '';
+            tableReg.rows[i].style.display = 'initial';
         } else {
             tableReg.rows[i].style.display = 'none';
         }
