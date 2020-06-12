@@ -28,10 +28,10 @@ btn_consultar.addEventListener("click", ()=>{
         t_culturales.children['thead'], 
         t_laborales.children['thead'], 
         t_registros.children['thead'],
-        t_general.children['tbody_general'],
-        t_culturales.children['tbody_culturales'],
-        t_laborales.children['tbody_laborales'], 
-        t_registros.children['tbody_registros']
+        t_general.children['tbody'],
+        t_culturales.children['tbody'],
+        t_laborales.children['tbody'], 
+        t_registros.children['tbody']
     );
 });
 
