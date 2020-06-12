@@ -49,20 +49,36 @@ function table_generate_rowsandcols(thead, tbody, rows, columns){
     
 }
 
-function table_generate_datatables(tablename, rows, cols){
+function table_generate_datatables(tablename, rows, cols, customButtons){
     let result = [];
     let dataSet = [];
-    rows.forEach((valor)=>{
-        for(var i in valor){
-            result.push(valor[i]);
+    let customCols = [];
+    let first = true;
+    /*
+    rows.forEach((row)=>{
+        for(var col in row){
+            result.push(row[col]);
         }
         dataSet.push(result);
     })
+    */
+   //cols={"Apellido Paterno" : "Apellido_P", "Apellido Materno" : "Apellido_M", "ind" : "value"}
+    rows.forEach((row)=>{
+        Object.entries(cols).forEach((value, ind)=>{
+            result.push(row[value]);
+            if(first) customCols.push({title: ind})
+        })
+        dataSet.push(result);
+        first=false;
+    })
+    
+
     //dataSet es la variable que se le pasa al dataSet de DataTable
     $(tablename).DataTable( {
         select: true,
         data: dataSet,
-        columns: cols
+        columns: customCols,
+        buttons: customButtons
     } );
 }
 
@@ -80,7 +96,7 @@ function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
 }
 
 
-function datatable_consultar_todos(uri, table, columns, rowsindex){
+function datatable_consultar_todos(uri, table, columns, rowsindex, buttons){
     fetch(uri, {
         method: 'GET'
     })
@@ -88,7 +104,7 @@ function datatable_consultar_todos(uri, table, columns, rowsindex){
     .then(res=>res.json())
     .then(res_json=>{
         let rows=res_json[rowsindex]; 
-        table_generate_datatables(table, rows, columns);
+        table_generate_datatables(table, rows, columns, buttons);
     })
     .catch(e=>console.log(e))
 }
@@ -171,16 +187,26 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
 
 export function migrante_consultar_todos(table){  //thead_migrantes, tbody_migrantes
 
-    datatable_consultar_todos("php/res_migrantes.php", table, 
-        [
+    datatable_consultar_todos("php/res_migrantes.php", table, {
+       
+        'Nombre':'Nombre', 
+        'Apellido Paterno':'Apellido_Paterno', 
+        'Apellido Materno':'Apellido_Materno', 
+        'Pais':'Pais', 
+        'Punto de Control':'Punto_de_Control', 
+        'Estado':'Estado'
+    }
+        /*[
             { title: "Nombre" },
             { title: "Apellido Paterno" },
             { title: "Apellido Materno" },
             { title: "País" },
             { title: "Punto de control" },
             { title: "Estado" }
-        ],
-     "migrantes"
+        ]*/
+    ,
+     "migrantes",
+        ["copy", "excel", "pdf"]
      )
 
      /*
