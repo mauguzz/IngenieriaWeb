@@ -189,7 +189,7 @@ export function migrante_consultar(id, t_general, t_culturales, t_laborales, t_r
 export function migrante_consultar_todos(table, t_general, t_culturales, t_laborales, t_registros){  //thead_migrantes, tbody_migrantes
 
     let datatable = datatable_consultar_todos("php/res_migrantes.php", "migrantes", table, {
-       
+        //Hace falta obtener el ID desde el View de MySQL, para poder hacer tratamientos posteriores
         'Nombre':'Nombre', 
         'Apellido Paterno':'Apellido_Paterno', 
         'Apellido Materno':'Apellido_Materno', 
@@ -205,6 +205,7 @@ export function migrante_consultar_todos(table, t_general, t_culturales, t_labor
                         text:"Detalles", 
                         action: ()=>{
                             console.log(datatable.rows( { selected: true } ).data()[0]); 
+                            //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
                             migrante_consultar(1, t_general, t_culturales, t_laborales, t_registros)
                         }, 
                         extend: "selectedSingle",
@@ -222,19 +223,7 @@ export function migrante_consultar_todos(table, t_general, t_culturales, t_labor
      })
      .catch(e=>console.log(e));
     //action requiere una definición de una función, y no una llamada a una función. Por ello se hace una estructura arrow function, es decir ()=>{}
-     /*
-    table_consultar_todos("php/res_migrantes.php", thead_migrantes, tbody_migrantes,{
-       
-        'Nombre':'Nombre', 
-        'Apellido Paterno':'Apellido_Paterno', 
-        'Apellido Materno':'Apellido_Materno', 
-        'Pais':'Pais', 
-        'Punto de Control':'Punto_de_Control', 
-        'Estado':'Estado'
-    },
-        "migrantes"
-    )
-    */
+   
 }
 
 export function migrante_registrar(jsonData){
