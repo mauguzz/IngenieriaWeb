@@ -78,11 +78,11 @@ function table_generate_datatables(tablename, rows, cols, customButtons){
         select: true,
         data: dataSet,
         columns: customCols,
-        dom: "Bfrtip",
+        //dom: "Bfrtip",
         buttons: customButtons
     } );
     table.buttons().container()
-    .appendTo( 'col2 .col-md-6:eq(0)' );
+    .appendTo( '#col2' );
 }
 
 function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
