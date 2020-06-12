@@ -58,7 +58,21 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             action: ()=>{
                                 console.log(datatable.rows( { selected: true } ).data()[0]); 
                                 //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
-                                migrante_eliminar(1)
+                                
+                            }, 
+                            extend: "selectedSingle",
+                            attr:{
+                                "data-toggle": "modal",
+                                "data-target": "#modal_migrantes_form"
+                            }
+                            
+                        },
+                        {
+                            text:"Añadir", 
+                            action: ()=>{
+                                console.log(datatable.rows( { selected: true } ).data()[0]); 
+                                //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
+                                
                             }, 
                             extend: "selectedSingle",
                             attr:{
@@ -87,6 +101,8 @@ form_migrantes_registrar.onsubmit = function(e){
 
     migrante_registrar(formJson);
 }
+
+//
 
 form_migrantes_modificar.onsubmit = function(e){
     e.preventDefault();
