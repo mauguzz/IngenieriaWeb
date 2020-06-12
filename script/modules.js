@@ -78,8 +78,14 @@ function table_generate_datatables(tablename, rows, cols, customButtons){
         select: true,
         data: dataSet,
         columns: customCols,
-        dom: 'Bfrtip',
-        buttons: customButtons
+       
+        buttons: {customButtons,
+            dom: {
+                collection: {
+                    tag: 'aside'
+                }
+            }
+        }
     } );
 }
 
