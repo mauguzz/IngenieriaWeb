@@ -64,7 +64,7 @@ function table_generate_datatables(tablename, rows, cols, customButtons){
     */
    //cols={"Apellido Paterno" : "Apellido_P", "Apellido Materno" : "Apellido_M", "ind" : "value"}
     rows.forEach((row)=>{
-        Object.entries(cols).forEach((value, ind)=>{
+        Object.entries(cols).forEach(([ind, value])=>{
             result.push(row[value]);
             if(first) customCols.push({title: ind})
         })
