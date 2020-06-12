@@ -28,23 +28,18 @@ btn_consultar.addEventListener("click", ()=>{
         t_culturales,
         t_laborales,
         t_registros
-        /*
-        t_general.children['thead'], 
-        t_culturales.children['thead'], 
-        t_laborales.children['thead'], 
-        t_registros.children['thead'],
-        t_general.children['tbody'],
-        t_culturales.children['tbody'],
-        t_laborales.children['tbody'], 
-        t_registros.children['tbody']
-        */
     );
 });
 
 
 document.addEventListener("DOMContentLoaded", function(event) {
     
-        migrante_consultar_todos('#t_migrantes');  //thead_migrantes, tbody_migrantes
+        migrante_consultar_todos('#t_migrantes',
+        t_general,
+        t_culturales,
+        t_laborales,
+        t_registros
+        );  //thead_migrantes, tbody_migrantes
         //$('#t_migrantes').DataTable();
    
     

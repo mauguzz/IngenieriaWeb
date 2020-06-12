@@ -186,7 +186,7 @@ export function migrante_consultar(id, t_general, t_culturales, t_laborales, t_r
 
 }
 
-export function migrante_consultar_todos(table){  //thead_migrantes, tbody_migrantes
+export function migrante_consultar_todos(table, t_general, t_culturales, t_laborales, t_registros){  //thead_migrantes, tbody_migrantes
 
     let datatable = datatable_consultar_todos("php/res_migrantes.php", "migrantes", table, {
        
@@ -205,7 +205,7 @@ export function migrante_consultar_todos(table){  //thead_migrantes, tbody_migra
                         text:"Detalles", 
                         action: ()=>{
                             console.log(datatable.rows( { selected: true } ).data()[0]); 
-                            migrante_eliminar(1)
+                            migrante_consultar(1, t_general, t_culturales, t_laborales, t_registros)
                         }, 
                         extend: "selectedSingle"
                     }
