@@ -224,6 +224,7 @@ export function migrante_consultar_todos(table){  //thead_migrantes, tbody_migra
         datatable.buttons(0, null).container().prependTo( datatable.table().container() );
         
      })
+     .catch(e=>console.log(e));
     //action requiere una definición de una función, y no una llamada a una función. Por ello se hace una estructura arrow function, es decir ()=>{}
      /*
     table_consultar_todos("php/res_migrantes.php", thead_migrantes, tbody_migrantes,{
