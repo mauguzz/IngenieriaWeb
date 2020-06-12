@@ -206,7 +206,7 @@ export function migrante_consultar_todos(table){  //thead_migrantes, tbody_migra
         ]*/
     ,
      "migrantes",
-        ["copy", "excel", "pdf"]
+        ["copyHtml5"]
      )
 
      /*
