@@ -82,7 +82,7 @@ function table_generate_datatables(tablename, rows, cols, customButtons){
         buttons: customButtons
     } );
     table.buttons().container()
-    .appendTo( '#col2' );
+    .appendTo( '#buttons_container' );
 }
 
 function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
