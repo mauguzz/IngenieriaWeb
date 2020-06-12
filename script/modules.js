@@ -217,7 +217,7 @@ export function migrante_consultar_todos(table, t_general, t_culturales, t_labor
                 ]
             }
         );
-        datatable.buttons().container().appendTo( '#buttons_container' );  
+        datatable.buttons().container().appendTo( '#datatable_buttons_container' );  
      })
      .catch(e=>console.log(e));
     //action requiere una definición de una función, y no una llamada a una función. Por ello se hace una estructura arrow function, es decir ()=>{}
