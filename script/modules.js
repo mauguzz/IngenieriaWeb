@@ -78,7 +78,7 @@ function table_generate_datatables(tablename, rows, cols, customButtons){
         select: true,
         data: dataSet,
         columns: customCols,
-        //dom: "Bfrtip",
+        dom: "frtip",
         buttons: customButtons
     } );
     table.buttons().container()
