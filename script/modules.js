@@ -49,19 +49,11 @@ function table_generate_rowsandcols(thead, tbody, rows, columns){
     
 }
 
-function table_generate_datatables(tablename, rows, cols, customButtons){
+function table_generate_datatables(tablename, rows, cols){
     let result = [];
     let dataSet = [];
     let customCols = [];
     let first = true;
-    /*
-    rows.forEach((row)=>{
-        for(var col in row){
-            result.push(row[col]);
-        }
-        dataSet.push(result);
-    })
-    */
    //cols={"Apellido Paterno" : "Apellido_P", "Apellido Materno" : "Apellido_M", "ind" : "value"}
     rows.forEach((row)=>{
         Object.entries(cols).forEach(([ind, value])=>{
@@ -81,8 +73,6 @@ function table_generate_datatables(tablename, rows, cols, customButtons){
         dom: "frtip"  //,
         //buttons: customButtons
     } );
-    datatable.buttons().container()
-    .appendTo( '#buttons_container' );
     return datatable;
 }
 
@@ -100,7 +90,7 @@ function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
 }
 
 
-function datatable_consultar_todos(uri, table, columns, rowsindex, buttons){
+function datatable_consultar_todos(uri, rowsindex, table, columns){
     let datatable;
     return new Promise((resolve, reject)=>{
         fetch(uri, {
@@ -110,14 +100,12 @@ function datatable_consultar_todos(uri, table, columns, rowsindex, buttons){
         .then(res=>res.json())
         .then(res_json=>{
             let rows=res_json[rowsindex]; 
-            datatable=table_generate_datatables(table, rows, columns, buttons);
+            datatable=table_generate_datatables(table, rows, columns);
             resolve(datatable);
         })
         .catch(e=>{console.log(e); reject(e);})
     })
-    
-    
-    
+     
 }
 
 
@@ -198,7 +186,7 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
 
 export function migrante_consultar_todos(table){  //thead_migrantes, tbody_migrantes
 
-    let datatable = datatable_consultar_todos("php/res_migrantes.php", table, {
+    let datatable = datatable_consultar_todos("php/res_migrantes.php", "migrantes", table, {
        
         'Nombre':'Nombre', 
         'Apellido Paterno':'Apellido_Paterno', 
@@ -206,20 +194,19 @@ export function migrante_consultar_todos(table){  //thead_migrantes, tbody_migra
         'Pais':'Pais', 
         'Punto de Control':'Punto_de_Control', 
         'Estado':'Estado'
-    }
-        /*[
-            { title: "Nombre" },
-            { title: "Apellido Paterno" },
-            { title: "Apellido Materno" },
-            { title: "País" },
-            { title: "Punto de control" },
-            { title: "Estado" }
-        ]*/
-    ,
-     "migrantes",
-        [] //{text:"Detalles", action: ()=>{ migrante_eliminar(1)}, extend: "selectedSingle"}
-     ).then(datatable=>{
-        new $.fn.dataTable.Buttons(datatable, {buttons: [{text:"Detalles", action: ()=>{console.log(datatable.rows( { selected: true } ).data()[0]); migrante_eliminar(1)}, extend: "selectedSingle"}]});
+    })
+    .then(datatable=>{
+        new $.fn.dataTable.Buttons(datatable, { 
+            buttons: 
+                [
+                    {
+                        text:"Detalles", 
+                        action: ()=>{console.log(datatable.rows( { selected: true } ).data()[0]); migrante_eliminar(1)}, 
+                        extend: "selectedSingle"
+                    }
+                ]
+            }
+        );
         datatable.buttons().container().appendTo( '#buttons_container' );
         //datatable.buttons(0, null).container().prependTo( datatable.table().container() );
         
