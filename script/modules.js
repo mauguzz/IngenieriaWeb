@@ -188,7 +188,7 @@ export function migrante_consultar(id, t_general, t_culturales, t_laborales, t_r
 
 export function migrante_consultar_todos(table, t_general, t_culturales, t_laborales, t_registros){  //thead_migrantes, tbody_migrantes
 
-    let datatable = datatable_consultar_todos("php/res_migrantes.php", "migrantes", table, {
+    datatable_consultar_todos("php/res_migrantes.php", "migrantes", table, {
         //Hace falta obtener el ID desde el View de MySQL, para poder hacer tratamientos posteriores
         'Nombre':'Nombre', 
         'Apellido Paterno':'Apellido_Paterno', 
@@ -217,9 +217,7 @@ export function migrante_consultar_todos(table, t_general, t_culturales, t_labor
                 ]
             }
         );
-        datatable.buttons().container().appendTo( '#buttons_container' );
-        //datatable.buttons(0, null).container().prependTo( datatable.table().container() );
-        
+        datatable.buttons().container().appendTo( '#buttons_container' );  
      })
      .catch(e=>console.log(e));
     //action requiere una definición de una función, y no una llamada a una función. Por ello se hace una estructura arrow function, es decir ()=>{}
