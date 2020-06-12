@@ -21,49 +21,53 @@ let id =1; //Variable de prueba, id de migrante que se aplica la acción
 document.addEventListener("DOMContentLoaded", function(event) {
     
         migrante_consultar_todos('#t_migrantes',
-        t_general,
-        t_culturales,
-        t_laborales,
-        t_registros
+            t_general,
+            t_culturales,
+            t_laborales,
+            t_registros
         )
         .then(datatable=>{
             new $.fn.dataTable.Buttons(datatable, { 
-            buttons: 
-                [
-                    {
-                        text:"Detalles", 
-                        action: ()=>{
-                            console.log(datatable.rows( { selected: true } ).data()[0]); 
-                            //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
-                            migrante_consultar(1, t_general, t_culturales, t_laborales, t_registros)
-                        }, 
-                        extend: "selectedSingle",
-                        attr: {
-                            "data-toggle":"modal",
-                            "data-target":"#exampleModal"
+                buttons: 
+                    [
+                        {
+                            text:"Detalles", 
+                            action: ()=>{
+                                console.log(datatable.rows( { selected: true } ).data()[0]); 
+                                //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
+                                migrante_consultar(1, t_general, t_culturales, t_laborales, t_registros)
+                            }, 
+                            extend: "selectedSingle",
+                            attr: {
+                                "data-toggle":"modal",
+                                "data-target":"#modal_migrantes_details"
+                            }
+                        },
+                        {
+                            text:"Eliminar", 
+                            action: ()=>{
+                                console.log(datatable.rows( { selected: true } ).data()[0]); 
+                                //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
+                                migrante_eliminar(1)
+                            }, 
+                            extend: "selectedSingle",
+                            
+                        },
+                        {
+                            text:"Modificar", 
+                            action: ()=>{
+                                console.log(datatable.rows( { selected: true } ).data()[0]); 
+                                //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
+                                migrante_eliminar(1)
+                            }, 
+                            extend: "selectedSingle",
+                            attr:{
+                                "data-toggle": "modal",
+                                "data-target": "#modal_migrantes_form"
+                            }
+                            
                         }
-                    },
-                    {
-                        text:"Eliminar", 
-                        action: ()=>{
-                            console.log(datatable.rows( { selected: true } ).data()[0]); 
-                            //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
-                            migrante_eliminar(1)
-                        }, 
-                        extend: "selectedSingle",
-                        
-                    },
-                    {
-                        text:"Modificar", 
-                        action: ()=>{
-                            console.log(datatable.rows( { selected: true } ).data()[0]); 
-                            //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
-                            migrante_eliminar(1)
-                        }, 
-                        extend: "selectedSingle",
-                        
-                    }
-                ]
+                    ]
             });
             datatable.buttons().container().appendTo( '#datatable_buttons_container' );  
         })

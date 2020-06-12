@@ -202,8 +202,6 @@ export function migrante_consultar_todos(table, t_general, t_culturales, t_labor
         .then(datatable=>{resolve(datatable)})
         .catch(e=>{reject(e)})
     })
-    
-   
 }
 
 export function migrante_registrar(jsonData){
