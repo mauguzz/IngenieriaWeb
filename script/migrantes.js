@@ -32,13 +32,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 
-
-
-btn_migrante_eliminar.addEventListener("click", ()=>{
-    migrante_eliminar(id);
-
-})
-
 form_migrantes_registrar.onsubmit = function(e){
     e.preventDefault();
 
