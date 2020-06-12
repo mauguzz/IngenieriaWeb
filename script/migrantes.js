@@ -27,7 +27,7 @@ const form_migrantes_modificar = document.getElementById('f_migrantes_modificar'
 
 let id =1; //Variable de prueba, id de migrante que se aplica la acción
 
-console.log(t_migrantes.children['thead'])
+console.log(t_migrantes.children)
 
 btn_consultar.addEventListener("click", ()=>{ 
     migrante_consultar(id,
