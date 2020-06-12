@@ -219,7 +219,7 @@ export function migrante_consultar_todos(table){  //thead_migrantes, tbody_migra
      "migrantes",
         [] //{text:"Detalles", action: ()=>{ migrante_eliminar(1)}, extend: "selectedSingle"}
      ).then(datatable=>{
-        new $.fn.dataTable.Buttons(datatable, {buttons: [{text:"Detalles", action: ()=>{console.log(datatable.rows( { selected: true } ).count()); migrante_eliminar(1)}, extend: "selectedSingle"}]});
+        new $.fn.dataTable.Buttons(datatable, {buttons: [{text:"Detalles", action: ()=>{console.log(datatable.rows( { selected: true } ).data()); migrante_eliminar(1)}, extend: "selectedSingle"}]});
         datatable.buttons().container().appendTo( '#buttons_container' );
         //datatable.buttons(0, null).container().prependTo( datatable.table().container() );
         
