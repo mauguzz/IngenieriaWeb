@@ -74,19 +74,15 @@ function table_generate_datatables(tablename, rows, cols, customButtons){
     
 
     //dataSet es la variable que se le pasa al dataSet de DataTable
-    $(tablename).DataTable( {
+    let table = $(tablename).DataTable( {
         select: true,
         data: dataSet,
         columns: customCols,
        
-        buttons: {customButtons,
-            dom: {
-                collection: {
-                    tag: 'aside'
-                }
-            }
-        }
+        buttons: customButtons
     } );
+    table.buttons().container()
+    .appendTo( '#col2 .col-md-6:eq(0)' );
 }
 
 function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
