@@ -129,7 +129,7 @@ function table_eliminar(uri){
 
 
 //FUNCIONES DE MIGRANTE//
-export function migrante_consultar(id, thead_general, thead_culturales, thead_laborales, thead_registros, tbody_general, tbody_culturales, tbody_laborales, tbody_registros){
+export function migrante_consultar(id, t_general, t_culturales, t_laborales, t_registros){ //thead_general, thead_culturales, thead_laborales, thead_registros, tbody_general, tbody_culturales, tbody_laborales, tbody_registros
     fetch("php/res_migrantes.php/"+id, {
         method: 'GET'
     })
@@ -142,7 +142,8 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
         let culturales=res_json.culturales;
         let registros=res_json.registros;
 
-        tbody_general.innerHTML="";
+        //tbody_general.innerHTML="";
+        t_general.children['tbody'].innerHTML="";
 
         //Object:={key: value, key: value, key:value}
         Object.entries(general).forEach(([key, value])=>{
@@ -154,26 +155,27 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
             val_general.innerHTML=`${value}`;
             row_general.appendChild(var_general);
             row_general.appendChild(val_general);
-            tbody_general.appendChild(row_general);
+            //tbody_general.appendChild(row_general);
+            t_general.children['tbody'].appendChild(row_general);
         });
         
         
 
         
     
-        table_generate_rowsandcols(thead_laborales, tbody_laborales, laborales, {
+        table_generate_rowsandcols(t_laborales.children['thead'], t_laborales.children['tbody'], laborales, {
             'Fecha':'Fecha', 
             'Trabajo':'Actividad',  
             'Direccion':'Direccion'
         });
 
-        table_generate_rowsandcols(thead_culturales, tbody_culturales, culturales, {
+        table_generate_rowsandcols(t_culturales.children['thead'], t_culturales.children['tbody'], culturales, {
             'Fecha':'fecha', 
             'Actividad Cultural':'Actividad', 
             'Direccion':'Direccion', 
         })
 
-        table_generate_rowsandcols(thead_registros, tbody_registros, registros, {
+        table_generate_rowsandcols(t_registros.children['thead'], t_registros.children['tbody'], registros, {
             'Punto de control':'Punto de_control', 
             'Fecha de Entrada':'Fecha_Entrada', 
             'Fecha de salida': 'Fecha_Salida', 

@@ -24,6 +24,11 @@ console.log(t_registros.children['thead_registros'])
 
 btn_consultar.addEventListener("click", ()=>{ 
     migrante_consultar(id,
+        t_general,
+        t_culturales,
+        t_laborales,
+        t_registros
+        /*
         t_general.children['thead'], 
         t_culturales.children['thead'], 
         t_laborales.children['thead'], 
@@ -32,6 +37,7 @@ btn_consultar.addEventListener("click", ()=>{
         t_culturales.children['tbody'],
         t_laborales.children['tbody'], 
         t_registros.children['tbody']
+        */
     );
 });
 
