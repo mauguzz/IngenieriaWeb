@@ -1,3 +1,5 @@
+let id;
+
 //FUNCIONES GENERALES//
 
 function handleHttpErrors(response) { //Maneja los códigos de error de HTTP cuando se hace una solicitud.
@@ -213,6 +215,26 @@ export function migrante_consultar_todos(table, t_general, t_culturales, t_labor
                             "data-toggle":"modal",
                             "data-target":"#exampleModal"
                         }
+                    },
+                    {
+                        text:"Eliminar", 
+                        action: ()=>{
+                            console.log(datatable.rows( { selected: true } ).data()[0]); 
+                            //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
+                            migrante_eliminar(1)
+                        }, 
+                        extend: "selectedSingle",
+                        
+                    },
+                    {
+                        text:"Modificar", 
+                        action: ()=>{
+                            console.log(datatable.rows( { selected: true } ).data()[0]); 
+                            //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
+                            migrante_eliminar(1)
+                        }, 
+                        extend: "selectedSingle",
+                        
                     }
                 ]
             }
