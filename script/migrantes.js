@@ -12,24 +12,10 @@ const t_laborales = document.getElementById('t_laborales');
 const t_registros = document.getElementById('t_registros');
 
 
-const btn_consultar =document.getElementById('btn_consultar');
-const btn_migrante_eliminar = document.getElementById('btn_migrante_eliminar');
-
 const form_migrantes_registrar = document.getElementById('f_migrantes_registrar');
 const form_migrantes_modificar = document.getElementById('f_migrantes_modificar');
 
 let id =1; //Variable de prueba, id de migrante que se aplica la acción
-
-console.log(t_registros.children['thead_registros'])
-
-btn_consultar.addEventListener("click", ()=>{ 
-    migrante_consultar(id,
-        t_general,
-        t_culturales,
-        t_laborales,
-        t_registros
-    );
-});
 
 
 document.addEventListener("DOMContentLoaded", function(event) {
