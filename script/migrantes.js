@@ -41,7 +41,8 @@ btn_consultar.addEventListener("click", ()=>{
         tbody_general,
         tbody_culturales,
         tbody_laborales, 
-        tbody_registros
+        //tbody_registros
+        t_registros.children['tbody_registros']
     );
 });
 
