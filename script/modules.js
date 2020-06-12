@@ -102,17 +102,21 @@ function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
 
 function datatable_consultar_todos(uri, table, columns, rowsindex, buttons){
     let datatable;
-    fetch(uri, {
-        method: 'GET'
+    return new Promise((resolve, reject)=>{
+        fetch(uri, {
+            method: 'GET'
+        })
+        .then(handleHttpErrors)
+        .then(res=>res.json())
+        .then(res_json=>{
+            let rows=res_json[rowsindex]; 
+            datatable=table_generate_datatables(table, rows, columns, buttons);
+            resolve(datatable);
+        })
+        .catch(e=>{console.log(e); reject(e);})
     })
-    .then(handleHttpErrors)
-    .then(res=>res.json())
-    .then(res_json=>{
-        let rows=res_json[rowsindex]; 
-        datatable=table_generate_datatables(table, rows, columns, buttons);
-        return datatable;
-    })
-    .catch(e=>console.log(e))
+    
+    
     
 }
 
@@ -214,7 +218,11 @@ export function migrante_consultar_todos(table){  //thead_migrantes, tbody_migra
     ,
      "migrantes",
         [{text:"Detalles", action: ()=>{console.log(datatable.rows( { selected: true } )); migrante_eliminar(1)}, extend: "selectedSingle"}]
-     )
+     ).then(datatable=>{
+        $.fn.dataTable.Buttons(datatable, [{text:"Detalles", action: ()=>{console.log(datatable.rows( { selected: true } )); migrante_eliminar(1)}, extend: "selectedSingle"}])
+        datatable.buttons().container().appendTo( '#prueba' );
+        
+     })
     //action requiere una definición de una función, y no una llamada a una función. Por ello se hace una estructura arrow function, es decir ()=>{}
      /*
     table_consultar_todos("php/res_migrantes.php", thead_migrantes, tbody_migrantes,{
