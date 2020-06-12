@@ -25,8 +25,50 @@ document.addEventListener("DOMContentLoaded", function(event) {
         t_culturales,
         t_laborales,
         t_registros
-        );  //thead_migrantes, tbody_migrantes
-        //$('#t_migrantes').DataTable();
+        )
+        .then(datatable=>{
+            new $.fn.dataTable.Buttons(datatable, { 
+            buttons: 
+                [
+                    {
+                        text:"Detalles", 
+                        action: ()=>{
+                            console.log(datatable.rows( { selected: true } ).data()[0]); 
+                            //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
+                            migrante_consultar(1, t_general, t_culturales, t_laborales, t_registros)
+                        }, 
+                        extend: "selectedSingle",
+                        attr: {
+                            "data-toggle":"modal",
+                            "data-target":"#exampleModal"
+                        }
+                    },
+                    {
+                        text:"Eliminar", 
+                        action: ()=>{
+                            console.log(datatable.rows( { selected: true } ).data()[0]); 
+                            //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
+                            migrante_eliminar(1)
+                        }, 
+                        extend: "selectedSingle",
+                        
+                    },
+                    {
+                        text:"Modificar", 
+                        action: ()=>{
+                            console.log(datatable.rows( { selected: true } ).data()[0]); 
+                            //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
+                            migrante_eliminar(1)
+                        }, 
+                        extend: "selectedSingle",
+                        
+                    }
+                ]
+            });
+            datatable.buttons().container().appendTo( '#datatable_buttons_container' );  
+        })
+        .catch(e=>console.log(e));
+        //action requiere una definición de una función, y no una llamada a una función. Por ello se hace una estructura arrow function, es decir ()=>{}
    
     
 });
