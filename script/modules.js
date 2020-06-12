@@ -207,7 +207,11 @@ export function migrante_consultar_todos(table, t_general, t_culturales, t_labor
                             console.log(datatable.rows( { selected: true } ).data()[0]); 
                             migrante_consultar(1, t_general, t_culturales, t_laborales, t_registros)
                         }, 
-                        extend: "selectedSingle"
+                        extend: "selectedSingle",
+                        attr: {
+                            "data-toggle":"modal",
+                            "data-target":"#exampleModal"
+                        }
                     }
                 ]
             }
