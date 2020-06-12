@@ -78,8 +78,8 @@ function table_generate_datatables(tablename, rows, cols, customButtons){
         select: true,
         data: dataSet,
         columns: customCols,
-        dom: "frtip",
-        buttons: customButtons
+        dom: "frtip"  //,
+        //buttons: customButtons
     } );
     datatable.buttons().container()
     .appendTo( '#buttons_container' );
