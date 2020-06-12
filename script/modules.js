@@ -217,7 +217,7 @@ export function migrante_consultar_todos(table){  //thead_migrantes, tbody_migra
         ]*/
     ,
      "migrantes",
-        [{text:"Detalles", action: ()=>{ migrante_eliminar(1)}, extend: "selectedSingle"}]
+        [] //{text:"Detalles", action: ()=>{ migrante_eliminar(1)}, extend: "selectedSingle"}
      ).then(datatable=>{
         $.fn.dataTable.Buttons(datatable, [{text:"Detalles", action: ()=>{console.log(datatable.rows( { selected: true } )); migrante_eliminar(1)}, extend: "selectedSingle"}])
         datatable.buttons().container().appendTo( '#prueba' );
