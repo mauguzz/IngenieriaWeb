@@ -209,7 +209,7 @@ export function migrante_consultar_todos(table){  //thead_migrantes, tbody_migra
         ]*/
     ,
      "migrantes",
-        [{text:"Detalles", action: migrante_eliminar(1)}]
+        [{text:"Detalles", action: migrante_eliminar(1), extend: "selectedSingle"}]
      )
 
      /*
