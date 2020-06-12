@@ -74,15 +74,16 @@ function table_generate_datatables(tablename, rows, cols, customButtons){
     
 
     //dataSet es la variable que se le pasa al dataSet de DataTable
-    let table = $(tablename).DataTable( {
+    let datatable = $(tablename).DataTable( {
         select: true,
         data: dataSet,
         columns: customCols,
         dom: "frtip",
         buttons: customButtons
     } );
-    table.buttons().container()
+    datatable.buttons().container()
     .appendTo( '#buttons_container' );
+    return datatable;
 }
 
 function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
@@ -100,6 +101,7 @@ function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
 
 
 function datatable_consultar_todos(uri, table, columns, rowsindex, buttons){
+    let datatable;
     fetch(uri, {
         method: 'GET'
     })
@@ -107,9 +109,11 @@ function datatable_consultar_todos(uri, table, columns, rowsindex, buttons){
     .then(res=>res.json())
     .then(res_json=>{
         let rows=res_json[rowsindex]; 
-        table_generate_datatables(table, rows, columns, buttons);
+        datatable=table_generate_datatables(table, rows, columns, buttons);
+        return datatable;
     })
     .catch(e=>console.log(e))
+    
 }
 
 
@@ -190,7 +194,7 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
 
 export function migrante_consultar_todos(table){  //thead_migrantes, tbody_migrantes
 
-    datatable_consultar_todos("php/res_migrantes.php", table, {
+    let datatable = datatable_consultar_todos("php/res_migrantes.php", table, {
        
         'Nombre':'Nombre', 
         'Apellido Paterno':'Apellido_Paterno', 
@@ -209,9 +213,9 @@ export function migrante_consultar_todos(table){  //thead_migrantes, tbody_migra
         ]*/
     ,
      "migrantes",
-        [{text:"Detalles", action: ()=>{migrante_eliminar(1)}, extend: "selectedSingle"}]
+        [{text:"Detalles", action: ()=>{console.log(datatable.rows( { selected: true } )); migrante_eliminar(1)}, extend: "selectedSingle"}]
      )
-
+    //action requiere una definición de una función, y no una llamada a una función. Por ello se hace una estructura arrow function, es decir ()=>{}
      /*
     table_consultar_todos("php/res_migrantes.php", thead_migrantes, tbody_migrantes,{
        
