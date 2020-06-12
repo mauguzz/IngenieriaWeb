@@ -220,8 +220,8 @@ export function migrante_consultar_todos(table){  //thead_migrantes, tbody_migra
         [] //{text:"Detalles", action: ()=>{ migrante_eliminar(1)}, extend: "selectedSingle"}
      ).then(datatable=>{
         new $.fn.dataTable.Buttons(datatable, {buttons: [{text:"Detalles", action: ()=>{console.log(datatable.rows( { selected: true } )); migrante_eliminar(1)}, extend: "selectedSingle"}]});
-        //datatable.buttons().container().appendTo( '#prueba' );
-        datatable.buttons(0, null).container().prependTo( datatable.table().container() );
+        datatable.buttons().container().appendTo( '#button_container' );
+        //datatable.buttons(0, null).container().prependTo( datatable.table().container() );
         
      })
      .catch(e=>console.log(e));
