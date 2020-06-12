@@ -201,7 +201,10 @@ export function migrante_consultar_todos(table){  //thead_migrantes, tbody_migra
                 [
                     {
                         text:"Detalles", 
-                        action: ()=>{console.log(datatable.rows( { selected: true } ).data()[0]); migrante_eliminar(1)}, 
+                        action: ()=>{
+                            console.log(datatable.rows( { selected: true } ).data()[0]); 
+                            migrante_eliminar(1)
+                        }, 
                         extend: "selectedSingle"
                     }
                 ]
