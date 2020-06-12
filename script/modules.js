@@ -221,7 +221,7 @@ export function migrante_consultar_todos(table){  //thead_migrantes, tbody_migra
      ).then(datatable=>{
         new $.fn.dataTable.Buttons(datatable, {buttons: [{text:"Detalles", action: ()=>{console.log(datatable.rows( { selected: true } )); migrante_eliminar(1)}, extend: "selectedSingle"}]});
         //datatable.buttons().container().appendTo( '#prueba' );
-        datatable.buttons(0, null).container().prependTo( '#prueba' );
+        datatable.buttons(0, null).container().prependTo( datatable.table().container() );
         
      })
     //action requiere una definición de una función, y no una llamada a una función. Por ello se hace una estructura arrow function, es decir ()=>{}
