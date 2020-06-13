@@ -72,6 +72,8 @@ function table_generate_datatables(tablename, init, rows, cols){
         dataSet.push(result);
         first=false;
     })
+
+    console.log("Dataset: " + dataSet);
     
     let datatable;
     if(init){
@@ -121,6 +123,7 @@ function datatable_consultar_todos(uri, rowsindex, table, init, columns){
         .then(res=>res.json())
         .then(res_json=>{
             let rows=res_json[rowsindex]; 
+            console.log(rows);
             datatable=table_generate_datatables(table, init, rows, columns);
             resolve(datatable);
         })
@@ -361,31 +364,22 @@ export function culturales_eliminar(id){
 
 //FUNCIONES DE OPCIONES
 export function llenar_opciones_selector(selectors_ids){
-    //Prueba
     let ids;
-    console.log(selectors_ids);
     for(ids of selectors_ids){
-        console.log(ids);
         let selector = document.getElementById(ids);
         fetch('php/res_options.php/'+ids, {
             method: 'GET'
         })
         .then(res=>res.json())
         .then(resjson=>{
-            
             Object.entries(resjson).forEach(([ind, value])=>{
                 let option = document.createElement('option');
-                
                 option.setAttribute("value",value[Object.keys(value)[0]]); //Se refiere al id
                 option.innerHTML=value[Object.keys(value)[1]]; //Se refiere al texto que aparece en la opción.
                 selector.appendChild(option); //Agrega las opciones al selector
-                console.log(selector);
-            })
-            //console.log(resjson);
-            
+            })  
         })      
-    }
-    
+    }   
 }
 
 /*------------------------------------------------Sesiones----------------------------------------------------*/
