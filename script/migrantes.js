@@ -1,79 +1,131 @@
 
 import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migrante_modificar, migrante_eliminar, 
-} from './modules.js';
+llenar_opciones_selector} from './modules.js';
 
 const mcontent = document.getElementById('content'); //Div del contenido principal (tablas, etc), todas las páginas
 
 
 const t_migrantes = document.getElementById('t_migrantes');
-
-const thead_general = document.getElementById('thead_general');
-const thead_culturales = document.getElementById('thead_culturales');
-const thead_laborales = document.getElementById('thead_laborales');
-const thead_migrantes = document.getElementById('thead_migrantes');
-const thead_registros = document.getElementById('thead_registros')
-
-const tbody_general= document.getElementById('tbody_general');
-const tbody_culturales = document.getElementById('tbody_culturales');
-const tbody_laborales = document.getElementById('tbody_laborales');
-const tbody_migrantes = document.getElementById('tbody_migrantes');
-const tbody_registros = document.getElementById('tbody_registros');
-
-const btn_consultar =document.getElementById('btn_consultar');
-const btn_migrante_eliminar = document.getElementById('btn_migrante_eliminar');
-
-const form_migrantes_registrar = document.getElementById('f_migrantes_registrar');
-const form_migrantes_modificar = document.getElementById('f_migrantes_modificar');
-
-let id =1; //Variable de prueba, id de migrante que se aplica la acción
+const t_general = document.getElementById('t_general');
+const t_culturales = document.getElementById('t_culturales');
+const t_laborales = document.getElementById('t_laborales');
+const t_registros = document.getElementById('t_registros');
 
 
-btn_consultar.addEventListener("click", ()=>{ 
-    migrante_consultar(id,
-        thead_general, 
-        thead_culturales, 
-        thead_laborales, 
-        thead_registros, 
-        tbody_general,
-        tbody_culturales,
-        tbody_laborales, 
-        tbody_registros
-    );
-});
+const form_migrantes = document.getElementById('f_migrantes');
+const form_migrantes_action = document.getElementById('f_migrantes_action');
+const form_migrantes_submit = document.getElementById('f_migrantes_submit');
+
+let id =0; //Variable de prueba, id de migrante que se aplica la acción
+
+
 
 
 document.addEventListener("DOMContentLoaded", function(event) {
+
+        llenar_opciones_selector(
+            [
+                'paises_origen',
+                'niveles_educativos',
+                'causas_migracion',
+                'situaciones_familiares'
+            ]
+        )
     
-        migrante_consultar_todos('#t_migrantes');  //thead_migrantes, tbody_migrantes
-        //$('#t_migrantes').DataTable();
+        migrante_consultar_todos('#t_migrantes',
+            t_general,
+            t_culturales,
+            t_laborales,
+            t_registros
+        )
+        .then(datatable=>{
+            new $.fn.dataTable.Buttons(datatable, { 
+                buttons: 
+                    [
+                        {
+                            text:"Detalles", 
+                            action: ()=>{
+                                console.log(datatable.rows( { selected: true } ).data()[0]); 
+                                id=1;
+                                //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
+                                migrante_consultar(1, t_general, t_culturales, t_laborales, t_registros)
+                            }, 
+                            extend: "selectedSingle",
+                            attr: {
+                                "data-toggle":"modal",
+                                "data-target":"#modal_migrantes_details"
+                            }
+                        },
+                        {
+                            text:"Eliminar", 
+                            action: ()=>{
+                                console.log(datatable.rows( { selected: true } ).data()[0]); 
+                                id=1;
+                                //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
+                                migrante_eliminar(1)
+                            }, 
+                            extend: "selectedSingle",
+                            
+                        },
+                        {
+                            text:"Modificar", 
+                            action: ()=>{
+                                console.log(datatable.rows( { selected: true } ).data()[0]);
+                                id=1; 
+                                //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
+                                form_migrantes_action.value="modify";
+                                form_migrantes_submit.value="Guardar cambios";
+                            }, 
+                            extend: "selectedSingle",
+                            attr:{
+                                "data-toggle": "modal",
+                                "data-target": "#modal_migrantes_form"
+                            }
+                            
+                        },
+                        {
+                            text:"Añadir", 
+                            action: ()=>{
+                                console.log(datatable.rows( { selected: true } ).data()[0]); 
+                                form_migrantes_action.value="create";
+                                form_migrantes_submit.value="Registrar";
+                                
+                                //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
+                                
+                            }, 
+                            //extend: "selectedSingle",
+                            attr:{
+                                "data-toggle": "modal",
+                                "data-target": "#modal_migrantes_form"
+                            }
+                            
+                        }
+                    ]
+            });
+            datatable.buttons().container().appendTo( '#datatable_buttons_container' );  
+        })
+        .catch(e=>console.log(e));
+        //action requiere una definición de una función, y no una llamada a una función. Por ello se hace una estructura arrow function, es decir ()=>{}
    
     
 });
 
 
-
-
-btn_migrante_eliminar.addEventListener("click", ()=>{
-    migrante_eliminar(id);
-
-})
-
-form_migrantes_registrar.onsubmit = function(e){
+form_migrantes.onsubmit = function(e){
     e.preventDefault();
 
-    let formData = new FormData(form_migrantes_registrar);
+    
+    let formData = new FormData(form_migrantes);
     let formJson = JSON.stringify(Object.fromEntries(formData));
     console.log(formJson);
 
-    migrante_registrar(formJson);
+    if(form_migrantes_action.value=="create"){
+        migrante_registrar(formJson);
+    }else if(form_migrantes_action.value=="modify"){
+        migrante_modificar(id, formJson);
+    }
+    
 }
 
-form_migrantes_modificar.onsubmit = function(e){
-    e.preventDefault();
 
-    let formData = new FormData(form_migrantes_registrar);
-    let formJson = JSON.stringify(Object.fromEntries(formData));
-    console.log(formJson);
 
-    migrante_modificar(id, formJson);
-}

@@ -1,3 +1,5 @@
+let id;
+
 //FUNCIONES GENERALES//
 
 function handleHttpErrors(response) { //Maneja los códigos de error de HTTP cuando se hace una solicitud.
@@ -52,17 +54,28 @@ function table_generate_rowsandcols(thead, tbody, rows, columns){
 function table_generate_datatables(tablename, rows, cols){
     let result = [];
     let dataSet = [];
-    rows.forEach((valor)=>{
-        for(var i in valor){
-            result.push(valor[i]);
-        }
+    let customCols = [];
+    let first = true;
+   //cols={"Apellido Paterno" : "Apellido_P", "Apellido Materno" : "Apellido_M", "ind" : "value"}
+    rows.forEach((row)=>{
+        Object.entries(cols).forEach(([ind, value])=>{
+            result.push(row[value]);
+            if(first) customCols.push({title: ind})
+        })
         dataSet.push(result);
+        first=false;
     })
+    
+
     //dataSet es la variable que se le pasa al dataSet de DataTable
-    $(tablename).DataTable( {
+    let datatable = $(tablename).DataTable( {
+        select: true,
         data: dataSet,
-        columns: cols
+        columns: customCols,
+        dom: "frtip"  //,
+        //buttons: customButtons
     } );
+    return datatable;
 }
 
 function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
@@ -79,17 +92,22 @@ function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
 }
 
 
-function datatable_consultar_todos(uri, table, columns, rowsindex){
-    fetch(uri, {
-        method: 'GET'
+function datatable_consultar_todos(uri, rowsindex, table, columns){
+    let datatable;
+    return new Promise((resolve, reject)=>{
+        fetch(uri, {
+            method: 'GET'
+        })
+        .then(handleHttpErrors)
+        .then(res=>res.json())
+        .then(res_json=>{
+            let rows=res_json[rowsindex]; 
+            datatable=table_generate_datatables(table, rows, columns);
+            resolve(datatable);
+        })
+        .catch(e=>{console.log(e); reject(e);})
     })
-    .then(handleHttpErrors)
-    .then(res=>res.json())
-    .then(res_json=>{
-        let rows=res_json[rowsindex]; 
-        table_generate_datatables(table, rows, columns);
-    })
-    .catch(e=>console.log(e))
+     
 }
 
 
@@ -113,7 +131,7 @@ function table_eliminar(uri){
 
 
 //FUNCIONES DE MIGRANTE//
-export function migrante_consultar(id, thead_general, thead_culturales, thead_laborales, thead_registros, tbody_general, tbody_culturales, tbody_laborales, tbody_registros){
+export function migrante_consultar(id, t_general, t_culturales, t_laborales, t_registros){ //thead_general, thead_culturales, thead_laborales, thead_registros, tbody_general, tbody_culturales, tbody_laborales, tbody_registros
     fetch("php/res_migrantes.php/"+id, {
         method: 'GET'
     })
@@ -126,7 +144,8 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
         let culturales=res_json.culturales;
         let registros=res_json.registros;
 
-        tbody_general.innerHTML="";
+        //tbody_general.innerHTML="";
+        t_general.children['tbody'].innerHTML="";
 
         //Object:={key: value, key: value, key:value}
         Object.entries(general).forEach(([key, value])=>{
@@ -138,26 +157,27 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
             val_general.innerHTML=`${value}`;
             row_general.appendChild(var_general);
             row_general.appendChild(val_general);
-            tbody_general.appendChild(row_general);
+            //tbody_general.appendChild(row_general);
+            t_general.children['tbody'].appendChild(row_general);
         });
         
         
 
         
     
-        table_generate_rowsandcols(thead_laborales, tbody_laborales, laborales, {
+        table_generate_rowsandcols(t_laborales.children['thead'], t_laborales.children['tbody'], laborales, {
             'Fecha':'Fecha', 
             'Trabajo':'Actividad',  
             'Direccion':'Direccion'
         });
 
-        table_generate_rowsandcols(thead_culturales, tbody_culturales, culturales, {
+        table_generate_rowsandcols(t_culturales.children['thead'], t_culturales.children['tbody'], culturales, {
             'Fecha':'fecha', 
             'Actividad Cultural':'Actividad', 
             'Direccion':'Direccion', 
         })
 
-        table_generate_rowsandcols(thead_registros, tbody_registros, registros, {
+        table_generate_rowsandcols(t_registros.children['thead'], t_registros.children['tbody'], registros, {
             'Punto de control':'Punto de_control', 
             'Fecha de Entrada':'Fecha_Entrada', 
             'Fecha de salida': 'Fecha_Salida', 
@@ -168,33 +188,20 @@ export function migrante_consultar(id, thead_general, thead_culturales, thead_la
 
 }
 
-export function migrante_consultar_todos(table){  //thead_migrantes, tbody_migrantes
-
-    datatable_consultar_todos("php/res_migrantes.php", table, 
-        [
-            { title: "Nombre" },
-            { title: "Apellido Paterno" },
-            { title: "Apellido Materno" },
-            { title: "País" },
-            { title: "Punto de control" },
-            { title: "Estado" }
-        ],
-     "migrantes"
-     )
-
-     /*
-    table_consultar_todos("php/res_migrantes.php", thead_migrantes, tbody_migrantes,{
-       
-        'Nombre':'Nombre', 
-        'Apellido Paterno':'Apellido_Paterno', 
-        'Apellido Materno':'Apellido_Materno', 
-        'Pais':'Pais', 
-        'Punto de Control':'Punto_de_Control', 
-        'Estado':'Estado'
-    },
-        "migrantes"
-    )
-    */
+export function migrante_consultar_todos(table, t_general, t_culturales, t_laborales, t_registros){  //thead_migrantes, tbody_migrantes
+    return new Promise((resolve, reject)=>{
+        datatable_consultar_todos("php/res_migrantes.php", "migrantes", table, {
+            //Hace falta obtener el ID desde el View de MySQL, para poder hacer tratamientos posteriores
+            'Nombre':'Nombre', 
+            'Apellido Paterno':'Apellido_Paterno', 
+            'Apellido Materno':'Apellido_Materno', 
+            'Pais':'Pais', 
+            'Punto de Control':'Punto_de_Control', 
+            'Estado':'Estado'
+        })
+        .then(datatable=>{resolve(datatable)})
+        .catch(e=>{reject(e)})
+    })
 }
 
 export function migrante_registrar(jsonData){
@@ -275,6 +282,34 @@ export function culturales_eliminar(id){
     table_eliminar("php/res_culturales.php/"+id);
 }
 
+//FUNCIONES DE OPCIONES
+export function llenar_opciones_selector(selectors_ids){
+    //Prueba
+    let ids;
+    console.log(selectors_ids);
+    for(ids of selectors_ids){
+        console.log(ids);
+        let selector = document.getElementById(ids);
+        fetch('php/res_options.php/'+ids, {
+            method: 'GET'
+        })
+        .then(res=>res.json())
+        .then(resjson=>{
+            
+            Object.entries(resjson).forEach(([ind, value])=>{
+                let option = document.createElement('option');
+                
+                option.setAttribute("value",value[Object.keys(value)[0]]); //Se refiere al id
+                option.innerHTML=value[Object.keys(value)[1]]; //Se refiere al texto que aparece en la opción.
+                selector.appendChild(option); //Agrega las opciones al selector
+                console.log(selector);
+            })
+            //console.log(resjson);
+            
+        })      
+    }
+    
+}
 
 /*------------------------------------------------Sesiones----------------------------------------------------*/
 
