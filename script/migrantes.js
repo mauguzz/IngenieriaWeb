@@ -13,7 +13,8 @@ const t_registros = document.getElementById('t_registros');
 
 
 const form_migrantes = document.getElementById('f_migrantes');
-const form_migrantes_action = document.getElementById('f_migrantes_action')
+const form_migrantes_action = document.getElementById('f_migrantes_action');
+const form_migrantes_submit = document.getElementById('f_migrantes_submit');
 
 let id =0; //Variable de prueba, id de migrante que se aplica la acción
 
@@ -62,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                 id=1; 
                                 //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
                                 form_migrantes_action.value="modify";
+                                form_migrantes_submit.value="Guardar cambios";
                             }, 
                             extend: "selectedSingle",
                             attr:{
@@ -75,6 +77,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             action: ()=>{
                                 console.log(datatable.rows( { selected: true } ).data()[0]); 
                                 form_migrantes_action.value="create";
+                                form_migrantes_submit.value="Registrar";
                                 
                                 //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
                                 
