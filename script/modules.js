@@ -73,16 +73,16 @@ function table_generate_datatables(tablename, init, rows, cols){
         first=false;
     })
     
-
+    let datatable;
     if(init){
-        let datatable = $(tablename).DataTable( {
+        datatable = $(tablename).DataTable( {
             select: true,
             data: dataSet,
             columns: customCols,
             dom: "frtip"
         });
     }else{ //Caso de solo actualización
-        let datatable = $(tablename).DataTable()
+        datatable = $(tablename).DataTable();
         datatable.fnClearTable();
         datatable.fnAddData(dataSet);
     }
