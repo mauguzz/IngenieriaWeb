@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         {
                             text:"Detalles", 
                             action: ()=>{
-                                console.log(datatable.rows( { selected: true } ).data()[0]); 
+                                console.log(datatable.rows( { selected: true } ).data()[0][0]); 
                                 id=1;
                                 //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
                                 migrante_consultar(1, t_general, t_culturales, t_laborales, t_registros)

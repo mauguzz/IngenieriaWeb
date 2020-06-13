@@ -192,6 +192,7 @@ export function migrante_consultar_todos(table, t_general, t_culturales, t_labor
     return new Promise((resolve, reject)=>{
         datatable_consultar_todos("php/res_migrantes.php", "migrantes", table, {
             //Hace falta obtener el ID desde el View de MySQL, para poder hacer tratamientos posteriores
+            'ID' : "Id_Migrante",
             'Nombre':'Nombre', 
             'Apellido Paterno':'Apellido_Paterno', 
             'Apellido Materno':'Apellido_Materno', 
