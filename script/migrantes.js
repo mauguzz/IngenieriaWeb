@@ -22,7 +22,7 @@ let id =0; //Variable de prueba, id de migrante que se aplica la acción
 fetch('php/res_options.php', {
     method: 'GET'
 })
-.then(res=>res.json())
+.then(res=>res.text())
 .then(resjson=>{
     console.log(resjson);
 })
