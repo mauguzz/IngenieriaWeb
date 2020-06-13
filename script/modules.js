@@ -9,14 +9,21 @@ function handleHttpErrors(response) { //Maneja los códigos de error de HTTP cua
     return response;
 }
 
-function table_simple_fetch(uri, parameters){
-    fetch(uri, parameters)
-    .then(handleHttpErrors)
-    .then(res=>res.text()) //Cambiar a json() para version final
-    .then(res_json=>{
-        console.log(res_json);
+//Usado para las operaciones que no requieren de respuesta  
+function table_simple_fetch(uri, parameters){  
+    return new Promise((resolve, reject)=>{
+        fetch(uri, parameters)
+        .then(handleHttpErrors)
+        .then(res=>res.text()) //Cambiar a json() para version final
+        .then(res_json=>{
+            console.log(res_json);
+            resolve(res_json);
+        })
+        .catch(e=>{
+            console.log(e);
+            reject(e);
+        })
     })
-    .catch(e=>console.log(e))
 }
 
 function table_generate_rowsandcols(thead, tbody, rows, columns){
@@ -51,7 +58,7 @@ function table_generate_rowsandcols(thead, tbody, rows, columns){
     
 }
 
-function table_generate_datatables(tablename, rows, cols){
+function table_generate_datatables(tablename, init, rows, cols){
     let result = [];
     let dataSet = [];
     let customCols = [];
@@ -67,17 +74,25 @@ function table_generate_datatables(tablename, rows, cols){
     })
     
 
-    //dataSet es la variable que se le pasa al dataSet de DataTable
-    let datatable = $(tablename).DataTable( {
-        select: true,
-        data: dataSet,
-        columns: customCols,
-        dom: "frtip"  //,
-        //buttons: customButtons
-    } );
+    if(init){
+        let datatable = $(tablename).DataTable( {
+            select: true,
+            data: dataSet,
+            columns: customCols,
+            dom: "frtip"
+        });
+    }else{ //Caso de solo actualización
+        let datatable = $(tablename).DataTable()
+        datatable.fnClearTable();
+        datatable.fnAddData(dataSet);
+    }
+    
+
     return datatable;
 }
 
+
+//Es posible que pueda usar la función simple fetch
 function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
     fetch(uri, {
         method: 'GET'
@@ -91,8 +106,8 @@ function table_consultar_todos(uri, thead, tbody, columns, rowsindex){
     .catch(e=>console.log(e))
 }
 
-
-function datatable_consultar_todos(uri, rowsindex, table, columns){
+//Es posible que pueda usar la función simple fetch
+function datatable_consultar_todos(uri, rowsindex, table, init, columns){
     let datatable;
     return new Promise((resolve, reject)=>{
         fetch(uri, {
@@ -102,7 +117,7 @@ function datatable_consultar_todos(uri, rowsindex, table, columns){
         .then(res=>res.json())
         .then(res_json=>{
             let rows=res_json[rowsindex]; 
-            datatable=table_generate_datatables(table, rows, columns);
+            datatable=table_generate_datatables(table, init, rows, columns);
             resolve(datatable);
         })
         .catch(e=>{console.log(e); reject(e);})
@@ -113,15 +128,27 @@ function datatable_consultar_todos(uri, rowsindex, table, columns){
 
 
 function table_registrar(uri, jsonData){
-    table_simple_fetch(uri, {method: 'POST', body: jsonData})
+    return new Promise((resolve, reject)=>{
+        table_simple_fetch(uri, {method: 'POST', body: jsonData})
+        .then(result => resolve(result))
+        .catch(result => reject(result));
+    })
 }
 
 function table_modificar(uri, jsonData){
-    table_simple_fetch(uri, {method: 'PUT', body: jsonData}) 
+    return new Promise((resolve, reject)=>{
+        table_simple_fetch(uri, {method: 'PUT', body: jsonData})
+        .then(result=>resolve(result))
+        .catch(result=>reject(result));
+    })
 }
 
 function table_eliminar(uri){
-   table_simple_fetch(uri, {method: 'DELETE'});
+    return new Promise((resolve, reject)=>{
+        table_simple_fetch(uri, {method: 'DELETE'})
+        .then(result=> resolve(result))
+        .catch(result=>reject(result));
+    })
 }
 
 
@@ -188,9 +215,9 @@ export function migrante_consultar(id, t_general, t_culturales, t_laborales, t_r
 
 }
 
-export function migrante_consultar_todos(table, t_general, t_culturales, t_laborales, t_registros){  //thead_migrantes, tbody_migrantes
+export function migrante_consultar_todos(table, init){  //thead_migrantes, tbody_migrantes
     return new Promise((resolve, reject)=>{
-        datatable_consultar_todos("php/res_migrantes.php", "migrantes", table, {
+        datatable_consultar_todos("php/res_migrantes.php", "migrantes", table, init, {
             //Hace falta obtener el ID desde el View de MySQL, para poder hacer tratamientos posteriores
             'ID' : "Id_Migrante",
             'Nombre':'Nombre', 
@@ -206,16 +233,31 @@ export function migrante_consultar_todos(table, t_general, t_culturales, t_labor
 }
 
 export function migrante_registrar(jsonData){
-   table_registrar("php/res_migrantes.php", jsonData);
+    return new Promise((resolve, reject)=>{
+        table_registrar("php/res_migrantes.php", jsonData)
+        .then(result=>resolve(result))
+        .catch(result=>reject(result));
+    })
+   
 }
 
 export function migrante_modificar(id, jsonData){
-    table_modificar("php/res_migrantes.php/"+id, jsonData);
+    return new Promise((resolve, reject)=>{
+        table_modificar("php/res_migrantes.php/"+id, jsonData)    
+        .then(result=>resolve(result))
+        .catch(result=>reject(result));
+    })
+    
 }
 
 
 export function migrante_eliminar(id){
-    table_eliminar("php/res_migrantes.php/"+id);
+    return new Promise((resolve, reject)=>{
+        table_eliminar("php/res_migrantes.php/"+id)    
+        .then(result=>resolve(result))
+        .catch(result=>reject(result));
+    })
+    
 }
 
 
@@ -243,15 +285,30 @@ export function laborales_consultar_todos(thead_laborales, tbody_laborales){
 }
 
 export function laborales_registrar(jsonData){
-    table_registrar("php/res_laborales.php", jsonData);
+    return new Promise((resolve, reject)=>{
+        table_registrar("php/res_laborales.php", jsonData)    
+        .then(result=>resolve(result))
+        .catch(result=>reject(result));
+    })
+    
 }
 
 export function laborales_modificar(id, jsonData){
-    table_modificar("php/res_laborales/"+id, jsonData);
+    return new Promise((resolve, reject)=>{
+        table_modificar("php/res_laborales/"+id, jsonData)    
+        .then(result=>resolve(result))
+        .catch(result=>reject(result));
+    })
+    
 }
 
 export function laborales_eliminar(id){
-    table_eliminar("php/res_laborales.php/"+id);
+    return new Promise((resolve, reject)=>{
+        table_eliminar("php/res_laborales.php/"+id)    
+        .then(result=>resolve(result))
+        .catch(result=>reject(result));
+    })
+    
 }
 
 
@@ -272,15 +329,30 @@ export function culturales_consultar_todos(thead_culturales, tbody_culturales){
 }
 
 export function culturales_registrar(jsonData){
-    table_registrar("php/res_culturales.php", jsonData);
+    return new Promise((resolve, reject)=>{
+        table_registrar("php/res_culturales.php", jsonData)    
+        .then(result=>resolve(result))
+        .catch(result=>reject(result));
+    })
+    
 }
 
 export function culturales_modificar(id, jsonData){
-    table_modificar("php/res_culturales.php/"+id, jsonData);
+    return new Promise((resolve, reject)=>{
+        table_modificar("php/res_culturales.php/"+id, jsonData)    
+        .then(result=>resolve(result))
+        .catch(result=>reject(result));
+    })
+    
 }
 
 export function culturales_eliminar(id){
-    table_eliminar("php/res_culturales.php/"+id);
+    return new Promise((resolve, reject)=>{
+        table_eliminar("php/res_culturales.php/"+id)    
+        .then(result=>resolve(result))
+        .catch(result=>reject(result));
+    })
+    
 }
 
 //FUNCIONES DE OPCIONES
@@ -327,6 +399,6 @@ export function Iniciar_Sesion(formJson){
         console.log(e);
         console.log("Catching");
     })  
-    //.then(handleHttpErrors)
+
 
 }

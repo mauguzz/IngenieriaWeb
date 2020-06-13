@@ -32,12 +32,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             ]
         )
     
-        migrante_consultar_todos('#t_migrantes',
-            t_general,
-            t_culturales,
-            t_laborales,
-            t_registros
-        )
+        migrante_consultar_todos('#t_migrantes', true)
         .then(datatable=>{
             new $.fn.dataTable.Buttons(datatable, { 
                 buttons: 
@@ -47,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             action: ()=>{
                                 id=datatable.rows( { selected: true } ).data()[0][0]; 
                                 console.log("El id es: "+id);
-                                migrante_consultar(1, t_general, t_culturales, t_laborales, t_registros)
+                                migrante_consultar(id, t_general, t_culturales, t_laborales, t_registros)
                             }, 
                             extend: "selectedSingle",
                             attr: {
@@ -60,7 +55,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             action: ()=>{
                                 id=datatable.rows( { selected: true } ).data()[0][0]; 
                                 console.log("El id es: "+id);
-                                migrante_eliminar(1)
+                                migrante_eliminar(id)
+                                .then(result=>{
+                                    migrante_consultar_todos('#t_migrantes', false)
+                                })
                             }, 
                             extend: "selectedSingle",
                             
@@ -115,9 +113,15 @@ form_migrantes.onsubmit = function(e){
     console.log(formJson);
 
     if(form_migrantes_action.value=="create"){
-        migrante_registrar(formJson);
+        migrante_registrar(formJson)
+        .then(result=>{
+            migrante_consultar_todos('#t_migrantes', false)
+        });
     }else if(form_migrantes_action.value=="modify"){
-        migrante_modificar(id, formJson);
+        migrante_modificar(id, formJson)
+        .then(result=>{
+            migrante_consultar_todos('#t_migrantes', false)
+        });
     }
     
 }

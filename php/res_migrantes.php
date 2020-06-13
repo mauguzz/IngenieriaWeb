@@ -36,6 +36,8 @@ function res_post(){
         header('HTTP/1.1 400 Bad Request');
         return;
     }
+    $conexion= new Database();
+
     $Nombre = $data->nombre;
     $Apellido_Paterno = $data->apellido_paterno;
     $Apellido_Materno = $data->apellido_materno;
@@ -52,8 +54,26 @@ function res_post(){
     
     //Datos derivados en la BD, que no es necesario insertar: ID_Migrante, Edad, Id_Estado (migrando o establecido).
 
-    //DataBase::Crear_Migrante($Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion, $Llave);
-    $result=["POST"=>"Correcto, insertado correctamente"];
+    $result = $conexion->Crear_Migrante(
+        $conexion,
+        $data->nombre, 
+        $data->apellido_paterno, 
+        $data->apellido_materno, 
+        $data->fecha_nacimiento, 
+        $data->ciudad, 
+        $data->pais, 
+        $data->oficio, 
+        $data->contacto_telefono, 
+        $data->nivel_educativo, 
+        $data->situacion_familiar, 
+        $data->causa_migracion, 
+        $Llave
+    );
+    
+    
+    
+    
+    //$result=["POST"=>"Correcto, insertado correctamente"];
     return $result;
 
 }
