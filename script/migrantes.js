@@ -45,9 +45,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         {
                             text:"Detalles", 
                             action: ()=>{
-                                console.log(datatable.rows( { selected: true } ).data()[0][0]); 
-                                id=1;
-                                //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
+                                id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                console.log("El id es: "+id);
                                 migrante_consultar(1, t_general, t_culturales, t_laborales, t_registros)
                             }, 
                             extend: "selectedSingle",
@@ -59,9 +58,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         {
                             text:"Eliminar", 
                             action: ()=>{
-                                console.log(datatable.rows( { selected: true } ).data()[0]); 
-                                id=1;
-                                //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
+                                id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                console.log("El id es: "+id);
                                 migrante_eliminar(1)
                             }, 
                             extend: "selectedSingle",
@@ -70,9 +68,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         {
                             text:"Modificar", 
                             action: ()=>{
-                                console.log(datatable.rows( { selected: true } ).data()[0]);
-                                id=1; 
-                                //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
+                                id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                console.log("El id es: "+id);
                                 form_migrantes_action.value="modify";
                                 form_migrantes_submit.value="Guardar cambios";
                             }, 
@@ -86,11 +83,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         {
                             text:"Añadir", 
                             action: ()=>{
-                                console.log(datatable.rows( { selected: true } ).data()[0]); 
+                                
                                 form_migrantes_action.value="create";
                                 form_migrantes_submit.value="Registrar";
-                                
-                                //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
                                 
                             }, 
                             //extend: "selectedSingle",
