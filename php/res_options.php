@@ -19,8 +19,8 @@ function res_get(){
         $result=$conexion->Mostrar_Opciones($conexion); //Descomentar para version final
         try{
             $result=$result[$args[0]];
-        }catch{
-            $result=["error"=>"No se encuentra el recurso"];
+        }catch(Exception $e ){
+            $result=["error"=>"No se encuentra el recurso", "exception"=> $e->getMessage()];
             header('HTTP/1.1 404 Not Found');
         }
     }else{
