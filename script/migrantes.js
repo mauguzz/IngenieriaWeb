@@ -19,7 +19,7 @@ const form_migrantes_submit = document.getElementById('f_migrantes_submit');
 let id =0; //Variable de prueba, id de migrante que se aplica la acción
 
 //Prueba
-fetch('php/res_options.php', {
+fetch('php/res_options.php/niveles_educativos', {
     method: 'GET'
 })
 .then(res=>res.text())
