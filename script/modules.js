@@ -295,12 +295,11 @@ export function llenar_opciones_selector(selectors_ids){
             let selector = document.getElementById(ids);
             Object.entries(resjson).forEach(([ind, value])=>{
                 let option = document.createElement('option');
-                console.log(value);
-                console.log(value[Object.keys(value)[0]]);
-                console.log(value[Object.keys(value)[1]]);
-                option.value=value[Object.keys(value)[0]]; //Se refiere al id
+                
+                option.setAttribute("value",value=value[Object.keys(value)[0]]); //Se refiere al id
                 option.innerHTML=value[Object.keys(value)[1]]; //Se refiere al texto que aparece en la opción.
                 selector.appendChild(option); //Agrega las opciones al selector
+                console.log(selector);
             })
             //console.log(resjson);
             
