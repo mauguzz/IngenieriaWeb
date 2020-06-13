@@ -1,6 +1,6 @@
 
 import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migrante_modificar, migrante_eliminar, 
-} from './modules.js';
+llenar_opciones_selector} from './modules.js';
 
 const mcontent = document.getElementById('content'); //Div del contenido principal (tablas, etc), todas las páginas
 
@@ -18,17 +18,19 @@ const form_migrantes_submit = document.getElementById('f_migrantes_submit');
 
 let id =0; //Variable de prueba, id de migrante que se aplica la acción
 
-//Prueba
-fetch('php/res_options.php/niveles_educativos', {
-    method: 'GET'
-})
-.then(res=>res.text())
-.then(resjson=>{
-    console.log(resjson);
-})
+
 
 
 document.addEventListener("DOMContentLoaded", function(event) {
+
+        llenar_opciones_selector(
+            [
+                'paises_origen',
+                'niveles_educativos',
+                'causas_migracion',
+                'situaciones_familiares'
+            ]
+        )
     
         migrante_consultar_todos('#t_migrantes',
             t_general,

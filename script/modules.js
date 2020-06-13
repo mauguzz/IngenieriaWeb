@@ -282,6 +282,29 @@ export function culturales_eliminar(id){
     table_eliminar("php/res_culturales.php/"+id);
 }
 
+//FUNCIONES DE OPCIONES
+export function llenar_opciones_selector(selectors_ids){
+    //Prueba
+    
+    for(ids in selectors_ids){
+        fetch('php/res_options.php/'+ids, {
+            method: 'GET'
+        })
+        .then(res=>res.json())
+        .then(resjson=>{
+            let selector = document.getElementById(ids);
+            Object.entries(resjson).forEach(([ind, value])=>{
+                let option = document.createElement('option');
+                option.value=value[0]; //Se refiere al id
+                option.innerHTML=value[1]; //Se refiere al texto que aparece en la opción.
+                selector.appendChild(option); //Agrega las opciones al selector
+            })
+            console.log(resjson);
+            
+        })      
+    }
+    
+}
 
 /*------------------------------------------------Sesiones----------------------------------------------------*/
 
