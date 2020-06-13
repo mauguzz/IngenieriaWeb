@@ -285,7 +285,7 @@ export function culturales_eliminar(id){
 //FUNCIONES DE OPCIONES
 export function llenar_opciones_selector(selectors_ids){
     //Prueba
-    
+    let ids;
     for(ids in selectors_ids){
         fetch('php/res_options.php/'+ids, {
             method: 'GET'
