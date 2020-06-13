@@ -297,9 +297,9 @@ export function llenar_opciones_selector(selectors_ids){
                 let option = document.createElement('option');
                 console.log(value);
                 console.log(value[Object.keys(value)[0]]);
-                console.log(value[1]);
-                option.value=value[0]; //Se refiere al id
-                option.innerHTML=value[1]; //Se refiere al texto que aparece en la opción.
+                console.log(value[Object.keys(value)[1]]);
+                option.value=value[Object.keys(value)[0]]; //Se refiere al id
+                option.innerHTML=value[Object.keys(value)[1]]; //Se refiere al texto que aparece en la opción.
                 selector.appendChild(option); //Agrega las opciones al selector
             })
             //console.log(resjson);
