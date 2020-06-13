@@ -130,10 +130,10 @@ class DataBase{
 
     public static function Crear_Migrante ($mysqli,$Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion, $Llave){
     
-        $Pais=int ($Pais);
-        $Edad=int ($Edad);
-        $Nivel_Educativo=int ($Nivel_Educativo);
-        $Situacion_Familia=int($Situacion_Familia);
+        //$Pais=int ($Pais);
+        //$Edad=int ($Edad);
+        //$Nivel_Educativo=int ($Nivel_Educativo);
+        //$Situacion_Familia=int($Situacion_Familia);
         $Estado_Por_Defecto= 1;
         try {
             $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
