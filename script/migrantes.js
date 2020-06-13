@@ -18,6 +18,15 @@ const form_migrantes_submit = document.getElementById('f_migrantes_submit');
 
 let id =0; //Variable de prueba, id de migrante que se aplica la acción
 
+//Prueba
+fetch('php/res_options', {
+    method: 'GET'
+})
+.then(res=>res.json())
+.then(resjson=>{
+    console.log(resjson);
+})
+
 
 document.addEventListener("DOMContentLoaded", function(event) {
     

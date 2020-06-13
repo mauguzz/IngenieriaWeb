@@ -92,6 +92,40 @@ class DataBase{
         $Funcionario->execute();  //Ejecuto la consulta
         return ['Funcionario'=>$Funcionario->fetchAll(PDO::FETCH_ASSOC)];
     }
+
+    public static function Mostrar_Opciones($mysqli){
+        $Conexion = $mysqli -> Conectar(); //Me conecto a la base de datos
+        $query="SELECT * FROM pais";
+        $Paises = $Conexion -> prepare($query);
+        $Paises->execute();
+        $query="SELECT * FROM estados";
+        $Estados = $Conexion -> prepare($query);
+        $Estados->execute();
+        $query="SELECT * FROM municipios";
+        $Municipios = $Conexion -> prepare($query);
+        $Municipios->execute();
+        $query="SELECT * FROM nivel_educativo";
+        $Niveles_Educativos = $Conexion -> prepare($query);
+        $Niveles_Educativos->execute();
+        $query="SELECT * FROM causas_migracion";
+        $Causas_Migracion = $Conexion -> prepare($query);
+        $Causas_Migracion->execute();
+        $query="SELECT * FROM estado_de_migrante";
+        $Estados_Migrante = $Conexion -> prepare($query);
+        $Estados_Migrante->execute();
+        $query="SELECT * FROM Familia";
+        $Situaciones_Familiares = $Conexion -> prepare($query);
+        $Situaciones_Familiares->execute();
+        return [
+            'paises_origen' => $Paises ->fetchAll(PDO::FETCH_ASSOC),
+            'estados_mexico' => $Estados ->fetchAll(PDO::FETCH_ASSOC),
+            'municipios_mexico' => $Municipios ->fetchAll(PDO::FETCH_ASSOC),
+            'niveles_educativos' => $Niveles_Educativos ->fetchAll(PDO::FETCH_ASSOC),
+            'causas_migracion' =>  $Causas_Migracion ->fetchAll(PDO::FETCH_ASSOC),
+            'migrante_estados' => $Estados_Migrante ->fetchAll(PDO::FETCH_ASSOC),
+            'situaciones_familiares'=> $Situaciones_Familiares ->fetchAll(PDO::FETCH_ASSOC)
+        ];
+    }
 /*----------------------------------------------Insercciones------------------------------------------------ */
 
     public static function Crear_Migrante ($mysqli,$Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion, $Llave){
