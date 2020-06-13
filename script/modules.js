@@ -289,13 +289,13 @@ export function llenar_opciones_selector(selectors_ids){
     console.log(selectors_ids);
     for(ids of selectors_ids){
         console.log(ids);
-        
+        let selector = document.getElementById(ids);
         fetch('php/res_options.php/'+ids, {
             method: 'GET'
         })
         .then(res=>res.json())
         .then(resjson=>{
-            let selector = document.getElementById(ids);
+            
             Object.entries(resjson).forEach(([ind, value])=>{
                 let option = document.createElement('option');
                 
