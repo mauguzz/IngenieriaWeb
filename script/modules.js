@@ -83,8 +83,12 @@ function table_generate_datatables(tablename, init, rows, cols){
         });
     }else{ //Caso de solo actualización
         datatable = $(tablename).DataTable();
-        datatable.fnClearTable();
-        datatable.fnAddData(dataSet);
+        //datatable.fnClearTable();
+        //datatable.fnAddData(dataSet);
+
+        datatable.clear();
+        datatable.rows.add(dataSet);
+        datatable.draw();
     }
     
 
