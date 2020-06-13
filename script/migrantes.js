@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             action: ()=>{
                                 console.log(datatable.rows( { selected: true } ).data()[0]); 
                                 
-                                console.log(form_migrantes_registrar.children[0])
+                                console.log(form_migrantes_registrar.children)
                                 //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
                                 
                             }, 
