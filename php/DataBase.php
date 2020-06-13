@@ -147,10 +147,10 @@ class DataBase{
             '".$Pais."',
             '".$Oficio."',
             '".$Fecha_Nacimiento."',
-            '".$Edad."',
+            NULL,
             '".$Contacto_Telefono."',
             '".$Nivel_Educativo."',
-            '".$Situacion_Familia."',
+            '".$Situacion_Familiar."',
             '".$Llave."',
             '".$Causa_Migracion."',
             '".$Estado_Por_Defecto."');";
