@@ -123,7 +123,7 @@ function datatable_consultar_todos(uri, rowsindex, table, init, columns){
         .then(res=>res.json())
         .then(res_json=>{
             let rows=res_json[rowsindex]; 
-            console.log(rows);
+            console.log(res_json);
             datatable=table_generate_datatables(table, init, rows, columns);
             resolve(datatable);
         })
