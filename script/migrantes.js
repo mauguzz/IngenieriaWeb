@@ -71,10 +71,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             text:"Añadir", 
                             action: ()=>{
                                 console.log(datatable.rows( { selected: true } ).data()[0]); 
+                                
+                                console.log(form_migrantes_registrar.children[0])
                                 //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
                                 
                             }, 
-                            extend: "selectedSingle",
+                            //extend: "selectedSingle",
                             attr:{
                                 "data-toggle": "modal",
                                 "data-target": "#modal_migrantes_form"
