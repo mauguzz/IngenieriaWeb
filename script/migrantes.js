@@ -85,6 +85,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         {
                             text:"Editar Participación en Actividades", 
                             extend: "selectedSingle",
+                            attr:{
+                                "data-toggle": "modal",
+                                "data-target": "#migrante_culturales_modal"
+                            },
                             action: ()=>{
                                 id=datatable.rows( { selected: true } ).data()[0][0]; 
                                 
@@ -94,6 +98,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         {
                             text:"Editar Seguimiento Laboral", 
                             extend: "selectedSingle",
+                            attr:{
+                                "data-toggle": "modal",
+                                "data-target": "#migrante_laborales_modal"
+                            },
                             action: ()=>{
                                 id=datatable.rows( { selected: true } ).data()[0][0]; 
                                 
