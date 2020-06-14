@@ -108,7 +108,7 @@ form_migrantes.onsubmit = function(e){
     e.preventDefault();
 
     //document.getElementById('modal_migrantes_form').hidde();
-    $('#modal_migrantes_form').hidde();
+    $('#modal_migrantes_form').hide();
     
     let formData = new FormData(form_migrantes);
     let formJson = JSON.stringify(Object.fromEntries(formData));
