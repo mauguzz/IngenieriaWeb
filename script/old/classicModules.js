@@ -292,17 +292,6 @@ export function laborales_consultar_todos(thead_laborales, tbody_laborales){
     )
 }
 
-//Convertir lo anterior a modo DataTables como en el caso de migrantes (Ver más arriba, cómo se regresa un Promise y se llama a datatables_consultar_todos())
-
-//Aparte construir otra función que se llame "table_consultar_por_migrante(table, id, init)"
-//En res_laborales.php permitir la ruta "php/res_laborales.php/migrante/#" que es la opción que entregará las actividades laborales filtradas por migrante
-//Para implementar lo anterior, usar la View "Asistencia_Oferta_Laboral_View" que también es usada para los detalles del migrante.
-//Desde "table_consultar_por_migrante(table, id, init)" usar la dirección "php/res_laborales.php/migrante/"+id en la función datatables_consultar_todos()
-
-//Verificar en la BD que la tabla registros, asistencia_actividad_cultural, asistencia_oferta_laboral, tengan un primary key binario (id de migrante e id de cultural/laboral/punto)
-
-//Repetir lo anterior para Actividades Culturales
-
 export function laborales_registrar(jsonData){
     return new Promise((resolve, reject)=>{
         table_registrar("php/res_laborales.php", jsonData)    
