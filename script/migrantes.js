@@ -38,60 +38,92 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 buttons: 
                     [
                         {
-                            text:"Detalles", 
+                            text:"Registrar Entrada", 
+                            extend: "selectedSingle",
                             action: ()=>{
                                 id=datatable.rows( { selected: true } ).data()[0][0]; 
-                                console.log("El id es: "+id);
-                                migrante_consultar(id, t_general, t_culturales, t_laborales, t_registros)
-                            }, 
+                                
+                            },   
+                        },
+
+                        {
+                            text:"Registrar Salida", 
+                            extend: "selectedSingle",
+                            action: ()=>{
+                                id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                
+                            },   
+                        },
+
+                        {
+                            text:"Ver Detalles", 
                             extend: "selectedSingle",
                             attr: {
                                 "data-toggle":"modal",
                                 "data-target":"#modal_migrantes_details"
-                            }
-                        },
-                        {
-                            text:"Eliminar", 
+                            },
                             action: ()=>{
                                 id=datatable.rows( { selected: true } ).data()[0][0]; 
-                                console.log("El id es: "+id);
+                                migrante_consultar(id, t_general, t_culturales, t_laborales, t_registros)
+                            }
+                        },
+
+                        {
+                            text:"Modificar Datos Generales",
+                            extend: "selectedSingle",
+                            attr:{
+                                "data-toggle": "modal",
+                                "data-target": "#modal_migrantes_form"
+                            },
+                            action: ()=>{
+                                id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                form_migrantes_action.value="modify";
+                                form_migrantes_submit.value="Guardar cambios";
+                            }     
+                        },
+
+                        {
+                            text:"Editar Participación en Actividades", 
+                            extend: "selectedSingle",
+                            action: ()=>{
+                                id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                
+                            },   
+                        },
+
+                        {
+                            text:"Editar Seguimiento Laboral", 
+                            extend: "selectedSingle",
+                            action: ()=>{
+                                id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                
+                            },   
+                        },
+
+                        {
+                            text:"Eliminar", 
+                            extend: "selectedSingle",
+                            action: ()=>{
+                                id=datatable.rows( { selected: true } ).data()[0][0]; 
                                 migrante_eliminar(id)
                                 .then(result=>{
                                     migrante_consultar_todos('#t_migrantes', false)
                                 })
-                            }, 
-                            extend: "selectedSingle",
-                            
+                            },   
                         },
+
                         {
-                            text:"Modificar", 
-                            action: ()=>{
-                                id=datatable.rows( { selected: true } ).data()[0][0]; 
-                                console.log("El id es: "+id);
-                                form_migrantes_action.value="modify";
-                                form_migrantes_submit.value="Guardar cambios";
-                            }, 
-                            extend: "selectedSingle",
+                            text:"Añadir Migrante", 
                             attr:{
                                 "data-toggle": "modal",
                                 "data-target": "#modal_migrantes_form"
-                            }
-                            
-                        },
-                        {
-                            text:"Añadir", 
+                            },
                             action: ()=>{
-                                form_migrantes.reset();
+                                form_migrantes.reset(); //Limpia el formulario
                                 form_migrantes_action.value="create";
                                 form_migrantes_submit.value="Registrar";
                                 
-                            }, 
-                            //extend: "selectedSingle",
-                            attr:{
-                                "data-toggle": "modal",
-                                "data-target": "#modal_migrantes_form"
-                            }
-                            
+                            }   
                         }
                     ]
             });
@@ -103,6 +135,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
 });
 
+/////////////////////////////////////////////////////////////////7
+//Para limpiar el formulario, en la ventana modal se puede poner un botón en el cual se pueda dar clic a propia decisión si limpiarlo o no, esto para que sea útil en el caso de modificar
 
 form_migrantes.onsubmit = function(e){
     e.preventDefault();
