@@ -5,6 +5,8 @@
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Mejora el escalamiento en móviles-->
         <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/index.css}">
+
     </head>
 
     <body>
@@ -13,24 +15,38 @@
             <a class="navbar-brand" href="#">SIS-IW</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
-            </button>
-          
+            </button>    
         </nav>
 
          <!--Esto es solo una prueba de otra tabla, después se van a hacer varias páginas-->
-        <div class="content" id="content">
-           
-            <form id="Form_Iniciar_Sesion" class="">
-                <h1>INICIAR SESIÓN</h1>
-                <input type = "text" name = "Usuario" id="User" placeholder="Usuario:" autocomplete="off" required >              
-                <input type="password" name="Clave" id="Pass"  placeholder="Contraseña:" autocomplete="off" required >         
-                <button id="btn_Login" >Iniciar Sesión</button>
-                <a href = "#" >Registrarse</a>
-                <a href = "#" >Recuperar contraseña</a>
-            </form>
+        <section class="container-fluid">    
+            
+            <div class="modal-dialog text-center">
+                <div class="col-sm-8 main-section" >
+                    <div class="modal-content">
+                        <div class="col-12 user-img">
+                            <img src="img/SIS-IW.png" th:src="@{/img/user.png}"/>
+                        </div>      
+                        <form id="Form_Iniciar_Sesion" class="col-12">
+                            <h3 class="text-center font-weigth-bold">Iniciar Sesión</h3>
+                            <div class="form-group">
+                                <input type = "text" name = "Usuario" id="User" placeholder="Usuario:" autocomplete="off" required >              
+                            </div>
+                            <div class="form-group">   
+                                <input type="password" name="Clave" id="Pass"  placeholder="Contraseña:" autocomplete="off" required >         
+                            </div>
+                            <div class="form-group">
+                                <button id="btn_Login" class="btn-primary"> Iniciar Sesión</button>
+                            </div>
+                            <div class="form-group">
+                                <a href = "#" >Recuperar contraseña</a>
+                            </div>        
+                        </form>
 
-        </div>
-
+                    </div>
+                </div> 
+            </div>
+        </section>
         <script type="module" src="script/index.js"></script>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

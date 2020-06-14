@@ -329,3 +329,11 @@ export function Iniciar_Sesion(formJson){
     //.then(handleHttpErrors)
 
 }
+
+export function Validar_Sesion(){
+    
+    console.log("Cargando");
+
+
+
+}
