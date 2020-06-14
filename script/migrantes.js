@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 form_migrantes.onsubmit = function(e){
     e.preventDefault();
 
-    document.getElementById('modal_migrantes_form').modal('hide');
+    $('#modal_migrantes_form').modal('hide');
     
     let formData = new FormData(form_migrantes);
     let formJson = JSON.stringify(Object.fromEntries(formData));
