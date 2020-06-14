@@ -4,13 +4,14 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Mejora el escalamiento en móviles-->
         <meta charset="UTF-8">
     </head>
-
     <body>
        
+       <!--Navbar bootstrap correspondiente a la barra superior principal-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">SIS-IW</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,207 +36,311 @@
             </div>
         </nav>
          
-
-
-
-
+        <!--Container bootstrap correspondiente al contenido de la página-->
         <div class="container" id="content">
             <div class="row">
                 <div class="col-10">
                     
                     <!--Tabla de información de todos los migrantes (resumen)-->
-                    <table id="t_migrantes">
-                        <thead id="thead_migrantes">
-                        </thead>
-                        <tbody id="tbody_migrantes">
-                        </tbody>
-                    </table>
-
+                    <div class="table-responsive">
+                        <table class="display compact" id="t_migrantes">
+                            <thead id="thead_migrantes">
+                            </thead>
+                            <tbody id="tbody_migrantes">
+                            </tbody>
+                        </table>
+                    </div>  
                     
                 </div>
-                <div class="col-2">
-                    <button id="btn_migrante_eliminar">Eliminar</button>
-                    <button id="btn_consultar">Detalles</button>
-                    
+                <div class="col-2" >
+                    <div class="row" id="datatable_buttons_container"></div>
+                    <div class="row" id="generic_buttons_container">
+                    </div>    
+                </div>
+            </div>
+        </div>
+        
+      
+        <!--Ventana modal bootstrap correspondiente a los detalles del migrante-->
+        <div class="modal fade" id="modal_migrantes_details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detalles del migrante</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!--Tabla de información general del migrante-->
+                        <table id="t_general">
+                            <thead id="thead">
+                            </thead>     
+                            <tbody id="tbody">
+                            </tbody>
+                        </table>
+                        <!--Tabla de ofertas laborales en las que participa el migrante-->
+                        <table id="t_laborales">
+                            <thead id="thead">
+                            </thead>
+                            <tbody id="tbody">
+                            </tbody>
+                        </table>
+                        <!--Tabla de actividades culturales en las que participa el migrante-->
+                        <table id="t_culturales">
+                            <thead id="thead">
+                            </thead>
+                            <tbody id="tbody">  
+                            </tbody>
+                        </table>
+                        <!--Tabla de registros en puntos de control en los que ha estado el migrante-->
+                        <table id="t_registros">
+                            <thead id="thead">
+                            </thead>
+                            <tbody id="tbody">  
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+         <!--Ventana modal bootstrap correspondiente al formulario de registro o modificación de migrantes-->
+        <div class="modal fade" id="modal_migrantes_form" tabindex="-1" role="dialog" aria-labelledby="ModalLabel_Migrantes_Form" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLabel_Migrantes_Form">Detalles del migrante</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!--Formulario de registro o modificación de migrantes-->
+                        <form id="f_migrantes">
+                            <p>
+                                <label for="nombre">Nombre: </label>
+                                <input type="text" name="nombre" id="nombre" placeholder="Nombre (s)" required>
+                            </p>
+                            <p>
+                                <label for="apellido_paterno">Apellido paterno: </label>
+                                <input type="text" name="apellido_paterno" id="apellido_paterno" placeholder="Apellido paterno" required>
+                            </p>
+                            <p>
+                                <label for="apellido_materno">Apellido materno: </label>
+                                <input type="text" name="apellido_materno" id="apellido_materno" placeholder="Apellido materno" required>
+                            </p>
+                            <p>
+                                <label for="fecha_nacimiento">Fecha de nacimiento </label>
+                                <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" placeholder="" required>
+                            </p>
+                            <p>
+                                <label for="ciudad">Ciudad de origen:</label>
+                                <input type="text"  name="ciudad" id="ciudad" placeholder="" required>
+                            </p>
+                            <p>
+                                <label for="pais">País de origen:</label>
+                                <select name="pais" id="paises_origen"></select>
+                                <!--<input type="select"  name="pais" id="pais" placeholder="" required>-->
+                            </p>
+                            <p>
+                                <label for="oficio">Oficio:</label>
+                                <input type="text"  name="oficio" id="oficio" placeholder="" required>
+                            </p>
+                            <p>
+                                <label for="contacto_telefono">Teléfono de contacto:</label>
+                                <input type="text"  name="contacto_telefono" id="contacto_telefono" placeholder="" required>
+                            </p>
+                            <p>
+                                <label for="nivel_educativo">Nivel educativo:</label>
+                                <select name="nivel_educativo" id="niveles_educativos"></select>
+                                <!--<input type="select"  name="nivel_educativo" id="nivel_educativo" placeholder="" required>-->
+                            </p>
+                            <p>
+                                <label for="situacion_familiar">Situación familiar:</label>
+                                <select name="situacion_familiar" id="situaciones_familiares"></select>
+                                <!--<input type="select"  name="situacion_familiar" id="situacion_familiar" placeholder="" required>-->
+                            </p>
+                            <p>
+                                <label for="causa_migracion">Causa de migración:</label>
+                                <select name="causa_migracion" id="causas_migracion"></select>
+                                <!--<input type="select"  name="causa_migracion" id="causa_migracion" placeholder="" required>-->
+                            </p>
+                            <p>
+                                <input type="hidden" id="f_migrantes_action" name="f_migrantes_action" value="default_action">
+                            </p>
+                            <p>
+                                <!--<input type="submit" id="f_migrantes_submit" value="Registrar">-->
+                            </p>
+                            <!--'paises_origen',
+                                'estados_mexico',
+                                'municipios_mexico',
+                                'niveles_educativos',
+                                'causas_migracion',
+                                'migrante_estados',
+                                'situaciones_familiares'
+                            -->
+                            
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                        <input type="submit" id="f_migrantes_submit" class="btn btn-primary" form="f_migrantes" value="Registrar">
+                    </div>
                 </div>
             </div>
         </div>
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Launch demo modal
-          </button>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <!--Ventana modal bootstrap correspondiente a la EDICIÓN de las ACTIVIDADES CULTURALES en  las que PARTICIPA en MIGRANTE-->
+        <div class="modal fade" id="migrante_culturales_modal" tabindex="-1" role="dialog" aria-labelledby="migrante_culturales_modal_label" aria-hidden="true">
             <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Detalles del migrante</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="migrante_culturales_modal_label">Detalles del migrante</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                         <!--Container bootstrap de las tablas-->
+                        <div class="container" id="migrante_culturales_tables">
+                            <div class="row">
+                                <div class="col-10">
+
+                                    <!--Tabla de información de todos los migrantes (resumen)-->
+                                    <div class="table-responsive">
+                                        <!--Tabla de TODAS LAS ACTIVIDADES CULTURALES-->
+                                        <table id="t_migrante_culturales_todas">
+                                            <thead id="thead">
+                                            </thead>     
+                                            <tbody id="tbody">
+                                            </tbody>
+                                        </table>
+                                    </div>  
+
+                                </div>
+                                <div class="col-2" >
+                                    <div class="row" id="migrante_culturales_datatable_buttons_todas"></div>
+
+                                </div>    
+
+                            </div>
+                            <div class="row">
+                                <div class="col-10">
+
+                                    <!--Tabla de información de todos los migrantes (resumen)-->
+                                    <div class="table-responsive">
+                                        <!--Tabla de ACTIVIDADES CULTURALES EN LAS QUE PARTICIPA-->
+                                        <table id="t_migrante_culturales_seleccionadas">
+                                            <thead id="thead">
+                                            </thead>     
+                                            <tbody id="tbody">
+                                            </tbody>
+                                        </table>
+                                    </div>  
+
+                                </div>
+                                <div class="col-2" >
+                                    <div class="row" id="migrante_culturales_datatable_buttons_seleccionadas"></div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-
-                    <!--Tabla de información general del migrante-->
-                    <table id="t_general">
-                        <thead id="thead_general">
-                        </thead>     
-                        <tbody id="tbody_general">
-                        </tbody>
-                    </table>
-
-                    <!--Tabla de ofertas laborales en las que participa el migrante-->
-                    <table id="t_laborales">
-                        <thead id="thead_laborales">
-                        </thead>
-                        <tbody id="tbody_laborales">
-                        </tbody>
-                    </table>
-
-                    <!--Tabla de actividades culturales en las que participa el migrante-->
-                    <table id="t_culturales">
-                        <thead id="thead_culturales">
-                        </thead>
-                        <tbody id="tbody_culturales">  
-                        </tbody>
-                    </table>
-
-                    <!--Tabla de registros en puntos de control en los que ha estado el migrante-->
-                    <table id="t_registros">
-                        <thead id="thead_registros">
-                        </thead>
-                        <tbody id="tbody_registros">  
-                        </tbody>
-                    </table>
-
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-              </div>
             </div>
-          </div>
-            
-            
-           
+        </div>
 
+        <!--Ventana modal bootstrap correspondiente a la EDICIÓN de las ACTIVIDADES LABORALES en  las que PARTICIPA en MIGRANTE-->
+        <div class="modal fade" id="migrante_laborales_modal" tabindex="-1" role="dialog" aria-labelledby="migrante_laborales_modal_label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="migrante_laborales_modal_label">Detalles del migrante</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
 
-            
+                         <!--Container bootstrap de las tablas-->
+                        <div class="container" id="migrante_laborales_tables">
+                            <div class="row">
+                                <div class="col-10">
 
+                                    <!--Tabla de información de todos los migrantes (resumen)-->
+                                    <div class="table-responsive">
+                                        <!--Tabla de TODAS LAS ACTIVIDADES LABORALES-->
+                                        <table id="t_migrante_laborales_todas">
+                                            <thead id="thead">
+                                            </thead>     
+                                            <tbody id="tbody">
+                                            </tbody>
+                                        </table>
+                                    </div>  
 
-            <!--Poner dentro de una ventana modal en Bootstrap-->
-            <form id="f_migrantes_registrar">
-                <p>
-                    <label for="nombre">Nombre: </label>
-                    <input type="text" name="nombre" id="nombre" placeholder="Nombre (s)" required>
-                </p>
-                <p>
-                    <label for="apellido_paterno">Apellido paterno: </label>
-                    <input type="text" name="apellido_paterno" id="apellido_paterno" placeholder="Apellido paterno" required>
-                </p>
-                <p>
-                    <label for="apellido_materno">Apellido materno: </label>
-                    <input type="text" name="apellido_materno" id="apellido_materno" placeholder="Apellido materno" required>
-                </p>
-                <p>
-                    <label for="fecha_nacimiento">Fecha de nacimiento </label>
-                    <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" placeholder="" required>
-                </p>
-                <p>
-                    <label for="ciudad">Ciudad de origen:</label>
-                    <input type="text"  name="ciudad" id="ciudad" placeholder="" required>
-                </p>
-                <p>
-                    <label for="pais">País de origen:</label>
-                    <input type="select"  name="pais" id="pais" placeholder="" required>
-                </p>
-                <p>
-                    <label for="oficio">Oficio:</label>
-                    <input type="text"  name="oficio" id="oficio" placeholder="" required>
-                </p>
-                <p>
-                    <label for="contacto_telefono">Teléfono de contacto:</label>
-                    <input type="text"  name="contacto_telefono" id="contacto_telefono" placeholder="" required>
-                </p>
-                <p>
-                    <label for="nivel_educativo">Nivel educativo:</label>
-                    <input type="select"  name="nivel_educativo" id="nivel_educativo" placeholder="" required>
-                </p>
-                <p>
-                    <label for="situacion_familiar">Situación familiar:</label>
-                    <input type="select"  name="situacion_familiar" id="situacion_familiar" placeholder="" required>
-                </p>
-                <p>
-                    <label for="causa_migracion">Causa de migración:</label>
-                    <input type="select"  name="causa_migracion" id="causa_migracion" placeholder="" required>
-                </p>
-                <p>
-                    <input type="submit" value="Registrar">
-                </p>
-            </form>
+                                </div>
+                                <div class="col-2" >
+                                    <div class="row" id="migrante_laborales_datatable_buttons_todas"></div>
 
-            <!--Poner dentro de una ventana modal en Bootstrap-->
-            <form id="f_migrantes_modificar">
-                <p>
-                    <label for="nombre">Nombre: </label>
-                    <input type="text" name="nombre" id="nombre" placeholder="Nombre (s)" required>
-                </p>
-                <p>
-                    <label for="apellido_paterno">Apellido paterno: </label>
-                    <input type="text" name="apellido_paterno" id="apellido_paterno" placeholder="Apellido paterno" required>
-                </p>
-                <p>
-                    <label for="apellido_materno">Apellido materno: </label>
-                    <input type="text" name="apellido_materno" id="apellido_materno" placeholder="Apellido materno" required>
-                </p>
-                <p>
-                    <label for="fecha_nacimiento">Fecha de nacimiento </label>
-                    <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" placeholder="" required>
-                </p>
-                <p>
-                    <label for="ciudad">Ciudad de origen:</label>
-                    <input type="text"  name="ciudad" id="ciudad" placeholder="" required>
-                </p>
-                <p>
-                    <label for="pais">País de origen:</label>
-                    <input type="select"  name="pais" id="pais" placeholder="" required>
-                </p>
-                <p>
-                    <label for="oficio">Oficio:</label>
-                    <input type="text"  name="oficio" id="oficio" placeholder="" required>
-                </p>
-                <p>
-                    <label for="contacto_telefono">Teléfono de contacto:</label>
-                    <input type="text"  name="contacto_telefono" id="contacto_telefono" placeholder="" required>
-                </p>
-                <p>
-                    <label for="nivel_educativo">Nivel educativo:</label>
-                    <input type="select"  name="nivel_educativo" id="nivel_educativo" placeholder="" required>
-                </p>
-                <p>
-                    <label for="situacion_familiar">Situación familiar:</label>
-                    <input type="select"  name="situacion_familiar" id="situacion_familiar" placeholder="" required>
-                </p>
-                <p>
-                    <label for="causa_migracion">Causa de migración:</label>
-                    <input type="select"  name="causa_migracion" id="causa_migracion" placeholder="" required>
-                </p>
-                <p>
-                    <input type="submit" value="Modificar">
-                </p>
-            </form>
+                                </div>    
+
+                            </div>
+                            <div class="row">
+                                <div class="col-10">
+
+                                    <!--Tabla de información de todos los migrantes (resumen)-->
+                                    <div class="table-responsive">
+                                        <!--Tabla de ACTIVIDADES LABORALES EN LAS QUE PARTICIPA-->
+                                        <table id="t_migrante_laborales_seleccionadas">
+                                            <thead id="thead">
+                                            </thead>     
+                                            <tbody id="tbody">
+                                            </tbody>
+                                        </table>
+                                    </div>  
+
+                                </div>
+                                <div class="col-2" >
+                                    <div class="row" id="migrante_laborales_datatable_buttons_seleccionadas"></div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         
 
-        
         <script type="module" src="script/migrantes.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+       
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-        <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> <!--Datatables-->
+        <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script> <!--Datatables Bootstrap 4-->
+        <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script> <!--Datatables Select-->
+        <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script> <!--Datatables Buttons-->
 
         
 
