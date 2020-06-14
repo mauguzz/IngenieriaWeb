@@ -59,7 +59,9 @@
                 </div>
                 <div class="col-2" >
                     <div class="row" id="datatable_buttons_container"></div>
-                    <div class="row" id="generic_buttons_container"></div>    
+                    <div class="row" id="generic_buttons_container">
+
+                    </div>    
                 </div>
             </div>
         </div>
@@ -186,7 +188,7 @@
                                 <input type="hidden" id="f_migrantes_action" name="f_migrantes_action" value="default_action">
                             </p>
                             <p>
-                                <input type="submit" id="f_migrantes_submit" value="Registrar">
+                                <!--<input type="submit" id="f_migrantes_submit" value="Registrar">-->
                             </p>
 
                             <!--'paises_origen',
@@ -203,11 +205,150 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                        <input type="submit" id="f_migrantes_submit" class="btn btn-primary" form="f_migrantes" value="Registrar">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--Ventana modal bootstrap correspondiente a la EDICIÓN de las ACTIVIDADES CULTURALES en  las que PARTICIPA en MIGRANTE-->
+        <div class="modal fade" id="migrante_culturales_modal" tabindex="-1" role="dialog" aria-labelledby="migrante_culturales_modal_label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="migrante_culturales_modal_label">Detalles del migrante</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                         <!--Container bootstrap de las tablas-->
+                        <div class="container" id="migrante_culturales_tables">
+                            <div class="row">
+                                <div class="col-10">
+                                    
+                                    <!--Tabla de información de todos los migrantes (resumen)-->
+                                    <div class="table-responsive">
+                                        <!--Tabla de TODAS LAS ACTIVIDADES CULTURALES-->
+                                        <table id="t_migrante_culturales_todas">
+                                            <thead id="thead">
+                                            </thead>     
+                                            <tbody id="tbody">
+                                            </tbody>
+                                        </table>
+                                    </div>  
+                                    
+                                </div>
+                                <div class="col-2" >
+                                    <div class="row" id="migrante_culturales_datatable_buttons_todas"></div>
+
+                                </div>    
+                            
+                            </div>
+                            <div class="row">
+                                <div class="col-10">
+                                    
+                                    <!--Tabla de información de todos los migrantes (resumen)-->
+                                    <div class="table-responsive">
+                                        <!--Tabla de ACTIVIDADES CULTURALES EN LAS QUE PARTICIPA-->
+                                        <table id="t_migrante_culturales_seleccionadas">
+                                            <thead id="thead">
+                                            </thead>     
+                                            <tbody id="tbody">
+                                            </tbody>
+                                        </table>
+                                    </div>  
+                                    
+                                </div>
+                                <div class="col-2" >
+                                    <div class="row" id="migrante_culturales_datatable_buttons_seleccionadas"></div>
+                                     
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!--Ventana modal bootstrap correspondiente a la EDICIÓN de las ACTIVIDADES LABORALES en  las que PARTICIPA en MIGRANTE-->
+        <div class="modal fade" id="migrante_laborales_modal" tabindex="-1" role="dialog" aria-labelledby="migrante_laborales_modal_label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="migrante_laborales_modal_label">Detalles del migrante</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                         <!--Container bootstrap de las tablas-->
+                        <div class="container" id="migrante_laborales_tables">
+                            <div class="row">
+                                <div class="col-10">
+                                    
+                                    <!--Tabla de información de todos los migrantes (resumen)-->
+                                    <div class="table-responsive">
+                                        <!--Tabla de TODAS LAS ACTIVIDADES LABORALES-->
+                                        <table id="t_migrante_laborales_todas">
+                                            <thead id="thead">
+                                            </thead>     
+                                            <tbody id="tbody">
+                                            </tbody>
+                                        </table>
+                                    </div>  
+                                    
+                                </div>
+                                <div class="col-2" >
+                                    <div class="row" id="migrante_laborales_datatable_buttons_todas"></div>
+
+                                </div>    
+                            
+                            </div>
+                            <div class="row">
+                                <div class="col-10">
+                                    
+                                    <!--Tabla de información de todos los migrantes (resumen)-->
+                                    <div class="table-responsive">
+                                        <!--Tabla de ACTIVIDADES LABORALES EN LAS QUE PARTICIPA-->
+                                        <table id="t_migrante_laborales_seleccionadas">
+                                            <thead id="thead">
+                                            </thead>     
+                                            <tbody id="tbody">
+                                            </tbody>
+                                        </table>
+                                    </div>  
+                                    
+                                </div>
+                                <div class="col-2" >
+                                    <div class="row" id="migrante_laborales_datatable_buttons_seleccionadas"></div>
+                                     
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
            
 
         

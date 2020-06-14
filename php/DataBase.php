@@ -130,10 +130,10 @@ class DataBase{
 
     public static function Crear_Migrante ($mysqli,$Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion, $Llave){
     
-        $Pais=int ($Pais);
-        $Edad=int ($Edad);
-        $Nivel_Educativo=int ($Nivel_Educativo);
-        $Situacion_Familia=int($Situacion_Familia);
+        //$Pais=int ($Pais);
+        //$Edad=int ($Edad);
+        //$Nivel_Educativo=int ($Nivel_Educativo);
+        //$Situacion_Familia=int($Situacion_Familia);
         $Estado_Por_Defecto= 1;
         try {
             $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
@@ -147,16 +147,16 @@ class DataBase{
             '".$Pais."',
             '".$Oficio."',
             '".$Fecha_Nacimiento."',
-            '".$Edad."',
+            NULL,
             '".$Contacto_Telefono."',
             '".$Nivel_Educativo."',
-            '".$Situacion_Familia."',
+            '".$Situacion_Familiar."',
             '".$Llave."',
             '".$Causa_Migracion."',
             '".$Estado_Por_Defecto."');";
             $Funcionario = $Conexion->prepare($query); 
             $Funcionario->execute();  //Ejecuto la consulta
-            return ["POST"=>"Correcto, insertado correctamente"];
+            return ["POST"=>"Correcto, insertado correctamente", "llave_migrante"=>$Llave];
          }catch(PDOException $e){
              return ["POST"=>"$e->getMessage()"];
          }

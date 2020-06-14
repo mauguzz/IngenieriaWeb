@@ -32,73 +32,106 @@ document.addEventListener("DOMContentLoaded", function(event) {
             ]
         )
     
-        migrante_consultar_todos('#t_migrantes',
-            t_general,
-            t_culturales,
-            t_laborales,
-            t_registros
-        )
+        migrante_consultar_todos('#t_migrantes', true)
         .then(datatable=>{
             new $.fn.dataTable.Buttons(datatable, { 
                 buttons: 
                     [
                         {
-                            text:"Detalles", 
+                            text:"Registrar Entrada", 
+                            extend: "selectedSingle",
                             action: ()=>{
-                                console.log(datatable.rows( { selected: true } ).data()[0]); 
-                                id=1;
-                                //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
-                                migrante_consultar(1, t_general, t_culturales, t_laborales, t_registros)
-                            }, 
+                                id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                
+                            },   
+                        },
+
+                        {
+                            text:"Registrar Salida", 
+                            extend: "selectedSingle",
+                            action: ()=>{
+                                id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                
+                            },   
+                        },
+
+                        {
+                            text:"Ver Detalles", 
                             extend: "selectedSingle",
                             attr: {
                                 "data-toggle":"modal",
                                 "data-target":"#modal_migrantes_details"
+                            },
+                            action: ()=>{
+                                id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                migrante_consultar(id, t_general, t_culturales, t_laborales, t_registros)
                             }
                         },
+
                         {
-                            text:"Eliminar", 
-                            action: ()=>{
-                                console.log(datatable.rows( { selected: true } ).data()[0]); 
-                                id=1;
-                                //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
-                                migrante_eliminar(1)
-                            }, 
-                            extend: "selectedSingle",
-                            
-                        },
-                        {
-                            text:"Modificar", 
-                            action: ()=>{
-                                console.log(datatable.rows( { selected: true } ).data()[0]);
-                                id=1; 
-                                //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
-                                form_migrantes_action.value="modify";
-                                form_migrantes_submit.value="Guardar cambios";
-                            }, 
+                            text:"Modificar Datos Generales",
                             extend: "selectedSingle",
                             attr:{
                                 "data-toggle": "modal",
                                 "data-target": "#modal_migrantes_form"
-                            }
-                            
-                        },
-                        {
-                            text:"Añadir", 
+                            },
                             action: ()=>{
-                                console.log(datatable.rows( { selected: true } ).data()[0]); 
+                                id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                form_migrantes_action.value="modify";
+                                form_migrantes_submit.value="Guardar cambios";
+                            }     
+                        },
+
+                        {
+                            text:"Editar Participación en Actividades", 
+                            extend: "selectedSingle",
+                            attr:{
+                                "data-toggle": "modal",
+                                "data-target": "#migrante_culturales_modal"
+                            },
+                            action: ()=>{
+                                id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                edicion_migrante_culturales(id); //Llama a esta función para hacer consultas a la BD. Está implementada en este mismo archivo.
+                            },   
+                        },
+
+                        {
+                            text:"Editar Seguimiento Laboral", 
+                            extend: "selectedSingle",
+                            attr:{
+                                "data-toggle": "modal",
+                                "data-target": "#migrante_laborales_modal"
+                            },
+                            action: ()=>{
+                                id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                edicion_migrante_laborales(id); //Llama a esta función para hacer consultas a la BD. Está implementada en este mismo archivo.
+                            },   
+                        },
+
+                        {
+                            text:"Eliminar", 
+                            extend: "selectedSingle",
+                            action: ()=>{
+                                id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                migrante_eliminar(id)
+                                .then(result=>{
+                                    migrante_consultar_todos('#t_migrantes', false)
+                                })
+                            },   
+                        },
+
+                        {
+                            text:"Añadir Migrante", 
+                            attr:{
+                                "data-toggle": "modal",
+                                "data-target": "#modal_migrantes_form"
+                            },
+                            action: ()=>{
+                                form_migrantes.reset(); //Limpia el formulario
                                 form_migrantes_action.value="create";
                                 form_migrantes_submit.value="Registrar";
                                 
-                                //De la línea anterior, hay que sacar el ID, y remplazar en la función de abajo el 1 por el ID sacado
-                                
-                            }, 
-                            //extend: "selectedSingle",
-                            attr:{
-                                "data-toggle": "modal",
-                                "data-target": "#modal_migrantes_form"
-                            }
-                            
+                            }   
                         }
                     ]
             });
@@ -111,6 +144,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 
+//En estas funciones se llenará el contenido de las ventanas Modales para editar las asistencias de actividades culturales y ofertas laborales por parte de los migrantes
+//Las ventanas modales ya están implementadas en HTML, falta hacer una importación con getElementById de lo necesario.
+//Como se puede ver en la página, existen los botones "Editar Seguimiento Laboral", y "Editar Participación en Actividades", la idea es que estas ediciones se abran en la misma página de migrantes
+function edicion_migrante_culturales(id){
+ 
+}
+function edicion_migrante_laborales(id){
+    //Implementar la función "table_consultar_todos(table, init)" importada desde Modules.js donde table es "#t_migrante_laborales_todas" 
+   //Implementar la función "table_consultar_por_migrante(table, id, init)" importada desde Modules.js donde table es "#t_migrante_laborales_seleccionadas"  y el id es el pasado a la función
+}
+
+/////////////////////////////////////////////////////////////////7
+//Para limpiar el formulario, en la ventana modal se puede poner un botón en el cual se pueda dar clic a propia decisión si limpiarlo o no, esto para que sea útil en el caso de modificar
+
 form_migrantes.onsubmit = function(e){
     e.preventDefault();
 
@@ -120,9 +167,15 @@ form_migrantes.onsubmit = function(e){
     console.log(formJson);
 
     if(form_migrantes_action.value=="create"){
-        migrante_registrar(formJson);
+        migrante_registrar(formJson)
+        .then(result=>{
+            migrante_consultar_todos('#t_migrantes', false)
+        });
     }else if(form_migrantes_action.value=="modify"){
-        migrante_modificar(id, formJson);
+        migrante_modificar(id, formJson)
+        .then(result=>{
+            migrante_consultar_todos('#t_migrantes', false)
+        });
     }
     
 }
