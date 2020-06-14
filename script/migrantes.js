@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         {
                             text:"Añadir", 
                             action: ()=>{
-                                
+                                form_migrantes.reset();
                                 form_migrantes_action.value="create";
                                 form_migrantes_submit.value="Registrar";
                                 
