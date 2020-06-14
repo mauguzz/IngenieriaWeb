@@ -73,7 +73,7 @@ function table_generate_datatables(tablename, init, rows, cols){
         first=false;
     })
 
-    console.log("Dataset: " + dataSet);
+    console.log(dataSet);
     
     let datatable;
     if(init){
