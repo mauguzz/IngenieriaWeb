@@ -9,8 +9,4 @@ document.addEventListener("DOMContentLoaded", function(event) {
     Validar_Sesion();
 
 
-
-
-
-
-}
+});

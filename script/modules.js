@@ -281,16 +281,22 @@ export function migrante_eliminar(id){
 
 
 //FUNCIONES DE ACTIVIDADES LABORALES//
-export function laborales_consultar_todos(thead_laborales, tbody_laborales){
-    table_consultar_todos("php/res_laborales.php", thead_laborales, tbody_laborales,{
-        'ID':'Id_Trabajo',
-        'Detalles':'Detalles', 
-        'Requisitos':'Requisitos', 
-        'Direccion':'Direccion'
-    },
-        "laborales"
-    )
+
+export function laborales_consultar_todos(table, init){  //thead_culturales, tbody_culturales
+    return new Promise((resolve, reject)=>{
+        datatable_consultar_todos("php/res_laborales.php", "laborales", table, init, {
+            //Hace falta obtener el ID desde el View de MySQL, para poder hacer tratamientos posteriores
+            'ID':'Id_Trabajo',
+            'Detalles':'Detalles', 
+            'Requisitos':'Requisitos', 
+            'Direccion':'Direccion'
+        })
+        .then(datatable=>{resolve(datatable)})
+        .catch(e=>{reject(e)})
+    })
 }
+
+
 
 //Convertir lo anterior a modo DataTables como en el caso de migrantes (Ver más arriba, cómo se regresa un Promise y se llama a datatables_consultar_todos())
 
@@ -333,19 +339,24 @@ export function laborales_eliminar(id){
 
 
 //FUNCIONES DE ACTIVIDADES CULTURALES//
-export function culturales_consultar_todos(thead_culturales, tbody_culturales){
-    table_consultar_todos("php/res_culturales.php", thead_culturales, tbody_culturales,{
-        'ID': 'Id_Actividad',
-        'Fecha':'Fecha', 
-        'Nombre':'Nombre', 
-        'Dirección':'Direccion',
-        'Detalles':'Detalles',
-        'Activo': 'Activo' 
-        
-    },
-        "culturales"
-    )
+export function culturales_consultar_todos(table, init){  //thead_culturales, tbody_culturales
+    return new Promise((resolve, reject)=>{
+        datatable_consultar_todos("php/res_culturales.php", "culturales", table, init, {
+            //Hace falta obtener el ID desde el View de MySQL, para poder hacer tratamientos posteriores
+            'ID': 'Id_Actividad',
+            'Fecha':'Fecha', 
+            'Nombre':'Nombre', 
+            'Dirección':'Direccion',
+            'Detalles':'Detalles',
+            'Activo': 'Activo'
+        })
+        .then(datatable=>{resolve(datatable)})
+        .catch(e=>{reject(e)})
+    })
 }
+
+
+
 
 export function culturales_registrar(jsonData){
     return new Promise((resolve, reject)=>{
@@ -414,8 +425,11 @@ export function Iniciar_Sesion(formJson){
 }
 
 export function Validar_Sesion(){
-    
-    console.log("Cargando");
+
+    console.log("Cargado");
+    fetch("php/res_funcionarios.php/",{ method: 'GET'})
+    .then(handleHttpErrors)
+    .then(response=>response.text()) //Cambiar a .text() para pruebas, y a .json() para funcionamiento
 
 
 

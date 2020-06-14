@@ -16,9 +16,9 @@ function res_get(){
 
     if (count($args)==1){
         //Se pasó el id. //CASO: Obtener una única actividad cultural
-
+        $result=$conexion->Mostrar_Actividades_Culturales($conexion);
         //OJO: Prototipo del array a pasar, verificar que el resultado del método correspondiente en DataBase.php devuelva un array con la misma estructura
-        $result=array("culturales"=>array("Fecha"=>"23 de mayo de 2020", "Nombre"=> "Guitarra", "Detalles"=>"Clases básicas", "Direccion"=>"Jiutepec", "Activo"=>"1"));
+        //$result=array("culturales"=>array("Fecha"=>"23 de mayo de 2020", "Nombre"=> "Guitarra", "Detalles"=>"Clases básicas", "Direccion"=>"Jiutepec", "Activo"=>"1"));
     }else{
         //No se pasó el id. //CASO: Obtener todos las actividades culturales
         $result=$conexion->Mostrar_Actividades_Culturales($conexion);
@@ -26,7 +26,6 @@ function res_get(){
         //$result=array("culturales"=>array("1"=>array("Fecha"=>"23 de mayo de 2020", "Nombre"=> "Guitarra", "Detalles"=>"Clases básicas", "Direccion"=>"Jiutepec", "Activo"=>"1"), 
         //"2"=>array("Fecha"=>"02 de febrero de 2020", "Nombre"=> "Pintura", "Detalles"=>"Clases básicas", "Direccion"=>"Jonacatepec", "Activo"=>"1")));
     }
-          
 
 return $result;
 }

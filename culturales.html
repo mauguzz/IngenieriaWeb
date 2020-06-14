@@ -8,8 +8,7 @@
     </head>
 
     <body>
-       
-
+    
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">SIS-IW</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,15 +37,10 @@
          
         <div class="content" id="content">
             <!--Página culturales.html-->
+            
             <button id="btn_culturales_consultar_todos">Consultar</button>
             <table id="t_culturales">
                 <thead id="thead_culturales">
-                    <!--
-                    <th>Fecha de registro</th>
-                    <th>Nombre</th>
-                    <th>Detalles</th>
-                    <th>Dirección</th>
-                    -->
                 </thead>
                 <tbody id="tbody_culturales">
                 </tbody>
@@ -56,16 +50,20 @@
             <form id="f_culturales_registrar">
                 <p>
                     <label for="nombre">Nombre: </label>
-                    <input type="text" name="nombre" id="nombre" placeholder="Nombre (s)" required>
+                    <input type="text" name="nombre" id="nombre" placeholder="Nombre de actividad" required>
                 </p>
                 <p>
-                    <label for="detalles">Detalles: </label>
-                    <input type="text" name="detalles" id="detalles" placeholder="Apellido paterno" required>
+                    <label for="detalles">Fecha: </label>
+                    <input type="date" name="fecha" id="fecha"  required>
                 </p>
                 <p>
                     <label for="direccion">Dirección: </label>
-                    <input type="text" name="direccion" id="direccion" placeholder="Apellido materno" required>
-                </p>
+                    <textarea type="text" name="direccion" id="direccion" placeholder="Dirección de realización" required></textarea>
+                </p>                
+                <p>
+                    <label for="detalles">Detalles: </label>
+                    <textarea type="text" name="detalles"  id="detalles"  placeholder="Detalles de actividad" required></textarea>
+                 </p>
                 <p>
                     <input type="submit" value="Registrar">
                 </p>

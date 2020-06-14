@@ -2787,10 +2787,37 @@ insert into Administrador values (1,'Mauricio','Gutiérrez','Montor', '554035837
 /*Corroboramos la información*/
 select * from Administrador;
 
+
+/*Agregamos valores de Actividades Culturales*/
+insert into Actividades values (1,2,'Danza Folklorica','2020-06-15',1,'Cabecera Municipal de Tenabo','Se realizarán demostraciones de danza');
+insert into Actividades values (NULL,2,'Clases de Guitarra','2020-06-15',1,'Cabecera Municipal de Tenabo','Clases gratuitas de guitarra para toda la comunidad');
+insert into Actividades values (NULL,4,'Clases de teatro','2020-09-15',1,'Cabecera Municipal Cuauhtémoc','Clases gratuitas de teatro para toda la comunidad');
+insert into Actividades values (NULL,4,'Clases de piano','2020-09-11',1,'Cabecera Municipal de Cuauhtémoc','Clases gratuitas de piano para toda la comunidad');
+/*Corroboramos la información*/
+Select * from Actividades;
+
+
+/*Agregamos valores de ofertas laborales*/
+insert into Ofertas_de_trabajo values (
+									   1,
+                                       1,
+                                       'Mantenimiento elétrico',
+                                       'Mantenimiento correctivo y preventivo a equipo eléctrico en importante empresa productora de Jugos',
+                                       'Conocimientos de sistemas eléctricos,Manejo de herramientas de electricidad','Los Naranjos, Centro 30830 Tapachula de Córdova y Ordoñez, Chis');
+
+insert into Ofertas_de_trabajo values (
+									   NULL,
+                                       1,
+                                       'Confección de ropa',
+                                       'Corte y confección de ropa en importante maquiladora',
+                                       'Manejo de herramientas de confección',' Los Naranjos, Bosque de las Palomas Tapachula de Córdova y Ordoñez, Chis. 
+');
+/*Corroboramos la información*/
+select *from Ofertas_de_Trabajo;
 /*---------------------------------------------------------------------------------------Vistas------------------------------------------------------------------------------*/
 create view Migrantes_Todos As
-select Migrante.Id_Migrante,
-		Migrante.Nombre, 
+	select Migrante.Id_Migrante,
+			Migrante.Nombre, 
         Migrante.Apellido_Paterno,
         Migrante.Apellido_Materno,
         Pais.Nombre as 'Pais',
@@ -2799,7 +2826,7 @@ select Migrante.Id_Migrante,
         from Migrante 
         Inner join Pais ON 
 		Pais.Id_Pais=Migrante.Id_Pais
-        inner join Registro ON
+        inner join Registro ON	
 		Registro.Id_Migrante=Migrante.Id_Migrante
 		inner join Puntos_De_Control ON
 		Puntos_De_Control.Id_Punto_Control=Registro.Id_Punto_Control/*Cambiar el nombre del ID de estados*/
@@ -2900,13 +2927,16 @@ select
       Puntos_de_control.Id_Punto_Control=Funcionario.Id_Punto_Control
       inner join Estados ON
       Estados.Id=Puntos_de_control.Id_Estado;
-      
+	
       select * from Funcionario;
       
       select * from Administrador;
       
-      update Funcionario 
-      set Contrasenia='$2y$10$W8meY..MFwROZEnsOYzgr.qX6CjI.bLKbffmLmpL2BhnZof2lYjXm'
-      where Id_Funcionario=1;
-      
+	  ALTER TABLE Funcionario
+	  MODIFY Contrasenia varchar (100);
+	
+		  update Funcionario 
+		  set Contrasenia='$2y$10$W8meY..MFwROZEnsOYzgr.qX6CjI.bLKbffmLmpL2BhnZof2lYjXm'
+		  where Id_Funcionario=1;
 
+SELECT * FROM Asistencia_Actividad_Cultural_View;

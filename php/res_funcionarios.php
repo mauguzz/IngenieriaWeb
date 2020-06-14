@@ -2,18 +2,15 @@
 
 require_once('DataBase.php');
 
-//Obtención de datos de la solicitud
-//$json=file_get_contents('php://input');
-//$data=json_decode($json);
-//$id=$data->id;
-
-//Obtención de datos de la solicitud
-if($data=file_get_contents('php://input')){
-    $id=$data->id;
-}else{
-    header('HTTP/1.1 400 Bad Request');
-    return;
-}
-
+     /*Continuamos la sesión*/
+     session_start();
+    if (!empty($_SESSION['USERID']) and !empty($_SESSION['USERNAME']) ){
+         return [
+            'USERID'=>$_SESSION['USERID'],
+            'USERNAME'=>$_SESSION['USERNAME']
+                ];
+    }else{
+        return ['Datos'=>'Inicie sesión'];
+    }
 
 ?>
