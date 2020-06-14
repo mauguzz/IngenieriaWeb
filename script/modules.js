@@ -59,12 +59,13 @@ function table_generate_rowsandcols(thead, tbody, rows, columns){
 }
 
 function table_generate_datatables(tablename, init, rows, cols){
-    let result = [];
+    
     let dataSet = [];
     let customCols = [];
     let first = true;
    //cols={"Apellido Paterno" : "Apellido_P", "Apellido Materno" : "Apellido_M", "ind" : "value"}
     rows.forEach((row)=>{
+        let result = [];
         Object.entries(cols).forEach(([ind, value])=>{
             result.push(row[value]);
             if(first) customCols.push({title: ind})
