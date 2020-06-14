@@ -7,6 +7,7 @@ $uri=$_SERVER['REQUEST_URI'];       //Capturar URI utilizada
 $result = "";
 
 
+
 //MÉTODO HTTP GET
 function res_get(){
     //USO: Pasar un único argumento entero id si se va a aplicar la acción a un elemento específico
@@ -32,50 +33,36 @@ function res_post(){
     //Obtención de datos de la solicitud
     if($json=file_get_contents('php://input')){
         $data=json_decode($json);
+        $conexion= new Database();
+
+        $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $Llave=substr(str_shuffle($permitted_chars), 0, 10);
+
+        //$Llave = "123456"; //Crear una llave de migrante aleatoria
+        //Datos derivados en la BD, que no es necesario insertar: ID_Migrante, Edad, Id_Estado (migrando o establecido).
+
+        $result = $conexion->Crear_Migrante(
+            $conexion,
+            $data->nombre, 
+            $data->apellido_paterno, 
+            $data->apellido_materno, 
+            $data->fecha_nacimiento, 
+            $data->ciudad, 
+            $data->pais, 
+            $data->oficio, 
+            $data->contacto_telefono, 
+            $data->nivel_educativo, 
+            $data->situacion_familiar, 
+            $data->causa_migracion, 
+            $Llave
+        );
     }else{
+        $result = ["Error"=>"No se enviaron todos los parametros correctamente"];
         header('HTTP/1.1 400 Bad Request');
         return;
     }
-    $conexion= new Database();
-
-    $Nombre = $data->nombre;
-    $Apellido_Paterno = $data->apellido_paterno;
-    $Apellido_Materno = $data->apellido_materno;
-    $Fecha_Nacimiento = $data->fecha_nacimiento;
-    $Ciudad = $data->ciudad;
-    $Pais = $data->pais; //entero (opción de combobox)
-    $Oficio = $data->oficio;
-    $Contacto_Telefono = $data->contacto_telefono;
-    $Nivel_Educativo = $data->nivel_educativo; //entero (opción de combobox)
-    $Situacion_Familiar = $data->situacion_familiar; //entero (opción de combobox)
-    $Causa_Migracion = $data->causa_migracion; //entero (opción de combobox)
-    $Llave = "123456"; //Crear una llave de migrante aleatoria
     
-    
-    //Datos derivados en la BD, que no es necesario insertar: ID_Migrante, Edad, Id_Estado (migrando o establecido).
-
-    $result = $conexion->Crear_Migrante(
-        $conexion,
-        $data->nombre, 
-        $data->apellido_paterno, 
-        $data->apellido_materno, 
-        $data->fecha_nacimiento, 
-        $data->ciudad, 
-        $data->pais, 
-        $data->oficio, 
-        $data->contacto_telefono, 
-        $data->nivel_educativo, 
-        $data->situacion_familiar, 
-        $data->causa_migracion, 
-        $Llave
-    );
-    
-    
-    
-    
-    //$result=["POST"=>"Correcto, insertado correctamente"];
     return $result;
-
 }
 
 //MÉTODO HTTP PUT
