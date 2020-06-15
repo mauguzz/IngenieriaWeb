@@ -191,7 +191,7 @@ B_Cerrar_Sesion.addEventListener("click", function(event) {
     Cerrar_Sesion()
     .then ()
 
-}
+})
 
 
 
