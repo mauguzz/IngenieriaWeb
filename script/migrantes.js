@@ -1,6 +1,6 @@
 
 import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migrante_modificar, migrante_eliminar, 
-llenar_opciones_selector,Validar_Sesion} from './modules.js';
+llenar_opciones_selector,Validar_Sesion,Cerrar_Sesion} from './modules.js';
 
 const mcontent = document.getElementById('content'); //Div del contenido principal (tablas, etc), todas las páginas
 
@@ -16,8 +16,10 @@ const form_migrantes = document.getElementById('f_migrantes');
 const form_migrantes_action = document.getElementById('f_migrantes_action');
 const form_migrantes_submit = document.getElementById('f_migrantes_submit');
 
-let id =0; //Variable de prueba, id de migrante que se aplica la acción
 
+const B_Cerrar_Sesion=document.getElementById('b_Cerrar_Sesion');
+
+let id =0; //Variable de prueba, id de migrante que se aplica la acción
 
 
 
@@ -181,6 +183,14 @@ form_migrantes.onsubmit = function(e){
         });
     }
     
+}
+
+
+B_Cerrar_Sesion.addEventListener("click", function(event) {
+
+    Cerrar_Sesion()
+    .then ()
+
 }
 
 

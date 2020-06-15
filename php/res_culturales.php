@@ -36,20 +36,28 @@ function res_post(){
     //Obtención de datos de la solicitud
     if($json=file_get_contents('php://input')){
         $data=json_decode($json);
+
+        $conexion= new Database();
+
+        $Nombre = $data->nombre;
+        $Detalles = $data->detalles;
+        $Direccion = $data->direccion;
+
+        $result = $conexion->Crear_Actividad_Cultural(
+            $conexion,
+            $Nombre, 
+            $Fecha, 
+            $Direccion, 
+            $Detalles
+        );
+
     }else{
+        $result = ["Error"=>"No se enviaron todos los parametros correctamente"];
         header('HTTP/1.1 400 Bad Request');
         return;
     }
-    $Nombre = $data->nombre;
-    $Detalles = $data->detalles;
-    $Direccion = $data->direccion;
-    //$ID_Punto_Control = //contenido de la cookie de sesión //Inserción para relacionar actividad con punto de control
-    
-    
-    //Datos derivados en la BD, que no es necesario insertar: Id_Actividad, Fecha (Se pone la actual), Activo (Se pone a 1 en la inserción)
 
-    //DataBase::Crear_Actividad_Cultural($ID_Punto_Control, $Nombre, $Detalles, $Direccion);
-    $result=["POST"=>"Correcto, insertado correctamente"];
+
     return $result;
 
 }
@@ -59,31 +67,39 @@ function res_put($id){
     //USO: Es necesario pasar un único argumento $id, para conocer cual row se va a modificar.
     if($json=file_get_contents('php://input')){
         $data=json_decode($json);
+        $conexion= new Database();
+
+        $Nombre = $data->nombre;
+        $Detalles = $data->detalles;
+        $Direccion = $data->direccion;
+
+        $result = $conexion->Modificar_Actividad_Cultural(
+            $conexion,
+            $id,
+            $Nombre, 
+            $Fecha, 
+            $Direccion, 
+            $Detalles
+        );
+
     }else{
+        $result = ["Error"=>"No se enviaron todos los parametros correctamente"];
         header('HTTP/1.1 400 Bad Request');
         return;
     }
-    $Nombre = $data->nombre;
-    $Detalles = $data->detalles;
-    $Direccion = $data->direccion;
-    //$ID_Punto_Control = //contenido de la cookie de sesión //Verificación con BD para saber si se puede modificar por este punto de control
-    
-    
-    //Datos derivados en la BD, que no es necesario modificar: Id_Actividad, Fecha (No se modifica), Activo (No se modifica)
-
-    //DataBase::Modificar_Actividad_Cultural($ID_Punto_Control, $Nombre, $Detalles, $Direccion);
-    $result=["PUT"=>"Correcto, modificado correctamente"];
     return $result;
 }
 
 //MÉTODO HTTP DELETE
 function res_delete($id){
-    //USO: Es necesario pasar un único argumento $id, para conocer cual row se va a eliminar. No se considera implementar la opción de eliminar todos.
-    
-    //DataBase::Eliminar_Actividad_Cultural($ID_Punto_Control, $id);
-    //En la implementación de esta función en DataBase.php, solo se cambiará el parámetro Activo a 0, en lugar del 1 cuando se inserta
 
-    $result=["DELETE"=>"Correcto, eliminado correctamente", "ID"=>$id];
+    $conexion= new Database();
+
+    $result = $conexion->Eliminar_Actividad_Cultural (
+        $conexion,
+        $id
+    );
+    
     return $result;
 }
 

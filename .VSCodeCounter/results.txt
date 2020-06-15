@@ -1,0 +1,66 @@
+Date : 2020-06-15 01:02:22
+Directory : c:\xampp\htdocs\IngenieriaWeb
+Total : 32 files,  5295 codes, 343 comments, 707 blanks, all 6345 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| SQL        |          1 |      2,823 |         53 |         66 |      2,942 |
+| JavaScript |          8 |      1,056 |        109 |        302 |      1,467 |
+| PHP        |         14 |        843 |        142 |        253 |      1,238 |
+| HTML       |          6 |        539 |         39 |         76 |        654 |
+| CSS        |          3 |         34 |          0 |         10 |         44 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                   | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                      |         32 |      5,295 |        343 |        707 |      6,345 |
+| CSS                                                                    |          3 |         34 |          0 |         10 |         44 |
+| database                                                               |          1 |      2,823 |         53 |         66 |      2,942 |
+| php                                                                    |         13 |        740 |        120 |        217 |      1,077 |
+| php\ejemplosInicioSesion                                               |          4 |        125 |         17 |         43 |        185 |
+| script                                                                 |          9 |      1,159 |        131 |        338 |      1,628 |
+| script\old                                                             |          3 |        534 |         82 |        171 |        787 |
++------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                               | language   | code       | comment    | blank      | total      |
++------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\xampp\htdocs\IngenieriaWeb\CSS\Estilos.css                          | CSS        |          4 |          0 |          4 |          8 |
+| c:\xampp\htdocs\IngenieriaWeb\CSS\Index.css                            | CSS        |         30 |          0 |          5 |         35 |
+| c:\xampp\htdocs\IngenieriaWeb\CSS\style.css                            | CSS        |          0 |          0 |          1 |          1 |
+| c:\xampp\htdocs\IngenieriaWeb\Funcionario.html                         | HTML       |         12 |          0 |          1 |         13 |
+| c:\xampp\htdocs\IngenieriaWeb\administrador.html                       | HTML       |          0 |          0 |          1 |          1 |
+| c:\xampp\htdocs\IngenieriaWeb\culturales.html                          | HTML       |        102 |          1 |         12 |        115 |
+| c:\xampp\htdocs\IngenieriaWeb\database\Sistema de migración.sql        | SQL        |      2,823 |         53 |         66 |      2,942 |
+| c:\xampp\htdocs\IngenieriaWeb\index.html                               | HTML       |         48 |          1 |         11 |         60 |
+| c:\xampp\htdocs\IngenieriaWeb\laborales.html                           | HTML       |        102 |          1 |         14 |        117 |
+| c:\xampp\htdocs\IngenieriaWeb\migrantes.html                           | HTML       |        275 |         36 |         37 |        348 |
+| c:\xampp\htdocs\IngenieriaWeb\php\DataBase.php                         | PHP        |        196 |         16 |         30 |        242 |
+| c:\xampp\htdocs\IngenieriaWeb\php\ejemplosInicioSesion\adminlogin.php  | PHP        |         40 |         12 |         19 |         71 |
+| c:\xampp\htdocs\IngenieriaWeb\php\ejemplosInicioSesion\adminlogout.php | PHP        |         11 |          0 |          4 |         15 |
+| c:\xampp\htdocs\IngenieriaWeb\php\ejemplosInicioSesion\adminsignup.php | PHP        |         16 |          0 |          9 |         25 |
+| c:\xampp\htdocs\IngenieriaWeb\php\ejemplosInicioSesion\jwt.php         | PHP        |         58 |          5 |         11 |         74 |
+| c:\xampp\htdocs\IngenieriaWeb\php\res_administradores.php              | PHP        |          2 |          0 |          2 |          4 |
+| c:\xampp\htdocs\IngenieriaWeb\php\res_culturales.php                   | PHP        |         82 |         27 |         29 |        138 |
+| c:\xampp\htdocs\IngenieriaWeb\php\res_funcionarios.php                 | PHP        |         16 |          1 |          3 |         20 |
+| c:\xampp\htdocs\IngenieriaWeb\php\res_laborales.php                    | PHP        |         84 |         26 |         31 |        141 |
+| c:\xampp\htdocs\IngenieriaWeb\php\res_migrantes.php                    | PHP        |        106 |         20 |         33 |        159 |
+| c:\xampp\htdocs\IngenieriaWeb\php\res_options.php                      | PHP        |         49 |          7 |         20 |         76 |
+| c:\xampp\htdocs\IngenieriaWeb\php\res_sesion.php                       | PHP        |         74 |          6 |         22 |        102 |
+| c:\xampp\htdocs\IngenieriaWeb\php\test.php                             | PHP        |          6 |          0 |          4 |         10 |
+| c:\xampp\htdocs\IngenieriaWeb\script\culturales.js                     | JavaScript |         74 |          5 |         16 |         95 |
+| c:\xampp\htdocs\IngenieriaWeb\script\funcionario.js                    | JavaScript |          5 |          0 |          7 |         12 |
+| c:\xampp\htdocs\IngenieriaWeb\script\index.js                          | JavaScript |         10 |          0 |          4 |         14 |
+| c:\xampp\htdocs\IngenieriaWeb\script\laborales.js                      | JavaScript |         72 |          5 |         12 |         89 |
+| c:\xampp\htdocs\IngenieriaWeb\script\migrantes.js                      | JavaScript |        140 |          8 |         40 |        188 |
+| c:\xampp\htdocs\IngenieriaWeb\script\modules.js                        | JavaScript |        324 |         31 |         88 |        443 |
+| c:\xampp\htdocs\IngenieriaWeb\script\old\classicModules.js             | JavaScript |        302 |         23 |         79 |        404 |
+| c:\xampp\htdocs\IngenieriaWeb\script\old\originalmodules.js            | JavaScript |        129 |         37 |         56 |        222 |
+| c:\xampp\htdocs\IngenieriaWeb\script\old\res_migrantes.php             | PHP        |        103 |         22 |         36 |        161 |
+| Total                                                                  |            |      5,295 |        343 |        707 |      6,345 |
++------------------------------------------------------------------------+------------+------------+------------+------------+------------+

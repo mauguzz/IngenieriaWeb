@@ -51,7 +51,17 @@ function res_put($id){
 }
 
 //MÉTODO HTTP DELETE
-function res_delete($id){
+function res_delete(){
+
+    try {
+        session_start();//Continuamos los valroes de sesión
+        session_destroy(); //Borramos datos de la sesión
+        header("location:http://localhost/IngenieriaWeb/index.html");  
+    } catch (Exception $e) {
+        echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+        return $result;
+    }
+    return $result;
 
 }
 

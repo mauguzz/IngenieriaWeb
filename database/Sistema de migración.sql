@@ -2795,8 +2795,6 @@ insert into Actividades values (NULL,4,'Clases de teatro','2020-09-15',1,'Cabece
 insert into Actividades values (NULL,4,'Clases de piano','2020-09-11',1,'Cabecera Municipal de Cuauhtémoc','Clases gratuitas de piano para toda la comunidad');
 /*Corroboramos la información*/
 Select * from Actividades;
-
-
 /*Agregamos valores de ofertas laborales*/
 insert into Ofertas_de_trabajo values (
 									   1,
@@ -2940,3 +2938,50 @@ select
 		  where Id_Funcionario=1;
 
 SELECT * FROM Asistencia_Actividad_Cultural_View;
+
+
+
+UPDATE Migrante
+SET Nombre='José Ricardo', 
+Apellido_Paterno='Flores', 
+Apellido_Materno='Lima', 
+Ciudad='Lima',Id_Pais='4', 
+Oficio='Panadero', 
+Fecha_Nacimiento='1996-01-13', 
+Edad=24, 
+Telefono_Contacto='5519360328',
+Id_Nivel=6,
+Id_Famlia=1,
+Llave='123456',
+Id_Causa=1,
+Id_Estado=1
+WHERE Id_Migrante=1; 
+
+
+
+update Ofertas_De_Trabajo 
+set 
+Nombre='Mantenimiento eléctrico',
+Detalles='Mantenimiento correctivo',
+Requisitos='Conocimiento de sistemas eléctricos',
+Direccion='Los naranjos'
+where Id_Trabajo='1';
+select * from Ofertas_De_Trabajo;
+
+update Actividades
+set 
+Nombre='Danza Folklorica',
+Fecha='2020-06-15',
+Activo='1',
+Direccion='Cabecera municipal de Tenabo',
+Detalles='Clases para todos'
+where Id_Actividad='1';
+
+SELECT * FROM ACTIVIDADES;
+
+select * from Migrante;
+
+
+DELETE FROM Migrante
+WHERE some_column = some_value 
+

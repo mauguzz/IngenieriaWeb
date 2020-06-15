@@ -129,11 +129,7 @@ class DataBase{
 /*----------------------------------------------Insercciones------------------------------------------------ */
 
     public static function Crear_Migrante ($mysqli,$Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion, $Llave){
-    
-        //$Pais=int ($Pais);
-        //$Edad=int ($Edad);
-        //$Nivel_Educativo=int ($Nivel_Educativo);
-        //$Situacion_Familia=int($Situacion_Familia);
+
         $Estado_Por_Defecto= 1;
         try {
             $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
@@ -162,6 +158,196 @@ class DataBase{
          }
 
     }
+
+    public static function Crear_Actividad_Cultural ($mysqli,$Nombre, $Fecha, $Direcccion, $Detalles){
+    
+        $Estado_Por_Defecto= 1;
+        $PuntoDeControl=$_SESSION['POINTID'];
+        try {
+            $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+            $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $query="insert into Actividades values (
+            NULL,
+            '".$PuntoDeControl."',
+            '".$Nombre."',
+            '".$Fecha."',
+            '".$Estado_Por_Defecto."',
+            '".$Direcccion."',
+            '".$Detalles."'
+            );";
+            $Funcionario = $Conexion->prepare($query); 
+            $Funcionario->execute();  //Ejecuto la consulta
+            return ["POST"=>"Correcto, insertado correctamente"];
+         }catch(PDOException $e){
+             return ["POST"=>"$e->getMessage()"];
+         }
+
+    }
+
+    public static function Crear_Oferta_Laboral ($mysqli,$Nombre, $Detalles, $Requisitos, $Direccion){
+    
+        $Estado_Por_Defecto= 1;
+        $PuntoDeControl=$_SESSION['POINTID'];
+        try {
+            $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+            $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $query="insert into Ofertas_De_trabajo values (
+            NULL,
+            '".$PuntoDeControl."',
+            '".$Nombre."',
+            '".$Detalles."',
+            '".$Requisitos."',
+            '".$Direcccion."'
+            );";
+            $Funcionario = $Conexion->prepare($query); 
+            $Funcionario->execute();  //Ejecuto la consulta
+            return ["POST"=>"Correcto, insertado correctamente"];
+         }catch(PDOException $e){
+             return ["POST"=>"$e->getMessage()"];
+         }
+
+    }
+
+/*----------------------------------------------Modificaciones------------------------------------------------ */
+
+public static function Modificar_Migrante ($mysqli,$id, $Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento,$Edad, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion, $Llave){
+
+    $Estado_Por_Defecto= 1;
+    $Tabla='Migrante';
+    try {
+        $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+        $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query="
+        UPDATE ".$Tabla."
+        SET 
+        Nombre='".$Nombre."', 
+        Apellido_Paterno='".$Apellido_Paterno."', 
+        Apellido_Materno='".$Apellido_Materno."', 
+        Ciudad='".$Ciudad."',
+        Id_Pais='".$Pais."', 
+        Oficio='".$Oficio."', 
+        Fecha_Nacimiento='".$Fecha_Nacimiento."', 
+        Edad='".$Edad."', 
+        Telefono_Contacto='".$Contacto_Telefono."',
+        Id_Nivel='".$Nivel_Educativo."',
+        Id_Famlia='".$Situacion_Familiar."',
+        Llave='".$Llave."',
+        Id_Causa='".$Causa_Migracion."',
+        Id_Estado='".$Estado_Por_Defecto."'
+        WHERE Id_Migrante=".$id.";";
+        $Funcionario = $Conexion->prepare($query); 
+        $Funcionario->execute();  //Ejecuto la consulta
+        return ["PUT"=>"Correcto, Modificado correctamente"];
+     }catch(PDOException $e){
+         return ["PUT"=>"$e->getMessage()"];
+     }
+
+}
+
+public static function Modificar_Oferta_Laboral ($mysqli,$id,$Nombre, $Detalles, $Requisitos, $Direccion){
+
+    $Estado_Por_Defecto= 1;
+    $Tabla='Ofertas_De_Trabajo';
+    try {
+        $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+        $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query="
+        UPDATE ".$Tabla."
+        SET 
+        Nombre='".$Nombre."', 
+        Detalles='".$Detalles."', 
+        Requisitos='".$Requisitos."', 
+        Direccion='".$Direccion."'       
+        WHERE Id_Trabajo=".$id.";";
+        $Funcionario = $Conexion->prepare($query); 
+        $Funcionario->execute();  //Ejecuto la consulta
+        return ["PUT"=>"Correcto, Modificado correctamente"];
+     }catch(PDOException $e){
+         return ["PUT"=>"$e->getMessage()"];
+     }
+
+}
+
+public static function Modificar_Actividad_Cultural($mysqli,$id,$Nombre, $Fecha, $Activo, $Direccion, $Detalles){
+
+    $Estado_Por_Defecto= 1;
+    $Tabla='Actividades';
+    try {
+        $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+        $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query="
+        UPDATE ".$Tabla."
+        SET 
+        Nombre='".$Nombre."', 
+        Fecha='".$Fecha."', 
+        Activo='".$Activo."', 
+        Direccion='".$Direccion."',
+        Detalles='".$Detalles."'
+        WHERE Id_Actividad=".$id.";";
+        $Funcionario = $Conexion->prepare($query); 
+        $Funcionario->execute();  //Ejecuto la consulta
+        return ["PUT"=>"Correcto, Modificado correctamente"];
+     }catch(PDOException $e){
+         return ["PUT"=>"$e->getMessage()"];
+     }
+}
+
+/*--------------------------------------------------Borrado de registros----------------------------------------*/
+
+public static function Eliminar_Migrante($mysqli,$id){
+   
+     $Tabla='Migrante';
+     $Id_Tabla='Id_Migrante';
+    try {
+        $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+        $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query="
+        DELETE FROM ".$Tabla."
+        WHERE ".$Id_Tabla."=".$id.";";
+        $Funcionario = $Conexion->prepare($query); 
+        $Funcionario->execute();  //Ejecuto la consulta
+        return ["DELETE"=>"Correcto, Eliminado correctamente"];
+     }catch(PDOException $e){
+         return ["DELETE"=>"$e->getMessage()"];
+     }
+}
+
+public static function Eliminar_Oferta_Laboral($mysqli,$id){
+   
+    $Tabla='Ofertas_De_Trabajo';
+    $Id_Tabla='Id_Trabajo';
+   try {
+       $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+       $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       $query="
+       DELETE FROM ".$Tabla."
+       WHERE ".$Id_Tabla."=".$id.";";
+       $Funcionario = $Conexion->prepare($query); 
+       $Funcionario->execute();  //Ejecuto la consulta
+       return ["DELETE"=>"Correcto, Eliminado correctamente"];
+    }catch(PDOException $e){
+        return ["DELETE"=>"$e->getMessage()"];
+    }
+}
+
+public static function Eliminar_Actividad_Cultural($mysqli,$id){
+   
+    $Tabla='Actividades';
+    $Id_Tabla='Id_Actividad';
+   try {
+       $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+       $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       $query="
+       DELETE FROM ".$Tabla."
+       WHERE ".$Id_Tabla."=".$id.";";
+       $Funcionario = $Conexion->prepare($query); 
+       $Funcionario->execute();  //Ejecuto la consulta
+       return ["DELETE"=>"Correcto, Eliminado correctamente"];
+    }catch(PDOException $e){
+        return ["DELETE"=>"$e->getMessage()"];
+    }
+}
+
 
 /*------------------------------------------------Sesiones--------------------------------------------------*/
     public static function IniciarSesion ($mysqli,$User, $Pass){
@@ -213,6 +399,7 @@ class DataBase{
                         session_start(); /*Inicializamos los valores de la sesión*/
                         $_SESSION['USERNAME']=$res[0]["Nombre"];
                         $_SESSION['USERID']=$res[0]["Id_Administrador"];
+                        $_SESSION['ADMIN']=1;
                         header("Location: "."../../administrador.html");    
                     }else{
                         echo '

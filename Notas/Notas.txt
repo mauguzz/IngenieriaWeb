@@ -16,3 +16,5 @@ User: WebApplication
 Password: 123456git 
 
 Otros datos: Default
+
+El atributo de familia en la tabla migrante se llama: "Id_famlia"

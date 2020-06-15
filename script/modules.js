@@ -412,7 +412,6 @@ export function Iniciar_Sesion(formJson){
     .then(handleHttpErrors)
     .then(response=>{
         if (response.redirected) {
-            console.log("F bro");
             window.location.href = response.url;
         }
     })
@@ -432,12 +431,31 @@ export function Validar_Sesion(){
             alert("Primero Inicie sesión");
             window.location.href ="http://localhost/IngenieriaWeb/index.html";
         }else{
+            if (resjson.ADMIN==1){
+                window.location.href ="http://localhost/IngenieriaWeb/administrador.html";               
+            }
             console.log("Sesión_Iniciada"); 
+            
         }
     })
     .catch(e=>{
         console.log(e);
     }) 
+}
+
+
+export function Cerrar_Sesion(){
+    fetch("php/res_sesion.php",{ method:'DELETE'})
+    .then(handleHttpErrors)
+    .then(response=>{
+        if (response.redirected) {
+            window.location.href = response.url;
+        }
+    })
+    .catch(e=>{
+        console.log(e);
+        console.log("Catching");
+    })
 
 
 }

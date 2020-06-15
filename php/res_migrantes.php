@@ -70,41 +70,48 @@ function res_put($id){
     //USO: Es necesario pasar un único argumento $id, para conocer cual row se va a modificar.
     if($json=file_get_contents('php://input')){
         $data=json_decode($json);
+        $conexion= new Database();
+
+        $result = $conexion->Modificar_Migrante(
+            $conexion,
+            $id,
+            $data->nombre, 
+            $data->apellido_paterno, 
+            $data->apellido_materno, 
+            $data->fecha_nacimiento, 
+            $data->Edad,
+            $data->ciudad, 
+            $data->pais, 
+            $data->oficio, 
+            $data->contacto_telefono, 
+            $data->nivel_educativo, 
+            $data->situacion_familiar, 
+            $data->causa_migracion, 
+            $Llave
+        );
+
     }else{
+        $result = ["Error"=>"No se enviaron todos los parametros correctamente"];
         header('HTTP/1.1 400 Bad Request');
         return;
     }
-    $Nombre = $data->nombre;
-    $Apellido_Paterno = $data->apellido_paterno;
-    $Apellido_Materno = $data->apellido_materno;
-    $Fecha_Nacimiento = $data->fecha_nacimiento;
-    $Ciudad = $data->ciudad;
-    $Pais = $data->pais; //entero (opción de combobox)
-    $Oficio = $data->oficio;
-    $Contacto_Telefono = $data->contacto_telefono;
-    $Nivel_Educativo = $data->nivel_educativo; //entero (opción de combobox)
-    $Situacion_Familiar = $data->situacion_familiar; //entero (opción de combobox)
-    $Causa_Migracion = $data->causa_migracion; //entero (opción de combobox)
-    $Llave = "123456"; //Cambiar la llave de migrante aleatoria
-    
     
     //Datos derivados en la BD, que no es necesario insertar: ID_Migrante, Edad, Id_Estado (migrando o establecido).
 
     //A diferencia de DataBase::Crear_Migrante(), se pasa adicionalmente un ID
     //DataBase::Modificar_Migrante($id, $Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion, $Llave);
 
-    $result=["PUT"=>"Correcto, modificado correctamente", "ID"=>$id];
     return $result;
 }
 
 //MÉTODO HTTP DELETE
 function res_delete($id){
-    //USO: Es necesario pasar un único argumento $id, para conocer cual row se va a eliminar. No se considera implementar la opción de eliminar todos.
-    
-    //DataBase::Eliminar_Migrante($id);
+    $conexion= new Database();
 
-    $result=["DELETE"=>"Correcto, eliminado correctamente", "ID"=>$id];
-    return $result;
+    $result = $conexion->Eliminar_Migrante(
+        $conexion,
+        $id
+    );
 }
 
 
