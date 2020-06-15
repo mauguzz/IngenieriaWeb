@@ -88,7 +88,7 @@ function table_generate_datatables(tablename, init, rows, cols){
         }else{
             console.log("Caso sin rows")
             datatable = $(tablename).DataTable( {
-                select: true,
+                //select: true,
                 data: [],
                 columns: customCols,
                 dom: "frtip"
