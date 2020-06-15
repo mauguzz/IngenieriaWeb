@@ -5,8 +5,8 @@ from './modules.js';
 /*------------------------------------------------Tablas------------------------------------------------------*/
 
 const t_culturales = document.getElementById('t_culturales');
-const thead_culturales = document.getElementById('thead_culturales');
-const tbody_culturales = document.getElementById("tbody_culturales");
+const thead_culturales = document.getElementById('thead');
+const tbody_culturales = document.getElementById("tbody");
 
 /*-----------------------------------------------Contenido----------------------------------------------------*/
 const mcontent = document.getElementById('content'); //Div del contenido principal (tablas, etc), todas las páginas
