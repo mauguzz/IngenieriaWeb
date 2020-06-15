@@ -17,7 +17,7 @@ const form_migrantes_action = document.getElementById('f_migrantes_action');
 const form_migrantes_submit = document.getElementById('f_migrantes_submit');
 
 
-const B_Cerrar_Sesion=document.getElementById('b_Cerrar_Sesion');
+const B_Cerrar_Sesion=document.getElementById('B_Cerrar_Sesion');
 
 let id =0; //Variable de prueba, id de migrante que se aplica la acción
 
