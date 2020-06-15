@@ -177,7 +177,7 @@ class DataBase{
         }   
         else {
             $Conexion = $mysqli ->Conectar();
-            $query="SELECT Id_Funcionario, Nombre,Apellido_Paterno,Apellido_Materno,Correo_Electronico,Contrasenia FROM Funcionario where Correo_Electronico='".$User."'";//Introduzco la consulta
+            $query="SELECT Id_Funcionario, Nombre,Apellido_Paterno,Apellido_Materno,Correo_Electronico,Contrasenia,Id_Punto_Control FROM Funcionario where Correo_Electronico='".$User."'";//Introduzco la consulta
             $result  = $Conexion->prepare($query); //
             $result->execute();
             $res=$result->fetchAll(PDO::FETCH_ASSOC);
@@ -187,9 +187,10 @@ class DataBase{
                     session_start(); /*Inicializamos los valores de la sesión*/
                     $_SESSION['USERNAME']=$res[0]["Nombre"];
                     $_SESSION['USERID']=$res[0]["Id_Funcionario"];
-                    header("location:http://localhost/IngenieriaWeb/Funcionario.html");  
+                    $_SESSION['POINTID']=$RES[0]["Id_Punto_Control"];
+                    header("location:http://localhost/IngenieriaWeb/migrantes.html");  
                     //header('Content-Type: text/html; charset=utf-8');
-                    header("Location: "."../../migrantes.html");  
+                    //header("Location: "."../../migrantes.html");  
 
                 }else{
                     echo '
@@ -212,8 +213,7 @@ class DataBase{
                         session_start(); /*Inicializamos los valores de la sesión*/
                         $_SESSION['USERNAME']=$res[0]["Nombre"];
                         $_SESSION['USERID']=$res[0]["Id_Administrador"];
-                        header("location:../Funcionario.html");  
-
+                        header("Location: "."../../administrador.html");    
                     }else{
                         echo '
                         <script type="text/javascript">	

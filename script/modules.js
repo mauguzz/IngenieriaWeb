@@ -342,7 +342,6 @@ export function laborales_eliminar(id){
 export function culturales_consultar_todos(table, init){  //thead_culturales, tbody_culturales
     return new Promise((resolve, reject)=>{
         datatable_consultar_todos("php/res_culturales.php", "culturales", table, init, {
-            //Hace falta obtener el ID desde el View de MySQL, para poder hacer tratamientos posteriores
             'ID': 'Id_Actividad',
             'Fecha':'Fecha', 
             'Nombre':'Nombre', 
@@ -409,10 +408,11 @@ export function llenar_opciones_selector(selectors_ids){
 
 export function Iniciar_Sesion(formJson){
     console.log(formJson);//Imprimo mi Json
-    fetch("php/res_sesion.php/",{method: 'POST', body: formJson})   ///
+    fetch("php/res_sesion.php",{method: 'POST', body: formJson})   ///
     .then(handleHttpErrors)
     .then(response=>{
         if (response.redirected) {
+            console.log("F bro");
             window.location.href = response.url;
         }
     })
@@ -420,17 +420,24 @@ export function Iniciar_Sesion(formJson){
         console.log(e);
         console.log("Catching");
     })  
-
-
 }
 
 export function Validar_Sesion(){
-
-    console.log("Cargado");
-    fetch("php/res_funcionarios.php/",{ method: 'GET'})
+    fetch("php/res_sesion.php",{ method: 'GET'})
     .then(handleHttpErrors)
-    .then(response=>response.text()) //Cambiar a .text() para pruebas, y a .json() para funcionamiento
-
+    .then(res=>res.json())
+    .then(resjson=>{
+        if (resjson.USERID==null){
+            console.log("Sin valores de sesión");
+            alert("Primero Inicie sesión");
+            window.location.href ="http://localhost/IngenieriaWeb/index.html";
+        }else{
+            console.log("Sesión_Iniciada"); 
+        }
+    })
+    .catch(e=>{
+        console.log(e);
+    }) 
 
 
 }

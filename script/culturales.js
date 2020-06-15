@@ -1,12 +1,20 @@
 //import {} from './modules.js';
-import {culturales_consultar_todos, culturales_eliminar, culturales_modificar, culturales_registrar} from './modules.js';
+import {culturales_consultar_todos, culturales_eliminar, culturales_modificar, culturales_registrar} 
+from './modules.js';
 
-const btn_culturales_consultar_todos = document.getElementById("btn_culturales_consultar_todos");
+/*------------------------------------------------Tablas------------------------------------------------------*/
+
+const t_culturales = document.getElementById('t_culturales');
 const thead_culturales = document.getElementById('thead_culturales');
 const tbody_culturales = document.getElementById("tbody_culturales");
+
+/*-----------------------------------------------Contenido----------------------------------------------------*/
+const mcontent = document.getElementById('content'); //Div del contenido principal (tablas, etc), todas las páginas
+
+/*--------------------------------------------------Forms-----------------------------------------------------*/
 const form_culturales_registrar = document.getElementById('f_culturales_registrar');
-
-
+const form_culturales_submit = document.getElementById('f_culturales_submit');
+const form_culturales_action = document.getElementById('f_culturales_submit');
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
@@ -17,21 +25,29 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 [
                     {
                         text:"Agregar Actividad", 
-                        extend: "selectedSingle",
                         attr: {
                             "data-toggle":"modal",
-                            "data-target":"//#endregionf_culturales_registrar"
+                            "data-target":"#modal_culturales_form"
                         },
                         action: ()=>{
-                            id=datatable.rows( { selected: true } ).data()[0][0];                       
+                            id=datatable.rows( { selected: true } ).data()[0][0];   
+                            form_culturales_registrar.reset(); //Limpia el formulario
+                            form_culturales_action.value="create";
+                            form_culturales_submit.value="Registrar";                    
                         },   
                     },
                     {
                         text:"Modificar Actividad", 
                         extend: "selectedSingle",
+                        attr: {
+                            "data-toggle":"modal",
+                            "data-target":"#modal_culturales_form"
+                        },
                         action: ()=>{
                             id=datatable.rows( { selected: true } ).data()[0][0]; 
-                            
+                            form_culturales_registrar.reset(); //Limpia el formulario
+                            form_culturales_action.value="modify";
+                            form_culturales_submit.value="Guardar cambios";    
                         },   
                     },
 
@@ -46,16 +62,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     }
                 ]
         });
-        datatable.buttons().container().appendTo( '#datatable_buttons_container' );  
+        datatable.buttons().container().appendTo( '#datatable_buttons_container');  
     })
     .catch(e=>console.log(e));
     //action requiere una definición de una función, y no una llamada a una función. Por ello se hace una estructura arrow function, es decir ()=>{}
 });
 
-
-btn_culturales_consultar_todos.addEventListener("click", ()=>{
-    culturales_consultar_todos(thead_culturales, tbody_culturales);
-});
 
 form_culturales_registrar.onsubmit = function(e){
     e.preventDefault();
@@ -64,5 +76,19 @@ form_culturales_registrar.onsubmit = function(e){
     let formJson = JSON.stringify(Object.fromEntries(formData));
     console.log(formJson);
 
-    culturales_registrar(formJson);
+    if(form_culturales_action.value=="create"){
+        culturales_registrar(formJson)
+        .then(result=>{
+            culturales_consultar_todos('#t_culturales', false)
+        });
+    }else if(form_culturales_action.value=="modify"){
+        culturales_registrar(formJson)
+        .then(result=>{
+            culturales_modificar('#t_culturales', false)
+        });
+    }
+
+
+
 }
+

@@ -1,36 +1,51 @@
 //import {} from './modules.js';
 import {laborales_consultar_todos, laborales_eliminar, laborales_modificar, laborales_registrar} from './modules.js';
 
-const btn_laborales_consultar_todos = document.getElementById("btn_laborales_consultar_todos");
+/*------------------------------------------------Tablas------------------------------------------------------*/
+
 const thead_laborales = document.getElementById('thead_laborales');
 const tbody_laborales = document.getElementById("tbody_laborales");
+/*-----------------------------------------------Contenido----------------------------------------------------*/
+const mcontent = document.getElementById('content'); //Div del contenido principal (tablas, etc), todas las páginas
+
+/*--------------------------------------------------Forms-----------------------------------------------------*/
 const form_laborales_registrar = document.getElementById('f_laborales_registrar');
+const form_laborales_submit = document.getElementById('f_laborales_submit');
+const form_laborales_action = document.getElementById('f_laborales_submit');
 
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
-    laborales_consultar_todos('#t_culturales', true)
+    laborales_consultar_todos('#t_laborales', true)
     .then(datatable=>{
         new $.fn.dataTable.Buttons(datatable, { 
             buttons: 
                 [
                     {
                         text:"Agregar oferta laboral", 
-                        extend: "selectedSingle",
                         attr: {
                             "data-toggle":"modal",
-                            "data-target":"#f_laborales_registrar"
+                            "data-target":"#modal_laborales_form"
                         },
                         action: ()=>{
-                            id=datatable.rows( { selected: true } ).data()[0][0];                       
+                            id=datatable.rows( { selected: true } ).data()[0][0];     
+                            form_laborales_registrar.reset(); //Limpia el formulario
+                            form_laborales_action.value="create";
+                            form_laborales_submit.value="Registrar";                        
                         },   
                     },
                     {
                         text:"Modificar oferta laboral", 
                         extend: "selectedSingle",
+                        attr: {
+                            "data-toggle":"modal",
+                            "data-target":"#modal_laborales_form"
+                        },
                         action: ()=>{
                             id=datatable.rows( { selected: true } ).data()[0][0]; 
-                            
+                            form_laborales_registrar.reset(); //Limpia el formulario
+                            form_laborales_action.value="modify";
+                            form_laborales_submit.value="Guardar cambios";    
                         },   
                     },
 
@@ -59,5 +74,16 @@ form_laborales_registrar.onsubmit = function(e){
     let formJson = JSON.stringify(Object.fromEntries(formData));
     console.log(formJson);
 
-    laborales_registrar(formJson);
+    if(form_laborales_action.value=="create"){
+        laborales_registrar(formJson)
+        .then(result=>{
+            laborales_consultar_todos('#t_laborales', false)
+        });
+    }else if(form_laborales_action.value=="modify"){
+        laborales_registrar(formJson)
+        .then(result=>{
+            laborales_modificar('#t_laborales', false)
+        });
+    }
+
 }

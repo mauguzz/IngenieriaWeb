@@ -154,7 +154,6 @@ if($uri[0] == 'res_migrantes.php'){
 
 
 
-
 echo json_encode(($result),JSON_UNESCAPED_UNICODE);
 
 ?>

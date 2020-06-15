@@ -1,6 +1,6 @@
 
 import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migrante_modificar, migrante_eliminar, 
-llenar_opciones_selector} from './modules.js';
+llenar_opciones_selector,Validar_Sesion} from './modules.js';
 
 const mcontent = document.getElementById('content'); //Div del contenido principal (tablas, etc), todas las páginas
 
@@ -22,6 +22,9 @@ let id =0; //Variable de prueba, id de migrante que se aplica la acción
 
 
 document.addEventListener("DOMContentLoaded", function(event) {
+
+
+        Validar_Sesion()
 
         llenar_opciones_selector(
             [
