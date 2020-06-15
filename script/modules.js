@@ -78,15 +78,20 @@ function table_generate_datatables(tablename, init, rows, cols){
     
     let datatable;
     if(init){
-
-
-        datatable = $(tablename).DataTable( {
-            select: true,
-            data: dataSet,
-            columns: customCols,
-            dom: "frtip"
-        });
-
+        if(dataSet.length!=0){
+            datatable = $(tablename).DataTable( {
+                select: true,
+                data: dataSet,
+                columns: customCols,
+                dom: "frtip"
+            });
+        }else{
+            datatable = $(tablename).DataTable( {
+                select: true,
+                columns: customCols,
+                dom: "frtip"
+            }); 
+        }
 
     }else{ //Caso de solo actualización
         datatable = $(tablename).DataTable();
