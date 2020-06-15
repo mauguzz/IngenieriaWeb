@@ -87,12 +87,10 @@ function table_generate_datatables(tablename, init, rows, cols){
             });
         }else{
             console.log("Caso sin rows")
-            datatable = $(tablename).DataTable( {
-                //select: true,
-                data: [[],[],[],[],[],[]],
-                columns: customCols,
-                dom: "frtip"
-            }); 
+            datatable = $(tablename).DataTable( );
+            datatable.clear();
+            
+            datatable.draw();
         }
 
     }else{ //Caso de solo actualización
