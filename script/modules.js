@@ -163,7 +163,7 @@ export function migrante_consultar(id, prompt, t_general, t_culturales, t_labora
 
     let request;
     if(prompt){ 
-        let llave = prompt("Ingrese la llave que le proporcionó su familiar", "");
+        let llave = window.prompt("Ingrese la llave que le proporcionó su familiar", "");
         header = new Headers('Authorization', 'Basic ' + btoa("familiar:" + llave));
         //header.set('Authorization', 'Basic ' + btoa("familiar:" + llave));
         request = new Request('php/res_migrantes.php/'+id,{
