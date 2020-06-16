@@ -76,7 +76,7 @@ function table_generate_datatables(tablename, init, rows, cols){
 
     console.log(dataSet);
     console.log([["a","b","c","d","e","f"]])
-    
+    let dataExample = [["a","b","c","d","e","f"], ["a","b","c","d","e","f"]];
     let datatable;
     if(init){
         if(dataSet.length!=0){
@@ -91,7 +91,7 @@ function table_generate_datatables(tablename, init, rows, cols){
             datatable = $(tablename).DataTable(
                 {
                     select: true,
-                    data: [["a","b","c","d","e","f"], ["a","b","c","d","e","f"]],
+                    data: dataExample,
                     columns: customCols,
                     dom: "frtip"
                 
