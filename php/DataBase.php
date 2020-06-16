@@ -52,7 +52,7 @@ class DataBase{
 
     public static function Consultar_Llave_Migrante($mysqli, $id){
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-        $query = "SELECT Id_Migrante, Llave FROM migrante WHERE Id_Migrante='".$Id_Migrante."' ";
+        $query = "SELECT Id_Migrante, Llave FROM migrante WHERE Id_Migrante='".$id."' ";
         $result = $Conexion->prepare($query); //Agrego variables (Si es el caso)
         $result->execute();  //Ejecuto la consulta
         return ["migrante"=>$result->fetchAll(PDO::FETCH_ASSOC)];
