@@ -98,15 +98,14 @@ function res_put($id){
             $data->apellido_paterno, 
             $data->apellido_materno, 
             $data->fecha_nacimiento, 
-            $data->Edad,
             $data->ciudad, 
             $data->pais, 
             $data->oficio, 
             $data->contacto_telefono, 
             $data->nivel_educativo, 
             $data->situacion_familiar, 
-            $data->causa_migracion, 
-            $Llave
+            $data->causa_migracion
+            
         );
 
     }else{
@@ -131,6 +130,7 @@ function res_delete($id){
         $conexion,
         $id
     );
+    return $result;
 }
 
 

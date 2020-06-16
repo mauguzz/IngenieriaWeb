@@ -87,6 +87,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             }     
                         },
 
+                        /*
                         {
                             text:"Editar Participación en Actividades", 
                             extend: "selectedSingle",
@@ -112,6 +113,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                 edicion_migrante_laborales(id); //Llama a esta función para hacer consultas a la BD. Está implementada en este mismo archivo.
                             },   
                         },
+                        */
 
                         {
                             text:"Eliminar", 

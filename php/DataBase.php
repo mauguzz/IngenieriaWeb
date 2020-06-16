@@ -284,7 +284,7 @@ class DataBase{
 
 /*----------------------------------------------Modificaciones------------------------------------------------ */
 
-public static function Modificar_Migrante ($mysqli,$id, $Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento,$Edad, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion, $Llave){
+public static function Modificar_Migrante ($mysqli,$id, $Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion){
 
     $Estado_Por_Defecto= 1;
     $Tabla='Migrante';
@@ -301,11 +301,11 @@ public static function Modificar_Migrante ($mysqli,$id, $Nombre, $Apellido_Pater
         Id_Pais='".$Pais."', 
         Oficio='".$Oficio."', 
         Fecha_Nacimiento='".$Fecha_Nacimiento."', 
-        Edad='".$Edad."', 
+         
         Telefono_Contacto='".$Contacto_Telefono."',
         Id_Nivel='".$Nivel_Educativo."',
         Id_Famlia='".$Situacion_Familiar."',
-        Llave='".$Llave."',
+        
         Id_Causa='".$Causa_Migracion."',
         Id_Estado='".$Estado_Por_Defecto."'
         WHERE Id_Migrante=".$id.";";
@@ -370,7 +370,7 @@ public static function Modificar_Actividad_Cultural($mysqli,$id,$Nombre, $Fecha,
 
 public static function Eliminar_Migrante($mysqli,$id){
    
-     $Tabla='Migrante';
+     $Tabla='migrante';
      $Id_Tabla='Id_Migrante';
     try {
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
@@ -382,7 +382,7 @@ public static function Eliminar_Migrante($mysqli,$id){
         $Funcionario->execute();  //Ejecuto la consulta
         return ["DELETE"=>"Correcto, Eliminado correctamente"];
      }catch(PDOException $e){
-         return ["DELETE"=>"$e->getMessage()"];
+         return ["DELETE"=>$e->getMessage()];
      }
 }
 
@@ -400,7 +400,7 @@ public static function Eliminar_Oferta_Laboral($mysqli,$id){
        $Funcionario->execute();  //Ejecuto la consulta
        return ["DELETE"=>"Correcto, Eliminado correctamente"];
     }catch(PDOException $e){
-        return ["DELETE"=>"$e->getMessage()"];
+        return ["DELETE"=>$e->getMessage()];
     }
 }
 
@@ -418,7 +418,7 @@ public static function Eliminar_Actividad_Cultural($mysqli,$id){
        $Funcionario->execute();  //Ejecuto la consulta
         
     }catch(PDOException $e){
-        return ["DELETE"=>"$e->getMessage()"];
+        return ["DELETE"=>$e->getMessage()];
     }
 }
 
