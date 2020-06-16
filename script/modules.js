@@ -76,13 +76,15 @@ function table_generate_datatables(tablename, init, rows, cols){
     })
     */
 
-    Object.entries(cols).forEach(([ind, value])=>{
-        rows.forEach((row,index)=>{
-            if (first) {let result =[];}
-            result[index]=row[value];
-            if (first) {dataSet.push(result);}
+    rows.forEach((row)=>{
+        let result = [];
+        Object.entries(cols).forEach(([ind, value])=>{
+            result.push(row[value]); 
         })
-        first = false
+        dataSet.push(result);
+    })
+
+    Object.entries(cols).forEach(([ind, value])=>{
         customCols.push({title: ind})
     })
 
