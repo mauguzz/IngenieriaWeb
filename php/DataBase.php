@@ -334,7 +334,7 @@ public static function Eliminar_Migrante($mysqli,$id){
         $Funcionario->execute();  //Ejecuto la consulta
         return ["DELETE"=>"Correcto, Eliminado correctamente"];
      }catch(PDOException $e){
-         return ["DELETE"=>"$e->getMessage()"];
+         return ["DELETE"=>$e->getMessage()];
      }
 }
 
@@ -352,7 +352,7 @@ public static function Eliminar_Oferta_Laboral($mysqli,$id){
        $Funcionario->execute();  //Ejecuto la consulta
        return ["DELETE"=>"Correcto, Eliminado correctamente"];
     }catch(PDOException $e){
-        return ["DELETE"=>"$e->getMessage()"];
+        return ["DELETE"=>$e->getMessage()];
     }
 }
 
@@ -370,7 +370,7 @@ public static function Eliminar_Actividad_Cultural($mysqli,$id){
        $Funcionario->execute();  //Ejecuto la consulta
         
     }catch(PDOException $e){
-        return ["DELETE"=>"$e->getMessage()"];
+        return ["DELETE"=>$e->getMessage()];
     }
 }
 
