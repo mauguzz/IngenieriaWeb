@@ -301,6 +301,31 @@ export function migrante_eliminar(id){
 
 
 //FUNCIONES DE ADMINISTRADOR//
+export function funcionarios_registrar(jsonData){
+    return new Promise((resolve, reject)=>{
+        table_registrar("php/res_administrador.php", jsonData)
+        .then(result=>resolve(result))
+        .catch(result=>reject(result));
+    })
+   
+}
+
+export function funcionarios_consultar(table, init){  //thead_culturales, tbody_culturales
+    return new Promise((resolve, reject)=>{
+        datatable_consultar_todos("php/res_administrador.php", "Funcionario", table, init, {
+            'ID Funcionario': 'Id_Funcionario',
+            'ID Punto de Control':'Id_Punto_Control',
+            'Punto de Control':'Punto_De_Control',
+            'Estado':'Estado', 
+            'Nombre':'Nombre', 
+            'Apellido Paterno':'Apellido_Paterno',
+            'Apellido Materno':'Apellido_Materno',
+            'Correo Electronico': 'Correo_electronico'
+        })
+        .then(datatable=>{resolve(datatable)})
+        .catch(e=>{reject(e)})
+    })
+}
 
 //FUNCIONES DE FUNCIONARIOS//
 
@@ -572,10 +597,10 @@ export function llenar_opciones_selector(selectors_ids){
 /*------------------------------------------------Sesiones----------------------------------------------------*/
 
 export function Iniciar_Sesion(formJson){
-    console.log(formJson);//Imprimo mi Json
     fetch("php/res_sesion.php",{method: 'POST', body: formJson})   ///
     .then(handleHttpErrors)
     .then(response=>{
+
         if (response.redirected) {
             window.location.href = response.url;
         }

@@ -167,6 +167,8 @@ class DataBase{
     public static function Crear_Migrante ($mysqli,$Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion, $Llave){
 
         $Estado_Por_Defecto= 1;
+        $PuntoDeControl=$_SESSION['POINTID'];
+        $Comida_Por_Defecto=0;
         try {
             $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
             $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -186,11 +188,35 @@ class DataBase{
             '".$Llave."',
             '".$Causa_Migracion."',
             '".$Estado_Por_Defecto."');";
-            $Funcionario = $Conexion->prepare($query); 
-            $Funcionario->execute();  //Ejecuto la consulta
+            $Migrante = $Conexion->prepare($query); 
+            $Migrante->execute();  //Ejecuto la consulta
+            /*-----------------------------Registramos al migrante en un punto de control-----------------------*/
+            /*Obtenemos el ID del migrante*/
+            $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $query="select Id_Migrante from Migrante where Llave='".$Llave."' and Nombre='".$Nombre."';";
+            $result  = $Conexion->prepare($query); //
+            $result->execute();
+            $Id_Migrante=$result->fetchAll(PDO::FETCH_ASSOC);
+            /*Obtenemos la fecha actual*/
+            $query="select curdate();";
+            $result  = $Conexion->prepare($query); //
+            $result->execute();
+            $Curdate=$result->fetchAll(PDO::FETCH_ASSOC);
+            echo "AL 100 bro";
+            echo $Curdate[0]["curdate()"];
+            echo $PuntoDeControl;
+            /*Insertamos al migrante en la tabla Registro*/      
+            $query="insert into Registro values (
+                '".$PuntoDeControl."',
+                '".$Id_Migrante[0]["Id_Migrante"]."',
+                '".$Curdate[0]["curdate()"]."',
+                    NULL,
+                '".$Comida_Por_Defecto."');";
+            $result  = $Conexion->prepare($query); //
+            $result->execute();
             return ["POST"=>"Correcto, insertado correctamente", "llave_migrante"=>$Llave];
          }catch(PDOException $e){
-             return ["POST"=>$e->getMessage()];
+             return ["POST"=>"$e->getMessage()"];
          }
 
     }
@@ -540,7 +566,7 @@ public static function Eliminar_Asistencia_Oferta_Laboral($mysqli, $ID_Migrante,
                     session_start(); /*Inicializamos los valores de la sesión*/
                     $_SESSION['USERNAME']=$res[0]["Nombre"];
                     $_SESSION['USERID']=$res[0]["Id_Funcionario"];
-                    $_SESSION['POINTID']=$RES[0]["Id_Punto_Control"];
+                    $_SESSION['POINTID']=$res[0]["Id_Punto_Control"];
                     header("location:http://localhost/IngenieriaWeb/migrantes.html");  
                     //header('Content-Type: text/html; charset=utf-8');
                     //header("Location: "."../../migrantes.html");  

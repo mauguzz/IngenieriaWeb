@@ -6,9 +6,11 @@
                                         user-scalable-no, 
                                         initial-scale=1.0,
                                         maximum-scale=1.0"> 
-        <link rel="stylesheet" type="text/css" href="css/Test.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -18,14 +20,93 @@
             </button>    
         </nav>
 
+        <div class="content" id="content">
+            <div class="row">
+                <div class="col-10">  
+                    <div class="table-responsive">
+                        <table class="display compact" id="t_culturales">
+                            <thead id="thead_funcionarios">
+                            </thead>
+                            <tbody id="tbody_funcionarios">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-2" >
+                    <div class="row" id="datatable_buttons_container"></div>
+                    <div class="row" id="generic_buttons_container"></div>    
+                </div>
+            </div>
+        </div>
+
+    <!--Ventana modal bootstrap correspondiente para Agregar Actividades culturales-->
+    <div class="modal fade" id="modal_funcionarios_form" tabindex="-1" role="dialog" aria-labelledby="ModalLabel_funcionarios_Form" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel_funcionarios_Form">Agregar funcionario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="f_funcionarios_registrar">
+                        <p>
+                            <label for="Nombre">Nombre: </label>
+                            <input type="text" name="Nombre" id="Nombre" placeholder="Nombre de actividad" required>
+                        </p>
+                        <p>
+                            <label for="Apellido_Paterno">Apellido Paterno: </label>
+                            <input type="text" name="Apellido_Paterno" id="Apellido_Paterno" placeholder="Apellido Paterno" required>
+                        </p>
+                        <p>
+                            <label for="Apellido_Materno">Apellido Materno: </label>
+                            <textarea type="text" name="Apellido_Materno" id="Apellido_Materno" placeholder="Apellido_Materno" required></textarea>
+                        </p>                
+                        <p>
+                            <label for="Telefono_Contacto">Telefono de contacto: </label>
+                            <textarea type="text" name="Telefono_Contacto"  id="Telefono_Contacto"  placeholder="Telefono de contacto" required></textarea>
+                        </p>
+                        <p>
+                            <label for="Correo_Electronico">Correo Electrónico: </label>
+                            <input type="Correo_Electronico" name="Correo_Electronico" id="Correo_Electronico" placeholder="Correo Electrónico" required>
+                        </p>
+                        <p>
+                            <label for="Password">Contraseña: </label>
+                            <input type="password" name="Password" id="Password" placeholder="Contraseña" required>
+                        </p>
+                        <p>
+                            <label for="Id_Control">Id de Punto De Control</label>
+                            <input type="Id_Control" name="Id_Contro" id="Id_Control" placeholder="Id_Control" required>
+                        </p>
+                        <p>
+                            <input type="hidden" id="f_funcionarios_action" name="f_funcionarios_action" value="default_action">
+                        </p>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" id="f_funcionarios_submit" class="btn btn-primary" form="f_funcionarios_registrar" value="Registrar">
+                </div>
+            </div>
+        </div>
+    </div>
+
 
         
-        
-        <script type="module" src="script/Administrador.js"></script>
+        <script type="module" src="script/administrador.js"></script>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> <!--Datatables-->
+        <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script> <!--Datatables Bootstrap 4-->
+        <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script> <!--Datatables Select-->
+        <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script> <!--Datatables Buttons-->
+
     
     </body>
     
