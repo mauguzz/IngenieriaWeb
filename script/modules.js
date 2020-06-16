@@ -160,68 +160,71 @@ function table_eliminar(uri){
 
 //FUNCIONES DE MIGRANTE//
 export function migrante_consultar(id, prompt, t_general, t_culturales, t_laborales, t_registros){ //thead_general, thead_culturales, thead_laborales, thead_registros, tbody_general, tbody_culturales, tbody_laborales, tbody_registros
-
     let request;
-    if(prompt){ 
-        let llave = window.prompt("Ingrese la llave que le proporcionó su familiar", "");
-        if (llave == null || llave == "") return;
-        
-        let header = new Headers();
-        header.set('Authorization', 'Basic ' + btoa("familiar:" + llave));
-        request = new Request('php/res_migrantes.php/'+id,{
-            method: 'GET',
-            headers: header
-        })
-    }else{
-        request = new Request('php/res_migrantes.php/'+id,{
-            method: 'GET',
-        })
-    }
-    fetch(request)
-    .then(handleHttpErrors)
-    .then(res=>res.text()) //Cambiar a .text() para pruebas, y a .json() para funcionamiento
-    .then(res_json=>{
-        console.log(res_json);
- 
-        let general=res_json.general[0];
-        let laborales=res_json.laborales;
-        let culturales=res_json.culturales;
-        let registros=res_json.registros;
-
-        t_general.children['tbody'].innerHTML="";
-
-        Object.entries(general).forEach(([key, value])=>{
-            let row_general = document.createElement('tr');
-            let var_general = document.createElement('td');
-            let val_general = document.createElement('td');
+    return new Promise((resolve,reject)=>{
+        if(prompt){ 
+            let llave = window.prompt("Ingrese la llave que le proporcionó su familiar", "");
+            if (llave == null || llave == "") reject("Llave no especificada");
             
-            var_general.innerHTML=`${key}`;
-            val_general.innerHTML=`${value}`;
-            row_general.appendChild(var_general);
-            row_general.appendChild(val_general);
-            t_general.children['tbody'].appendChild(row_general);
-        });
-        
-        table_generate_rowsandcols(t_laborales.children['thead'], t_laborales.children['tbody'], laborales, {
-            'Fecha':'Fecha', 
-            'Trabajo':'Actividad',  
-            'Direccion':'Direccion'
-        });
-
-        table_generate_rowsandcols(t_culturales.children['thead'], t_culturales.children['tbody'], culturales, {
-            'Fecha':'fecha', 
-            'Actividad Cultural':'Actividad', 
-            'Direccion':'Direccion', 
+            let header = new Headers();
+            header.set('Authorization', 'Basic ' + btoa("familiar:" + llave));
+            request = new Request('php/res_migrantes.php/'+id,{
+                method: 'GET',
+                headers: header
+            })
+        }else{
+            request = new Request('php/res_migrantes.php/'+id,{
+                method: 'GET',
+            })
+        }
+        fetch(request)
+        .then(handleHttpErrors)
+        .then(res=>res.json()) //Cambiar a .text() para pruebas, y a .json() para funcionamiento
+        .then(res_json=>{
+            console.log(res_json);
+     
+            let general=res_json.general[0];
+            let laborales=res_json.laborales;
+            let culturales=res_json.culturales;
+            let registros=res_json.registros;
+    
+            t_general.children['tbody'].innerHTML="";
+    
+            Object.entries(general).forEach(([key, value])=>{
+                let row_general = document.createElement('tr');
+                let var_general = document.createElement('td');
+                let val_general = document.createElement('td');
+                
+                var_general.innerHTML=`${key}`;
+                val_general.innerHTML=`${value}`;
+                row_general.appendChild(var_general);
+                row_general.appendChild(val_general);
+                t_general.children['tbody'].appendChild(row_general);
+            });
+            
+            table_generate_rowsandcols(t_laborales.children['thead'], t_laborales.children['tbody'], laborales, {
+                'Fecha':'Fecha', 
+                'Trabajo':'Actividad',  
+                'Direccion':'Direccion'
+            });
+    
+            table_generate_rowsandcols(t_culturales.children['thead'], t_culturales.children['tbody'], culturales, {
+                'Fecha':'fecha', 
+                'Actividad Cultural':'Actividad', 
+                'Direccion':'Direccion', 
+            })
+    
+            table_generate_rowsandcols(t_registros.children['thead'], t_registros.children['tbody'], registros, {
+                'Punto de control':'Punto de_control', 
+                'Fecha de Entrada':'Fecha_Entrada', 
+                'Fecha de salida': 'Fecha_Salida', 
+                'Alimentación':'Alimentacion'
+            })
+            resolve("Consulta correcta");
         })
-
-        table_generate_rowsandcols(t_registros.children['thead'], t_registros.children['tbody'], registros, {
-            'Punto de control':'Punto de_control', 
-            'Fecha de Entrada':'Fecha_Entrada', 
-            'Fecha de salida': 'Fecha_Salida', 
-            'Alimentación':'Alimentacion'
-        })
-    })
-    .catch(e=>console.log(e));
+        .catch(e=>reject(e));
+    });
+    
 }
 
 export function migrante_consultar_todos(table, init){  //thead_migrantes, tbody_migrantes
