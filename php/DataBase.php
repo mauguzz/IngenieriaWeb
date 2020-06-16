@@ -236,7 +236,7 @@ class DataBase{
 
 /*----------------------------------------------Modificaciones------------------------------------------------ */
 
-public static function Modificar_Migrante ($mysqli,$id, $Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion, $Llave){
+public static function Modificar_Migrante ($mysqli,$id, $Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion){
 
     $Estado_Por_Defecto= 1;
     $Tabla='Migrante';
@@ -253,11 +253,11 @@ public static function Modificar_Migrante ($mysqli,$id, $Nombre, $Apellido_Pater
         Id_Pais='".$Pais."', 
         Oficio='".$Oficio."', 
         Fecha_Nacimiento='".$Fecha_Nacimiento."', 
-        Edad='".$Edad."', 
+         
         Telefono_Contacto='".$Contacto_Telefono."',
         Id_Nivel='".$Nivel_Educativo."',
         Id_Famlia='".$Situacion_Familiar."',
-        Llave='".$Llave."',
+        
         Id_Causa='".$Causa_Migracion."',
         Id_Estado='".$Estado_Por_Defecto."'
         WHERE Id_Migrante=".$id.";";

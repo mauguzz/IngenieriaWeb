@@ -104,8 +104,8 @@ function res_put($id){
             $data->contacto_telefono, 
             $data->nivel_educativo, 
             $data->situacion_familiar, 
-            $data->causa_migracion, 
-            $Llave
+            $data->causa_migracion
+            
         );
 
     }else{
