@@ -322,7 +322,7 @@ public static function Modificar_Actividad_Cultural($mysqli,$id,$Nombre, $Fecha,
 
 public static function Eliminar_Migrante($mysqli,$id){
    
-     $Tabla='Migrante';
+     $Tabla='migrante';
      $Id_Tabla='Id_Migrante';
     try {
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
