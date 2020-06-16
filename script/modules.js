@@ -14,7 +14,7 @@ function table_simple_fetch(uri, parameters){
     return new Promise((resolve, reject)=>{
         fetch(uri, parameters)
         .then(handleHttpErrors)
-        .then(res=>res.text()) //Cambiar a json() para version final
+        .then(res=>res.json()) //Cambiar a json() para version final
         .then(res_json=>{
             console.log(res_json);
             resolve(res_json);
