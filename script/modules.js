@@ -179,7 +179,7 @@ export function migrante_consultar(id, prompt, t_general, t_culturales, t_labora
     }
     fetch(request)
     .then(handleHttpErrors)
-    .then(res=>res.json()) //Cambiar a .text() para pruebas, y a .json() para funcionamiento
+    .then(res=>res.text()) //Cambiar a .text() para pruebas, y a .json() para funcionamiento
     .then(res_json=>{
         //console.log(res_json);
  
