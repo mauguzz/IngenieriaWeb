@@ -43,7 +43,6 @@ class DataBase{
         //Accesible por todas las funciones.
         if(!isset(DataBase::$Conexion_Alt)){
             $Conexion=$mysqli->Conectar();
-            echo('No está seteado');
         }else{
             $Conexion=DataBase::$Conexion_Alt;
         }
