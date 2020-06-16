@@ -87,7 +87,7 @@ function table_generate_datatables(tablename, init, rows, cols){
             });
         }else{
             console.log("Caso sin rows")
-            datatable = $(tablename).DataTable();
+            datatable = $(tablename).DataTable({columns: customCols});
             datatable.clear();
             
             datatable.draw();
