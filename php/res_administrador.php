@@ -10,7 +10,7 @@ $result = "";
 //MÉTODO HTTP GET
 function res_get(){
     $conexion= new Database();
-    $result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0]); //Descomentar para version final
+    $result=$conexion->Mostrar_Funcionario($conexion); //Descomentar para version final
 
 return $result;
 }

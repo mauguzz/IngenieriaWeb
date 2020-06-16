@@ -177,8 +177,29 @@ class DataBase{
             '".$Llave."',
             '".$Causa_Migracion."',
             '".$Estado_Por_Defecto."');";
-            $Funcionario = $Conexion->prepare($query); 
-            $Funcionario->execute();  //Ejecuto la consulta
+            $Migrante = $Conexion->prepare($query); 
+            $Migrante->execute();  //Ejecuto la consulta
+            /*-----------------------------Registramos al migrante en un punto de control-----------------------*/
+            /*Obtenemos el ID del migrante*/
+            $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $query="select Id_Migrante from Migrante where Llave='".$Llave."' and Nombre='".$Nombre."';";
+            $result  = $Conexion->prepare($query); //
+            $result->execute();
+            $Id_Migrante=$result->fetchAll(PDO::FETCH_ASSOC);
+            /*Obtenemos la fecha actual*/
+            $query="select curdate();";
+            $result  = $Conexion->prepare($query); //
+            $result->execute();
+            $Curdate=$result->fetchAll(PDO::FETCH_ASSOC);
+            /*Insertamos al migrante en la tabla Registro*/      
+            $query="insert into Registro values (
+                '".$PuntoDeControl."',
+                '".$Id_Migrante[0]["Id_Migrante"];."',
+                '".$Curdate[0]["curdate()"]."',
+                NULL,
+                0);";
+            $result  = $Conexion->prepare($query); //
+
             return ["POST"=>"Correcto, insertado correctamente", "llave_migrante"=>$Llave];
          }catch(PDOException $e){
              return ["POST"=>"$e->getMessage()"];
