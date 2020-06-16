@@ -1,5 +1,6 @@
 <?php
 class DataBase{	
+    private $Conexion_Alt;
 /*-------------------------------------------------Conexión-------------------------------------------------*/
     public static function Conectar() {        
         define('Server', 'localhost');
@@ -26,10 +27,16 @@ class DataBase{
         return ["migrantes"=>$result->fetchAll(PDO::FETCH_ASSOC)];
     }
 
-    public static function Mostrar_Migrante_Detalle ($mysqli, $Id_Migrante, $SeguimientoFamiliar){//Recibe objeto de conexión
+    public static function Mostrar_Migrante_Detalle ($mysqli, $Id_Migrante){//Recibe objeto de conexión
 
         //$Id_Migrante=$_POST['Id_Migrante']; //Se hace el cast de HTML a un variable PHP por el metodo POST 
-        if(!$SeguimientoFamiliar) $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+        //if(!$SeguimientoFamiliar) $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+        if(!isset($Conexion_Alt)){
+            $Conexion=$mysqli->Conectar();
+        }else{
+            $Conexion=$Conexion_Alt;
+        }
+        
         $query="SELECT * FROM Migrantes_Detalle where Id_Migrante='".$Id_Migrante."'";//Introduzco la consulta
         $Migrante = $Conexion->prepare($query); //Agrego la variable $Id_Migrante
         $Migrante->execute();  //Ejecuto la consulta
@@ -51,9 +58,10 @@ class DataBase{
     }
 
     public static function Consultar_Llave_Migrante($mysqli, $id){
-        $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+        //$Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+        $Conexion_Alt=Conectar();
         $query = "SELECT Id_Migrante, Llave FROM migrante WHERE Id_Migrante='".$id."' ";
-        $result = $Conexion->prepare($query); //Agrego variables (Si es el caso)
+        $result = $ConexionAlt->prepare($query); //Agrego variables (Si es el caso)
         $result->execute();  //Ejecuto la consulta
         return ["migrante"=>$result->fetchAll(PDO::FETCH_ASSOC)];
     }

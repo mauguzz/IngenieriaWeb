@@ -18,12 +18,12 @@ function res_get(){
     if (count($args)==1){
         //Se pasó el id. //CASO: Obtener detalles de un migrante
         if(isset($_SESSION['USERID'])){ //$sesion->USERID!=NULL
-            $result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0], false); //Descomentar para version final
+            $result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0]); //Descomentar para version final
         }elseif (isset($_SERVER['PHP_AUTH_PW'])) {
             //Antes de ejecutar lo siguiente, se tiene que verificar que para el usuario args[0] tiene la llave correcta
             $result=$conexion->Consultar_Llave_Migrante($conexion,$args[0]);
             if($result["migrante"][0]["Llave"]==$_SERVER['PHP_AUTH_PW']){
-                $result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0], true); //Como ya se hizo la conexión previamente, con el valor true se le indica que ya no se vuelva a conectar (ver implementación en DataBase.php)
+                $result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0]); //Como ya se hizo la conexión previamente, con el valor true se le indica que ya no se vuelva a conectar (ver implementación en DataBase.php)
             }else{
                 header("HTTP/1.1 401 Unauthorized");
             }
