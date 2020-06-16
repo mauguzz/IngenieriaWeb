@@ -164,9 +164,8 @@ export function migrante_consultar(id, prompt, t_general, t_culturales, t_labora
     let request;
     if(prompt){ 
         let llave = window.prompt("Ingrese la llave que le proporcionó su familiar", "");
-        if (llave == null || llave == "") {
-            return;
-        }
+        if (llave == null || llave == "") return;
+        
         let header = new Headers();
         header.set('Authorization', 'Basic ' + btoa("familiar:" + llave));
         request = new Request('php/res_migrantes.php/'+id,{
@@ -180,7 +179,7 @@ export function migrante_consultar(id, prompt, t_general, t_culturales, t_labora
     }
     fetch(request)
     .then(handleHttpErrors)
-    .then(res=>res.json()) //Cambiar a .text() para pruebas, y a .json() para funcionamiento
+    .then(res=>res.text()) //Cambiar a .text() para pruebas, y a .json() para funcionamiento
     .then(res_json=>{
  
         let general=res_json.general[0];
@@ -188,10 +187,8 @@ export function migrante_consultar(id, prompt, t_general, t_culturales, t_labora
         let culturales=res_json.culturales;
         let registros=res_json.registros;
 
-        //tbody_general.innerHTML="";
         t_general.children['tbody'].innerHTML="";
 
-        //Object:={key: value, key: value, key:value}
         Object.entries(general).forEach(([key, value])=>{
             let row_general = document.createElement('tr');
             let var_general = document.createElement('td');
@@ -201,14 +198,9 @@ export function migrante_consultar(id, prompt, t_general, t_culturales, t_labora
             val_general.innerHTML=`${value}`;
             row_general.appendChild(var_general);
             row_general.appendChild(val_general);
-            //tbody_general.appendChild(row_general);
             t_general.children['tbody'].appendChild(row_general);
         });
         
-        
-
-        
-    
         table_generate_rowsandcols(t_laborales.children['thead'], t_laborales.children['tbody'], laborales, {
             'Fecha':'Fecha', 
             'Trabajo':'Actividad',  
@@ -229,7 +221,6 @@ export function migrante_consultar(id, prompt, t_general, t_culturales, t_labora
         })
     })
     .catch(e=>console.log(e));
-
 }
 
 export function migrante_consultar_todos(table, init){  //thead_migrantes, tbody_migrantes

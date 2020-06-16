@@ -17,7 +17,17 @@ function res_get(){
 
     if (count($args)==1){
         //Se pasó el id. //CASO: Obtener detalles de un migrante
-        $result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0]); //Descomentar para version final
+        if($sesion->USERID!=NULL){
+            $result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0]); //Descomentar para version final
+        }elseif (isset($_SERVER['PHP_AUTH_PW'])) {
+            //Antes de ejecutar lo siguiente, se tiene que verificar que para el usuario args[0] tiene la llave correcta
+            $result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0]); //Descomentar para version final
+        }else{
+            header("HTTP/1.1 401 Unauthorized");
+        }
+
+        
+        
     }else{
         //No se pasó el id. //CASO: Obtener todos los migrantes
         $result = $conexion->Mostrar_Migrantes_Todos($conexion);
@@ -114,6 +124,16 @@ function res_delete($id){
     );
 }
 
+
+session_start();/*Continuamos la sesión*/
+$sesion=new stdclass();
+if (!empty($_SESSION['USERID']) and !empty($_SESSION['USERNAME'])){
+        $sesion->USERID=$_SESSION['USERID'];
+        $sesion->USERNAME=$_SESSION['USERNAME'];
+        $sesion->POINTID=$_SESSION['POINTID'];  
+}else{
+    $sesion->USERID=NULL;
+}
 
 //CÓDIGO EJECUTADO AL MOMENTO DE LLAMAR AL ARCHIVO PHP
 
