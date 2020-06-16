@@ -46,6 +46,9 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
                                             $('#modal_migrantes_details').on('shown', function() { 
                                                 $('#close').click(); 
                                                 //$('#modal_migrantes_details').modal('hide'); 
+                                                $("#modal_migrantes_details").modal('hide');//ocultamos el modal
+                                                $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+                                                $('.modal-backdrop').remove();//eliminamos el backdrop del modal
                                            })
                                         }
                                     })
