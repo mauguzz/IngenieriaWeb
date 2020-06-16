@@ -75,6 +75,7 @@ function table_generate_datatables(tablename, init, rows, cols){
     })
 
     console.log(dataSet);
+    console.log([["a","b","c","d","e","f"]])
     
     let datatable;
     if(init){
