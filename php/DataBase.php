@@ -31,11 +31,11 @@ class DataBase{
 
         //$Id_Migrante=$_POST['Id_Migrante']; //Se hace el cast de HTML a un variable PHP por el metodo POST 
         //if(!$SeguimientoFamiliar) $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-        if(!isset($Conexion_Alt)){
+        if(!isset(DataBase::$Conexion_Alt)){
             $Conexion=$mysqli->Conectar();
             echo('No está seteado');
         }else{
-            $Conexion=$Conexion_Alt;
+            $Conexion=DataBase::$Conexion_Alt;
         }
         
         $query="SELECT * FROM Migrantes_Detalle where Id_Migrante='".$Id_Migrante."'";//Introduzco la consulta
@@ -60,7 +60,7 @@ class DataBase{
 
     public static function Consultar_Llave_Migrante($mysqli, $id){
         //$Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-        $Conexion_Alt=DataBase::Conectar();
+        DataBase::$Conexion_Alt=DataBase::Conectar();
         $query = "SELECT Id_Migrante, Llave FROM migrante WHERE Id_Migrante='".$id."' ";
         $result = $Conexion_Alt->prepare($query); //Agrego variables (Si es el caso)
         $result->execute();  //Ejecuto la consulta
