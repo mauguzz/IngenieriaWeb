@@ -216,7 +216,7 @@ class DataBase{
             $result->execute();
             return ["POST"=>"Correcto, insertado correctamente", "llave_migrante"=>$Llave];
          }catch(PDOException $e){
-             return ["POST"=>"$e->getMessage()"];
+             return ["POST"=>$e->getMessage()];
          }
 
     }
