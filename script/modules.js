@@ -415,9 +415,9 @@ export function registros_consultar_todos(table, init){  //thead_migrantes, tbod
         .catch(e=>{reject(e)})
     })
 }
-export function registros_registrar(jsonData){
+export function registros_registrar(id,jsonData){
     return new Promise((resolve, reject)=>{
-        table_registrar("php/res_registros.php", jsonData)
+        table_registrar("php/res_registros.php/migrante/"+id, jsonData)
         .then(result=>resolve(result))
         .catch(result=>reject(result));
     })
@@ -426,7 +426,7 @@ export function registros_registrar(jsonData){
 
 export function registros_modificar(id, jsonData){
     return new Promise((resolve, reject)=>{
-        table_modificar("php/res_registros.php/"+id, jsonData)    
+        table_modificar("php/res_registros.php/migrante/"+id, jsonData)    
         .then(result=>resolve(result))
         .catch(result=>reject(result));
     })
@@ -436,7 +436,7 @@ export function registros_modificar(id, jsonData){
 
 export function registros_eliminar(id){
     return new Promise((resolve, reject)=>{
-        table_eliminar("php/res_registros.php/"+id)    
+        table_eliminar("php/res_registros.php/migrante/"+id)    
         .then(result=>resolve(result))
         .catch(result=>reject(result));
     })

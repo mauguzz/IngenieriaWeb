@@ -76,13 +76,18 @@ $uri=explode("/",$uri);
 $uri=array_slice($uri,3); //Elimina las primeras tres partes irrelevantes de la uri (""/"projectfolder"/"php")
 if($uri[0] == 'res_registros.php'){
     if($uri=array_slice($uri,1)){ //Si después de eliminar el primer elemento ("res_culturales.php"), el array no está vacío, entonces
-        if($uri[0]==""){ //Si no se especificó un id pero si se puso un slash al final de la uri ("...ntes.php/")
-            header('HTTP/1.1 400 Bad Request');
-            return;
-        } else { //Si se especificó un id en la uri ("...rales.php/1")
-            $id=$uri[0];
-            $id_specified=TRUE;   
+        if($uri[0]=='migrante'){
+            if($uri=array_slice($uri,1)){
+                if($uri[0]==""){ //Si no se especificó un id pero si se puso un slash al final de la uri ("...ntes.php/")
+                    header('HTTP/1.1 400 Bad Request');
+                    return;
+                } else { //Si se especificó un id en la uri ("...rales.php/1")
+                    $id=$uri[0];
+                    $id_specified=TRUE;   
+                }
+            }
         }
+        
     }else{ //Si no se especificó un id en la uri ("...rales.php")
        $id_specified=FALSE;
     }
@@ -92,7 +97,7 @@ if($uri[0] == 'res_registros.php'){
                 $id_specified ? ($result=res_get($id)) : ($result=res_get());
         break;
         case 'POST':
-                $id_specified ? header('HTTP/1.1 400 Bad Request') : ($result = res_post());
+                $id_specified ? ($result=res_post($id)) : header('HTTP/1.1 400 Bad Request');
         break;
         case 'PUT':
                 $id_specified ? ($result=res_put($id)) : header('HTTP/1.1 400 Bad Request');

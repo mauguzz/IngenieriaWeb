@@ -1,6 +1,6 @@
 
 import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migrante_modificar, migrante_eliminar, 
-llenar_opciones_selector,Validar_Sesion,Cerrar_Sesion} from './modules.js';
+llenar_opciones_selector,Validar_Sesion,Cerrar_Sesion, registros_registrar, registros_modificar} from './modules.js';
 
 const mcontent = document.getElementById('content'); //Div del contenido principal (tablas, etc), todas las páginas
 
@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             extend: "selectedSingle",
                             action: ()=>{
                                 id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                registros_registrar(id, JSON.stringify({"id_migrante": id}));
                                 
                             },   
                         },
@@ -56,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             extend: "selectedSingle",
                             action: ()=>{
                                 id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                registros_modificar(id, JSON.stringify({"id_migrante": id}));
                                 
                             },   
                         },
