@@ -158,6 +158,7 @@ class DataBase{
 
         $Estado_Por_Defecto= 1;
         $PuntoDeControl=$_SESSION['POINTID'];
+        $Comida_Por_Defecto=0;
         try {
             $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
             $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -191,15 +192,18 @@ class DataBase{
             $result  = $Conexion->prepare($query); //
             $result->execute();
             $Curdate=$result->fetchAll(PDO::FETCH_ASSOC);
+            echo "AL 100 bro";
+            echo $Curdate[0]["curdate()"];
+            echo $PuntoDeControl;
             /*Insertamos al migrante en la tabla Registro*/      
             $query="insert into Registro values (
                 '".$PuntoDeControl."',
-                '".$Id_Migrante[0]["Id_Migrante"];."',
+                '".$Id_Migrante[0]["Id_Migrante"]."',
                 '".$Curdate[0]["curdate()"]."',
-                NULL,
-                0);";
+                    NULL,
+                '".$Comida_Por_Defecto."');";
             $result  = $Conexion->prepare($query); //
-
+            $result->execute();
             return ["POST"=>"Correcto, insertado correctamente", "llave_migrante"=>$Llave];
          }catch(PDOException $e){
              return ["POST"=>$e->getMessage()];
@@ -454,7 +458,7 @@ public static function Eliminar_Actividad_Cultural($mysqli,$id){
                     session_start(); /*Inicializamos los valores de la sesión*/
                     $_SESSION['USERNAME']=$res[0]["Nombre"];
                     $_SESSION['USERID']=$res[0]["Id_Funcionario"];
-                    $_SESSION['POINTID']=$RES[0]["Id_Punto_Control"];
+                    $_SESSION['POINTID']=$res[0]["Id_Punto_Control"];
                     header("location:http://localhost/IngenieriaWeb/migrantes.html");  
                     //header('Content-Type: text/html; charset=utf-8');
                     //header("Location: "."../../migrantes.html");  

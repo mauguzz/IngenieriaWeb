@@ -2927,14 +2927,20 @@ select
       inner join Estados ON
       Estados.Id=Puntos_de_control.Id_Estado;
 	
-      select * from Mostrar_Funcionarios;
-      select * from Funcionario;
+      select * from Registro;
+      select curdate();
+      select Id_Migrante from Migrante where Llave='123456' and Nombre='José Ricardo';
       
-      select * from Administrador;
+	SELECT * FROM Migrante;
       
+      select *from Migrante where Llave='tpDx27Xehv' and Nombre='El chema';
+      
+insert into Registro values ('1','5','1999-05-06',NULL,0 );
+
+SELECT* FROM Registro;
 	  ALTER TABLE Funcionario
 	  MODIFY Contrasenia varchar (100);
-	
+      
 		  update Funcionario 
 		  set Contrasenia='$2y$10$W8meY..MFwROZEnsOYzgr.qX6CjI.bLKbffmLmpL2BhnZof2lYjXm'
 		  where Id_Funcionario=1;
