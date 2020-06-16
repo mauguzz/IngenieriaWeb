@@ -62,7 +62,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
         });
         datatable.buttons().container().appendTo( '#datatable_buttons_container' );  
     })
-    .catch(e=>console.log(e));
+    .catch(
+        e=>{console.log(e);
+        console.log ('Tabla sin datos');
+        }
+        );
     //action requiere una definición de una función, y no una llamada a una función. Por ello se hace una estructura arrow function, es decir ()=>{}
 });
 

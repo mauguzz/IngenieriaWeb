@@ -46,7 +46,7 @@ function res_post(){
 
 
 //MÉTODO HTTP PUT
-function res_put($id){
+function res_put(){
 
 }
 
@@ -59,10 +59,9 @@ function res_delete(){
         header("location:http://localhost/IngenieriaWeb/index.html");  
     } catch (Exception $e) {
         echo 'Excepción capturada: ',  $e->getMessage(), "\n";
-        return $result;
+        return $e->getMessage();
     }
-    return $result;
-
+    return ["DELETE"=>"Sesión terminada"];
 }
 
 $uri=explode("/",$uri);
@@ -82,16 +81,16 @@ if($uri[0] == 'res_sesion.php'){
     
     switch($method){
         case 'GET':
-                $id_specified ? ($result=res_get($id)) : ($result=res_get());
+                $id_specified ? ($result=res_get()) : ($result=res_get());
         break;
         case 'POST':
                 $id_specified ? header('HTTP/1.1 400 Bad Request') : ($result = res_post());
         break;
         case 'PUT':
-                $id_specified ? ($result=res_put($id)) : header('HTTP/1.1 400 Bad Request');
+                $id_specified ? ($result=res_put()) : header('HTTP/1.1 400 Bad Request');
         break;
         case 'DELETE':
-                $id_specified ? ($result=res_delete($id)) : header('HTTP/1.1 400 Bad Request');
+                $id_specified ? ($result=res_delete()) : ($result=res_delete());
         break;
         default:
                 header('HTTP/1.1 405 Method not allowed');
