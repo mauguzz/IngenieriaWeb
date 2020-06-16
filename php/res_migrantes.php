@@ -125,7 +125,7 @@ function res_delete($id){
 }
 
 
-//session_start();/*Continuamos la sesión*/
+session_start();/*Continuamos la sesión*/
 $sesion=new stdclass();
 if (!empty($_SESSION['USERID']) and !empty($_SESSION['USERNAME'])){
         $sesion->USERID=$_SESSION['USERID'];
