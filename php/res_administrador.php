@@ -7,22 +7,10 @@ $uri=$_SERVER['REQUEST_URI'];       //Capturar URI utilizada
 $result = "";
 
 
-
 //MÉTODO HTTP GET
 function res_get(){
-    //USO: Pasar un único argumento entero id si se va a aplicar la acción a un elemento específico
-    //Si no, no es necesario pasar argumentos.
-    $args=func_get_args();
     $conexion= new Database();
-
-    if (count($args)==1){
-        //Se pasó el id. //CASO: Obtener detalles de un migrante
-        $result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0]); //Descomentar para version final
-    }else{
-        //No se pasó el id. //CASO: Obtener todos los migrantes
-        $result = $conexion->Mostrar_Migrantes_Todos($conexion);
-    }
-          
+    $result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0]); //Descomentar para version final
 
 return $result;
 }
@@ -33,61 +21,44 @@ function res_post(){
     //Obtención de datos de la solicitud
     if($json=file_get_contents('php://input')){
         $data=json_decode($json);
+
         $conexion= new Database();
 
-        $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $Llave=substr(str_shuffle($permitted_chars), 0, 10);
+        $Id_Control=$data->Id_Control;
+        $Nombre = $data->Nombre;
+        $Apellido_Paterno = $data->Apellido_Paterno;
+        $Apellido_Materno = $data->Apellido_Materno;
+        $Telefono_Contacto=$data->Telefono_Contacto;
+        $Correo_Electronico=$data->Correo_Electronico;
+        $Contraseña=$data->Password;
 
-        //$Llave = "123456"; //Crear una llave de migrante aleatoria
-        //Datos derivados en la BD, que no es necesario insertar: ID_Migrante, Edad, Id_Estado (migrando o establecido).
-
-        $result = $conexion->Crear_Migrante(
+        $result = $conexion->Crear_Funcionario(
             $conexion,
-            $data->nombre, 
-            $data->apellido_paterno, 
-            $data->apellido_materno, 
-            $data->fecha_nacimiento, 
-            $data->ciudad, 
-            $data->pais, 
-            $data->oficio, 
-            $data->contacto_telefono, 
-            $data->nivel_educativo, 
-            $data->situacion_familiar, 
-            $data->causa_migracion, 
-            $Llave
+            $Id_Control,
+            $Nombre,
+            $Apellido_Paterno, 
+            $Apellido_Materno, 
+            $Telefono_Contacto, 
+            $Correo_Electronico,
+            $Contraseña
         );
+
     }else{
         $result = ["Error"=>"No se enviaron todos los parametros correctamente"];
         header('HTTP/1.1 400 Bad Request');
         return;
     }
-    
+
+
     return $result;
+
 }
 
 //MÉTODO HTTP PUT
 function res_put($id){
     //USO: Es necesario pasar un único argumento $id, para conocer cual row se va a modificar.
     if($json=file_get_contents('php://input')){
-        $data=json_decode($json);
-        $conexion= new Database();
 
-        $result = $conexion->Modificar_Migrante(
-            $conexion,
-            $id,
-            $data->nombre, 
-            $data->apellido_paterno, 
-            $data->apellido_materno, 
-            $data->fecha_nacimiento, 
-            $data->Edad,
-            $data->ciudad, 
-            $data->pais, 
-            $data->oficio, 
-            $data->contacto_telefono, 
-            $data->nivel_educativo, 
-            $data->situacion_familiar, 
-            $data->causa_migracion, 
-            $Llave
         );
 
     }else{
@@ -95,41 +66,36 @@ function res_put($id){
         header('HTTP/1.1 400 Bad Request');
         return;
     }
-    
-    //Datos derivados en la BD, que no es necesario insertar: ID_Migrante, Edad, Id_Estado (migrando o establecido).
-
-    //A diferencia de DataBase::Crear_Migrante(), se pasa adicionalmente un ID
-    //DataBase::Modificar_Migrante($id, $Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion, $Llave);
-
     return $result;
 }
 
 //MÉTODO HTTP DELETE
 function res_delete($id){
+
     $conexion= new Database();
 
     $result = $conexion->Eliminar_Actividad_Cultural (
         $conexion,
         $id
     );
+    
+    return $result;
 }
 
 
 //CÓDIGO EJECUTADO AL MOMENTO DE LLAMAR AL ARCHIVO PHP
-
-
 $uri=explode("/",$uri);
 $uri=array_slice($uri,3); //Elimina las primeras tres partes irrelevantes de la uri (""/"projectfolder"/"php")
-if($uri[0] == 'res_migrantes.php'){
-    if($uri=array_slice($uri,1)){ //Si después de eliminar el primer elemento ("res_migrantes.php"), el array no está vacío, entonces
+if($uri[0] == 'res_culturales.php'){
+    if($uri=array_slice($uri,1)){ //Si después de eliminar el primer elemento ("res_culturales.php"), el array no está vacío, entonces
         if($uri[0]==""){ //Si no se especificó un id pero si se puso un slash al final de la uri ("...ntes.php/")
             header('HTTP/1.1 400 Bad Request');
             return;
-        } else { //Si se especificó un id en la uri ("...ntes.php/1")
+        } else { //Si se especificó un id en la uri ("...rales.php/1")
             $id=$uri[0];
             $id_specified=TRUE;   
         }
-    }else{ //Si no se especificó un id en la uri ("...ntes.php")
+    }else{ //Si no se especificó un id en la uri ("...rales.php")
        $id_specified=FALSE;
     }
     
@@ -156,10 +122,6 @@ if($uri[0] == 'res_migrantes.php'){
     // Sólo se aceptan resources desde 'clients'
     header('HTTP/1.1 404 Not Found');
 }
-
-
-
-
 
 echo json_encode(($result),JSON_UNESCAPED_UNICODE);
 

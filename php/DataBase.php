@@ -131,6 +131,7 @@ class DataBase{
     public static function Crear_Migrante ($mysqli,$Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion, $Llave){
 
         $Estado_Por_Defecto= 1;
+        $PuntoDeControl=$_SESSION['POINTID'];
         try {
             $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
             $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -199,6 +200,32 @@ class DataBase{
             '".$Requisitos."',
             '".$Direcccion."'
             );";
+            $Funcionario = $Conexion->prepare($query); 
+            $Funcionario->execute();  //Ejecuto la consulta
+            return ["POST"=>"Correcto, insertado correctamente"];
+         }catch(PDOException $e){
+             return ["POST"=>"$e->getMessage()"];
+         }
+
+    }
+
+    
+    public static function Crear_Funcionario ($mysqli,$Id_Control,$Nombre,$Apellido_Paterno,$Apellido_Materno, $Telefono_Contacto, $Correo_Electronico,$Contraseña){
+    
+
+        try {
+            $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+            $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $query="insert into Funcionario values (
+            NULL,
+            '".$Id_Control."',
+            '".$Nombre."',
+            '".$Apellido_Paterno."',
+            '".$Apellido_Materno."',
+            '".$Telefono_Contacto."',
+            '".$Correo_Electronico."',
+            '".$Contraseña."'
+            );";    
             $Funcionario = $Conexion->prepare($query); 
             $Funcionario->execute();  //Ejecuto la consulta
             return ["POST"=>"Correcto, insertado correctamente"];

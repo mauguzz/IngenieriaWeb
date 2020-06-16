@@ -2911,12 +2911,13 @@ select *from Asistencia_Oferta_Laboral_View where Id_Migrante=1; /*Vista de asis
 select Id_Trabajo,Actividad,Direccion,fecha FROM Asistencia_Oferta_Laboral_View where Id_Migrante=1; /*VISTA PARA DETALLE MIGRANTE*/
 
 	
-create view Mostrar_Funcionarios as 
+alter view Mostrar_Funcionarios as 
 select 
 	  Funcionario.Id_Funcionario,
+      Puntos_de_control.Id_Punto_Control,
 	  Puntos_de_control.Nombre as "Punto_De_Control",
-      Funcionario.Nombre as "Nombre",
       Estados.Nombre as "Estado",
+      Funcionario.Nombre as "Nombre",
       Funcionario.Apellido_Paterno,
       Funcionario.Apellido_Materno,
       Funcionario.Correo_electronico
@@ -2926,6 +2927,7 @@ select
       inner join Estados ON
       Estados.Id=Puntos_de_control.Id_Estado;
 	
+      select * from Mostrar_Funcionarios;
       select * from Funcionario;
       
       select * from Administrador;
@@ -2978,10 +2980,3 @@ Detalles='Clases para todos'
 where Id_Actividad='1';
 
 SELECT * FROM ACTIVIDADES;
-
-select * from Migrante;
-
-
-DELETE FROM Migrante
-WHERE some_column = some_value 
-

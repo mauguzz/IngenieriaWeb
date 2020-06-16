@@ -88,7 +88,5 @@ form_culturales_registrar.onsubmit = function(e){
         });
     }
 
-
-
 }
 
