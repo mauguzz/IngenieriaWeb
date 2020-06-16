@@ -510,7 +510,7 @@ export function laborales_registrar(jsonData){
 
 export function laborales_modificar(id, jsonData){
     return new Promise((resolve, reject)=>{
-        table_modificar("php/res_laborales/"+id, jsonData)    
+        table_modificar("php/res_laborales.php/"+id, jsonData)    
         .then(result=>resolve(result))
         .catch(result=>reject(result));
     })
