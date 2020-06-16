@@ -25,7 +25,6 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
     document.addEventListener("DOMContentLoaded", function(event) {
     
     
-            Validar_Sesion()
     
             llenar_opciones_selector(
                 [
