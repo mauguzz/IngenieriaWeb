@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             },
                             action: ()=>{
                                 id=datatable.rows( { selected: true } ).data()[0][0]; 
-                                migrante_consultar(id, true, t_general, t_culturales, t_laborales, t_registros)
+                                migrante_consultar(id, false, t_general, t_culturales, t_laborales, t_registros)
                             }
                         },
 
