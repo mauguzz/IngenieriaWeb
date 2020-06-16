@@ -226,7 +226,7 @@ export function migrante_consultar(id, prompt, t_general, t_culturales, t_labora
             })
     
             table_generate_rowsandcols(t_registros.children['thead'], t_registros.children['tbody'], registros, {
-                'Punto de control':'Punto de_control', 
+                'Punto de control':'Punto_de_Control', 
                 'Fecha de Entrada':'Fecha_Entrada', 
                 'Fecha de salida': 'Fecha_Salida', 
                 'Alimentación':'Alimentacion'
@@ -305,8 +305,100 @@ export function migrante_eliminar(id){
 //FUNCIONES DE FUNCIONARIOS//
 
 //FUNCIONES DE TABLA MIGRANTES-CULTURALES//
+export function asistencias_culturales_consultar_todos(table, init){  //thead_migrantes, tbody_migrantes
+    return new Promise((resolve, reject)=>{
+        datatable_consultar_todos("php/res_asistencias_culturales.php", "asistencias_culturales", table, init, {
+            //Hace falta obtener el ID desde el View de MySQL, para poder hacer tratamientos posteriores
+            'ID Actividad' : "Id_Actividad",
+            'Nombre Actividad':'Actividad', 
+            'Dirección Actividad':'Direccion', 
+            'ID Asistente':'Id_Migrante', 
+            'Nombre Asistente':'Nombre', 
+            'Apellido Paterno':'Apellido_Paterno', 
+            'Apellido Materno':'Apellido_Materno',
+            'Fecha de Registro':'Fecha', 
+        })
+        .then(datatable=>{resolve(datatable)})
+        .catch(e=>{reject(e)})
+    })
+}
+
+
+export function asistencias_culturales_registrar(jsonData){
+    return new Promise((resolve, reject)=>{
+        table_registrar("php/res_asistencias_culturales.php", jsonData)
+        .then(result=>resolve(result))
+        .catch(result=>reject(result));
+    })
+   
+}
+
+export function asistencias_culturales_modificar(id, jsonData){
+    return new Promise((resolve, reject)=>{
+        table_modificar("php/res_asistencias_culturales.php/"+id, jsonData)    
+        .then(result=>resolve(result))
+        .catch(result=>reject(result));
+    })
+    
+}
+
+
+export function asistencias_culturales_eliminar(id){
+    return new Promise((resolve, reject)=>{
+        table_eliminar("php/res_asistencias_culturales.php/"+id)    
+        .then(result=>resolve(result))
+        .catch(result=>reject(result));
+    })
+    
+}
 
 //FUNCIONES DE TABLA MIGRANTES-LABORALES//
+export function asistencias_laborales_consultar_todos(table, init){  //thead_migrantes, tbody_migrantes
+    return new Promise((resolve, reject)=>{
+        datatable_consultar_todos("php/res_asistencias_laborales.php", "asistencias_laborales", table, init, {
+            //Hace falta obtener el ID desde el View de MySQL, para poder hacer tratamientos posteriores
+            'ID Actividad' : "Id_Trabajo",
+            'Nombre Actividad':'Actividad', 
+            'Dirección Actividad':'Direccion',
+            'ID Asistente':'Id_Migrante', 
+            'Nombre Asistente':'Nombre', 
+            'Apellido Paterno':'Apellido_Paterno', 
+            'Apellido Materno':'Apellido_Materno',
+            'Fecha de Registro':'Fecha', 
+            
+        })
+        .then(datatable=>{resolve(datatable)})
+        .catch(e=>{reject(e)})
+    })
+}
+
+export function asistencias_laborales_registrar(jsonData){
+    return new Promise((resolve, reject)=>{
+        table_registrar("php/res_asistencias_laborales.php", jsonData)
+        .then(result=>resolve(result))
+        .catch(result=>reject(result));
+    })
+   
+}
+
+export function asistencias_laborales_modificar(id, jsonData){
+    return new Promise((resolve, reject)=>{
+        table_modificar("php/res_asistencias_laborales.php/"+id, jsonData)    
+        .then(result=>resolve(result))
+        .catch(result=>reject(result));
+    })
+    
+}
+
+
+export function asistencias_laborales_eliminar(id){
+    return new Promise((resolve, reject)=>{
+        table_eliminar("php/res_asistencias_laborales.php/"+id)    
+        .then(result=>resolve(result))
+        .catch(result=>reject(result));
+    })
+    
+}
 
 //FUNCIONES DE TABLA MIGRANTES-PUNTO DE CONTROL//
 export function registros_consultar_todos(table, init){  //thead_migrantes, tbody_migrantes
@@ -314,7 +406,7 @@ export function registros_consultar_todos(table, init){  //thead_migrantes, tbod
         datatable_consultar_todos("php/res_registros.php", "registros", table, init, {
             //Hace falta obtener el ID desde el View de MySQL, para poder hacer tratamientos posteriores
             'ID Punto de Control' : "Id_Punto_Control",
-            'Nombre Punto de Control':'Punto de control', 
+            'Nombre Punto de Control':'Punto_de_Control', 
             'Fecha de entrada':'Fecha_Entrada', 
             'Fecha de salida':'Fecha_Salida', 
             'Alimentación':'Alimentacion', 

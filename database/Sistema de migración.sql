@@ -160,6 +160,7 @@ ALTER TABLE municipios
         Id_Actividad int,
         Id_Migrante int,
         Fecha date, 
+        primary key (Id_Actividad, Id_Migrante),
 		foreign key (Id_Actividad) references Actividades(Id_Actividad),
 		foreign key (Id_Migrante) references Migrante(Id_Migrante)
         );
@@ -179,6 +180,7 @@ ALTER TABLE municipios
         Id_Trabajo int,
         Id_Migrante int,
         Fecha date, 
+        primary key (Id_Trabajo, Id_Migrante),
 		foreign key (Id_Trabajo) references Ofertas_de_Trabajo(Id_Trabajo),
 		foreign key (Id_Migrante) references Migrante(Id_Migrante)
         );
@@ -191,6 +193,7 @@ ALTER TABLE municipios
 	Fecha_Entrada date,
     Fecha_Salida date, 
     Alimentacion tinyint,
+    primary key (Id_Punto_Control, Id_Migrante),
     foreign key (Id_Punto_Control) references Puntos_De_Control(Id_Punto_Control),
     foreign key (Id_Migrante) references Migrante(Id_Migrante)
     );
