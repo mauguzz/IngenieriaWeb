@@ -4,7 +4,7 @@ from './modules.js';
 
 /*------------------------------------------------Tablas------------------------------------------------------*/
 
-const t_culturales = document.getElementById('t_culturaless');
+const t_culturales = document.getElementById('t_culturales');
 const thead_culturales = document.getElementById('thead');
 const tbody_culturales = document.getElementById("tbody");
 
@@ -18,7 +18,7 @@ const form_culturales_action = document.getElementById('f_culturales_submit');
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
-    culturales_consultar_todos('#t_culturaless', true)
+    culturales_consultar_todos('#t_culturales', true)
     .then(datatable=>{
         new $.fn.dataTable.Buttons(datatable, { 
             buttons: 
@@ -79,7 +79,7 @@ form_culturales_registrar.onsubmit = function(e){
     if(form_culturales_action.value=="create"){
         culturales_registrar(formJson)
         .then(result=>{
-            culturales_consultar_todos('#t_culturaless', false)
+            culturales_consultar_todos('#t_culturales', false)
         });
     }else if(form_culturales_action.value=="modify"){
         culturales_registrar(formJson)

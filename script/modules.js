@@ -94,9 +94,7 @@ function table_generate_datatables(tablename, init, rows, cols){
                     serverSide: false
                 
                 });
-            datatable.clear();
             
-            datatable.draw();
         }
 
     }else{ //Caso de solo actualización
