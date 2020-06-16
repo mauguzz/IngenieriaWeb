@@ -322,14 +322,21 @@ public static function Modificar_Actividad_Cultural($mysqli,$id,$Nombre, $Fecha,
 
 public static function Eliminar_Migrante($mysqli,$id){
    
-     $Tabla='migrante';
-     $Id_Tabla='Id_Migrante';
+     //$Tabla='migrante';
+     //$Id_Tabla='Id_Migrante';
     try {
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
         $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $query="
-        DELETE FROM ".$Tabla."
-        WHERE ".$Id_Tabla."=".$id.";";
+        $query="DELETE FROM registro WHERE Id_Migrante = '".$id."';";
+        $Funcionario = $Conexion->prepare($query); 
+        $Funcionario->execute();  //Ejecuto la consulta
+        $query="DELETE FROM asistencia_actividad_cultural WHERE Id_Migrante = '".$id."';";
+        $Funcionario = $Conexion->prepare($query); 
+        $Funcionario->execute();  //Ejecuto la consulta
+        $query="DELETE FROM asistencia_oferta_laboral WHERE Id_Migrante = '".$id."';";
+        $Funcionario = $Conexion->prepare($query); 
+        $Funcionario->execute();  //Ejecuto la consulta
+        $query="DELETE FROM migrante WHERE Id_Migrante = '".$id."';";
         $Funcionario = $Conexion->prepare($query); 
         $Funcionario->execute();  //Ejecuto la consulta
         return ["DELETE"=>"Correcto, Eliminado correctamente"];
