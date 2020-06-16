@@ -41,7 +41,7 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
                                         console.log("No especificado LLAVE");
                                         if(reason=="Llave no especificada"){
                                             console.log("No especificado LLAVE")
-                                            $("#modal_migrantes_details").modal("data-show"=false);
+                                            $("#modal_migrantes_details").modal({show:false});
                                             
                                         }
                                     })
