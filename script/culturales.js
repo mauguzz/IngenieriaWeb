@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             "data-target":"#modal_culturales_form"
                         },
                         action: ()=>{
-                            id=datatable.rows( { selected: true } ).data()[0][0];   
+                            
                             form_culturales_registrar.reset(); //Limpia el formulario
                             form_culturales_action.value="create";
                             form_culturales_submit.value="Registrar";                    

@@ -11,7 +11,7 @@ const mcontent = document.getElementById('content'); //Div del contenido princip
 /*--------------------------------------------------Forms-----------------------------------------------------*/
 const form_laborales_registrar = document.getElementById('f_laborales_registrar');
 const form_laborales_submit = document.getElementById('f_laborales_submit');
-const form_laborales_action = document.getElementById('f_laborales_submit');
+const form_laborales_action = document.getElementById('f_laborales_action');
 
 let id;
 
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             "data-target":"#modal_laborales_form"
                         },
                         action: ()=>{
-                            id=datatable.rows( { selected: true } ).data()[0][0];     
+                            
                             form_laborales_registrar.reset(); //Limpia el formulario
                             form_laborales_action.value="create";
                             form_laborales_submit.value="Registrar";                        
@@ -85,9 +85,9 @@ form_laborales_registrar.onsubmit = function(e){
             laborales_consultar_todos('#t_laborales', false)
         });
     }else if(form_laborales_action.value=="modify"){
-        laborales_registrar(formJson)
+        laborales_modificar(id, formJson)
         .then(result=>{
-            laborales_modificar('#t_laborales', false)
+            laborales_consultar_todos('#t_laborales', false)
         });
     }
 
