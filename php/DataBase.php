@@ -202,7 +202,7 @@ class DataBase{
 
             return ["POST"=>"Correcto, insertado correctamente", "llave_migrante"=>$Llave];
          }catch(PDOException $e){
-             return ["POST"=>"$e->getMessage()"];
+             return ["POST"=>$e->getMessage()];
          }
 
     }
@@ -227,7 +227,7 @@ class DataBase{
             $Funcionario->execute();  //Ejecuto la consulta
             return ["POST"=>"Correcto, insertado correctamente"];
          }catch(PDOException $e){
-             return ["POST"=>"$e->getMessage()"];
+             return ["POST"=>$e->getMessage()];
          }
 
     }
@@ -251,7 +251,7 @@ class DataBase{
             $Funcionario->execute();  //Ejecuto la consulta
             return ["POST"=>"Correcto, insertado correctamente"];
          }catch(PDOException $e){
-             return ["POST"=>"$e->getMessage()"];
+             return ["POST"=>$e->getMessage()];
          }
 
     }
@@ -313,7 +313,7 @@ public static function Modificar_Migrante ($mysqli,$id, $Nombre, $Apellido_Pater
         $Funcionario->execute();  //Ejecuto la consulta
         return ["PUT"=>"Correcto, Modificado correctamente"];
      }catch(PDOException $e){
-         return ["PUT"=>"$e->getMessage()"];
+         return ["PUT"=>$e->getMessage()];
      }
 
 }
@@ -337,7 +337,7 @@ public static function Modificar_Oferta_Laboral ($mysqli,$id,$Nombre, $Detalles,
         $Funcionario->execute();  //Ejecuto la consulta
         return ["PUT"=>"Correcto, Modificado correctamente"];
      }catch(PDOException $e){
-         return ["PUT"=>"$e->getMessage()"];
+         return ["PUT"=>$e->getMessage()];
      }
 
 }
@@ -362,7 +362,7 @@ public static function Modificar_Actividad_Cultural($mysqli,$id,$Nombre, $Fecha,
         $Funcionario->execute();  //Ejecuto la consulta
         return ["PUT"=>"Correcto, Modificado correctamente"];
      }catch(PDOException $e){
-         return ["PUT"=>"$e->getMessage()"];
+         return ["PUT"=>$e->getMessage()];
      }
 }
 
@@ -370,14 +370,21 @@ public static function Modificar_Actividad_Cultural($mysqli,$id,$Nombre, $Fecha,
 
 public static function Eliminar_Migrante($mysqli,$id){
    
-     $Tabla='migrante';
-     $Id_Tabla='Id_Migrante';
+     //$Tabla='migrante';
+     //$Id_Tabla='Id_Migrante';
     try {
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
         $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $query="
-        DELETE FROM ".$Tabla."
-        WHERE ".$Id_Tabla."=".$id.";";
+        $query="DELETE FROM registro WHERE Id_Migrante = '".$id."';";
+        $Funcionario = $Conexion->prepare($query); 
+        $Funcionario->execute();  //Ejecuto la consulta
+        $query="DELETE FROM asistencia_actividad_cultural WHERE Id_Migrante = '".$id."';";
+        $Funcionario = $Conexion->prepare($query); 
+        $Funcionario->execute();  //Ejecuto la consulta
+        $query="DELETE FROM asistencia_oferta_laboral WHERE Id_Migrante = '".$id."';";
+        $Funcionario = $Conexion->prepare($query); 
+        $Funcionario->execute();  //Ejecuto la consulta
+        $query="DELETE FROM migrante WHERE Id_Migrante = '".$id."';";
         $Funcionario = $Conexion->prepare($query); 
         $Funcionario->execute();  //Ejecuto la consulta
         return ["DELETE"=>"Correcto, Eliminado correctamente"];
