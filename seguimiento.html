@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Mejora el escalamiento en móviles-->
+        <meta charset="UTF-8">
+    </head>
+    <body>
+       
+       <!--Navbar bootstrap correspondiente a la barra superior principal-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">SIS-IW</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="migrantes.html">Migrantes <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="culturales.html">Actividades Culturales</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="laborales.html">Ofertas Laborales</a>
+                  </li>
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="B_Cerrar_Sesion" >Cerrar sesión</button>
+              </form>
+            </div>
+        </nav>
+         
+        <!--Container bootstrap correspondiente al contenido de la página-->
+        <div class="container" id="content">
+            <div class="row">
+                <div class="col-10">
+                    
+                    <!--Tabla de información de todos los migrantes (resumen)-->
+                    <div class="table-responsive">
+                        <table class="display compact" id="t_migrantes">
+                            <thead id="thead_migrantes">
+                            </thead>
+                            <tbody id="tbody_migrantes">
+                            </tbody>
+                        </table>
+                    </div>  
+                    
+                </div>
+                <div class="col-2" >
+                    <div class="row" id="datatable_buttons_container"></div>
+                    <div class="row" id="generic_buttons_container">
+                    </div>    
+                </div>
+            </div>
+        </div>
+        
+      
+        <!--Ventana modal bootstrap correspondiente a los detalles del migrante-->
+        <div class="modal fade" id="modal_migrantes_details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detalles del migrante</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!--Tabla de información general del migrante-->
+                        <table id="t_general">
+                            <thead id="thead">
+                            </thead>     
+                            <tbody id="tbody">
+                            </tbody>
+                        </table>
+                        <!--Tabla de ofertas laborales en las que participa el migrante-->
+                        <table id="t_laborales">
+                            <thead id="thead">
+                            </thead>
+                            <tbody id="tbody">
+                            </tbody>
+                        </table>
+                        <!--Tabla de actividades culturales en las que participa el migrante-->
+                        <table id="t_culturales">
+                            <thead id="thead">
+                            </thead>
+                            <tbody id="tbody">  
+                            </tbody>
+                        </table>
+                        <!--Tabla de registros en puntos de control en los que ha estado el migrante-->
+                        <table id="t_registros">
+                            <thead id="thead">
+                            </thead>
+                            <tbody id="tbody">  
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+      
+
+
+ 
+        
+
+        <script type="module" src="script/seguimiento.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+       
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> <!--Datatables-->
+        <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script> <!--Datatables Bootstrap 4-->
+        <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script> <!--Datatables Select-->
+        <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script> <!--Datatables Buttons-->
+
+        
+
+    </body>
+</html>
