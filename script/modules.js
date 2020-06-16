@@ -162,6 +162,10 @@ function table_eliminar(uri){
 export function migrante_consultar(id, prompt, t_general, t_culturales, t_laborales, t_registros){ //thead_general, thead_culturales, thead_laborales, thead_registros, tbody_general, tbody_culturales, tbody_laborales, tbody_registros
     let request;
     let llave="";
+    t_general.children['tbody'].innerHTML="";
+    t_culturales.children['tbody'].innerHTML="";
+    t_laborales.children['tbody'].innerHTML="";
+    t_registros.children['tbody'].innerHTML="";
     return new Promise((resolve,reject)=>{
         if(prompt){ 
             llave = window.prompt("Ingrese la llave que le proporcionó su familiar", "");
