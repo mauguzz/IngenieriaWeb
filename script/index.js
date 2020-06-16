@@ -5,6 +5,8 @@ import {Iniciar_Sesion,
 
 const btn_Login = document.getElementById('btn_Login'); //  HTML to JS
 const Form_Iniciar_Sesion = document.getElementById('Form_Iniciar_Sesion');
+const Form_Buscar_Migrante=document.getElementById('Form_Buscar_Migrante');
+
 
 Form_Iniciar_Sesion.onsubmit = function(e){ //Registro el evento a mi objeto botón, en este caso es a un click
     e.preventDefault();
@@ -12,3 +14,10 @@ Form_Iniciar_Sesion.onsubmit = function(e){ //Registro el evento a mi objeto bot
     let formJson = JSON.stringify(Object.fromEntries(formData)); //Convierto mi objeto a un formato Json
     Iniciar_Sesion(formJson);  
 };
+
+Form_Buscar_Migrante.onsubmit=function(e){
+    e.preventDefault
+    let FormData=new FormData(Form_Buscar_Migrante);
+    let FormJson=Json.stringify(Object.fromEntries(formData));
+    Form_Buscar_Migrante(FormJson);//Falta agregar la función 
+}

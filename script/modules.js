@@ -434,8 +434,7 @@ export function Validar_Sesion(){
             if (resjson.ADMIN==1){
                 window.location.href ="http://localhost/IngenieriaWeb/administrador.html";               
             }
-            console.log("Sesión_Iniciada"); 
-            
+            console.log("Sesión_Iniciada");            
         }
     })
     .catch(e=>{
@@ -447,15 +446,11 @@ export function Validar_Sesion(){
 export function Cerrar_Sesion(){
     fetch("php/res_sesion.php",{ method:'DELETE'})
     .then(handleHttpErrors)
-    .then(response=>{
-        if (response.redirected) {
-            window.location.href = response.url;
-        }
+    .then(res=>res.json())
+    .then(resjson=>{
+        console.log('Sesión finalizada')
     })
     .catch(e=>{
         console.log(e);
-        console.log("Catching");
-    })
-
-
+    }) 
 }

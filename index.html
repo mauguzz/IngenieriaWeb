@@ -1,57 +1,86 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Mejora el escalamiento en móviles-->
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/index.css}">
+        <meta name="viewport" content="width=device-width, 
+                                        user-scalable-no, 
+                                        initial-scale=1.0,
+                                        maximum-scale=1.0"> 
+        <link rel="stylesheet" type="text/css" href="css/Index.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     </head>
-
     <body>
-
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">SIS-IW</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>    
         </nav>
+        <aside>
+            <section class="container-fluid">              
+                <div class="modal-dialog text-center">
+                    <div class="col-sm-8 main-section" >
+                        <div class="modal-content">
+                            <div class="col-12 user-img">
+                                <img src="img/SIS-IW.png" th:src="@{/img/user.png}"/>
+                            </div>      
+                            <form id="Form_Iniciar_Sesion" class="col-12">
+                                <h3 class="text-center font-weigth-bold">Iniciar Sesión</h3>
+                                <div class="form-group">
+                                    <input type = "text" name = "Usuario" id="User" placeholder="Usuario:" autocomplete="off" required >              
+                                </div>
+                                <div class="form-group">   
+                                    <input type="password" name="Clave" id="Pass"  placeholder="Contraseña:" autocomplete="off" required >         
+                                </div>
+                                <div class="form-group">
+                                    <button id="btn_Login" class="btn-primary"> Iniciar Sesión</button>
+                                </div>
+                                <div class="form-group">
+                                    <a href = "#" >Recuperar contraseña</a>
+                                </div>        
+                            </form>
+    
+                        </div>
+                    </div> 
+                </div>
+            </section> 
+        </aside>
+        <main>
+            <section class="container-fluid">              
+                <div class="modal-dialog text-center">
+                    <div class="col-sm-8 main-section" >
+                        <div class="modal-content">
+                            <div class="col-12 user-img">
+                                <img src="img/SIS-IW.png" th:src="@{/img/user.png}"/>
+                            </div>      
+                            <form id="Form_Buscar_Migrante" class="col-12">
+                                <h5 class="text-center font-weigth-bold">Seguimiento de familiar</h5>
+                                <div class="form-group">
+                                    <input type = "text" name = "Nombre" id="Nombre" placeholder="Nombre:" autocomplete="off" required >              
+                                </div>
+                                <div class="form-group">   
+                                    <input type="text" name="Apellido_Paterno" id="Apellido_Paterno" placeholder="Apellido Paterno:" autocomplete="off" required >         
+                                </div>
+                                <div class="form-group">   
+                                    <input type="texr" name="Apellido_Materno" id="Apellido_Materno" placeholder="Apellido Materno:" autocomplete="off" required >         
+                                </div>
+                                <div class="form-group">
+                                    <button id="btn_Buscar" class="btn-primary">Buscar</button>
+                                </div>      
+                            </form>
+                        </div>
+                    </div> 
+                </div>
+            </section> 
+        </main>
 
-         <!--Esto es solo una prueba de otra tabla, después se van a hacer varias páginas-->
-        <section class="container-fluid">    
-            
-            <div class="modal-dialog text-center">
-                <div class="col-sm-8 main-section" >
-                    <div class="modal-content">
-                        <div class="col-12 user-img">
-                            <img src="img/SIS-IW.png" th:src="@{/img/user.png}"/>
-                        </div>      
-                        <form id="Form_Iniciar_Sesion" class="col-12">
-                            <h3 class="text-center font-weigth-bold">Iniciar Sesión</h3>
-                            <div class="form-group">
-                                <input type = "text" name = "Usuario" id="User" placeholder="Usuario:" autocomplete="off" required >              
-                            </div>
-                            <div class="form-group">   
-                                <input type="password" name="Clave" id="Pass"  placeholder="Contraseña:" autocomplete="off" required >         
-                            </div>
-                            <div class="form-group">
-                                <button id="btn_Login" class="btn-primary"> Iniciar Sesión</button>
-                            </div>
-                            <div class="form-group">
-                                <a href = "#" >Recuperar contraseña</a>
-                            </div>        
-                        </form>
-
-                    </div>
-                </div> 
-            </div>
-        </section>
         <script type="module" src="script/index.js"></script>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    
     </body>
     
 </html>
