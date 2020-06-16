@@ -87,7 +87,12 @@ function table_generate_datatables(tablename, init, rows, cols){
             });
         }else{
             console.log("Caso sin rows")
-            datatable = $(tablename).DataTable({columns: customCols});
+            datatable = $(tablename).DataTable(
+                {
+                    columns: customCols,
+                    dom: "Bftip"
+                
+                });
             datatable.clear();
             
             datatable.draw();
