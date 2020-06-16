@@ -21,7 +21,7 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
     document.addEventListener("DOMContentLoaded", function(event) {
     
         
-            migrante_consultar_todos('#t_migrantes', true)
+            migrante_seguimiento_todos('#t_migrantes', true)
             .then(datatable=>{
                 new $.fn.dataTable.Buttons(datatable, { 
                     buttons: 

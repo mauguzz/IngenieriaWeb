@@ -255,6 +255,22 @@ export function migrante_consultar_todos(table, init){  //thead_migrantes, tbody
     })
 }
 
+export function migrante_seguimiento_todos(table, init){  //thead_migrantes, tbody_migrantes
+    return new Promise((resolve, reject)=>{
+        datatable_consultar_todos("php/res_migrantes.php", "migrantes", table, init, {
+            //Hace falta obtener el ID desde el View de MySQL, para poder hacer tratamientos posteriores
+            'ID' : "Id_Migrante",
+            'Nombre':'Nombre', 
+            'Apellido Paterno':'Apellido_Paterno', 
+            'Apellido Materno':'Apellido_Materno', 
+            'Origen':'Pais', 
+        })
+        .then(datatable=>{resolve(datatable)})
+        .catch(e=>{reject(e)})
+    })
+}
+
+
 export function migrante_registrar(jsonData){
     return new Promise((resolve, reject)=>{
         table_registrar("php/res_migrantes.php", jsonData)
