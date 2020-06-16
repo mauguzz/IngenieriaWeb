@@ -1,5 +1,6 @@
 <?php
 class DataBase{	
+    private static $Conexion_Alt;
 /*-------------------------------------------------Conexión-------------------------------------------------*/
     public static function Conectar() {        
         define('Server', 'localhost');
@@ -28,8 +29,24 @@ class DataBase{
 
     public static function Mostrar_Migrante_Detalle ($mysqli, $Id_Migrante){//Recibe objeto de conexión
 
-        //$Id_Migrante=$_POST['Id_Migrante']; //Se hace el cast de HTML a un variable PHP por el metodo POST 
-        $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+        //Lo siguiente es un parche, debido a que en res_migrantes.php llamo dos veces a una función de DataBase
+        //estas son primero Consultar_Llave_Migrante() y después esta función Mostrar_Migrante_Detalle, y como
+        //me pide hacer la conexión para cada una de estas, PHP me regresaba una advertencia de que las constantes de
+        //servidor define('Server', 'localhost');
+        //define('DataBase', 'Sistema_Migracion');
+        //define('user', 'WebApplication');
+        //define('password', '123456');	
+        //ya estaban definidas, por lo que para no modificar mucho la estructura de lo que se tiene hasta ahorita hice el
+        //siguiente parche. Lo ideal sería modificar todas las funciones para que no se tenga que volver a llamar
+        //a la función Conectar() tanto en los archivos res_xxxxxx.php y después redefinirlo en cada función como se hacía hasta ahora
+        //Ver implementación de lo ideal en Consultar_Llave_Migrante(), observar que es una variable estática de la clase,
+        //Accesible por todas las funciones.
+        if(!isset(DataBase::$Conexion_Alt)){
+            $Conexion=$mysqli->Conectar();
+        }else{
+            $Conexion=DataBase::$Conexion_Alt;
+        }
+        
         $query="SELECT * FROM Migrantes_Detalle where Id_Migrante='".$Id_Migrante."'";//Introduzco la consulta
         $Migrante = $Conexion->prepare($query); //Agrego la variable $Id_Migrante
         $Migrante->execute();  //Ejecuto la consulta
@@ -48,6 +65,15 @@ class DataBase{
                 'laborales'=>$Asistencia_Oferta_Laboral->fetchAll(PDO::FETCH_ASSOC)
     )       ; //Retorno las matrices
 
+    }
+
+    public static function Consultar_Llave_Migrante($mysqli, $id){
+        //$Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+        DataBase::$Conexion_Alt=DataBase::Conectar();
+        $query = "SELECT Id_Migrante, Llave FROM migrante WHERE Id_Migrante='".$id."' ";
+        $result = DataBase::$Conexion_Alt->prepare($query); //Agrego variables (Si es el caso)
+        $result->execute();  //Ejecuto la consulta
+        return ["migrante"=>$result->fetchAll(PDO::FETCH_ASSOC)];
     }
 
     public static function Mostrar_Actividades_Culturales($mysqli){

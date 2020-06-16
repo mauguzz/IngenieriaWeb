@@ -59,24 +59,22 @@ function table_generate_rowsandcols(thead, tbody, rows, columns){
 }
 
 function table_generate_datatables(tablename, init, rows, cols){
-    
+    //cols={"Apellido Paterno" : "Apellido_P", "Apellido Materno" : "Apellido_M", "ind" : "value"}
+    let datatable;
     let dataSet = [];
     let customCols = [];
-    let first = true;
-   //cols={"Apellido Paterno" : "Apellido_P", "Apellido Materno" : "Apellido_M", "ind" : "value"}
+ 
     rows.forEach((row)=>{
         let result = [];
         Object.entries(cols).forEach(([ind, value])=>{
-            result.push(row[value]);
-            if(first) customCols.push({title: ind})
+            result.push(row[value]); 
         })
         dataSet.push(result);
-        first=false;
     })
-
-    console.log(dataSet);
-    
-    let datatable;
+    Object.entries(cols).forEach(([ind, value])=>{
+        customCols.push({title: ind})
+    })
+     
     if(init){
         datatable = $(tablename).DataTable( {
             select: true,
@@ -86,15 +84,10 @@ function table_generate_datatables(tablename, init, rows, cols){
         });
     }else{ //Caso de solo actualización
         datatable = $(tablename).DataTable();
-        //datatable.fnClearTable();
-        //datatable.fnAddData(dataSet);
-
         datatable.clear();
         datatable.rows.add(dataSet);
         datatable.draw();
     }
-    
-
     return datatable;
 }
 
@@ -166,61 +159,83 @@ function table_eliminar(uri){
 
 
 //FUNCIONES DE MIGRANTE//
-export function migrante_consultar(id, t_general, t_culturales, t_laborales, t_registros){ //thead_general, thead_culturales, thead_laborales, thead_registros, tbody_general, tbody_culturales, tbody_laborales, tbody_registros
-    fetch("php/res_migrantes.php/"+id, {
-        method: 'GET'
-    })
-    .then(handleHttpErrors)
-    .then(res=>res.json()) //Cambiar a .text() para pruebas, y a .json() para funcionamiento
-    .then(res_json=>{
- 
-        let general=res_json.general[0];
-        let laborales=res_json.laborales;
-        let culturales=res_json.culturales;
-        let registros=res_json.registros;
+export function migrante_consultar(id, prompt, t_general, t_culturales, t_laborales, t_registros){ //thead_general, thead_culturales, thead_laborales, thead_registros, tbody_general, tbody_culturales, tbody_laborales, tbody_registros
+    let request;
+    let llave="";
+    t_general.children['tbody'].innerHTML="";
+    t_culturales.children['tbody'].innerHTML="";
+    t_laborales.children['tbody'].innerHTML="";
+    t_registros.children['tbody'].innerHTML="";
+    t_general.children['thead'].innerHTML="";
+    t_culturales.children['thead'].innerHTML="";
+    t_laborales.children['thead'].innerHTML="";
+    t_registros.children['thead'].innerHTML="";
 
-        //tbody_general.innerHTML="";
-        t_general.children['tbody'].innerHTML="";
+    return new Promise((resolve,reject)=>{
+        if(prompt){ 
+            let header = new Headers();
 
-        //Object:={key: value, key: value, key:value}
-        Object.entries(general).forEach(([key, value])=>{
-            let row_general = document.createElement('tr');
-            let var_general = document.createElement('td');
-            let val_general = document.createElement('td');
+            llave = window.prompt("Ingrese la llave que le proporcionó su familiar", "");
+            if (llave == null || llave == "") {reject("Llave no especificada"); return;};
             
-            var_general.innerHTML=`${key}`;
-            val_general.innerHTML=`${value}`;
-            row_general.appendChild(var_general);
-            row_general.appendChild(val_general);
-            //tbody_general.appendChild(row_general);
-            t_general.children['tbody'].appendChild(row_general);
-        });
-        
-        
-
-        
+            header.set('Authorization', 'Basic ' + btoa("familiar:" + llave));
+            request = new Request('php/res_migrantes.php/'+id,{
+                method: 'GET',
+                headers: header
+            });
+        }else{
+            request = new Request('php/res_migrantes.php/'+id,{
+                method: 'GET',
+            });
+        }
+        fetch(request)
+        .then(handleHttpErrors)
+        .then(res=>res.json()) //Cambiar a .text() para pruebas, y a .json() para funcionamiento
+        .then(res_json=>{
+            console.log(res_json);
+     
+            let general=res_json.general[0];
+            let laborales=res_json.laborales;
+            let culturales=res_json.culturales;
+            let registros=res_json.registros;
     
-        table_generate_rowsandcols(t_laborales.children['thead'], t_laborales.children['tbody'], laborales, {
-            'Fecha':'Fecha', 
-            'Trabajo':'Actividad',  
-            'Direccion':'Direccion'
-        });
-
-        table_generate_rowsandcols(t_culturales.children['thead'], t_culturales.children['tbody'], culturales, {
-            'Fecha':'fecha', 
-            'Actividad Cultural':'Actividad', 
-            'Direccion':'Direccion', 
+            t_general.children['tbody'].innerHTML="";
+    
+            Object.entries(general).forEach(([key, value])=>{
+                let row_general = document.createElement('tr');
+                let var_general = document.createElement('td');
+                let val_general = document.createElement('td');
+                
+                var_general.innerHTML=`${key}`;
+                val_general.innerHTML=`${value}`;
+                row_general.appendChild(var_general);
+                row_general.appendChild(val_general);
+                t_general.children['tbody'].appendChild(row_general);
+            });
+            
+            table_generate_rowsandcols(t_laborales.children['thead'], t_laborales.children['tbody'], laborales, {
+                'Fecha':'Fecha', 
+                'Trabajo':'Actividad',  
+                'Direccion':'Direccion'
+            });
+    
+            table_generate_rowsandcols(t_culturales.children['thead'], t_culturales.children['tbody'], culturales, {
+                'Fecha':'fecha', 
+                'Actividad Cultural':'Actividad', 
+                'Direccion':'Direccion', 
+            })
+    
+            table_generate_rowsandcols(t_registros.children['thead'], t_registros.children['tbody'], registros, {
+                'Punto de control':'Punto de_control', 
+                'Fecha de Entrada':'Fecha_Entrada', 
+                'Fecha de salida': 'Fecha_Salida', 
+                'Alimentación':'Alimentacion'
+            })
+            resolve("Consulta correcta");
         })
-
-        table_generate_rowsandcols(t_registros.children['thead'], t_registros.children['tbody'], registros, {
-            'Punto de control':'Punto de_control', 
-            'Fecha de Entrada':'Fecha_Entrada', 
-            'Fecha de salida': 'Fecha_Salida', 
-            'Alimentación':'Alimentacion'
-        })
-    })
-    .catch(e=>console.log(e));
-
+        .catch(e=>reject(e));
+    });
+    
 }
 
 export function migrante_consultar_todos(table, init){  //thead_migrantes, tbody_migrantes
@@ -239,6 +254,22 @@ export function migrante_consultar_todos(table, init){  //thead_migrantes, tbody
         .catch(e=>{reject(e)})
     })
 }
+
+export function migrante_seguimiento_todos(table, init){  //thead_migrantes, tbody_migrantes
+    return new Promise((resolve, reject)=>{
+        datatable_consultar_todos("php/res_migrantes.php", "migrantes", table, init, {
+            //Hace falta obtener el ID desde el View de MySQL, para poder hacer tratamientos posteriores
+            'ID' : "Id_Migrante",
+            'Nombre':'Nombre', 
+            'Apellido Paterno':'Apellido_Paterno', 
+            'Apellido Materno':'Apellido_Materno', 
+            'Origen':'Pais', 
+        })
+        .then(datatable=>{resolve(datatable)})
+        .catch(e=>{reject(e)})
+    })
+}
+
 
 export function migrante_registrar(jsonData){
     return new Promise((resolve, reject)=>{

@@ -17,7 +17,26 @@ function res_get(){
 
     if (count($args)==1){
         //Se pasó el id. //CASO: Obtener detalles de un migrante
-        $result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0]); //Descomentar para version final
+        if(isset($_SESSION['USERID'])){ //$sesion->USERID!=NULL
+            $result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0]); //Descomentar para version final
+        }elseif (isset($_SERVER['PHP_AUTH_PW'])) {
+            //Antes de ejecutar lo siguiente, se tiene que verificar que para el usuario args[0] tiene la llave correcta
+            $result=$conexion->Consultar_Llave_Migrante($conexion,$args[0]);
+            if($result["migrante"][0]["Llave"]==$_SERVER['PHP_AUTH_PW']){
+                $result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0]); //Como ya se hizo la conexión previamente, con el valor true se le indica que ya no se vuelva a conectar (ver implementación en DataBase.php)
+                unset($_SERVER['PHP_AUTH_PW']);
+            }else{
+                header("HTTP/1.1 401 Unauthorized");
+                unset($_SERVER['PHP_AUTH_PW']);
+                return;
+            }
+            
+        }else{
+            header("HTTP/1.1 401 Unauthorized");
+        }
+
+        
+        
     }else{
         //No se pasó el id. //CASO: Obtener todos los migrantes
         $result = $conexion->Mostrar_Migrantes_Todos($conexion);
@@ -114,6 +133,16 @@ function res_delete($id){
     );
 }
 
+
+session_start();/*Continuamos la sesión*/
+$sesion=new stdclass();
+if (!empty($_SESSION['USERID']) and !empty($_SESSION['USERNAME'])){
+        $sesion->USERID=$_SESSION['USERID'];
+        $sesion->USERNAME=$_SESSION['USERNAME'];
+        $sesion->POINTID=$_SESSION['POINTID'];  
+}else{
+    $sesion->USERID=NULL;
+}
 
 //CÓDIGO EJECUTADO AL MOMENTO DE LLAMAR AL ARCHIVO PHP
 
