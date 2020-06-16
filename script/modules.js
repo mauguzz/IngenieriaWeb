@@ -59,10 +59,11 @@ function table_generate_rowsandcols(thead, tbody, rows, columns){
 }
 
 function table_generate_datatables(tablename, init, rows, cols){
+    //cols={"Apellido Paterno" : "Apellido_P", "Apellido Materno" : "Apellido_M", "ind" : "value"}
+    let datatable;
     let dataSet = [];
     let customCols = [];
  
-   //cols={"Apellido Paterno" : "Apellido_P", "Apellido Materno" : "Apellido_M", "ind" : "value"}
     rows.forEach((row)=>{
         let result = [];
         Object.entries(cols).forEach(([ind, value])=>{
@@ -70,14 +71,10 @@ function table_generate_datatables(tablename, init, rows, cols){
         })
         dataSet.push(result);
     })
-
     Object.entries(cols).forEach(([ind, value])=>{
         customCols.push({title: ind})
     })
-
-    console.log(dataSet);
-   
-    let datatable;
+     
     if(init){
         datatable = $(tablename).DataTable( {
             select: true,
@@ -85,39 +82,12 @@ function table_generate_datatables(tablename, init, rows, cols){
             columns: customCols,
             dom: "frtip"
         });
-        /*
-        if(dataSet.length!=0){
-            datatable = $(tablename).DataTable( {
-                select: true,
-                data: dataSet,
-                columns: customCols,
-                dom: "frtip"
-            });
-        }else{
-            console.log("Caso sin rows")
-            datatable = $(tablename).DataTable(
-                {
-                    select: true,
-                    data: dataSet,
-                    columns: customCols,
-                    dom: "frtip"
-                
-                });
-            
-        }
-        */
-
     }else{ //Caso de solo actualización
         datatable = $(tablename).DataTable();
-        //datatable.fnClearTable();
-        //datatable.fnAddData(dataSet);
-
         datatable.clear();
         datatable.rows.add(dataSet);
         datatable.draw();
     }
-    
-
     return datatable;
 }
 
