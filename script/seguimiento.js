@@ -15,7 +15,7 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
     const B_Cerrar_Sesion=document.getElementById('B_Cerrar_Sesion');
     
     let id =0; //Variable de prueba, id de migrante que se aplica la acción
-    
+    let llave;
     
     
     document.addEventListener("DOMContentLoaded", function(event) {
@@ -37,13 +37,14 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
                                 action: ()=>{
                                     id=datatable.rows( { selected: true } ).data()[0][0]; 
                                     migrante_consultar(id, true, t_general, t_culturales, t_laborales, t_registros)
+                                    .then(response=>{
+                                        llave=true;
+                                    })
                                     .catch(reason=>{
                                         console.log("No especificado LLAVE");
                                         if(reason=="Llave no especificada"){
                                             console.log("No especificado LLAVE")
-                                            $('#modal_migrantes_details').on('shown.bs.modal', function() { 
-                                                $("#modal_migrantes_details").modal('hide');
-                                            })
+                                            llave=false;
                                             
                                         }
                                     })
@@ -64,7 +65,9 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
     /////////////////////////////////////////////////////////////////7
     //Para limpiar el formulario, en la ventana modal se puede poner un botón en el cual se pueda dar clic a propia decisión si limpiarlo o no, esto para que sea útil en el caso de modificar
     
-    
+    $('#modal_migrantes_details').on('shown.bs.modal', function() { 
+        if(!llave){ $("#modal_migrantes_details").modal('hide');}
+    })
     
     
     B_Cerrar_Sesion.addEventListener("click", function(event) {
