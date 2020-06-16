@@ -22,7 +22,7 @@ function res_get(){
         }elseif (isset($_SERVER['PHP_AUTH_PW'])) {
             //Antes de ejecutar lo siguiente, se tiene que verificar que para el usuario args[0] tiene la llave correcta
             $result=$conexion->Consultar_Llave_Migrante($conexion,$args[0]);
-            $result=$result["migrante"]["Llave"];
+            $result=$result["migrante"][0]["Llave"];
             //$result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0]); //Descomentar para version final
         }else{
             header("HTTP/1.1 401 Unauthorized");
