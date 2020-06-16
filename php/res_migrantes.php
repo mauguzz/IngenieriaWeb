@@ -130,6 +130,7 @@ function res_delete($id){
         $conexion,
         $id
     );
+    return $result;
 }
 
 
