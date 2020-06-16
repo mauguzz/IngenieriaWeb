@@ -61,7 +61,7 @@ class DataBase{
         //$Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
         $Conexion_Alt=DataBase::Conectar();
         $query = "SELECT Id_Migrante, Llave FROM migrante WHERE Id_Migrante='".$id."' ";
-        $result = $ConexionAlt->prepare($query); //Agrego variables (Si es el caso)
+        $result = $Conexion_Alt->prepare($query); //Agrego variables (Si es el caso)
         $result->execute();  //Ejecuto la consulta
         return ["migrante"=>$result->fetchAll(PDO::FETCH_ASSOC)];
     }
