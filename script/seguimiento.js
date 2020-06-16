@@ -41,7 +41,7 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
                                         console.log("No especificado LLAVE");
                                         if(reason=="Llave no especificada"){
                                             console.log("No especificado LLAVE")
-                                            //$('#close').click(); 
+                                            $('#close').click(); 
                                             //$("[data-dismiss=modal]").trigger({ type: "click" }); 
                                             $("#modal_migrantes_details").modal('hide');//ocultamos el modal
                                                 $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
