@@ -70,7 +70,8 @@ function res_put($id){
             $conexion,
             $id,
             $data->nombre, 
-            $data->fecha, 
+            $data->fecha,
+            '1',
             $data->direccion, 
             $data->detalles
         );
