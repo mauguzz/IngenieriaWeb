@@ -18,7 +18,7 @@ const form_culturales_action = document.getElementById('f_culturales_submit');
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
-    culturales_consultar_todos('#t_culturales', true)
+    culturales_consultar_todos('#t_culturaless', true)
     .then(datatable=>{
         new $.fn.dataTable.Buttons(datatable, { 
             buttons: 
