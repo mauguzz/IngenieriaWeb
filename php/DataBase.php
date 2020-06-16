@@ -33,6 +33,7 @@ class DataBase{
         //if(!$SeguimientoFamiliar) $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
         if(!isset($Conexion_Alt)){
             $Conexion=$mysqli->Conectar();
+            echo('No está seteado');
         }else{
             $Conexion=$Conexion_Alt;
         }
