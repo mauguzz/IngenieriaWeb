@@ -159,10 +159,23 @@ function table_eliminar(uri){
 
 
 //FUNCIONES DE MIGRANTE//
-export function migrante_consultar(id, t_general, t_culturales, t_laborales, t_registros){ //thead_general, thead_culturales, thead_laborales, thead_registros, tbody_general, tbody_culturales, tbody_laborales, tbody_registros
-    fetch("php/res_migrantes.php/"+id, {
-        method: 'GET'
-    })
+export function migrante_consultar(id, prompt, t_general, t_culturales, t_laborales, t_registros){ //thead_general, thead_culturales, thead_laborales, thead_registros, tbody_general, tbody_culturales, tbody_laborales, tbody_registros
+
+    let request;
+    if(prompt){ 
+        let llave = prompt("Ingrese la llave que le proporcionó su familiar", "");
+        header = new Headers('Authorization', 'Basic ' + btoa("familiar:" + llave));
+        //header.set('Authorization', 'Basic ' + btoa("familiar:" + llave));
+        request = new Request('php/res_migrantes.php/'+id,{
+            method: 'GET',
+            headers: header
+        })
+    }else{
+        request = new Request('php/res_migrantes.php/'+id,{
+            method: 'GET',
+        })
+    }
+    fetch(request)
     .then(handleHttpErrors)
     .then(res=>res.json()) //Cambiar a .text() para pruebas, y a .json() para funcionamiento
     .then(res_json=>{
