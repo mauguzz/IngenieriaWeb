@@ -78,8 +78,9 @@ function table_generate_datatables(tablename, init, rows, cols){
 
     Object.entries(cols).forEach(([ind, value])=>{
         rows.forEach((row,index)=>{
-            if (first) {let result =[]; dataSet.push(result)}
+            if (first) {let result =[];}
             result[index]=row[value];
+            if (first) {dataSet.push(result);}
         })
         first = false
         customCols.push({title: ind})
