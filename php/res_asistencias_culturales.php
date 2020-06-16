@@ -16,11 +16,11 @@ function res_get(){
 
     if (count($args)==1){
         //Se pasó el id. //CASO: Obtener una única actividad cultural
-        $result=$conexion->Mostrar_Registros($conexion);
+        $result=$conexion->Mostrar_Asistencia_Actividad_Cultural($conexion);
         
     }else{
         //No se pasó el id. //CASO: Obtener todos las actividades culturales
-        $result=$conexion->Mostrar_Registros($conexion);
+        $result=$conexion->Mostrar_Asistencia_Actividad_Cultural($conexion);
         
     }
 
@@ -29,43 +29,58 @@ return $result;
 
 //MÉTODO HTTP POST
 function res_post($id){
-    
-    $conexion= new Database();
-    //Id_Punto_Control,'Punto de control',Fecha_Entrada,Fecha_Salida,Alimentacion
-    $result = $conexion->Crear_Registro(
-        $conexion,
-        $id //ID DE MIGRANTE
-    );
+    //USO: No es necesario pasar argumentos, la función lee el contenido del body de la solicitud HTTP y trata los datos para hacer la inserción en la BD
+    //Obtención de datos de la solicitud
+    if($json=file_get_contents('php://input')){
+        $data=json_decode($json);
+
+        $conexion= new Database();
+
+
+        //Id_Punto_Control,'Punto de control',Fecha_Entrada,Fecha_Salida,Alimentacion
+        $result = $conexion->Crear_Asistencia_Actividad_Cultural(
+            $conexion,
+            $id, //ID DE MIGRANTE
+            $data->$id //ID DE ACTIVIDAD
+        );
+
+    }else{
+        $result = ["Error"=>"No se enviaron todos los parametros correctamente"];
+        header('HTTP/1.1 400 Bad Request');
+        return;
+    }
 
 
     return $result;
 
 }
 
-//MÉTODO HTTP PUT
-function res_put($id){
-    //USO: Es necesario pasar un único argumento $id, para conocer cual row se va a modificar.
-    
-    $conexion= new Database();
-
-
-    $result = $conexion->Modificar_Registro(
-        $conexion,
-        $id, //ID DE MIGRANTE
-    );
-
-    return $result;
-}
 
 //MÉTODO HTTP DELETE
 function res_delete($id){
 
-    $conexion= new Database();
+    if($json=file_get_contents('php://input')){
+        $data=json_decode($json);
 
-    $result = $conexion->Eliminar_Registro (
-        $conexion,
-        $id //ID DE MIGRANTE
-    );
+        $conexion= new Database();
+
+
+        //Id_Punto_Control,'Punto de control',Fecha_Entrada,Fecha_Salida,Alimentacion
+        $result = $conexion->Eliminar_Asistencia_Actividad_Cultural (
+            $conexion,
+            $id, //ID DE MIGRANTE
+            $data->$id //ID DE ACTIVIDAD
+        );
+
+    }else{
+        $result = ["Error"=>"No se enviaron todos los parametros correctamente"];
+        header('HTTP/1.1 400 Bad Request');
+        return;
+    }
+
+
+
+
     
     return $result;
 }
@@ -94,15 +109,13 @@ if($uri[0] == 'res_registros.php'){
         case 'POST':
                 $id_specified ? header('HTTP/1.1 400 Bad Request') : ($result = res_post());
         break;
-        case 'PUT':
-                $id_specified ? ($result=res_put($id)) : header('HTTP/1.1 400 Bad Request');
-        break;
+        
         case 'DELETE':
                 $id_specified ? ($result=res_delete($id)) : header('HTTP/1.1 400 Bad Request');
         break;
         default:
                 header('HTTP/1.1 405 Method not allowed');
-                header('Allow: GET, POST, PUT, DELETE');
+                header('Allow: GET, POST, DELETE');
         break;
     }
         

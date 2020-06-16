@@ -50,7 +50,7 @@ class DataBase{
         $query="SELECT * FROM Migrantes_Detalle where Id_Migrante='".$Id_Migrante."'";//Introduzco la consulta
         $Migrante = $Conexion->prepare($query); //Agrego la variable $Id_Migrante
         $Migrante->execute();  //Ejecuto la consulta
-        $query="SELECT  Id_Punto_Control,'Punto de control',Fecha_Entrada,Fecha_Salida,Alimentacion FROM Migrantes_Registro where Id_Migrante='".$Id_Migrante."'";
+        $query="SELECT  Id_Punto_Control,'Punto_de_Control',Fecha_Entrada,Fecha_Salida,Alimentacion FROM Migrantes_Registro where Id_Migrante='".$Id_Migrante."'";
         $Registro = $Conexion->prepare($query); //Agrego la variable $Id_Migrante
         $Registro->execute();  //Ejecuto la consulta
         $query="SELECT Id_Actividad,Actividad,Direccion,fecha FROM  Asistencia_Actividad_Cultural_View where Id_Migrante='".$Id_Migrante."'";
@@ -90,7 +90,7 @@ class DataBase{
         $query="SELECT * FROM Asistencia_Actividad_Cultural_View";//Introduzco la consulta
         $Asistencia_Actividad_Cultural = $Conexion->prepare($query); //
         $Asistencia_Actividad_Cultural->execute();  //Ejecuto la consulta
-        return ['Asistencia_Actividad_Cultural'=>$Asistencia_Actividad_Cultural->fetchAll(PDO::FETCH_ASSOC)];
+        return ['asistencias_culturales'=>$Asistencia_Actividad_Cultural->fetchAll(PDO::FETCH_ASSOC)];
     }
  
 
@@ -108,7 +108,7 @@ class DataBase{
         $query="SELECT * FROM Asistencia_Oferta_Laboral_View";//Introduzco la consulta
         $Asistencia_Oferta_Laboral = $Conexion->prepare($query); //
         $Asistencia_Oferta_Laboral->execute();  //Ejecuto la consulta
-        return ['Asistencia_Oferta_Laboral'=>$Asistencia_Oferta_Laboral->fetchAll(PDO::FETCH_ASSOC)];
+        return ['asistencias_laborales'=>$Asistencia_Oferta_Laboral->fetchAll(PDO::FETCH_ASSOC)];
     }
 
     public static function Mostrar_Funcionario($mysqli){
@@ -277,6 +277,39 @@ class DataBase{
 
     }
 
+    public static function Crear_Asistencia_Actividad_Cultural($mysqli, $ID_Migrante, $ID_Actividad){
+        //La fecha se inserta mediante la función date() de Mysql
+        try{
+            $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+            $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $query="INSERT INTO asistencia_actividad_cultural VALUES ('".$ID_Actividad."','".$ID_Migrante."', (SELECT CURDATE()))";
+            $Asistencia = $Conexion->prepare($query); 
+            $Asistencia->execute();  //Ejecuto la consulta
+            return ["POST"=>"Correcto, insertado correctamente"];
+
+        }catch(PDOException $e){
+            return ["POST"=>$e->getMessage()];
+        }
+        
+    }
+
+    public static function Crear_Asistencia_Oferta_Laboral($mysqli, $ID_Migrante, $ID_Actividad){
+        //La fecha se inserta mediante la función date() de Mysql
+        try{
+            $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+            $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $query="INSERT INTO asistencia_oferta_laboral VALUES ('".$ID_Actividad."','".$ID_Migrante."', (SELECT CURDATE()))";
+            $Asistencia = $Conexion->prepare($query); 
+            $Asistencia->execute();  //Ejecuto la consulta
+            return ["POST"=>"Correcto, insertado correctamente"];
+
+        }catch(PDOException $e){
+            return ["POST"=>$e->getMessage()];
+        }
+
+        
+    }
+
 /*----------------------------------------------Modificaciones------------------------------------------------ */
 
 public static function Modificar_Migrante ($mysqli,$id, $Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion){
@@ -435,6 +468,36 @@ public static function Eliminar_Actividad_Cultural($mysqli,$id){
 public static function Eliminar_Registro($conexion, $ID_Migrante){
     //Sacar Id de punto de control desde las variables de sesion
     
+}
+
+public static function Eliminar_Asistencia_Actividad_Cultural($conexion, $ID_Migrante, $ID_Actividad){
+    
+    try{
+        $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+        $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query="DELETE FROM asistencia_actividad_cultural WHERE Id_Actividad = '".$ID_Actividad."' AND Id_Migrante = '".$ID_Migrante."'";
+        $Asistencia = $Conexion->prepare($query); 
+        $Asistencia->execute();  //Ejecuto la consulta
+        return ["DELETE"=>"Correcto, Eliminado correctamente"];
+
+    }catch(PDOException $e){
+        return ["DELETE"=>$e->getMessage()];
+    }
+}
+
+public static function Eliminar_Asistencia_Oferta_Laboral($conexion, $ID_Migrante, $ID_Actividad){
+    
+    try{
+        $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+        $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query="DELETE FROM asistencia_oferta_laboral WHERE Id_Trabajo = '".$ID_Actividad."' AND Id_Migrante = '".$ID_Migrante."'";
+        $Asistencia = $Conexion->prepare($query); 
+        $Asistencia->execute();  //Ejecuto la consulta
+        return ["DELETE"=>"Correcto, Eliminado correctamente"];
+
+    }catch(PDOException $e){
+        return ["DELETE"=>$e->getMessage()];
+    }
 }
 
 
