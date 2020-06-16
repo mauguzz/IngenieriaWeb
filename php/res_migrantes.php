@@ -1,6 +1,6 @@
 <?php
 
-require_once('DataBase.php');
+require('DataBase.php');
 
 $method=$_SERVER['REQUEST_METHOD']; //Capturar método utilizado
 $uri=$_SERVER['REQUEST_URI'];       //Capturar URI utilizada
