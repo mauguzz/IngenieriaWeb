@@ -41,7 +41,7 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
                                         console.log("No especificado LLAVE");
                                         if(reason=="Llave no especificada"){
                                             console.log("No especificado LLAVE")
-                                            $("#modal_migrantes_details").modal({show:false});
+                                            
                                             
                                         }
                                     })
@@ -62,7 +62,10 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
     /////////////////////////////////////////////////////////////////7
     //Para limpiar el formulario, en la ventana modal se puede poner un botón en el cual se pueda dar clic a propia decisión si limpiarlo o no, esto para que sea útil en el caso de modificar
     
- 
+    $('#modal_migrantes_details').on('shown.bs.modal', function() { 
+        $("#modal_migrantes_details").modal({show:false});
+   })
+    
     
     B_Cerrar_Sesion.addEventListener("click", function(event) {
         Cerrar_Sesion();
