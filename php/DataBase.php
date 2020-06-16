@@ -244,10 +244,24 @@ class DataBase{
 
     }
 
-    public static function Crear_Registro($conexion, $ID_Migrante){
+    public static function Crear_Registro($mysqli, $ID_Migrante){
         //Sacar Id de punto de control desde las variables de sesion
         //Esta función va a hacer una inserción con la fecha de entrada, el ide de migrante del argumento de la funciónn y el id de punto de control de las variables de sesion
         //La fecha de entrada se puede insertar con la función date() de Mysql
+        $PuntoDeControl=$_SESSION['POINTID'];
+
+        try{
+            $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+            $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $query="INSERT INTO registro VALUES ('".$PuntoDeControl."','".$ID_Migrante."',(SELECT CURDATE()),NULL,'0')";
+            $Asistencia = $Conexion->prepare($query); 
+            $Asistencia->execute();  //Ejecuto la consulta
+            return ["POST"=>"Correcto, insertado correctamente"];
+
+        }catch(PDOException $e){
+            return ["POST"=>$e->getMessage()];
+        }
+
 
     }
 
@@ -368,11 +382,25 @@ public static function Modificar_Actividad_Cultural($mysqli,$id,$Nombre, $Fecha,
      }
 }
 
-public static function Modificar_Registro($conexion, $ID_Migrante){
+public static function Modificar_Registro($mysqli, $ID_Migrante){
     //Sacar Id de punto de control desde las variables de sesion
     //Esta función solamente va a actualizar la fecha de salida y el parámetro de alimentación
     //Recordar que cada registro se identifica por el id de migrante en conjunto con el id de punto de control
     //La fecha de salida se puede insertar con la función date() de Mysql
+
+    $PuntoDeControl=$_SESSION['POINTID'];
+
+        try{
+            $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+            $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $query="UPDATE registro SET Fecha_salida=(SELECT CURDATE()), Alimentacion = '1' WHERE Id_Punto_Control = '".$PuntoDeControl."' AND Id_Migrante = '".$ID_Migrante."'";
+            $Asistencia = $Conexion->prepare($query); 
+            $Asistencia->execute();  //Ejecuto la consulta
+            return ["PUT"=>"Correcto, insertado correctamente"];
+
+        }catch(PDOException $e){
+            return ["PUT"=>$e->getMessage()];
+        }
     
 }
 
@@ -439,12 +467,25 @@ public static function Eliminar_Actividad_Cultural($mysqli,$id){
     }
 }
 
-public static function Eliminar_Registro($conexion, $ID_Migrante){
+public static function Eliminar_Registro($mysqli, $ID_Migrante){
     //Sacar Id de punto de control desde las variables de sesion
+    $PuntoDeControl=$_SESSION['POINTID'];
+
+        try{
+            $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+            $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $query="DELETE FROM registro WHERE Id_Punto_Control = '".$PuntoDeControl."' AND Id_Migrante = '".$ID_Migrante."'";
+            $Asistencia = $Conexion->prepare($query); 
+            $Asistencia->execute();  //Ejecuto la consulta
+            return ["PUT"=>"Correcto, insertado correctamente"];
+
+        }catch(PDOException $e){
+            return ["PUT"=>$e->getMessage()];
+        }
     
 }
 
-public static function Eliminar_Asistencia_Actividad_Cultural($conexion, $ID_Migrante, $ID_Actividad){
+public static function Eliminar_Asistencia_Actividad_Cultural($mysqli, $ID_Migrante, $ID_Actividad){
     
     try{
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
@@ -459,7 +500,7 @@ public static function Eliminar_Asistencia_Actividad_Cultural($conexion, $ID_Mig
     }
 }
 
-public static function Eliminar_Asistencia_Oferta_Laboral($conexion, $ID_Migrante, $ID_Actividad){
+public static function Eliminar_Asistencia_Oferta_Laboral($mysqli, $ID_Migrante, $ID_Actividad){
     
     try{
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
