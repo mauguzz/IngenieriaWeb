@@ -16,6 +16,8 @@ const form_culturales_registrar = document.getElementById('f_culturales_registra
 const form_culturales_submit = document.getElementById('f_culturales_submit');
 const form_culturales_action = document.getElementById('f_culturales_submit');
 
+let id;
+
 document.addEventListener("DOMContentLoaded", function(event) {
 
     culturales_consultar_todos('#t_culturales', true)

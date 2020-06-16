@@ -13,6 +13,7 @@ const form_laborales_registrar = document.getElementById('f_laborales_registrar'
 const form_laborales_submit = document.getElementById('f_laborales_submit');
 const form_laborales_action = document.getElementById('f_laborales_submit');
 
+let id;
 
 document.addEventListener("DOMContentLoaded", function(event) {
 

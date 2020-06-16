@@ -2782,6 +2782,8 @@ select * from Registro;
 
 /*Agregamos funcionarios*/
 insert into Funcionario values (1,1,'Noe','Torres','Cruz','5044389781','Noe@hotmail.com','123456');
+insert into Funcionario values (NULL,5,'Mauricio','Sanchez','Moreno','26228026','M@gmail.com','$2y$10$W8meY..MFwROZEnsOYzgr.qX6CjI.bLKbffmLmpL2BhnZof2lYjXm');
+insert into Funcionario values (NULL,7,'Jesus','Sanchez','Martinez','26228026','m2@gmail.com','$2y$10$W8meY..MFwROZEnsOYzgr.qX6CjI.bLKbffmLmpL2BhnZof2lYjXm');
 /*Corroboramos la información*/
 select* from Funcionario;
 
@@ -2914,7 +2916,7 @@ select *from Asistencia_Oferta_Laboral_View where Id_Migrante=1; /*Vista de asis
 select Id_Trabajo,Actividad,Direccion,fecha FROM Asistencia_Oferta_Laboral_View where Id_Migrante=1; /*VISTA PARA DETALLE MIGRANTE*/
 
 	
-alter view Mostrar_Funcionarios as 
+create view Mostrar_Funcionarios as 
 select 
 	  Funcionario.Id_Funcionario,
       Puntos_de_control.Id_Punto_Control,
@@ -2938,7 +2940,7 @@ select
       
       select *from Migrante where Llave='tpDx27Xehv' and Nombre='El chema';
       
-insert into Registro values ('1','5','1999-05-06',NULL,0 );
+#insert into Registro values ('1','5','1999-05-06',NULL,0 );
 
 SELECT* FROM Registro;
 	  ALTER TABLE Funcionario
