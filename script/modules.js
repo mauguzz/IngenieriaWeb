@@ -166,21 +166,27 @@ export function migrante_consultar(id, prompt, t_general, t_culturales, t_labora
     t_culturales.children['tbody'].innerHTML="";
     t_laborales.children['tbody'].innerHTML="";
     t_registros.children['tbody'].innerHTML="";
+    t_general.children['thead'].innerHTML="";
+    t_culturales.children['thead'].innerHTML="";
+    t_laborales.children['thead'].innerHTML="";
+    t_registros.children['thead'].innerHTML="";
+
     return new Promise((resolve,reject)=>{
         if(prompt){ 
+            let header = new Headers();
+
             llave = window.prompt("Ingrese la llave que le proporcionó su familiar", "");
             if (llave == null || llave == "") {reject("Llave no especificada"); return;};
             
-            let header = new Headers();
             header.set('Authorization', 'Basic ' + btoa("familiar:" + llave));
             request = new Request('php/res_migrantes.php/'+id,{
                 method: 'GET',
                 headers: header
-            })
+            });
         }else{
             request = new Request('php/res_migrantes.php/'+id,{
                 method: 'GET',
-            })
+            });
         }
         fetch(request)
         .then(handleHttpErrors)
