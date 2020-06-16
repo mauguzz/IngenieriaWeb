@@ -1,6 +1,6 @@
 <?php
 class DataBase{	
-    private $Conexion_Alt;
+    private static $Conexion_Alt;
 /*-------------------------------------------------Conexión-------------------------------------------------*/
     public static function Conectar() {        
         define('Server', 'localhost');
