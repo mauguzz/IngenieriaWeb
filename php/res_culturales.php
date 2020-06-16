@@ -39,16 +39,12 @@ function res_post(){
 
         $conexion= new Database();
 
-        $Nombre = $data->nombre;
-        $Detalles = $data->detalles;
-        $Direccion = $data->direccion;
-
         $result = $conexion->Crear_Actividad_Cultural(
             $conexion,
-            $Nombre, 
-            $Fecha, 
-            $Direccion, 
-            $Detalles
+            $data->nombre, 
+            $data->fecha, 
+            $data->direccion, 
+            $data->detalles
         );
 
     }else{
@@ -69,17 +65,14 @@ function res_put($id){
         $data=json_decode($json);
         $conexion= new Database();
 
-        $Nombre = $data->nombre;
-        $Detalles = $data->detalles;
-        $Direccion = $data->direccion;
 
         $result = $conexion->Modificar_Actividad_Cultural(
             $conexion,
             $id,
-            $Nombre, 
-            $Fecha, 
-            $Direccion, 
-            $Detalles
+            $data->nombre, 
+            $data->fecha, 
+            $data->direccion, 
+            $data->detalles
         );
 
     }else{
