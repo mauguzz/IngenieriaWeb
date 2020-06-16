@@ -96,6 +96,7 @@ function res_delete($id){
     return $result;
 }
 
+session_start();/*Continuamos la sesión*/
 
 //CÓDIGO EJECUTADO AL MOMENTO DE LLAMAR AL ARCHIVO PHP
 $uri=explode("/",$uri);
