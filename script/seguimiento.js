@@ -38,7 +38,9 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
                                     id=datatable.rows( { selected: true } ).data()[0][0]; 
                                     migrante_consultar(id, true, t_general, t_culturales, t_laborales, t_registros)
                                     .catch(reason=>{
+                                        console.log("No especificado LLAVE");
                                         if(reason=="Llave no especificada"){
+                                            console.log("No especificado LLAVE")
                                             $('#modal_migrantes_details').on('shown', function() { 
                                                 $('#modal_migrantes_details').modal('hide'); 
                                            })
