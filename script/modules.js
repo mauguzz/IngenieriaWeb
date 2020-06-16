@@ -64,6 +64,7 @@ function table_generate_datatables(tablename, init, rows, cols){
     let customCols = [];
     let first = true;
    //cols={"Apellido Paterno" : "Apellido_P", "Apellido Materno" : "Apellido_M", "ind" : "value"}
+   /*
     rows.forEach((row)=>{
         let result = [];
         Object.entries(cols).forEach(([ind, value])=>{
@@ -73,10 +74,19 @@ function table_generate_datatables(tablename, init, rows, cols){
         dataSet.push(result);
         first=false;
     })
+    */
+
+    Object.entries(cols).forEach(([ind, value])=>{
+        rows.forEach((row,index)=>{
+            if (first) {let result =[]; dataSet.push(result)}
+            result[index]=row[value];
+        })
+        first = false
+        customCols.push({title: ind})
+    })
 
     console.log(dataSet);
-    console.log([["a","b","c","d","e","f"]])
-    let dataExample = [["a","b","c","d","e","f"], ["a","b","c","d","e","f"]];
+   
     let datatable;
     if(init){
         if(dataSet.length!=0){
