@@ -59,7 +59,7 @@ class DataBase{
 
     public static function Consultar_Llave_Migrante($mysqli, $id){
         //$Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-        $Conexion_Alt=Conectar();
+        $Conexion_Alt=DataBase::Conectar();
         $query = "SELECT Id_Migrante, Llave FROM migrante WHERE Id_Migrante='".$id."' ";
         $result = $ConexionAlt->prepare($query); //Agrego variables (Si es el caso)
         $result->execute();  //Ejecuto la consulta
