@@ -221,7 +221,7 @@ class DataBase{
 
     }
 
-    public static function Crear_Actividad_Cultural ($mysqli,$Nombre, $Fecha, $Direcccion, $Detalles){
+    public static function Crear_Actividad_Cultural ($mysqli,$Nombre, $Fecha, $Direccion, $Detalles){
     
         $Estado_Por_Defecto= 1;
         $PuntoDeControl=$_SESSION['POINTID'];
@@ -234,7 +234,7 @@ class DataBase{
             '".$Nombre."',
             '".$Fecha."',
             '".$Estado_Por_Defecto."',
-            '".$Direcccion."',
+            '".$Direccion."',
             '".$Detalles."'
             );";
             $Funcionario = $Conexion->prepare($query); 
@@ -259,7 +259,7 @@ class DataBase{
             '".$Nombre."',
             '".$Detalles."',
             '".$Requisitos."',
-            '".$Direcccion."'
+            '".$Direccion."'
             );";
             $Funcionario = $Conexion->prepare($query); 
             $Funcionario->execute();  //Ejecuto la consulta

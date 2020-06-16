@@ -39,17 +39,13 @@ function res_post(){
         $data=json_decode($json);
         $conexion= new Database();
 
-        $Nombre = $data->nombre;
-        $Detalles = $data->detalles;
-        $Requisitos = $data->requisitos;
-        $Direccion = $data->direccion;
 
         $result = $conexion->Crear_Oferta_Laboral (
             $conexion,
-            $Nombre, 
-            $Detalles, 
-            $Requisitos, 
-            $Direccion
+            $data->nombre, 
+            $data->detalles, 
+            $data->requisitos, 
+            $data->direccion
         );
 
 
@@ -70,18 +66,13 @@ function res_put($id){
         $data=json_decode($json);
         $conexion= new Database();
 
-        $Nombre = $data->nombre;
-        $Detalles = $data->detalles;
-        $Requisitos = $data->requisitos;
-        $Direccion = $data->direccion;
-
         $result = $conexion->Modificar_Oferta_Laboral(
             $conexion,
             $id,
-            $Nombre, 
-            $Detalles, 
-            $Requisitos, 
-            $Direccion
+            $data->nombre, 
+            $data->detalles, 
+            $data->requisitos, 
+            $data->direccion
         );
 
 
@@ -113,6 +104,7 @@ function res_delete($id){
     return $result;
 }
 
+session_start();/*Continuamos la sesión*/
 
 //CÓDIGO EJECUTADO AL MOMENTO DE LLAMAR AL ARCHIVO PHP
 $uri=explode("/",$uri);
