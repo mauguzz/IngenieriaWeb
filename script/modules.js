@@ -90,7 +90,7 @@ function table_generate_datatables(tablename, init, rows, cols){
             datatable = $(tablename).DataTable(
                 {
                     columns: customCols,
-                    dom: "Bftip"
+                    dom: "B"
                 
                 });
             datatable.clear();
