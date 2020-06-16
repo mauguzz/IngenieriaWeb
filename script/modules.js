@@ -167,8 +167,8 @@ export function migrante_consultar(id, prompt, t_general, t_culturales, t_labora
         if (llave == null || llave == "") {
             return;
         }
-        header = new Headers('Authorization', 'Basic ' + btoa("familiar:" + llave));
-        //header.set('Authorization', 'Basic ' + btoa("familiar:" + llave));
+        header = new Headers();
+        header.set('Authorization', 'Basic ' + btoa("familiar:" + llave));
         request = new Request('php/res_migrantes.php/'+id,{
             method: 'GET',
             headers: header
