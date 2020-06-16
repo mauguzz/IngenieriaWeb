@@ -14,7 +14,7 @@ const mcontent = document.getElementById('content'); //Div del contenido princip
 /*--------------------------------------------------Forms-----------------------------------------------------*/
 const form_culturales_registrar = document.getElementById('f_culturales_registrar');
 const form_culturales_submit = document.getElementById('f_culturales_submit');
-const form_culturales_action = document.getElementById('f_culturales_submit');
+const form_culturales_action = document.getElementById('f_culturales_action');
 
 let id;
 
@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         },
                         action: ()=>{
                             id=datatable.rows( { selected: true } ).data()[0][0]; 
+                            //Se va a redireccionar a otra página
                         }
                     }
                 ]
@@ -84,9 +85,9 @@ form_culturales_registrar.onsubmit = function(e){
             culturales_consultar_todos('#t_culturales', false)
         });
     }else if(form_culturales_action.value=="modify"){
-        culturales_registrar(formJson)
+        culturales_modificar(id, formJson)
         .then(result=>{
-            culturales_modificar('#t_culturales', false)
+            culturales_consultar_todos('#t_culturales', false)
         });
     }
 
