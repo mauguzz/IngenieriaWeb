@@ -26,10 +26,10 @@ class DataBase{
         return ["migrantes"=>$result->fetchAll(PDO::FETCH_ASSOC)];
     }
 
-    public static function Mostrar_Migrante_Detalle ($mysqli, $Id_Migrante){//Recibe objeto de conexión
+    public static function Mostrar_Migrante_Detalle ($mysqli, $Id_Migrante, $SeguimientoFamiliar){//Recibe objeto de conexión
 
         //$Id_Migrante=$_POST['Id_Migrante']; //Se hace el cast de HTML a un variable PHP por el metodo POST 
-        $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+        if(!$SeguimientoFamiliar) $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
         $query="SELECT * FROM Migrantes_Detalle where Id_Migrante='".$Id_Migrante."'";//Introduzco la consulta
         $Migrante = $Conexion->prepare($query); //Agrego la variable $Id_Migrante
         $Migrante->execute();  //Ejecuto la consulta
