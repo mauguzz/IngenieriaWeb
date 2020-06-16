@@ -41,11 +41,7 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
                                         console.log("No especificado LLAVE");
                                         if(reason=="Llave no especificada"){
                                             console.log("No especificado LLAVE")
-                                            $('#close').click(); 
-                                            //$("[data-dismiss=modal]").trigger({ type: "click" }); 
-                                            $("#modal_migrantes_details").modal('hide');//ocultamos el modal
-                                                $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-                                                $('.modal-backdrop').remove();//eliminamos el backdrop del modal
+                                            $("#modal_migrantes_details").modal("data-show"=false);
                                             
                                         }
                                     })
@@ -66,15 +62,7 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
     /////////////////////////////////////////////////////////////////7
     //Para limpiar el formulario, en la ventana modal se puede poner un botón en el cual se pueda dar clic a propia decisión si limpiarlo o no, esto para que sea útil en el caso de modificar
     
-    $('#modal_migrantes_details').on('shown', function() { 
-        console.log("Entrando a modal");
-        $('#close').click(); 
-        //$('#modal_migrantes_details').modal('hide'); 
-        $("#modal_migrantes_details").modal('hide');//ocultamos el modal
-        $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-        $('.modal-backdrop').remove();//eliminamos el backdrop del modal
-   })
-    
+ 
     
     B_Cerrar_Sesion.addEventListener("click", function(event) {
         Cerrar_Sesion();
