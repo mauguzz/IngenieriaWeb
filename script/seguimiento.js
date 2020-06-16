@@ -1,5 +1,5 @@
 import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migrante_modificar, migrante_eliminar, 
-    llenar_opciones_selector,Validar_Sesion,Cerrar_Sesion} from './modules.js';
+    llenar_opciones_selector,Validar_Sesion,Cerrar_Sesion, migrante_seguimiento_todos} from './modules.js';
     
     const mcontent = document.getElementById('content'); //Div del contenido principal (tablas, etc), todas las páginas
     
