@@ -41,6 +41,7 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
                                         llave=true;
                                     })
                                     .catch(reason=>{
+                                        console.log(reason);
                                         console.log("No especificado LLAVE");
                                         //if(reason=="Llave no especificada"){
                                             
