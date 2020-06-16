@@ -17,7 +17,7 @@ function res_get(){
 
     if (count($args)==1){
         //Se pasó el id. //CASO: Obtener detalles de un migrante
-        if(!empty($_SESSION['USERID'])){ //$sesion->USERID!=NULL
+        if(isset($_SESSION['USERID'])){ //$sesion->USERID!=NULL
             $result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0]); //Descomentar para version final
         }elseif (isset($_SERVER['PHP_AUTH_PW'])) {
             //Antes de ejecutar lo siguiente, se tiene que verificar que para el usuario args[0] tiene la llave correcta
