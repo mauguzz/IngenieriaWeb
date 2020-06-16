@@ -26,6 +26,7 @@ function res_get(){
                 $result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0]); //Como ya se hizo la conexión previamente, con el valor true se le indica que ya no se vuelva a conectar (ver implementación en DataBase.php)
             }else{
                 header("HTTP/1.1 401 Unauthorized");
+                return;
             }
             
         }else{
