@@ -70,7 +70,4 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
     })
     
     
-    B_Cerrar_Sesion.addEventListener("click", function(event) {
-        Cerrar_Sesion();
-    });
     
