@@ -119,6 +119,16 @@ class DataBase{
         return ['Funcionario'=>$Funcionario->fetchAll(PDO::FETCH_ASSOC)];
     }
 
+    public static function Mostrar_Registros($mysqli){
+        
+        $Migrante = $Conexion->prepare($query); //Agrego la variable $Id_Migrante
+        $Migrante->execute();  //Ejecuto la consulta
+        $query="SELECT  Id_Punto_Control,'Punto de control',Fecha_Entrada,Fecha_Salida,Alimentacion FROM Migrantes_Registro where Id_Migrante='".$Id_Migrante."'";
+        $Registro = $Conexion->prepare($query); //Agrego la variable $Id_Migrante
+        $Registro->execute();  //Ejecuto la consulta
+        return ["registros"=>$Registro->fetchAll(PDO::FETCH_ASSOC)];
+    }
+
     public static function Mostrar_Opciones($mysqli){
         $Conexion = $mysqli -> Conectar(); //Me conecto a la base de datos
         $query="SELECT * FROM pais";
@@ -206,7 +216,7 @@ class DataBase{
             $result->execute();
             return ["POST"=>"Correcto, insertado correctamente", "llave_migrante"=>$Llave];
          }catch(PDOException $e){
-             return ["POST"=>$e->getMessage()];
+             return ["POST"=>"$e->getMessage()"];
          }
 
     }
@@ -260,29 +270,10 @@ class DataBase{
 
     }
 
-    
-    public static function Crear_Funcionario ($mysqli,$Id_Control,$Nombre,$Apellido_Paterno,$Apellido_Materno, $Telefono_Contacto, $Correo_Electronico,$Contraseña){
-    
-
-        try {
-            $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-            $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $query="insert into Funcionario values (
-            NULL,
-            '".$Id_Control."',
-            '".$Nombre."',
-            '".$Apellido_Paterno."',
-            '".$Apellido_Materno."',
-            '".$Telefono_Contacto."',
-            '".$Correo_Electronico."',
-            '".$Contraseña."'
-            );";    
-            $Funcionario = $Conexion->prepare($query); 
-            $Funcionario->execute();  //Ejecuto la consulta
-            return ["POST"=>"Correcto, insertado correctamente"];
-         }catch(PDOException $e){
-             return ["POST"=>"$e->getMessage()"];
-         }
+    public static function Crear_Registro($conexion, $ID_Migrante){
+        //Sacar Id de punto de control desde las variables de sesion
+        //Esta función va a hacer una inserción con la fecha de entrada, el ide de migrante del argumento de la funciónn y el id de punto de control de las variables de sesion
+        //La fecha de entrada se puede insertar con la función date() de Mysql
 
     }
 
@@ -370,6 +361,14 @@ public static function Modificar_Actividad_Cultural($mysqli,$id,$Nombre, $Fecha,
      }
 }
 
+public static function Modificar_Registro($conexion, $ID_Migrante){
+    //Sacar Id de punto de control desde las variables de sesion
+    //Esta función solamente va a actualizar la fecha de salida y el parámetro de alimentación
+    //Recordar que cada registro se identifica por el id de migrante en conjunto con el id de punto de control
+    //La fecha de salida se puede insertar con la función date() de Mysql
+    
+}
+
 /*--------------------------------------------------Borrado de registros----------------------------------------*/
 
 public static function Eliminar_Migrante($mysqli,$id){
@@ -431,6 +430,11 @@ public static function Eliminar_Actividad_Cultural($mysqli,$id){
     }catch(PDOException $e){
         return ["DELETE"=>$e->getMessage()];
     }
+}
+
+public static function Eliminar_Registro($conexion, $ID_Migrante){
+    //Sacar Id de punto de control desde las variables de sesion
+    
 }
 
 
