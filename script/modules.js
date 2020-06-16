@@ -90,7 +90,7 @@ function table_generate_datatables(tablename, init, rows, cols){
             datatable = $(tablename).DataTable(
                 {
                     select: true,
-                    data: ["a","b","c","d","e","f"],
+                    data: [["a","b","c","d","e","f"]],
                     columns: customCols,
                     dom: "frtip"
                 
