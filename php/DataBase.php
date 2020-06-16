@@ -180,7 +180,7 @@ class DataBase{
             $Funcionario->execute();  //Ejecuto la consulta
             return ["POST"=>"Correcto, insertado correctamente", "llave_migrante"=>$Llave];
          }catch(PDOException $e){
-             return ["POST"=>"$e->getMessage()"];
+             return ["POST"=>$e->getMessage()];
          }
 
     }
@@ -205,7 +205,7 @@ class DataBase{
             $Funcionario->execute();  //Ejecuto la consulta
             return ["POST"=>"Correcto, insertado correctamente"];
          }catch(PDOException $e){
-             return ["POST"=>"$e->getMessage()"];
+             return ["POST"=>$e->getMessage()];
          }
 
     }
@@ -229,7 +229,7 @@ class DataBase{
             $Funcionario->execute();  //Ejecuto la consulta
             return ["POST"=>"Correcto, insertado correctamente"];
          }catch(PDOException $e){
-             return ["POST"=>"$e->getMessage()"];
+             return ["POST"=>$e->getMessage()];
          }
 
     }
@@ -265,7 +265,7 @@ public static function Modificar_Migrante ($mysqli,$id, $Nombre, $Apellido_Pater
         $Funcionario->execute();  //Ejecuto la consulta
         return ["PUT"=>"Correcto, Modificado correctamente"];
      }catch(PDOException $e){
-         return ["PUT"=>"$e->getMessage()"];
+         return ["PUT"=>$e->getMessage()];
      }
 
 }
@@ -289,7 +289,7 @@ public static function Modificar_Oferta_Laboral ($mysqli,$id,$Nombre, $Detalles,
         $Funcionario->execute();  //Ejecuto la consulta
         return ["PUT"=>"Correcto, Modificado correctamente"];
      }catch(PDOException $e){
-         return ["PUT"=>"$e->getMessage()"];
+         return ["PUT"=>$e->getMessage()];
      }
 
 }
@@ -314,7 +314,7 @@ public static function Modificar_Actividad_Cultural($mysqli,$id,$Nombre, $Fecha,
         $Funcionario->execute();  //Ejecuto la consulta
         return ["PUT"=>"Correcto, Modificado correctamente"];
      }catch(PDOException $e){
-         return ["PUT"=>"$e->getMessage()"];
+         return ["PUT"=>$e->getMessage()];
      }
 }
 
