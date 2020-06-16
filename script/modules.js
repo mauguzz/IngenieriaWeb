@@ -104,7 +104,7 @@ function table_generate_datatables(tablename, init, rows, cols){
             datatable = $(tablename).DataTable(
                 {
                     select: true,
-                    data: dataExample,
+                    data: dataSet,
                     columns: customCols,
                     dom: "frtip"
                 
