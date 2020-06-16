@@ -63,7 +63,7 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
     //Para limpiar el formulario, en la ventana modal se puede poner un botón en el cual se pueda dar clic a propia decisión si limpiarlo o no, esto para que sea útil en el caso de modificar
     
     $('#modal_migrantes_details').on('shown.bs.modal', function() { 
-        $("#modal_migrantes_details").modal({show:false});
+        $("#modal_migrantes_details").modal('hidde');
    })
     
     
