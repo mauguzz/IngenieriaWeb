@@ -23,7 +23,7 @@ function res_get(){
             //Antes de ejecutar lo siguiente, se tiene que verificar que para el usuario args[0] tiene la llave correcta
             $result=$conexion->Consultar_Llave_Migrante($conexion,$args[0]);
             if($result["migrante"][0]["Llave"]==$_SERVER['PHP_AUTH_PW']){
-                $result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0]); //Como ya se hizo la conexión previamente, con el valor true se le indica que ya no se vuelva a conectar (ver implementación en DataBase.php)
+                //$result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0]); //Como ya se hizo la conexión previamente, con el valor true se le indica que ya no se vuelva a conectar (ver implementación en DataBase.php)
                 unset($_SERVER['PHP_AUTH_PW']);
             }else{
                 header("HTTP/1.1 401 Unauthorized");
