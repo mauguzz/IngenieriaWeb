@@ -164,7 +164,7 @@ export function migrante_consultar(id, prompt, t_general, t_culturales, t_labora
     return new Promise((resolve,reject)=>{
         if(prompt){ 
             let llave = window.prompt("Ingrese la llave que le proporcionó su familiar", "");
-            if (llave == null || llave == "") reject("Llave no especificada");
+            if (llave == null || llave == "") {reject("Llave no especificada"); return;};
             
             let header = new Headers();
             header.set('Authorization', 'Basic ' + btoa("familiar:" + llave));
