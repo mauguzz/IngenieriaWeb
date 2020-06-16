@@ -214,7 +214,7 @@ class DataBase{
                 '".$Comida_Por_Defecto."');";
             $result  = $Conexion->prepare($query); //
             $result->execute();
-            return ["POST"=>"Correcto, insertado correctamente", "llave_migrante"=>$Llave];
+            return ["POST"=>"Correcto, insertado correctamente", "llave_migrante"=>$Llave, "nombre"=>$Nombre];
          }catch(PDOException $e){
              return ["POST"=>$e->getMessage()];
          }
