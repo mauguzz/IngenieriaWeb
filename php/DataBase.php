@@ -437,7 +437,7 @@ public static function Eliminar_Migrante($mysqli,$id){
     try {
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
         $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $query="DELETE * FROM registro WHERE Id_Migrante = '".$id."';";
+        $query="DELETE FROM registro WHERE Id_Migrante = '".$id."';";
         $Funcionario = $Conexion->prepare($query); 
         $Funcionario->execute();  //Ejecuto la consulta
         $query="DELETE FROM asistencia_actividad_cultural WHERE Id_Migrante = '".$id."';";
