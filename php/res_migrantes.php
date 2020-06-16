@@ -98,7 +98,6 @@ function res_put($id){
             $data->apellido_paterno, 
             $data->apellido_materno, 
             $data->fecha_nacimiento, 
-            $data->Edad,
             $data->ciudad, 
             $data->pais, 
             $data->oficio, 
