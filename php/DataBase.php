@@ -599,7 +599,7 @@ public static function Eliminar_Asistencia_Oferta_Laboral($mysqli, $ID_Migrante,
                         //header("Location: "."../../migrantes.html");  
                     }            
                 }else {//Si no existe un usuario funcionario, lo verifico con un usuario Administrador 
-                    $query="SELECT Nombre,Apellido_Paterno,Apellido_Materno,Correo_Electronico,Contraseña FROM Administrador where Correo_Electronico='".$User."'";//Introduzco la consulta
+                    $query="SELECT Id_Administrador,Nombre,Apellido_Paterno,Apellido_Materno,Correo_Electronico,Contraseña FROM Administrador where Correo_Electronico='".$User."'";//Introduzco la consulta
                     $result  = $Conexion->prepare($query); //
                     $result->execute();
                     $res=$result->fetchAll(PDO::FETCH_ASSOC);
