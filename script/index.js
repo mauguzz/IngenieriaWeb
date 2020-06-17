@@ -16,8 +16,6 @@ Form_Iniciar_Sesion.onsubmit = function(e){ //Registro el evento a mi objeto bot
 };
 
 Form_Buscar_Migrante.onsubmit=function(e){
-    e.preventDefault
-    let FormData=new FormData(Form_Buscar_Migrante);
-    let FormJson=Json.stringify(Object.fromEntries(formData));
-    Form_Buscar_Migrante(FormJson);//Falta agregar la función 
+    e.preventDefault(); 
+    location.href="http://localhost/IngenieriaWeb/seguimiento.html";
 }
