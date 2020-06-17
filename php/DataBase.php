@@ -572,51 +572,55 @@ public static function Eliminar_Asistencia_Oferta_Laboral($mysqli, $ID_Migrante,
 /*------------------------------------------------Sesiones--------------------------------------------------*/
     public static function IniciarSesion ($mysqli,$User, $Pass){
         
-
-        if (empty($User) || empty ($Pass)){
-           
-            echo '
-					<script type="text/javascript">	
-					alert("Por favor llene ambos campos");
-					window.history.back();
-					</script>';
-        }   
-        else {
-            $Conexion = $mysqli ->Conectar();
-            $query="SELECT Id_Funcionario, Nombre,Apellido_Paterno,Apellido_Materno,Correo_Electronico,Contrasenia,Id_Punto_Control FROM Funcionario where Correo_Electronico='".$User."'";//Introduzco la consulta
-            $result  = $Conexion->prepare($query); //
-            $result->execute();
-            $res=$result->fetchAll(PDO::FETCH_ASSOC);
-            if (!empty($res)){//Verifico la existencia de un usuario funcinoario -----------Comprobar funcionamiento    
-                
-                if (password_verify($Pass,$res[0]["Contrasenia"])) {              
-                    session_start(); /*Inicializamos los valores de la sesión*/
-                    $_SESSION['USERNAME']=$res[0]["Nombre"];
-                    $_SESSION['USERID']=$res[0]["Id_Funcionario"];
-                    $_SESSION['POINTID']=$res[0]["Id_Punto_Control"];
-                    header("location:http://localhost/IngenieriaWeb/migrantes.html");  
-                    //header('Content-Type: text/html; charset=utf-8');
-                    //header("Location: "."../../migrantes.html");  
-                }            
-            }else {//Si no existe un usuario funcionario, lo verifico con un usuario Administrador 
-                $query="SELECT Nombre,Apellido_Paterno,Apellido_Materno,Correo_Electronico,Contraseña FROM Administrador where Correo_Electronico='".$User."'";//Introduzco la consulta
+        try{
+            if (empty($User) || empty ($Pass)){
+            
+                echo '
+                        <script type="text/javascript">	
+                        alert("Por favor llene ambos campos");
+                        window.history.back();
+                        </script>';
+            }   
+            else {
+                $Conexion = $mysqli ->Conectar();
+                $query="SELECT Id_Funcionario, Nombre,Apellido_Paterno,Apellido_Materno,Correo_Electronico,Contrasenia,Id_Punto_Control FROM Funcionario where Correo_Electronico='".$User."'";//Introduzco la consulta
                 $result  = $Conexion->prepare($query); //
                 $result->execute();
                 $res=$result->fetchAll(PDO::FETCH_ASSOC);
-                var_dump($res);
-                if (!empty($res)){
-                    if(password_verify($Pass,$res[0]["Contraseña"])){
+                if (!empty($res)){//Verifico la existencia de un usuario funcinoario -----------Comprobar funcionamiento    
+                    
+                    if (password_verify($Pass,$res[0]["Contrasenia"])) {              
                         session_start(); /*Inicializamos los valores de la sesión*/
                         $_SESSION['USERNAME']=$res[0]["Nombre"];
-                        $_SESSION['USERID']=$res[0]["Id_Administrador"];
-                        $_SESSION['ADMIN']=1;
-                        header("location:http://localhost/IngenieriaWeb/Administrador.html");  
+                        $_SESSION['USERID']=$res[0]["Id_Funcionario"];
+                        $_SESSION['POINTID']=$res[0]["Id_Punto_Control"];
+                        header("location:http://localhost/IngenieriaWeb/migrantes.html");  
+                        //header('Content-Type: text/html; charset=utf-8');
+                        //header("Location: "."../../migrantes.html");  
+                    }            
+                }else {//Si no existe un usuario funcionario, lo verifico con un usuario Administrador 
+                    $query="SELECT Id_Administrador,Nombre,Apellido_Paterno,Apellido_Materno,Correo_Electronico,Contraseña FROM Administrador where Correo_Electronico='".$User."'";//Introduzco la consulta
+                    $result  = $Conexion->prepare($query); //
+                    $result->execute();
+                    $res=$result->fetchAll(PDO::FETCH_ASSOC);
+                    //var_dump($res);
+                    if (!empty($res)){
+                        if(password_verify($Pass,$res[0]["Contraseña"])){
+                            session_start(); /*Inicializamos los valores de la sesión*/
+                            $_SESSION['USERNAME']=$res[0]["Nombre"];
+                            $_SESSION['USERID']=$res[0]["Id_Administrador"];
+                            $_SESSION['POINTID']=0;
+                            $_SESSION['ADMIN']=1;
+                            header("location:http://localhost/IngenieriaWeb/Administrador.html");  
+                        }
+
                     }
-
+                    
                 }
-                
-            }
 
+            }
+        }catch(Exception $e){
+            $result=["Error: "=>$e->getMessage()];
         }
 
     }

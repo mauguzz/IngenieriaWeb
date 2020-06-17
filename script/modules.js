@@ -600,6 +600,7 @@ export function Iniciar_Sesion(formJson){
     fetch("php/res_sesion.php",{method: 'POST', body: formJson})   ///
     .then(handleHttpErrors)
     .then(response=>{
+        console.log(response);
         console.log("F 2");
         if (response.redirected) {
             console.log("F 1");
@@ -634,6 +635,8 @@ export function Validar_SesionA(){
     .then(handleHttpErrors)
     .then(res=>res.json())
     .then(resjson=>{
+        console.log(resjson);
+        
         if (resjson.ADMIN==null){
             
             console.log(resjson); 
@@ -643,6 +646,7 @@ export function Validar_SesionA(){
             console.log("Bienvenido A"); 
             console.log(resjson);             
         }
+        
     })
     .catch(e=>{
         console.log(e);
