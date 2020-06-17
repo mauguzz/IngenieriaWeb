@@ -54,7 +54,10 @@ form_funcionarios_registrar.onsubmit = function(e){
     let formData = new FormData(form_funcionarios_registrar);
     let formJson = JSON.stringify(Object.fromEntries(formData));
     console.log(formJson);
-    funcionarios_registrar(formJson);
+    funcionarios_registrar(formJson)
+    .then(e=>{
+        funcionarios_consultar('#t_funcionarios', false);
+    });
  
     }
 
