@@ -632,7 +632,7 @@ export function Validar_Sesion(){
 export function Validar_SesionA(){
     fetch("php/res_sesion.php",{ method: 'GET'})
     .then(handleHttpErrors)
-    .then(res=>res.json())
+    .then(res=>res.text())
     .then(resjson=>{
         if (resjson.ADMIN==null){
             
