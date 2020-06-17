@@ -126,7 +126,7 @@ function res_put($id){
 function res_delete($id){
     $conexion= new Database();
 
-    $result = $conexion->Eliminar_Actividad_Cultural (
+    $result = $conexion->Eliminar_Migrante (
         $conexion,
         $id
     );

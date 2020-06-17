@@ -202,9 +202,7 @@ class DataBase{
             $result  = $Conexion->prepare($query); //
             $result->execute();
             $Curdate=$result->fetchAll(PDO::FETCH_ASSOC);
-            echo "AL 100 bro";
-            echo $Curdate[0]["curdate()"];
-            echo $PuntoDeControl;
+            
             /*Insertamos al migrante en la tabla Registro*/      
             $query="insert into Registro values (
                 '".$PuntoDeControl."',
@@ -214,7 +212,7 @@ class DataBase{
                 '".$Comida_Por_Defecto."');";
             $result  = $Conexion->prepare($query); //
             $result->execute();
-            return ["POST"=>"Correcto, insertado correctamente", "llave_migrante"=>$Llave];
+            return ["POST"=>"Correcto, insertado correctamente", "llave_migrante"=>$Llave, "nombre"=>$Nombre];
          }catch(PDOException $e){
              return ["POST"=>$e->getMessage()];
          }
