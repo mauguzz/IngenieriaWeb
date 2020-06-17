@@ -603,7 +603,7 @@ public static function Eliminar_Asistencia_Oferta_Laboral($mysqli, $ID_Migrante,
                     $result  = $Conexion->prepare($query); //
                     $result->execute();
                     $res=$result->fetchAll(PDO::FETCH_ASSOC);
-                    var_dump($res);
+                    //var_dump($res);
                     if (!empty($res)){
                         if(password_verify($Pass,$res[0]["Contraseña"])){
                             session_start(); /*Inicializamos los valores de la sesión*/
