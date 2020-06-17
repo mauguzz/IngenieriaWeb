@@ -2818,7 +2818,7 @@ insert into Ofertas_de_trabajo values (
 /*Corroboramos la información*/
 select *from Ofertas_de_Trabajo;
 /*---------------------------------------------------------------------------------------Vistas------------------------------------------------------------------------------*/
-alter view Migrantes_Todos As
+create view Migrantes_Todos As
 	select Migrante.Id_Migrante,
 			Migrante.Nombre, 
         Migrante.Apellido_Paterno,
@@ -2835,7 +2835,7 @@ alter view Migrantes_Todos As
 		Puntos_De_Control.Id_Punto_Control=Registro.Id_Punto_Control/*Cambiar el nombre del ID de estados*/
         inner join Estados ON
         Estados.Id=Puntos_De_Control.Id_Estado
-        group by Migrante.Nombre
+        group by Migrante.Id_Migrante
         order by Registro.Fecha_Entrada; /*Con base en la última fecha visitada se toma el punto de control actual o último*/		
 select * from Migrantes_Todos where Id_Migrante=1;
 
@@ -2941,7 +2941,7 @@ select
       
       select *from Migrante where Llave='tpDx27Xehv' and Nombre='El chema';
       
-insert into Registro values ('1','5','1999-05-06',NULL,0 );
+
 insert into Registro values ('1','2','1999-05-06',NULL,0 );
 insert into Registro values ('2','3','1999-05-06',NULL,0 );
 insert into Registro values ('3','4','1999-05-06',NULL,0 );
@@ -3001,7 +3001,7 @@ SELECT * FROM ACTIVIDADES;
 select * from Mostrar_Funcionarios;
 
 select * from Funcionario;
-select * from Administrador;
+select * from Migrante;
 
 
 
