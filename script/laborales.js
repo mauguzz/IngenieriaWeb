@@ -1,5 +1,5 @@
 //import {} from './modules.js';
-import {laborales_consultar_todos, laborales_eliminar, laborales_modificar, laborales_registrar} from './modules.js';
+import {laborales_consultar_todos, laborales_eliminar, laborales_modificar, laborales_registrar,Validar_Sesion,Cerrar_Sesion} from './modules.js';
 
 /*------------------------------------------------Tablas------------------------------------------------------*/
 
@@ -13,10 +13,14 @@ const form_laborales_registrar = document.getElementById('f_laborales_registrar'
 const form_laborales_submit = document.getElementById('f_laborales_submit');
 const form_laborales_action = document.getElementById('f_laborales_action');
 
+const B_Cerrar_Sesion=document.getElementById('B_Cerrar_Sesion');
+
+
 let id;
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
+    Validar_Sesion()
     laborales_consultar_todos('#t_laborales', true)
     .then(datatable=>{
         new $.fn.dataTable.Buttons(datatable, { 
@@ -92,3 +96,7 @@ form_laborales_registrar.onsubmit = function(e){
     }
 
 }
+
+B_Cerrar_Sesion.addEventListener("click", function(event) {
+    Cerrar_Sesion();
+});

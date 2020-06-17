@@ -600,8 +600,9 @@ export function Iniciar_Sesion(formJson){
     fetch("php/res_sesion.php",{method: 'POST', body: formJson})   ///
     .then(handleHttpErrors)
     .then(response=>{
-
+        console.log("F 2");
         if (response.redirected) {
+            console.log("F 1");
             window.location.href = response.url;
         }
     })
@@ -616,21 +617,38 @@ export function Validar_Sesion(){
     .then(handleHttpErrors)
     .then(res=>res.json())
     .then(resjson=>{
-        if (resjson.USERID==null){
-            console.log("Sin valores de sesión");
+        if (resjson.USERID==null){       
             alert("Primero Inicie sesión");
             window.location.href ="http://localhost/IngenieriaWeb/index.html";
         }else{
-            if (resjson.ADMIN==1){
-                window.location.href ="http://localhost/IngenieriaWeb/administrador.html";               
-            }
-            console.log("Sesión_Iniciada");            
+            console.log("Bienvenido,");
         }
     })
     .catch(e=>{
         console.log(e);
     }) 
 }
+
+export function Validar_SesionA(){
+    fetch("php/res_sesion.php",{ method: 'GET'})
+    .then(handleHttpErrors)
+    .then(res=>res.json())
+    .then(resjson=>{
+        if (resjson.ADMIN==null){
+            
+            console.log(resjson); 
+            window.location.href ="http://localhost/IngenieriaWeb/index.html";
+            alert("Primero Inicie sesión");  
+        }else{
+            console.log("Bienvenido A"); 
+            console.log(resjson);             
+        }
+    })
+    .catch(e=>{
+        console.log(e);
+    }) 
+}
+
 
 
 export function Cerrar_Sesion(){

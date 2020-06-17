@@ -1,5 +1,5 @@
 //import {} from './modules.js';
-import {culturales_consultar_todos, culturales_eliminar, culturales_modificar, culturales_registrar} 
+import {culturales_consultar_todos, culturales_eliminar, culturales_modificar, culturales_registrar,Validar_Sesion,Cerrar_Sesion} 
 from './modules.js';
 
 /*------------------------------------------------Tablas------------------------------------------------------*/
@@ -16,10 +16,13 @@ const form_culturales_registrar = document.getElementById('f_culturales_registra
 const form_culturales_submit = document.getElementById('f_culturales_submit');
 const form_culturales_action = document.getElementById('f_culturales_action');
 
+const B_Cerrar_Sesion=document.getElementById('B_Cerrar_Sesion');
+
 let id;
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
+    Validar_Sesion()
     culturales_consultar_todos('#t_culturales', true)
     .then(datatable=>{
         new $.fn.dataTable.Buttons(datatable, { 
@@ -93,3 +96,6 @@ form_culturales_registrar.onsubmit = function(e){
 
 }
 
+B_Cerrar_Sesion.addEventListener("click", function(event) {
+    Cerrar_Sesion();
+});

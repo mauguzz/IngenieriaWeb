@@ -1,5 +1,5 @@
 //import {} from './modules.js';
-import {funcionarios_consultar, funcionarios_registrar} 
+import {funcionarios_consultar, funcionarios_registrar,Validar_SesionA,Cerrar_Sesion} 
 from './modules.js';
 
 /*------------------------------------------------Tablas------------------------------------------------------*/
@@ -16,7 +16,11 @@ const form_funcionarios_registrar = document.getElementById('f_funcionarios_regi
 const form_funcionarios_submit = document.getElementById('f_funcionarios_submit');
 const form_funcionarios_action = document.getElementById('f_funcionarios_submit');
 
+const B_Cerrar_Sesion=document.getElementById('B_Cerrar_Sesion');
+
 document.addEventListener("DOMContentLoaded", function(event) {
+    
+    Validar_SesionA()
 
     funcionarios_consultar('#t_funcionarios', true)
     .then(datatable=>{
@@ -30,10 +34,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             "data-target":"#modal_funcionarios_form"
                         },
                         action: ()=>{
-                            id=datatable.rows( { selected: true } ).data()[0][0];   
+                            form_funcionarios_registrar.reset();
                             form_funcionarios_registrar.reset(); //Limpia el formulario
                             form_funcionarios_action.value="create";                    
-                        },   
+                        }   
                     }
                 ]
         });
@@ -54,3 +58,7 @@ form_funcionarios_registrar.onsubmit = function(e){
  
     }
 
+
+B_Cerrar_Sesion.addEventListener("click", function(event) {
+    Cerrar_Sesion();
+});

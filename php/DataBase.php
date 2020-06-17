@@ -324,6 +324,35 @@ class DataBase{
         
     }
 
+    
+    public static function Crear_Funcionario ($mysqli,$Id_Control,$Nombre,$Apellido_Paterno,$Apellido_Materno, $Telefono_Contacto, $Correo_Electronico,$Contraseña){
+    
+
+        try {
+            $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+            $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $Hashed_Password= password_hash($Contraseña,PASSWORD_DEFAULT);
+            $query="insert into Funcionario values (
+            NULL,
+            '".$Id_Control."',
+            '".$Nombre."',
+            '".$Apellido_Paterno."',
+            '".$Apellido_Materno."',
+            '".$Telefono_Contacto."',
+            '".$Correo_Electronico."',
+            '".$Hashed_Password."'
+            );";    
+            $Funcionario = $Conexion->prepare($query); 
+            $Funcionario->execute();  //Ejecuto la consulta
+            return ["POST"=>"Correcto, insertado correctamente"];
+         }catch(PDOException $e){
+             return ["POST"=>"$e->getMessage()"];
+         }
+
+    }
+
+
+
 /*----------------------------------------------Modificaciones------------------------------------------------ */
 
 public static function Modificar_Migrante ($mysqli,$id, $Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion){
@@ -560,9 +589,9 @@ public static function Eliminar_Asistencia_Oferta_Laboral($mysqli, $ID_Migrante,
             $result  = $Conexion->prepare($query); //
             $result->execute();
             $res=$result->fetchAll(PDO::FETCH_ASSOC);
-            //var_dump($res);
             if (!empty($res)){//Verifico la existencia de un usuario funcinoario -----------Comprobar funcionamiento    
-                if (password_verify($Pass,$res[0]["Contrasenia"])) {
+                
+                if (password_verify($Pass,$res[0]["Contrasenia"])) {              
                     session_start(); /*Inicializamos los valores de la sesión*/
                     $_SESSION['USERNAME']=$res[0]["Nombre"];
                     $_SESSION['USERID']=$res[0]["Id_Funcionario"];
@@ -570,45 +599,22 @@ public static function Eliminar_Asistencia_Oferta_Laboral($mysqli, $ID_Migrante,
                     header("location:http://localhost/IngenieriaWeb/migrantes.html");  
                     //header('Content-Type: text/html; charset=utf-8');
                     //header("Location: "."../../migrantes.html");  
-
-                }else{
-                    echo '
-					<script type="text/javascript">	
-					alert("La contraseña es incorrecta, por favor intente de nuevo");
-					window.history.back();
-					</script>';
                 }            
-
-
-
             }else {//Si no existe un usuario funcionario, lo verifico con un usuario Administrador 
                 $query="SELECT Nombre,Apellido_Paterno,Apellido_Materno,Correo_Electronico,Contraseña FROM Administrador where Correo_Electronico='".$User."'";//Introduzco la consulta
                 $result  = $Conexion->prepare($query); //
                 $result->execute();
                 $res=$result->fetchAll(PDO::FETCH_ASSOC);
-                
-                if (!empty($res)){//--------------------------------------------Comprobar funcionamiento
+                var_dump($res);
+                if (!empty($res)){
                     if(password_verify($Pass,$res[0]["Contraseña"])){
                         session_start(); /*Inicializamos los valores de la sesión*/
                         $_SESSION['USERNAME']=$res[0]["Nombre"];
                         $_SESSION['USERID']=$res[0]["Id_Administrador"];
                         $_SESSION['ADMIN']=1;
-                        header("Location: "."../../administrador.html");    
-                    }else{
-                        echo '
-                        <script type="text/javascript">	
-                        alert("La contraseña es incorrecta, por favor intente de nuevo");
-                        window.history.back();
-                        </script>';
-                    }     
+                        header("location:http://localhost/IngenieriaWeb/Administrador.html");  
+                    }
 
-
-                }else{
-                    echo '
-					<script type="text/javascript">	
-					alert("El usuario no es valido");
-					window.history.back();
-					</script>';
                 }
                 
             }

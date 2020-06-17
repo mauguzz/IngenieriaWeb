@@ -10,8 +10,7 @@ $result = "";
 //MÉTODO HTTP GET
 function res_get(){
     $conexion= new Database();
-    $result=$conexion->Mostrar_Funcionario($conexion); //Descomentar para version final
-
+    $result=$conexion->Mostrar_Funcionario($conexion);  
 return $result;
 }
 
@@ -59,7 +58,6 @@ function res_put($id){
     //USO: Es necesario pasar un único argumento $id, para conocer cual row se va a modificar.
     if($json=file_get_contents('php://input')){
 
-        );
 
     }else{
         $result = ["Error"=>"No se enviaron todos los parametros correctamente"];
@@ -72,21 +70,23 @@ function res_put($id){
 //MÉTODO HTTP DELETE
 function res_delete($id){
 
-    $conexion= new Database();
 
-    $result = $conexion->Eliminar_Actividad_Cultural (
-        $conexion,
-        $id
-    );
-    
-    return $result;
 }
 
-
+session_start();/*Continuamos la sesión*/
+$sesion=new stdclass();
+if (!empty($_SESSION['USERID']) and !empty($_SESSION['USERNAME'])){
+        $sesion->USERID=$_SESSION['USERID'];
+        $sesion->USERNAME=$_SESSION['USERNAME'];
+        $sesion->POINTID=$_SESSION['POINTID'];  
+        $sesion->ADMIN=$_SESSION['ADMIN'];  
+}else{
+    $sesion->USERID=NULL;
+}
 //CÓDIGO EJECUTADO AL MOMENTO DE LLAMAR AL ARCHIVO PHP
 $uri=explode("/",$uri);
 $uri=array_slice($uri,3); //Elimina las primeras tres partes irrelevantes de la uri (""/"projectfolder"/"php")
-if($uri[0] == 'res_culturales.php'){
+if($uri[0] == 'res_administrador.php'){
     if($uri=array_slice($uri,1)){ //Si después de eliminar el primer elemento ("res_culturales.php"), el array no está vacío, entonces
         if($uri[0]==""){ //Si no se especificó un id pero si se puso un slash al final de la uri ("...ntes.php/")
             header('HTTP/1.1 400 Bad Request');
