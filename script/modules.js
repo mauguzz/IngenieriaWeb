@@ -635,6 +635,7 @@ export function Validar_SesionA(){
     .then(res=>res.json())
     .then(resjson=>{
         console.log(resjson);
+        /*
         if (resjson.ADMIN==null){
             
             console.log(resjson); 
@@ -644,6 +645,7 @@ export function Validar_SesionA(){
             console.log("Bienvenido A"); 
             console.log(resjson);             
         }
+        */
     })
     .catch(e=>{
         console.log(e);
