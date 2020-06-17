@@ -609,6 +609,7 @@ public static function Eliminar_Asistencia_Oferta_Laboral($mysqli, $ID_Migrante,
                             session_start(); /*Inicializamos los valores de la sesión*/
                             $_SESSION['USERNAME']=$res[0]["Nombre"];
                             $_SESSION['USERID']=$res[0]["Id_Administrador"];
+                            $_SESSION['POINTID']=0;
                             $_SESSION['ADMIN']=1;
                             header("location:http://localhost/IngenieriaWeb/Administrador.html");  
                         }
