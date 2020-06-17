@@ -618,7 +618,7 @@ public static function Eliminar_Asistencia_Oferta_Laboral($mysqli, $ID_Migrante,
                 }
 
             }
-        }catch(PDOException $e){
+        }catch(Exception $e){
             $result=["Error: "=>$e->getMessage()];
         }
 
