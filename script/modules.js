@@ -634,6 +634,7 @@ export function Validar_SesionA(){
     .then(handleHttpErrors)
     .then(res=>res.text())
     .then(resjson=>{
+        console.log(resjson);
         if (resjson.ADMIN==null){
             
             console.log(resjson); 
