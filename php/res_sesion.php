@@ -16,14 +16,16 @@ function res_get(){
              $result->USERNAME=$_SESSION['USERNAME'];
              $result->POINTID=$_SESSION['POINTID'];
              $result->ADMIN=$_SESSION['ADMIN'];
-             return $result;   
+             
         }else{
             $result->USERID=NULL;
             $result->USERNAME=NULL;
             $result->POINTID=NULL;
             $result->ADMIN=NULL;
-            return $result;
+            
         }
+
+        return $result;
 
 
 }
@@ -35,7 +37,7 @@ function res_post(){
         $data=json_decode($json);
         $Conexion= new Database();
         $result = [$Conexion->IniciarSesion($Conexion,$data->Usuario,$data->Clave)];
-        return $result; 
+        //return $result; 
     }else{
         $result = ["Error"=>"No se enviaron todos los parametros correctamente"];
         header('HTTP/1.1 400 Bad Request');
