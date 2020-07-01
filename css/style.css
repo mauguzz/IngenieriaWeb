@@ -1,0 +1,6 @@
+.main-header{
+    display: flex;
+    flex-direction: row;
+    background-image: "img/mexico-destination.jpg";
+    
+}
