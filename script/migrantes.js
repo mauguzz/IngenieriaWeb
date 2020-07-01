@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
                         {
                             text:"Editar Participación en Actividades", 
-                            extend: "selectedSingle",
+                            extend: "selected",
                             attr:{
                                 "data-toggle": "modal",
                                 "data-target": "#migrante_culturales_modal"
@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
                         {
                             text:"Editar Seguimiento Laboral", 
-                            extend: "selectedSingle",
+                            extend: "selected",
                             attr:{
                                 "data-toggle": "modal",
                                 "data-target": "#migrante_laborales_modal"
