@@ -70,7 +70,19 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
         let formData = new FormData(form_seguimiento);
         console.log(formData.get('migrante_id'))
 
-        //migrante_consultar(id, true, t_general, t_culturales, t_laborales, t_registros)
+        migrante_consultar(formData.get('migrante_id'), true, t_general, t_culturales, t_laborales, t_registros)
+        .then(response=>{
+            llave=true;
+        })
+        .catch(reason=>{
+            console.log(reason);
+            console.log("No especificado LLAVE");
+            //if(reason=="Llave no especificada"){
+                
+                llave=false;
+                
+            //}
+        })
     }
     /////////////////////////////////////////////////////////////////7
     //Para limpiar el formulario, en la ventana modal se puede poner un botón en el cual se pueda dar clic a propia decisión si limpiarlo o no, esto para que sea útil en el caso de modificar
