@@ -1,6 +1,6 @@
 .main-header{
     display: flex;
     flex-direction: column;
-    background-image: "img/mexico-destination.jpg";
+    background-image: url("img/mexico-destination.jpg");
 
 }
