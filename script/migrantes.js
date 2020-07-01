@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     ]
                 });
 
-                datatable.buttons(2,null).container().appendTo( '#generic_buttons_container' ); 
+                datatable.buttons(1,null).container().appendTo( '#generic_buttons_container' ); 
 
 
 
