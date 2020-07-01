@@ -49,3 +49,7 @@
     justify-content: space-around;
 }
 
+.buttons-containers button{
+    width: 60vh;
+}
+
