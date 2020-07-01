@@ -187,9 +187,11 @@ form_migrantes.onsubmit = function(e){
             se le pedirá dicha clave. Guarde y mantenga esta clave de manera secreta pero envíesela a su familiar para que pueda estar al pendiente de usted`);
             migrante_consultar_todos('#t_migrantes', false);
             show = false;
+            $("#modal_migrantes_form").modal('hide');
         })
         .catch(e=>{
             show = false;
+            $("#modal_migrantes_form").modal('hide');
             alert("Error al insertar migrante");
         });
     }else if(form_migrantes_action.value=="modify"){
@@ -197,9 +199,11 @@ form_migrantes.onsubmit = function(e){
         .then(result=>{
             migrante_consultar_todos('#t_migrantes', false);
             show=false;
+            $("#modal_migrantes_form").modal('hide');
         })
         .catch(e=>{
             show = false;
+            $("#modal_migrantes_form").modal('hide');
             alert("Error al modificar migrante");
         });
     }
