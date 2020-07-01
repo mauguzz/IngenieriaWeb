@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         }
                     ]
             });
-            datatable.buttons().container().appendTo( '#datatable_buttons_container' );  
+            datatable.buttons(0, null).container().appendTo( '#datatable_buttons_container' );  
 
             new $.fn.dataTable.Buttons(datatable, { 
                 buttons: 
