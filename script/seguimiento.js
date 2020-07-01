@@ -36,7 +36,7 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
             $("#modal_migrantes_details").modal('show')
         })
         .catch(reason=>{
-            console.log(reason.text());
+            console.log(reason.message);
             console.log("No especificado LLAVE");
             //if(reason=="Llave no especificada"){
                 
