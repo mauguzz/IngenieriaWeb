@@ -1,6 +1,7 @@
 .main-header{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     background-image: url("../img/mexico-destination.jpg");
     height: 70vh;
     background-size: cover;
