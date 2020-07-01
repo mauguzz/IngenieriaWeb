@@ -73,6 +73,7 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
         migrante_consultar(formData.get('migrante_id'), true, t_general, t_culturales, t_laborales, t_registros)
         .then(response=>{
             llave=true;
+            $("#modal_migrantes_details").modal('show')
         })
         .catch(reason=>{
             console.log(reason);
