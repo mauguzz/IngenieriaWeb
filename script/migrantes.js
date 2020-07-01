@@ -40,6 +40,39 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
         migrante_consultar_todos('#t_migrantes', true)
         .then(datatable=>{
+
+
+
+
+            new $.fn.dataTable.Buttons(datatable, { 
+                buttons: 
+                    [
+                        {
+                            text:"Añadir Migrante", 
+                            attr:{
+                                "data-toggle": "modal",
+                                "data-target": "#modal_migrantes_form"
+                            },
+                            action: ()=>{
+                                form_migrantes.reset(); //Limpia el formulario
+                                form_migrantes_action.value="create";
+                                form_migrantes_submit.value="Registrar";
+                            }   
+                        }
+
+                        
+                    ]
+            });
+
+            datatable.buttons(0,null).container().appendTo( '#datatable_none_buttons_container' ); 
+
+
+
+
+
+
+
+
             new $.fn.dataTable.Buttons(datatable, { 
                 buttons: 
                     [
@@ -118,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         }
                     ]
             });
-            datatable.buttons(0, null).container().appendTo( '#datatable_single_buttons_container' );  
+            datatable.buttons(1, null).container().appendTo( '#datatable_single_buttons_container' );  
 
             new $.fn.dataTable.Buttons(datatable, { 
                 buttons: 
@@ -154,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     ]
                 });
 
-                datatable.buttons(1,null).container().appendTo( '#datatable_multiple_buttons_container' ); 
+                datatable.buttons(2,null).container().appendTo( '#datatable_multiple_buttons_container' ); 
 
 
 
