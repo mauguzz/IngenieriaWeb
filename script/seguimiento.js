@@ -37,8 +37,8 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
         })
         .catch(reason=>{
             console.log(reason.message);
-            console.log("No especificado LLAVE");
-            if(reason=="Unauthorized"){
+ 
+            if(reason.message=="Unauthorized"){
                 
                 llave=false;
                 alert("Llave incorrecta. Verifique que la llave proporcionada sea correcta.")
