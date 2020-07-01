@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         }
                     ]
             });
-            datatable.buttons(0, null).container().appendTo( '#datatable_buttons_container' );  
+            datatable.buttons(0, null).container().appendTo( '#datatable_single_buttons_container' );  
 
             new $.fn.dataTable.Buttons(datatable, { 
                 buttons: 
@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     ]
                 });
 
-                datatable.buttons(1,null).container().appendTo( '#generic_buttons_container' ); 
+                datatable.buttons(1,null).container().appendTo( '#datatable_multiple_buttons_container' ); 
 
 
 
