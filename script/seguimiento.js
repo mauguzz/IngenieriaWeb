@@ -68,7 +68,7 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
         e.preventDefault();
 
         let formData = new FormData(form_seguimiento);
-        console.log(formData.migrante_id)
+        console.log(formData)
 
         //migrante_consultar(id, true, t_general, t_culturales, t_laborales, t_registros)
     }
