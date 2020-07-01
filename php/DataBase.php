@@ -496,7 +496,6 @@ public static function Eliminar_Oferta_Laboral($mysqli,$id){
        WHERE ".$Id_Tabla."=".$id.";";
        $Funcionario = $Conexion->prepare($query); 
        $Funcionario->execute();  //Ejecuto la consulta
-       return ["DELETE"=>"Correcto, Eliminado correctamente"];
     }catch(PDOException $e){
         return ["DELETE"=>$e->getMessage()];
     }

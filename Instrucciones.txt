@@ -1,0 +1,81 @@
+Instrucciones de instalación:
+
+Requisitos:
+
+-Tener una instancia en Mysql con el siguiente nombre:"IngenieriaWeb"
+-Tener un usuario con el siguiente nombre:"WebApplication" con la contraseña:"123456",se puede crear con el 
+siguiente query:"Create USER 'WebApplication'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456'"
+-En caso de tener una instancia propia ya lista, los parametros de conexión se encuentran en el archivo:"DataBase" en la carpeta php
+-Tener instalado XAMPP o cualquier otro provedor de servicios apache o similar.
+
+Instalación:
+-Corre el script "Sistema de migración.sql" de la carpeta DataBase en tu instancia de MYSQL 
+-Descomprime el archivo .rar en el directorio ROOT de tu proovedor de servicios, en caso de usar xampp
+la dirección por defecto es: "C:\xampp\htdocs"
+-Correr los servicios de apache en xampp y en tu navegador ve a la siguiente dirección:"http://localhost/IngenieriaWeb/";
+
+
+Guía de uso:
+
+-Una vez en el index del sitio, inicia sesión con cualquiera de siguientes credenciales:
+
+Usuario: "Noe@hotmail.com"
+Contraseña: "123456"
+
+Usuario :"M@gmail.com"
+Contrasñea: "123456"
+
+Usuario: "m2@gmail.com"
+Contraseña:"123456" 
+
+Cada uno corresponde al punto de control 1,5,7 respectivamente.
+
+
+-Una vez iniciada la sesión, podrás consultar todos los migrantes que existen en la base de datos. Estos a su vez podrán ser consultados
+a detalle, modificados o eliminados a disposición del funcionario. 
+
+-Para registar un nuevo migrante, se debe hacer click sobre el botón "añadir migante" posteriormente se desplegará la información insertada en la tabla, donde su última
+ubicación mostrada será la sede de registro. Además, se desplegará la llave de migrante, quien deberá guardarla de manera segura y enviarla a sus familiares.
+
+-Cada que se registre la visita del migrante a algún punto de control, esta entrada se deberá registrar, dando click sobre el migrante y posteriormente
+sobre el botón "Registrar entrada", el sistema sabe el punto de control correspondiente de acuerdo al ID del funcionario que tiene iniciada su sesión,
+por lo que no habrá la necesidad de insertar este valor.
+
+-Cada que se registra la salida de un migrante sucede lo mismo, pero aquí se añadé el campo de alimentación, donde un 1 indica que se le proporcionó alimento.
+
+-Para consultar las actividades culturales así como las ofertas laborales, se accede a través del navbar ubicado en la parte superior, aquí también se podrán
+consultar, modificar, registrar asistencia y eliminar dichas actividades. 
+
+-Para agregar funcionarios, cierra sesión y accede con las siguiente credencial:
+Usuario:"mauricio@gmail.com"
+Contrase:"123456"
+
+
+-Para dar seguimiento a un migrante, desde el index, del lado derecho, aparece la opción para buscar un familiar, da click en buscar, te redigirá a una
+pagina de seguimiento, donde podrás ver los migrantes registrados, en caso de que quieras consultar información más detallada del migrante, da click sobre 
+el migrante de tu interés y después en detalles se desplagará un modal, donde ingresando la llave correspondiente de cada migrante 
+te permitirá acceder a su información.
+Las llaves de los migrantes con registro predeterminado son:
+
+Id migrante:"1"
+LLave: "123456"
+Id migrante:2
+LLave:"123456"
+
+Id migrante:3
+LLave:"123456"
+
+Id migrante:4 
+LLave:"123456"
+
+Id migrante:5
+LLave:"123456"
+
+NOTA: La llave para cualquier otro migrante que sea registrado en el sistema será la que arroje el banner al momento de registrarlo.
+NOTA 2: Si en tu navegador tienes iniciada una sesión de funcionario, esta página de seguimiento te arrojará la información de los detalles
+sin necesidad de insertar la llave de migrante. Por lo que se sugiere hacer la prueba con dos navegadores, uno con el acceso de funcionario,
+y otro sin haber iniciado sesión.
+
+
+
+

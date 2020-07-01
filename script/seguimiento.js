@@ -1,4 +1,4 @@
-import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migrante_modificar, migrante_eliminar, 
+import {migrante_consultar,Iniciar_Sesion, migrante_consultar_todos, migrante_registrar, migrante_modificar, migrante_eliminar, 
     llenar_opciones_selector,Validar_Sesion,Cerrar_Sesion, migrante_seguimiento_todos} from './modules.js';
     
     const mcontent = document.getElementById('content'); //Div del contenido principal (tablas, etc), todas las páginas
@@ -10,19 +10,22 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
     const t_laborales = document.getElementById('t_laborales');
     const t_registros = document.getElementById('t_registros');
 
-    const form_seguimiento = document.getElementById('form_seguimiento');
-    
-    
-    
-    const B_Cerrar_Sesion=document.getElementById('B_Cerrar_Sesion');
+    const form_seguimiento = document.getElementById('form_seguimiento');    
+    const Form_Iniciar_Sesion = document.getElementById('Form_Iniciar_Sesion');
+    const B_Iniciar_Sesion=document.getElementById("B_Iniciar_Sesion");
+
+
+      
+
     
     let id =0; //Variable de prueba, id de migrante que se aplica la acción
     let llave;
     
     
-    document.addEventListener("DOMContentLoaded", function(event) {
-    
-    });
+    B_Iniciar_Sesion.onclick=function(e) {
+        e.preventDefault();
+        $("#modal_Iniciar_Sesión").modal('show')
+    };
     
     form_seguimiento.onsubmit = function(e){
         e.preventDefault();
@@ -55,5 +58,13 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
         if(!llave){ $("#modal_migrantes_details").modal('hide');}
     })
     
+    Form_Iniciar_Sesion.onsubmit = function(e){ //Registro el evento a mi objeto botón, en este caso es a un click
+        e.preventDefault();
+        let formData = new FormData(Form_Iniciar_Sesion); //Creo un objeto con la información del form
+        let formJson = JSON.stringify(Object.fromEntries(formData)); //Convierto mi objeto a un formato Json
+        Iniciar_Sesion(formJson);  
+    };
+    
+
     
     

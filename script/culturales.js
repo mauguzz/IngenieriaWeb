@@ -65,6 +65,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             id=datatable.rows( { selected: true } ).data()[0][0]; 
                             //Se va a redireccionar a otra página
                         }
+                    },
+                    {
+                        text:"Eliminar", 
+                        extend: "selectedSingle",
+                        action: ()=>{
+                            id=datatable.rows( { selected: true } ).data()[0][0]; 
+                            culturales_eliminar(id)
+                            .then(result=>{
+                                culturales_consultar_todos('#t_culturales', false)
+                            })
+                        },   
                     }
                 ]
         });

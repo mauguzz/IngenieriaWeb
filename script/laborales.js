@@ -62,7 +62,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         action: ()=>{
                             id=datatable.rows( { selected: true } ).data()[0][0]; 
                         }
+                    },
+                    ,
+                    {
+                        text:"Eliminar", 
+                        extend: "selectedSingle",
+                        action: ()=>{
+                            id=datatable.rows( { selected: true } ).data()[0][0]; 
+                            laborales_eliminar(id)
+                            .then(result=>{
+                                laborales_consultar_todos('#t_culturales', false)
+                            })
+                        }   
                     }
+
                 ]
         });
         datatable.buttons().container().appendTo( '#datatable_buttons_container' );  
