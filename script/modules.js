@@ -77,7 +77,7 @@ function table_generate_datatables(tablename, init, rows, cols){
      
     if(init){
         datatable = $(tablename).DataTable( {
-            select: true,
+            select: {style: 'multi'},
             data: dataSet,
             columns: customCols,
             dom: "frtip"
