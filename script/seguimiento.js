@@ -9,6 +9,8 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
     const t_culturales = document.getElementById('t_culturales');
     const t_laborales = document.getElementById('t_laborales');
     const t_registros = document.getElementById('t_registros');
+
+    const form_seguimiento = document.getElementById('form_seguimiento');
     
     
     
@@ -62,7 +64,14 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
         
     });
     
-    
+    form_seguimiento.onsubmit = function(e){
+        e.preventDefault();
+
+        let formData = new FormData(form_seguimiento);
+        console.log(formData.migrante_id)
+
+        //migrante_consultar(id, true, t_general, t_culturales, t_laborales, t_registros)
+    }
     /////////////////////////////////////////////////////////////////7
     //Para limpiar el formulario, en la ventana modal se puede poner un botón en el cual se pueda dar clic a propia decisión si limpiarlo o no, esto para que sea útil en el caso de modificar
     
