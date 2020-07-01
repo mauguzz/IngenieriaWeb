@@ -182,7 +182,7 @@ form_migrantes.onsubmit = function(e){
     if(form_migrantes_action.value=="create"){
         migrante_registrar(formJson)
         .then(result=>{
-            
+            $("#modal_migrantes_form").modal('hide');
             /*
             alert(`Hola ${result['nombre']}, bienvenido a México. La siguiente es su llave de autorización: " ${result['llave_migrante']} ". 
             Cada que cambie de ubicación y se requiera de registrar en otro punto de control, o cuando quiera corregir sus datos 
@@ -213,12 +213,12 @@ form_migrantes.onsubmit = function(e){
     
 }
 
-
+/*
 $("#f_migrantes_submit").click( function() { 
     $("#modal_migrantes_form").modal('hide');
     return false;
 });
-
+*/
 
 
 
