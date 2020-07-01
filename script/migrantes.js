@@ -137,18 +137,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             },   
                         },
 
-                        {
-                            text:"Añadir Migrante", 
-                            attr:{
-                                "data-toggle": "modal",
-                                "data-target": "#modal_migrantes_form"
-                            },
-                            action: ()=>{
-                                form_migrantes.reset(); //Limpia el formulario
-                                form_migrantes_action.value="create";
-                                form_migrantes_submit.value="Registrar";
-                            }   
-                        }
+                       
                     ]
             });
             datatable.buttons(1, null).container().appendTo( '#datatable_single_buttons_container' );  
