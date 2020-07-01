@@ -43,7 +43,7 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
                 llave=false;
                 alert("Llave incorrecta. Verifique que la llave proporcionada sea correcta.")
                 
-            }else if(reason=="NoKey"){
+            }else if(reason.message=="NoKey"){
                 alert("No proporcionó ninguna llave. Ingrese la llave que le proporcionó su familiar o conocido para poder continuar.")
             }
         })
