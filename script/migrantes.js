@@ -90,33 +90,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             }     
                         },
 
-                        /*
-                        {
-                            text:"Editar Participación en Actividades", 
-                            extend: "selectedSingle",
-                            attr:{
-                                "data-toggle": "modal",
-                                "data-target": "#migrante_culturales_modal"
-                            },
-                            action: ()=>{
-                                id=datatable.rows( { selected: true } ).data()[0][0]; 
-                                edicion_migrante_culturales(id); //Llama a esta función para hacer consultas a la BD. Está implementada en este mismo archivo.
-                            },   
-                        },
-
-                        {
-                            text:"Editar Seguimiento Laboral", 
-                            extend: "selectedSingle",
-                            attr:{
-                                "data-toggle": "modal",
-                                "data-target": "#migrante_laborales_modal"
-                            },
-                            action: ()=>{
-                                id=datatable.rows( { selected: true } ).data()[0][0]; 
-                                edicion_migrante_laborales(id); //Llama a esta función para hacer consultas a la BD. Está implementada en este mismo archivo.
-                            },   
-                        },
-                        */
+                        
 
                         {
                             text:"Eliminar", 
@@ -145,6 +119,47 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     ]
             });
             datatable.buttons().container().appendTo( '#datatable_buttons_container' );  
+
+            new $.fn.dataTable.Buttons(datatable, { 
+                buttons: 
+                    [
+
+
+                        {
+                            text:"Editar Participación en Actividades", 
+                            extend: "selectedSingle",
+                            attr:{
+                                "data-toggle": "modal",
+                                "data-target": "#migrante_culturales_modal"
+                            },
+                            action: ()=>{
+                                id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                edicion_migrante_culturales(id); //Llama a esta función para hacer consultas a la BD. Está implementada en este mismo archivo.
+                            },   
+                        },
+
+                        {
+                            text:"Editar Seguimiento Laboral", 
+                            extend: "selectedSingle",
+                            attr:{
+                                "data-toggle": "modal",
+                                "data-target": "#migrante_laborales_modal"
+                            },
+                            action: ()=>{
+                                id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                edicion_migrante_laborales(id); //Llama a esta función para hacer consultas a la BD. Está implementada en este mismo archivo.
+                            },   
+                        },
+                        
+                    ]
+                });
+
+                datatable.buttons().container().appendTo( '#generic_buttons_container' ); 
+
+
+
+
+
         })
         .catch(e=>console.log(e));
         //action requiere una definición de una función, y no una llamada a una función. Por ello se hace una estructura arrow function, es decir ()=>{}
