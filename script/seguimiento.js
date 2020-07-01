@@ -22,6 +22,7 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
     
     document.addEventListener("DOMContentLoaded", function(event) {
     
+        /*
         
             migrante_seguimiento_todos('#t_migrantes', true)
             .then(datatable=>{
@@ -61,7 +62,7 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
             .catch(e=>console.log(e));
             //action requiere una definición de una función, y no una llamada a una función. Por ello se hace una estructura arrow function, es decir ()=>{}
        
-        
+        */
     });
     
     form_seguimiento.onsubmit = function(e){
