@@ -38,11 +38,14 @@ import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migran
         .catch(reason=>{
             console.log(reason.message);
             console.log("No especificado LLAVE");
-            //if(reason=="Llave no especificada"){
+            if(reason=="Unauthorized"){
                 
                 llave=false;
+                alert("Llave incorrecta. Verifique que la llave proporcionada sea correcta.")
                 
-            //}
+            }else if(reason=="NoKey"){
+                alert("No proporcionó ninguna llave. Ingrese la llave que le proporcionó su familiar o conocido para poder continuar.")
+            }
         })
     }
     /////////////////////////////////////////////////////////////////7
