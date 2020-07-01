@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: space-between;
     background-image: url("../img/mexico-destination.jpg");
-    max-height: 50vh;
+    height: 50vh;
     min-height: 25vh;
     background-size: cover;
 }
