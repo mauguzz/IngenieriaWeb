@@ -214,7 +214,7 @@ form_migrantes.onsubmit = function(e){
 }
 
 
-$("#f_migrantes_submit").submit( function() { 
+$("#f_migrantes_submit").click( function() { 
     $("#modal_migrantes_form").modal('hide');
     return false;
 });
