@@ -20,7 +20,7 @@ const form_migrantes_submit = document.getElementById('f_migrantes_submit');
 const B_Cerrar_Sesion=document.getElementById('B_Cerrar_Sesion');
 
 let id =0; //Variable de prueba, id de migrante que se aplica la acción
-let show;
+
 
 
 
@@ -73,7 +73,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             action: ()=>{
                                 id=datatable.rows( { selected: true } ).data()[0][0]; 
                                 migrante_consultar(id, false, t_general, t_culturales, t_laborales, t_registros)
-                                show=true;
                             }
                         },
 
@@ -87,8 +86,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             action: ()=>{
                                 id=datatable.rows( { selected: true } ).data()[0][0]; 
                                 form_migrantes_action.value="modify";
-                                form_migrantes_submit.value="Guardar cambios";
-                                show=true;
+                                form_migrantes_submit.value="Guardar cambios";                                
                             }     
                         },
 
@@ -142,8 +140,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                 form_migrantes.reset(); //Limpia el formulario
                                 form_migrantes_action.value="create";
                                 form_migrantes_submit.value="Registrar";
-                                show=true;
-                                
                             }   
                         }
                     ]
@@ -188,37 +184,23 @@ form_migrantes.onsubmit = function(e){
             Cada que cambie de ubicación y se requiera de registrar en otro punto de control, o cuando quiera corregir sus datos 
             se le pedirá dicha clave. Guarde y mantenga esta clave de manera secreta pero envíesela a su familiar para que pueda estar al pendiente de usted`);
             migrante_consultar_todos('#t_migrantes', false);
-            show = false;
-            
-            
         })
         .catch(e=>{
-            show = false;
-            
             alert("Error al insertar migrante");
         });
     }else if(form_migrantes_action.value=="modify"){
         migrante_modificar(id, formJson)
         .then(result=>{
             migrante_consultar_todos('#t_migrantes', false);
-            show=false;
-            
         })
         .catch(e=>{
-            show = false;
-            
             alert("Error al modificar migrante");
         });
     }
     
 }
 
-/*
-$("#f_migrantes_submit").click( function() { 
-    $("#modal_migrantes_form").modal('hide');
-    return false;
-});
-*/
+
 
 
 
