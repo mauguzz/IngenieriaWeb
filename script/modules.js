@@ -176,7 +176,7 @@ export function migrante_consultar(id, prompt, t_general, t_culturales, t_labora
             let header = new Headers();
 
             llave = window.prompt("Ingrese la llave que le proporcionó su familiar", "");
-            if (llave == null || llave == "") {reject("Llave no especificada"); return;};
+            if (llave == null || llave == "") {reject(new Error("NoKey")); return;};
             
             header.set('Authorization', 'Basic ' + btoa("familiar:" + llave));
             request = new Request('php/res_migrantes.php/'+id,{
