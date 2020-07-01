@@ -182,7 +182,7 @@ form_migrantes.onsubmit = function(e){
     if(form_migrantes_action.value=="create"){
         migrante_registrar(formJson)
         .then(result=>{
-            $("#modal_migrantes_form").modal('hide');
+            
             alert(`Hola ${result['nombre']}, bienvenido a México. La siguiente es su llave de autorización: " ${result['llave_migrante']} ". 
             Cada que cambie de ubicación y se requiera de registrar en otro punto de control, o cuando quiera corregir sus datos 
             se le pedirá dicha clave. Guarde y mantenga esta clave de manera secreta pero envíesela a su familiar para que pueda estar al pendiente de usted`);
@@ -192,7 +192,7 @@ form_migrantes.onsubmit = function(e){
         })
         .catch(e=>{
             show = false;
-            $("#modal_migrantes_form").modal('hide');
+            
             alert("Error al insertar migrante");
         });
     }else if(form_migrantes_action.value=="modify"){
@@ -200,11 +200,11 @@ form_migrantes.onsubmit = function(e){
         .then(result=>{
             migrante_consultar_todos('#t_migrantes', false);
             show=false;
-            $("#modal_migrantes_form").modal('hide');
+            
         })
         .catch(e=>{
             show = false;
-            $("#modal_migrantes_form").modal('hide');
+            
             alert("Error al modificar migrante");
         });
     }
