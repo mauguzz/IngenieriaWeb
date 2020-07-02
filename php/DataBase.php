@@ -130,6 +130,9 @@ class DataBase{
     }
 
     public static function Mostrar_Opciones($mysqli){
+
+        $PuntoDeControl=$_SESSION['POINTID'];
+
         $Conexion = $mysqli -> Conectar(); //Me conecto a la base de datos
         $query="SELECT * FROM pais";
         $Paises = $Conexion -> prepare($query);
@@ -153,10 +156,12 @@ class DataBase{
         $Situaciones_Familiares = $Conexion -> prepare($query);
         $Situaciones_Familiares->execute();
 
-        $query="SELECT Id_Actividad, Nombre FROM Actividades";
+        $query="SELECT Id_Actividad, Nombre FROM Actividades WHERE Id_Punto_Control = '".$PuntoDeControl."'"; 
+        //Solo podrá seleccionar una actividad que esté cerca del punto de control
         $Actividades_Culturales = $Conexion -> prepare($query);
         $Actividades_Culturales->execute();
-        $query="SELECT Id_Trabajo, Nombre FROM Ofertas_de_trabajo";
+        $query="SELECT Id_Trabajo, Nombre FROM Ofertas_de_trabajo WHERE Id_Punto_Control = '".$PuntoDeControl."'";
+        //Solo podrá seleccionar una actividad que esté cerca del punto de control
         $Actividades_Laborales = $Conexion -> prepare($query);
         $Actividades_Laborales->execute();
         return [
