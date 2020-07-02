@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                 
 
                                 for(let i=0; i<selected_count; i++){
-                                    ids.push(selected_count= datatable.rows( { selected: true } ).data()[i][0]); 
+                                    ids.push(datatable.rows( { selected: true } ).data()[i][0]); 
                                 }
                                 console.log(ids);
 
