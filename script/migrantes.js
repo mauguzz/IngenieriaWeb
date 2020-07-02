@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             action: ()=>{
                                 let ids=[];
                                 let selected_count= datatable.rows( { selected: true } ).count();                            
-                                console.log(selected)
+                                console.log(selected_count)
                                 
 
                                 for(let i=0; i<selected_count; i++){
