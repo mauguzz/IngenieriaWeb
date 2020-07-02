@@ -221,7 +221,7 @@ form_select_actividad_cultural.onsubmit = function(e){
     })
     .catch(e=>{
         $("#migrante_culturales_modal").modal('hide');
-        alert(`Las asistencias fueron parcialmente insertadas.
+        alert(`
         Uno o varios de los migrantes seleccionados no fueron añadidos a la lista.
         Es posible que algunos de los migrantes seleccionados ya estén en la lista.`);
     })
@@ -237,7 +237,7 @@ form_select_actividad_laboral.onsubmit = function(e){
     })
     .catch(e=>{
         $("#migrante_laborales_modal").modal('hide');
-        alert(`Las asistencias fueron parcialmente insertadas.
+        alert(`
         Uno o varios de los migrantes seleccionados no fueron añadidos a la lista.
         Es posible que algunos de los migrantes seleccionados ya estén en la lista.`);
     })
