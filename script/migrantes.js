@@ -15,6 +15,8 @@ const t_registros = document.getElementById('t_registros');
 const form_migrantes = document.getElementById('f_migrantes');
 const form_migrantes_action = document.getElementById('f_migrantes_action');
 const form_migrantes_submit = document.getElementById('f_migrantes_submit');
+const form_select_actividad_cultural = document.getElementById('form_select_actividad_cultural');
+const form_select_actividad_laboral = document.getElementById('form_select_actividad_laboral');
 
 
 const B_Cerrar_Sesion=document.getElementById('B_Cerrar_Sesion');
@@ -159,17 +161,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             action: ()=>{
                                 let ids=[];
                                 let selected_count= datatable.rows( { selected: true } ).count();                            
-                                console.log(selected_count)
-                                
-
                                 for(let i=0; i<selected_count; i++){
                                     ids.push(datatable.rows( { selected: true } ).data()[i][0]); 
                                 }
                                 console.log(ids);
 
-
-                                //console.log(datatable.rows( { selected: true } ).data())
-                                edicion_migrante_culturales(id); //Llama a esta función para hacer consultas a la BD. Está implementada en este mismo archivo.
+                                edicion_migrante_culturales(ids); //Llama a esta función para hacer consultas a la BD. Está implementada en este mismo archivo.
                             },   
                         },
 
@@ -181,8 +178,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                 "data-target": "#migrante_laborales_modal"
                             },
                             action: ()=>{
-                                id=datatable.rows( { selected: true } ).data()[0][0]; 
-                                edicion_migrante_laborales(id); //Llama a esta función para hacer consultas a la BD. Está implementada en este mismo archivo.
+                                let ids=[];
+                                let selected_count= datatable.rows( { selected: true } ).count();                            
+                                for(let i=0; i<selected_count; i++){
+                                    ids.push(datatable.rows( { selected: true } ).data()[i][0]); 
+                                }
+                                console.log(ids);
+                                edicion_migrante_laborales(ids); //Llama a esta función para hacer consultas a la BD. Está implementada en este mismo archivo.
                             },   
                         },
                         
@@ -216,6 +218,19 @@ function edicion_migrante_laborales(id){
 
 /////////////////////////////////////////////////////////////////7
 //Para limpiar el formulario, en la ventana modal se puede poner un botón en el cual se pueda dar clic a propia decisión si limpiarlo o no, esto para que sea útil en el caso de modificar
+
+form_select_actividad_cultural.onsubmit = function(e){
+    e.preventDefault();
+    let formData = new FormData(form_select_actividad_cultural);
+    console.log(formData.get('actividades_culturales'))
+}
+form_select_actividad_laboral.onsubmit = function(e){
+    e.preventDefault();
+    let formData = new FormData(form_select_actividad_laboral);
+    console.log(formData.get('actividades_laborales'))
+}
+
+
 
 form_migrantes.onsubmit = function(e){
     e.preventDefault();
