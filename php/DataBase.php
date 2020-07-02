@@ -153,10 +153,10 @@ class DataBase{
         $Situaciones_Familiares = $Conexion -> prepare($query);
         $Situaciones_Familiares->execute();
 
-        $query="SELECT * FROM Actividades";
+        $query="SELECT Id_Actividad, Nombre FROM Actividades";
         $Actividades_Culturales = $Conexion -> prepare($query);
         $Actividades_Culturales->execute();
-        $query="SELECT * FROM Ofertas_de_trabajo";
+        $query="SELECT Id_Trabajo, Nombre FROM Ofertas_de_trabajo";
         $Actividades_Laborales = $Conexion -> prepare($query);
         $Actividades_Laborales->execute();
         return [
