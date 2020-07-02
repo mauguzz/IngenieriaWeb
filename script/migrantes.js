@@ -217,11 +217,12 @@ form_select_actividad_cultural.onsubmit = function(e){
     asistencias_culturales_registrar(formData.get('actividades_culturales'), JSON.stringify(ids))
     .then(result=>{
         $("#migrante_culturales_modal").modal('hide');
-        alert('Añadidos todos a la lista correctamente');
+        alert('Migrante(s) añadido(s) a la lista correctamente');
     })
     .catch(e=>{
         $("#migrante_culturales_modal").modal('hide');
-        alert(`Uno o varios de los migrantes seleccionados no fueron añadidos a la lista.
+        alert(`Las asistencias fueron parcialmente insertadas.
+        Uno o varios de los migrantes seleccionados no fueron añadidos a la lista.
         Es posible que algunos de los migrantes seleccionados ya estén en la lista.`);
     })
 }
@@ -232,12 +233,13 @@ form_select_actividad_laboral.onsubmit = function(e){
     asistencias_laborales_registrar(formData.get('actividades_laborales'), JSON.stringify(ids))
     .then(result=>{
         $("#migrante_laborales_modal").modal('hide');
-        alert('Añadidos todos a la lista correctamente');
+        alert('Migrante(s) añadido(s) a la lista correctamente');
     })
     .catch(e=>{
         $("#migrante_laborales_modal").modal('hide');
-        alert(`Uno o varios de los migrantes seleccionados no fueron añadidos a la lista
-        Es posible que algunos de los migrantes seleccionados ya estén en la lista`);
+        alert(`Las asistencias fueron parcialmente insertadas.
+        Uno o varios de los migrantes seleccionados no fueron añadidos a la lista.
+        Es posible que algunos de los migrantes seleccionados ya estén en la lista.`);
     })
 }
 

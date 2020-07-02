@@ -324,6 +324,7 @@ class DataBase{
 
         }catch(PDOException $e){
             return ["POST"=>$e->getMessage()];
+            header('HTTP/1.1 409 Conflict'); //Puede existir un conflicto debido a duplicidades de ids
         }
         
     }
@@ -346,6 +347,7 @@ class DataBase{
 
         }catch(PDOException $e){
             return ["POST"=>$e->getMessage()];
+            header('HTTP/1.1 409 Conflict'); //Puede existir un conflicto debido a duplicidades de ids
         }
 
         
