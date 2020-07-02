@@ -158,11 +158,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             },
                             action: ()=>{
                                 
-                                let ids= datatable.rows( { selected: true } ).data();
-                                ids.forEach(element=>{
+                                let ids= datatable.rows( { selected: true } ).data();                            
+                               /* ids.forEach(element=>{
                                     id.push(element[0][0])
                                 }); 
+                                */
+                                
+
+                                Object.entries(ids).forEach(([ind, value])=>{
+                                    id.push(value[0][0]); 
+                                });
                                 console.log(id);
+
+
                                 //console.log(datatable.rows( { selected: true } ).data())
                                 edicion_migrante_culturales(id); //Llama a esta función para hacer consultas a la BD. Está implementada en este mismo archivo.
                             },   
