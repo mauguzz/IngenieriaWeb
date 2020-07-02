@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                 "data-target": "#migrante_culturales_modal"
                             },
                             action: ()=>{
-                                
+                                ids=[];
                                 let selected_count= datatable.rows( { selected: true } ).count();                            
                                 for(let i=0; i<selected_count; i++){
                                     ids.push(datatable.rows( { selected: true } ).data()[i][0]); 
@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                 "data-target": "#migrante_laborales_modal"
                             },
                             action: ()=>{
-                                
+                                ids=[];
                                 let selected_count= datatable.rows( { selected: true } ).count();                            
                                 for(let i=0; i<selected_count; i++){
                                     ids.push(datatable.rows( { selected: true } ).data()[i][0]); 
