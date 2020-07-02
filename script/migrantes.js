@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                 
 
                                 Object.entries(selected).forEach(([ind, value])=>{
-                                    ids.push(value[0][0]); 
+                                    ids.push(value); 
                                 });
                                 console.log(ids);
 
