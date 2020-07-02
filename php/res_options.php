@@ -35,7 +35,7 @@ return $result;
 
 //CÓDIGO EJECUTADO AL MOMENTO DE LLAMAR AL ARCHIVO PHP
 
-
+session_start();/*Continuamos la sesión*/
 $uri=explode("/",$uri);
 $uri=array_slice($uri,3); //Elimina las primeras tres partes irrelevantes de la uri (""/"projectfolder"/"php")
 if($uri[0] == 'res_options.php'){
