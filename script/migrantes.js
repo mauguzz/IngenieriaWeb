@@ -157,18 +157,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                 "data-target": "#migrante_culturales_modal"
                             },
                             action: ()=>{
-                                
-                                let ids= datatable.rows( { selected: true } ).data();                            
+                                let ids=[];
+                                let selected= datatable.rows( { selected: true } ).data();                            
                                /* ids.forEach(element=>{
                                     id.push(element[0][0])
                                 }); 
                                 */
                                 
 
-                                Object.entries(ids).forEach(([ind, value])=>{
-                                    id.push(value[0][0]); 
+                                Object.entries(selected).forEach(([ind, value])=>{
+                                    ids.push(value[0][0]); 
                                 });
-                                console.log(id);
+                                console.log(ids);
 
 
                                 //console.log(datatable.rows( { selected: true } ).data())
