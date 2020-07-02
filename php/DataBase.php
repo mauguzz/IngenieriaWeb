@@ -152,6 +152,13 @@ class DataBase{
         $query="SELECT * FROM Familia";
         $Situaciones_Familiares = $Conexion -> prepare($query);
         $Situaciones_Familiares->execute();
+
+        $query="SELECT * FROM Actividades";
+        $Actividades_Culturales = $Conexion -> prepare($query);
+        $Actividades_Culturales->execute();
+        $query="SELECT * FROM Ofertas_de_trabajo";
+        $Actividades_Laborales = $Conexion -> prepare($query);
+        $Actividades_Laborales->execute();
         return [
             'paises_origen' => $Paises ->fetchAll(PDO::FETCH_ASSOC),
             'estados_mexico' => $Estados ->fetchAll(PDO::FETCH_ASSOC),
@@ -159,7 +166,9 @@ class DataBase{
             'niveles_educativos' => $Niveles_Educativos ->fetchAll(PDO::FETCH_ASSOC),
             'causas_migracion' =>  $Causas_Migracion ->fetchAll(PDO::FETCH_ASSOC),
             'migrante_estados' => $Estados_Migrante ->fetchAll(PDO::FETCH_ASSOC),
-            'situaciones_familiares'=> $Situaciones_Familiares ->fetchAll(PDO::FETCH_ASSOC)
+            'situaciones_familiares'=> $Situaciones_Familiares ->fetchAll(PDO::FETCH_ASSOC),
+            'actividades_culturales'=> $Actividades_Culturales ->fetchAll(PDO::FETCH_ASSOC) ,
+            'actividades_laborales'=> $Actividades_Laborales ->fetchAll(PDO::FETCH_ASSOC)
         ];
     }
 /*----------------------------------------------Insercciones------------------------------------------------ */

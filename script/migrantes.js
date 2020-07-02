@@ -34,7 +34,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 'paises_origen',
                 'niveles_educativos',
                 'causas_migracion',
-                'situaciones_familiares'
+                'situaciones_familiares',
+                'actividades_culturales',
+                'actividades_laborales'
             ]
         )
     
