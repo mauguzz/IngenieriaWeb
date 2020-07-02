@@ -38,14 +38,16 @@ function res_post($id){
 
 
         //Id_Punto_Control,'Punto de control',Fecha_Entrada,Fecha_Salida,Alimentacion
-        /*
-        $result = $conexion->Crear_Asistencia_Oferta_Laboral(
-            $conexion,
-            $id, //ID DE MIGRANTE
-            $data->$id //ID DE ACTIVIDAD
-        );
-        */
-        $result=$data;
+        foreach($data as $value){
+            $result = $conexion->Crear_Asistencia_Oferta_Laboral(
+                $conexion,
+                $value, //ID DE MIGRANTE
+                $id //ID DE ACTIVIDAD
+            );
+        }
+        
+        
+        //$result=$data;
 
     }else{
         $result = ["Error"=>"No se enviaron todos los parametros correctamente"];
@@ -70,10 +72,12 @@ function res_delete($id){
 
 
         //Id_Punto_Control,'Punto de control',Fecha_Entrada,Fecha_Salida,Alimentacion
+        /*
         $result = $conexion->Eliminar_Asistencia_Oferta_Laboral (
             $conexion,
             $id //ID DE MIGRANTE
         );
+        */
 
     }else{
         $result = ["Error"=>"No se enviaron todos los parametros correctamente"];

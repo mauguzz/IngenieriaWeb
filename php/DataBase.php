@@ -305,11 +305,20 @@ class DataBase{
 
     public static function Crear_Asistencia_Actividad_Cultural($mysqli, $ID_Migrante, $ID_Actividad){
         //La fecha se inserta mediante la función date() de Mysql
+        
+
+
         try{
-            $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-            $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+            if(!isset(DataBase::$Conexion_Alt)){
+                DataBase::$Conexion_Alt=DataBase::Conectar();
+            }else{
+                $Conexion=DataBase::$Conexion_Alt;
+            }
+
+            DataBase::$Conexion_Alt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $query="INSERT INTO asistencia_actividad_cultural VALUES ('".$ID_Actividad."','".$ID_Migrante."', (SELECT CURDATE()))";
-            $Asistencia = $Conexion->prepare($query); 
+            $Asistencia = DataBase::$Conexion_Alt->prepare($query); 
             $Asistencia->execute();  //Ejecuto la consulta
             return ["POST"=>"Correcto, insertado correctamente"];
 
@@ -322,10 +331,16 @@ class DataBase{
     public static function Crear_Asistencia_Oferta_Laboral($mysqli, $ID_Migrante, $ID_Actividad){
         //La fecha se inserta mediante la función date() de Mysql
         try{
-            $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-            $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            if(!isset(DataBase::$Conexion_Alt)){
+                DataBase::$Conexion_Alt=DataBase::Conectar();
+            }else{
+                $Conexion=DataBase::$Conexion_Alt;
+            }
+            
+            DataBase::$Conexion_Alt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $query="INSERT INTO asistencia_oferta_laboral VALUES ('".$ID_Actividad."','".$ID_Migrante."', (SELECT CURDATE()))";
-            $Asistencia = $Conexion->prepare($query); 
+            $Asistencia = DataBase::$Conexion_Alt->prepare($query); 
             $Asistencia->execute();  //Ejecuto la consulta
             return ["POST"=>"Correcto, insertado correctamente"];
 

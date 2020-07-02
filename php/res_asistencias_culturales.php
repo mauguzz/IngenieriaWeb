@@ -45,7 +45,15 @@ function res_post($id){
             $data->$id //ID DE ACTIVIDAD
         );
         */
-        $result=$data;
+        foreach($data as $value){
+            $result = $conexion->Crear_Asistencia_Actividad_Cultural(
+                $conexion,
+                $value, //ID DE MIGRANTE
+                $id //ID DE ACTIVIDAD
+            );
+        }
+
+        //$result=$data;
 
     }else{
         $result = ["Error"=>"No se enviaron todos los parametros correctamente"];
