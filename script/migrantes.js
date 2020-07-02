@@ -157,8 +157,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                 "data-target": "#migrante_culturales_modal"
                             },
                             action: ()=>{
-                                id=datatable.rows( { selected: true } ).data()[0][0]; 
-                                console.log(datatable.rows( { selected: true } ).data()[0])
+                                
+                                datatable.rows( { selected: true } ).data().forEach(element=>{
+                                    id.push(element[0][0])
+                                }); 
+                                console.log(id);
+                                //console.log(datatable.rows( { selected: true } ).data())
                                 edicion_migrante_culturales(id); //Llama a esta función para hacer consultas a la BD. Está implementada en este mismo archivo.
                             },   
                         },
