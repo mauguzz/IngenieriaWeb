@@ -215,12 +215,18 @@ form_select_actividad_cultural.onsubmit = function(e){
     let formData = new FormData(form_select_actividad_cultural);
     console.log(formData.get('actividades_culturales'))
     asistencias_culturales_registrar(formData.get('actividades_culturales'), JSON.stringify(ids))
+    .then(result=>{
+        $("#migrante_culturales_modal").modal('hide');
+    })
 }
 form_select_actividad_laboral.onsubmit = function(e){
     e.preventDefault();
     let formData = new FormData(form_select_actividad_laboral);
     console.log(formData.get('actividades_laborales'))
     asistencias_laborales_registrar(formData.get('actividades_laborales'), JSON.stringify(ids))
+    .then(result=>{
+        $("#migrante_laborales_modal").modal('hide');
+    })
 }
 
 
