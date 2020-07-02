@@ -158,11 +158,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             },
                             action: ()=>{
                                 let ids=[];
-                                let selected= datatable.rows( { selected: true } ).ids();                            
-                               /* ids.forEach(element=>{
-                                    id.push(element[0][0])
-                                }); 
-                                */
+                                let selected= datatable.rows( { selected: true } ).data();                            
+                                console.log(selected)
                                 
 
                                 Object.entries(selected).forEach(([ind, value])=>{
