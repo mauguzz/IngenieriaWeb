@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             },
                             action: ()=>{
                                 id=datatable.rows( { selected: true } ).data()[0][0]; 
-                                console.log(datatable.rows( { selected: true } ).data().select())
+                                console.log(datatable.rows( { selected: true } ).data().cell(0))
                                 edicion_migrante_culturales(id); //Llama a esta función para hacer consultas a la BD. Está implementada en este mismo archivo.
                             },   
                         },
