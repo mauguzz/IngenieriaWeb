@@ -349,9 +349,9 @@ export function asistencias_culturales_consultar_todos(table, init){  //thead_mi
 }
 
 
-export function asistencias_culturales_registrar(jsonData){
-    return new Promise((resolve, reject)=>{
-        table_registrar("php/res_asistencias_culturales.php", jsonData)
+export function asistencias_culturales_registrar(id_actividad, ids_migrantes){
+    return new Promise((resolve, reject)=>{        
+        table_registrar("php/res_asistencias_culturales.php/actividad/"+id_actividad, ids_migrantes)
         .then(result=>resolve(result))
         .catch(result=>reject(result));
     })
@@ -397,9 +397,9 @@ export function asistencias_laborales_consultar_todos(table, init){  //thead_mig
     })
 }
 
-export function asistencias_laborales_registrar(jsonData){
+export function asistencias_laborales_registrar(id_actividad, ids_migrantes){
     return new Promise((resolve, reject)=>{
-        table_registrar("php/res_asistencias_laborales.php", jsonData)
+        table_registrar("php/res_asistencias_laborales.php/actividad/"+id_actividad, ids_migrantes)
         .then(result=>resolve(result))
         .catch(result=>reject(result));
     })

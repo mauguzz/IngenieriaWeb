@@ -1,6 +1,7 @@
 
 import {migrante_consultar, migrante_consultar_todos, migrante_registrar, migrante_modificar, migrante_eliminar, 
-llenar_opciones_selector,Validar_Sesion,Cerrar_Sesion, registros_registrar, registros_modificar} from './modules.js';
+llenar_opciones_selector,Validar_Sesion,Cerrar_Sesion, registros_registrar, registros_modificar,
+asistencias_culturales_registrar, asistencias_laborales_registrar} from './modules.js';
 
 const mcontent = document.getElementById('content'); //Div del contenido principal (tablas, etc), todas las páginas
 
@@ -22,6 +23,7 @@ const form_select_actividad_laboral = document.getElementById('form_select_activ
 const B_Cerrar_Sesion=document.getElementById('B_Cerrar_Sesion');
 
 let id =0; //Variable de prueba, id de migrante que se aplica la acción
+let ids=[];
 
 
 
@@ -159,14 +161,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                 "data-target": "#migrante_culturales_modal"
                             },
                             action: ()=>{
-                                let ids=[];
+                                
                                 let selected_count= datatable.rows( { selected: true } ).count();                            
                                 for(let i=0; i<selected_count; i++){
                                     ids.push(datatable.rows( { selected: true } ).data()[i][0]); 
                                 }
                                 console.log(ids);
 
-                                edicion_migrante_culturales(ids); //Llama a esta función para hacer consultas a la BD. Está implementada en este mismo archivo.
+                                
                             },   
                         },
 
@@ -178,13 +180,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                 "data-target": "#migrante_laborales_modal"
                             },
                             action: ()=>{
-                                let ids=[];
+                                
                                 let selected_count= datatable.rows( { selected: true } ).count();                            
                                 for(let i=0; i<selected_count; i++){
                                     ids.push(datatable.rows( { selected: true } ).data()[i][0]); 
                                 }
                                 console.log(ids);
-                                edicion_migrante_laborales(ids); //Llama a esta función para hacer consultas a la BD. Está implementada en este mismo archivo.
+                                
                             },   
                         },
                         
@@ -205,17 +207,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 
-//En estas funciones se llenará el contenido de las ventanas Modales para editar las asistencias de actividades culturales y ofertas laborales por parte de los migrantes
-//Las ventanas modales ya están implementadas en HTML, falta hacer una importación con getElementById de lo necesario.
-//Como se puede ver en la página, existen los botones "Editar Seguimiento Laboral", y "Editar Participación en Actividades", la idea es que estas ediciones se abran en la misma página de migrantes
-function edicion_migrante_culturales(id){
- 
-}
-function edicion_migrante_laborales(id){
-    //Implementar la función "table_consultar_todos(table, init)" importada desde Modules.js donde table es "#t_migrante_laborales_todas" 
-   //Implementar la función "table_consultar_por_migrante(table, id, init)" importada desde Modules.js donde table es "#t_migrante_laborales_seleccionadas"  y el id es el pasado a la función
-}
-
 /////////////////////////////////////////////////////////////////7
 //Para limpiar el formulario, en la ventana modal se puede poner un botón en el cual se pueda dar clic a propia decisión si limpiarlo o no, esto para que sea útil en el caso de modificar
 
@@ -223,11 +214,13 @@ form_select_actividad_cultural.onsubmit = function(e){
     e.preventDefault();
     let formData = new FormData(form_select_actividad_cultural);
     console.log(formData.get('actividades_culturales'))
+    asistencias_culturales_registrar(formData.get('actividades_culturales'), JSON.stringify(ids))
 }
 form_select_actividad_laboral.onsubmit = function(e){
     e.preventDefault();
     let formData = new FormData(form_select_actividad_laboral);
     console.log(formData.get('actividades_laborales'))
+    asistencias_laborales_registrar(formData.get('actividades_laborales'), JSON.stringify(ids))
 }
 
 

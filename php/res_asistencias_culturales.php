@@ -38,11 +38,14 @@ function res_post($id){
 
 
         //Id_Punto_Control,'Punto de control',Fecha_Entrada,Fecha_Salida,Alimentacion
+        /*
         $result = $conexion->Crear_Asistencia_Actividad_Cultural(
             $conexion,
             $id, //ID DE MIGRANTE
             $data->$id //ID DE ACTIVIDAD
         );
+        */
+        $result=$data;
 
     }else{
         $result = ["Error"=>"No se enviaron todos los parametros correctamente"];
@@ -90,28 +93,35 @@ function res_delete($id){
 $uri=explode("/",$uri);
 $uri=array_slice($uri,3); //Elimina las primeras tres partes irrelevantes de la uri (""/"projectfolder"/"php")
 if($uri[0] == 'res_registros.php'){
+    
     if($uri=array_slice($uri,1)){ //Si después de eliminar el primer elemento ("res_culturales.php"), el array no está vacío, entonces
-        if($uri[0]==""){ //Si no se especificó un id pero si se puso un slash al final de la uri ("...ntes.php/")
-            header('HTTP/1.1 400 Bad Request');
-            return;
-        } else { //Si se especificó un id en la uri ("...rales.php/1")
-            $id=$uri[0];
-            $id_specified=TRUE;   
+        if($uri[0]=='actividad'){
+            if($uri=array_slice($uri,1)){
+                if($uri[0]==""){ //Si no se especificó un id pero si se puso un slash al final de la uri ("...ntes.php/")
+                    header('HTTP/1.1 400 Bad Request');
+                    return;
+                } else { //Si se especificó un id en la uri ("...rales.php/1")
+                    $id=$uri[0];
+                    $id_specified=TRUE;   
+                }
+            }
         }
+        
     }else{ //Si no se especificó un id en la uri ("...rales.php")
        $id_specified=FALSE;
     }
     
     switch($method){
+       
         case 'GET':
-                $id_specified ? ($result=res_get($id)) : ($result=res_get());
+            $id_specified ? ($result=res_get($id)) : ($result=res_get());
         break;
         case 'POST':
-                $id_specified ? header('HTTP/1.1 400 Bad Request') : ($result = res_post());
+            $id_specified ? ($result=res_post($id)) : header('HTTP/1.1 400 Bad Request');
         break;
-        
+       
         case 'DELETE':
-                $id_specified ? ($result=res_delete($id)) : header('HTTP/1.1 400 Bad Request');
+            $id_specified ? ($result=res_delete($id)) : header('HTTP/1.1 400 Bad Request');
         break;
         default:
                 header('HTTP/1.1 405 Method not allowed');
