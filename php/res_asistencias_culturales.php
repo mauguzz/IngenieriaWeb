@@ -92,7 +92,7 @@ function res_delete($id){
 //CÓDIGO EJECUTADO AL MOMENTO DE LLAMAR AL ARCHIVO PHP
 $uri=explode("/",$uri);
 $uri=array_slice($uri,3); //Elimina las primeras tres partes irrelevantes de la uri (""/"projectfolder"/"php")
-if($uri[0] == 'res_registros.php'){
+if($uri[0] == 'res_asistencias_culturales.php'){
     
     if($uri=array_slice($uri,1)){ //Si después de eliminar el primer elemento ("res_culturales.php"), el array no está vacío, entonces
         if($uri[0]=='actividad'){
