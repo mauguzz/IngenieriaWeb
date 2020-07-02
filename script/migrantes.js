@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             },
                             action: ()=>{
                                 let ids=[];
-                                let selected= datatable.rows( { selected: true } ).data();                            
+                                let selected= datatable.rows( { selected: true } ).selector();                            
                                 console.log(selected)
                                 
 
