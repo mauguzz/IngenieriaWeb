@@ -50,7 +50,7 @@ class DataBase{
         $query="SELECT * FROM Migrantes_Detalle where Id_Migrante='".$Id_Migrante."'";//Introduzco la consulta
         $Migrante = $Conexion->prepare($query); //Agrego la variable $Id_Migrante
         $Migrante->execute();  //Ejecuto la consulta
-        $query="SELECT  Id_Punto_Control,'Punto_de_Control',Fecha_Entrada,Fecha_Salida,Alimentacion FROM Migrantes_Registro where Id_Migrante='".$Id_Migrante."'";
+        $query="SELECT  Id_Punto_Control, Punto_de_Control,Fecha_Entrada,Fecha_Salida,Alimentacion FROM Migrantes_Registro where Id_Migrante='".$Id_Migrante."'";
         $Registro = $Conexion->prepare($query); //Agrego la variable $Id_Migrante
         $Registro->execute();  //Ejecuto la consulta
         $query="SELECT Id_Actividad,Actividad,Direccion,fecha FROM  Asistencia_Actividad_Cultural_View where Id_Migrante='".$Id_Migrante."'";
