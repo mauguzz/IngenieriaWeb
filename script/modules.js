@@ -45,12 +45,12 @@ function table_generate_rowsandcols(thead, tbody, rows, columns, columnwidths){
         Object.entries(columns).forEach(([colname,col],ind)=>{ //colname es un key de Object, col es un value de Object
             if(first){
                 let th_col = document.createElement('th');
-                th_col.setAttribute('class','row');
+                th_col.setAttribute('class',columnwidths[ind])
                 th_col.innerHTML=`${colname}`;
                 th_row.appendChild(th_col);
             }
             let td_col = document.createElement('td');
-            td_col.setAttribute('class',columnwidths[ind])
+            
             td_col.innerHTML=`${row[col]}`;
             td_row.appendChild(td_col);
         })
