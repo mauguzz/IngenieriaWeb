@@ -26,7 +26,7 @@ function table_simple_fetch(uri, parameters){
     })
 }
 
-function table_generate_rowsandcols(thead, tbody, rows, columns){
+function table_generate_rowsandcols(thead, tbody, rows, columns, columnwidths){
     //Object:={key: value, key: value, key:value}
     //Esta función crea los nombres de columnas de las tablas y llena el contenido de la tabla.
     let th_row;
@@ -42,13 +42,14 @@ function table_generate_rowsandcols(thead, tbody, rows, columns){
         } 
         let td_row = document.createElement('tr');
 
-        Object.entries(columns).forEach(([colname,col])=>{ //colname es un key de Object, col es un value de Object
+        Object.entries(columns).forEach(([colname,col],ind)=>{ //colname es un key de Object, col es un value de Object
             if(first){
                 let th_col = document.createElement('th');
                 th_col.innerHTML=`${colname}`;
                 th_row.appendChild(th_col);
             }
             let td_col = document.createElement('td');
+            td_col.setAttribute('class',columnwidths[ind])
             td_col.innerHTML=`${row[col]}`;
             td_row.appendChild(td_col);
         })
@@ -217,20 +218,20 @@ export function migrante_consultar(id, prompt, t_general, t_culturales, t_labora
                 'Fecha':'Fecha', 
                 'Trabajo':'Actividad',  
                 'Direccion':'Direccion'
-            });
+            }, ['col-sm-2', 'col-sm-4', 'col-sm-6']);
     
             table_generate_rowsandcols(t_culturales.children['thead'], t_culturales.children['tbody'], culturales, {
                 'Fecha':'Fecha', 
                 'Actividad Cultural':'Actividad', 
                 'Direccion':'Direccion', 
-            })
+            },['col-sm-2', 'col-sm-4', 'col-sm-6'])
     
             table_generate_rowsandcols(t_registros.children['thead'], t_registros.children['tbody'], registros, {
                 'Punto de control':'Punto_de_Control', 
                 'Fecha de Entrada':'Fecha_Entrada', 
                 'Fecha de salida': 'Fecha_Salida', 
                 'Alimentación':'Alimentacion'
-            })
+            }, ['col-sm-4', 'col-sm-2', 'col-sm-2', 'col-sm-2'])
             resolve("Consulta correcta");
         })
         .catch(e=>reject(e));
