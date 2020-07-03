@@ -45,6 +45,7 @@ function table_generate_rowsandcols(thead, tbody, rows, columns, columnwidths){
         Object.entries(columns).forEach(([colname,col],ind)=>{ //colname es un key de Object, col es un value de Object
             if(first){
                 let th_col = document.createElement('th');
+                th_col.setAttribute('class','row');
                 th_col.innerHTML=`${colname}`;
                 th_row.appendChild(th_col);
             }
