@@ -218,7 +218,7 @@ export function migrante_consultar(id, prompt, t_general, t_culturales, t_labora
                 'Fecha':'Fecha', 
                 'Trabajo':'Actividad',  
                 'Direccion':'Direccion'
-            }, ['col-sm-6', 'col-sm-4', 'col-sm-2']);
+            }, ['col-sm-2', 'col-sm-4', 'col-sm-6']);
     
             table_generate_rowsandcols(t_culturales.children['thead'], t_culturales.children['tbody'], culturales, {
                 'Fecha':'Fecha', 
