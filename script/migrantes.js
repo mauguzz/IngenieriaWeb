@@ -140,9 +140,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             extend: "selectedSingle",
                             action: ()=>{
                                 id=datatable.rows( { selected: true } ).data()[0][0]; 
-                                registros_registrar(id, JSON.stringify({"id_migrante": id}))
+                                let llave = window.prompt("Solicitele al migrante su llave de autorización e ingresela:", "");                                
+                                registros_registrar(id, JSON.stringify({"id_migrante": id, 'llave': llave}))
                                 .then(result=>{
                                     migrante_consultar_todos('#t_migrantes', false)
+                                })
+                                .catch(result=>{
+                                    alert('La llave proporcionada fue incorrecta')
                                 });
                                 
                             },   
@@ -153,9 +157,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             extend: "selectedSingle",
                             action: ()=>{
                                 id=datatable.rows( { selected: true } ).data()[0][0]; 
-                                registros_modificar(id, JSON.stringify({"id_migrante": id}))
+                                let llave = window.prompt("Solicitele al migrante su llave de autorización e ingresela:", "");                                
+                                registros_modificar(id, JSON.stringify({"id_migrante": id, 'llave': llave}))
                                 .then(result=>{
                                     migrante_consultar_todos('#t_migrantes', false)
+                                })
+                                .catch(result=>{
+                                    alert('La llave proporcionada fue incorrecta');
                                 });
                                 
                             },   
@@ -244,6 +252,8 @@ form_select_actividad_cultural.onsubmit = function(e){
     })
     .catch(e=>{
         $("#migrante_culturales_modal").modal('hide');
+
+        //Falta agregar el caso Unauthorized (Punto de control inválido)
         alert(`
         Uno o varios de los migrantes seleccionados no fueron añadidos a la lista.
         Es posible que algunos de los migrantes seleccionados ya estén en la lista.`);
@@ -260,6 +270,7 @@ form_select_actividad_laboral.onsubmit = function(e){
     })
     .catch(e=>{
         $("#migrante_laborales_modal").modal('hide');
+        //Falta agregar el caso Unauthorized (Punto de control inválido)
         alert(`
         Uno o varios de los migrantes seleccionados no fueron añadidos a la lista.
         Es posible que algunos de los migrantes seleccionados ya estén en la lista.`);

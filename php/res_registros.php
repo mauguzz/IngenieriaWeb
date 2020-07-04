@@ -30,13 +30,20 @@ return $result;
 //MÉTODO HTTP POST
 function res_post($id){
     
-    $conexion= new Database();
-    //Id_Punto_Control,'Punto de control',Fecha_Entrada,Fecha_Salida,Alimentacion
-    $result = $conexion->Crear_Registro(
-        $conexion,
-        $id //ID DE MIGRANTE
-    );
+    if($json=file_get_contents('php://input')){
+        $data=json_decode($json);
 
+        $conexion= new Database();
+        //Id_Punto_Control,'Punto de control',Fecha_Entrada,Fecha_Salida,Alimentacion
+
+        //Verificar llave de migrante
+
+        $result = $conexion->Crear_Registro(
+            $conexion,
+            $id, //ID DE MIGRANTE
+            $data->llave
+        );
+    }
 
     return $result;
 
@@ -46,13 +53,18 @@ function res_post($id){
 function res_put($id){
     //USO: Es necesario pasar un único argumento $id, para conocer cual row se va a modificar.
     
-    $conexion= new Database();
+    if($json=file_get_contents('php://input')){
+        $data=json_decode($json);
+
+        $conexion= new Database();
 
 
-    $result = $conexion->Modificar_Registro(
-        $conexion,
-        $id, //ID DE MIGRANTE
-    );
+        $result = $conexion->Modificar_Registro(
+            $conexion,
+            $id, //ID DE MIGRANTE
+            $data->llave
+        );
+    }
 
     return $result;
 }

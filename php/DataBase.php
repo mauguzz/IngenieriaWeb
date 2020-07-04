@@ -282,7 +282,7 @@ class DataBase{
 
     }
 
-    public static function Crear_Registro($mysqli, $ID_Migrante){
+    public static function Crear_Registro($mysqli, $ID_Migrante, $Llave_Migrante){
         //Sacar Id de punto de control desde las variables de sesion
         //Esta función va a hacer una inserción con la fecha de entrada, el ide de migrante del argumento de la funciónn y el id de punto de control de las variables de sesion
         //La fecha de entrada se puede insertar con la función date() de Mysql
@@ -291,6 +291,18 @@ class DataBase{
         try{
             $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
             $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+            $query="SELECT Llave FROM Migrante WHERE Id_Migrante= '".$ID_Migrante."' ";
+            $Llave= $Conexion->prepare($query);
+            $Llave->execute();
+            $Llave=$Llave->fetchAll(PDO::FETCH_ASSOC);
+            if($Llave_Migrante!=$Llave[0][0]){
+                header('HTTP/1.1 401 Unauthorized');
+                return ['Fallido'=>'No está autorizado'];
+            }
+
+
             $query="INSERT INTO registro VALUES ('".$PuntoDeControl."','".$ID_Migrante."',(SELECT CURDATE()),NULL,'0')";
             $Asistencia = $Conexion->prepare($query); 
             $Asistencia->execute();  //Ejecuto la consulta
@@ -316,6 +328,20 @@ class DataBase{
                 $Conexion=DataBase::$Conexion_Alt;
             }
 
+
+            //Buscar el último punto de control
+            $query="SELECT Id_Punto_Control FROM Registro WHERE Id_Migrante = '".$ID_Migrante."' AND Fecha_Entrada = (SELECT MAX(Fecha_Entrada) FROM Registro WHERE Id_Migrante = '".$ID_Migrante."')";
+            $LastPointID=DataBase::$Conexion_Alt->prepare($query);
+            $LastPointID->execute();
+            $LastPointID=$LastPointID->fetchAll(PDO::FETCH_ASSOC);
+            if($_SESSION['POINTID']!=$LastPointID[0][0]){
+                header('HTTP/1.1 401 Unauthorized'); //El migrante no está en el punto de control desde el que se solicita la inscripción a actividad
+                return ["POST"=>"Incorrecto. El migrante no está en este punto de control"];
+            }
+
+
+
+
             DataBase::$Conexion_Alt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $query="INSERT INTO asistencia_actividad_cultural VALUES ('".$ID_Actividad."','".$ID_Migrante."', (SELECT CURDATE()))";
             $Asistencia = DataBase::$Conexion_Alt->prepare($query); 
@@ -338,6 +364,18 @@ class DataBase{
             }else{
                 $Conexion=DataBase::$Conexion_Alt;
             }
+
+
+            //Buscar el último punto de control
+            $query="SELECT Id_Punto_Control FROM Registro WHERE Id_Migrante = '".$ID_Migrante."' AND Fecha_Entrada = (SELECT MAX(Fecha_Entrada) FROM Registro WHERE Id_Migrante = '".$ID_Migrante."')";
+            $LastPointID=DataBase::$Conexion_Alt->prepare($query);
+            $LastPointID->execute();
+            $LastPointID=$LastPointID->fetchAll(PDO::FETCH_ASSOC);
+            if($_SESSION['POINTID']!=$LastPointID[0][0]){
+                header('HTTP/1.1 401 Unauthorized'); //El migrante no está en el punto de control desde el que se solicita la inscripción a actividad
+                return ["POST"=>"Incorrecto. El migrante no está en este punto de control"];
+            }
+
             
             DataBase::$Conexion_Alt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $query="INSERT INTO asistencia_oferta_laboral VALUES ('".$ID_Actividad."','".$ID_Migrante."', (SELECT CURDATE()))";
@@ -466,7 +504,7 @@ public static function Modificar_Actividad_Cultural($mysqli,$id,$Nombre, $Fecha,
      }
 }
 
-public static function Modificar_Registro($mysqli, $ID_Migrante){
+public static function Modificar_Registro($mysqli, $ID_Migrante, $Llave_Migrante){
     //Sacar Id de punto de control desde las variables de sesion
     //Esta función solamente va a actualizar la fecha de salida y el parámetro de alimentación
     //Recordar que cada registro se identifica por el id de migrante en conjunto con el id de punto de control
@@ -477,6 +515,16 @@ public static function Modificar_Registro($mysqli, $ID_Migrante){
         try{
             $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
             $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $query="SELECT Llave FROM Migrante WHERE Id_Migrante= '".$ID_Migrante."' ";
+            $Llave= $Conexion->prepare($query);
+            $Llave->execute();
+            $Llave=$Llave->fetchAll(PDO::FETCH_ASSOC);
+            if($Llave_Migrante!=$Llave[0][0]){
+                header('HTTP/1.1 401 Unauthorized');
+                return ['Fallido'=>'No está autorizado'];
+            }
+
             $query="UPDATE registro SET Fecha_salida=(SELECT CURDATE()), Alimentacion = '1' WHERE Id_Punto_Control = '".$PuntoDeControl."' AND Id_Migrante = '".$ID_Migrante."'";
             $Asistencia = $Conexion->prepare($query); 
             $Asistencia->execute();  //Ejecuto la consulta
