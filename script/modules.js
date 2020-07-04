@@ -26,6 +26,7 @@ function table_simple_fetch(uri, parameters){
     })
 }
 
+/*
 function table_generate_rowsandcols(thead, tbody, rows, columns, columnwidths){
     //Object:={key: value, key: value, key:value}
     //Esta función crea los nombres de columnas de las tablas y llena el contenido de la tabla.
@@ -59,6 +60,52 @@ function table_generate_rowsandcols(thead, tbody, rows, columns, columnwidths){
     });
     
 }
+*/
+
+
+
+function table_generate_rowsandcols(thead, tbody, rows, columns, columnwidths){
+    //Object:={key: value, key: value, key:value}
+    //Esta función crea los nombres de columnas de las tablas y llena el contenido de la tabla.
+    let th_row;
+    let th_col=[];
+    let first;
+    thead.innerHTML="";
+    tbody.innerHTML="";
+    Object.entries(rows).forEach(([rowname,row]) => { //rowname es un key de Object, row es un value de Object
+        if(th_row===undefined){
+            th_row= document.createElement('tr');
+            first=true;
+        }else{
+            first=false;
+        } 
+        let td_row = document.createElement('tr');
+
+        Object.entries(columns).forEach(([colname,col],ind)=>{ //colname es un key de Object, col es un value de Object
+            if(first){
+                th_col.push(document.createElement('th'));
+                th_col.setAttribute('class',columnwidths[ind])
+                th_col.innerHTML=`${colname}`;
+                //th_row.appendChild(th_col);
+            }
+            let td_col = document.createElement('td');
+            
+            td_col.innerHTML=`${row[col]}`;
+            td_row.appendChild(td_col);
+        })
+        if(first)thead.appendChild(th_row);
+        tbody.appendChild(td_row);
+    });
+    
+    th_col.forEach((col)=>{
+        th_row.appendChild(col);
+    })
+
+}
+
+
+
+
 
 function table_generate_datatables(tablename, init, rows, cols){
     //cols={"Apellido Paterno" : "Apellido_P", "Apellido Materno" : "Apellido_M", "ind" : "value"}
