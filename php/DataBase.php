@@ -297,7 +297,7 @@ class DataBase{
             $Llave= $Conexion->prepare($query);
             $Llave->execute();
             $Llave=$Llave->fetchAll(PDO::FETCH_ASSOC);
-            if($Llave_Migrante!=$Llave[0][0]){
+            if($Llave_Migrante!=$Llave[0]['Llave']){
                 header('HTTP/1.1 401 Unauthorized');
                 return ['Fallido'=>'No está autorizado'];
             }
@@ -520,7 +520,7 @@ public static function Modificar_Registro($mysqli, $ID_Migrante, $Llave_Migrante
             $Llave= $Conexion->prepare($query);
             $Llave->execute();
             $Llave=$Llave->fetchAll(PDO::FETCH_ASSOC);
-            if($Llave_Migrante!=$Llave[0][0]){
+            if($Llave_Migrante!=$Llave[0]['Llave']){
                 header('HTTP/1.1 401 Unauthorized');
                 return ['Fallido'=>'No está autorizado'];
             }
