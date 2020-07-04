@@ -666,7 +666,7 @@ export function Iniciar_Sesion(formJson){
     fetch("php/res_sesion.php",{method: 'POST', body: formJson})   ///
     .then(handleHttpErrors)
     .then(response=>{
-        console.log(response);
+        console.log(response.text());
         console.log("F 2");
         if (response.redirected) {
             console.log("F 1");
