@@ -128,54 +128,65 @@
                     <div class="modal-body">
                         <!--Formulario de registro o modificación de migrantes-->
                         <form id="f_migrantes">
-                            <p>
-                                <label for="nombre">Nombre: </label>
+                            
+                            <label class="col-sm-2 col-form-label" for="nombre">Nombre: </label>
+                            <div class="col-sm-10">
                                 <input type="text" name="nombre" id="nombre" placeholder="Nombre (s)" required>
-                            </p>
-                            <p>
-                                <label for="apellido_paterno">Apellido paterno: </label>
+                            </div>
+                            
+                            <label class="col-sm-2 col-form-label" for="apellido_paterno">Apellido paterno: </label>
+                            <div class="col-sm-10">
                                 <input type="text" name="apellido_paterno" id="apellido_paterno" placeholder="Apellido paterno" required>
-                            </p>
-                            <p>
-                                <label for="apellido_materno">Apellido materno: </label>
+                            </div>
+                            
+                            <label class="col-sm-2 col-form-label" for="apellido_materno">Apellido materno: </label>
+                            <div class="col-sm-10">
                                 <input type="text" name="apellido_materno" id="apellido_materno" placeholder="Apellido materno" required>
-                            </p>
-                            <p>
-                                <label for="fecha_nacimiento">Fecha de nacimiento </label>
+                            </div>
+                            
+                            <label class="col-sm-2 col-form-label" for="fecha_nacimiento">Fecha de nacimiento </label>
+                            <div class="col-sm-10">
                                 <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" placeholder="" required>
-                            </p>
-                            <p>
-                                <label for="ciudad">Ciudad de origen:</label>
+                            </div>
+                            
+                            <label class="col-sm-2 col-form-label" for="ciudad">Ciudad de origen:</label>
+                            <div class="col-sm-10">
                                 <input type="text"  name="ciudad" id="ciudad" placeholder="" required>
-                            </p>
-                            <p>
-                                <label for="pais">País de origen:</label>
+                            </div>
+                            
+                            <label class="col-sm-2 col-form-label" for="pais">País de origen:</label>
+                            <div class="col-sm-10">
                                 <select name="pais" id="paises_origen"></select>
                                 <!--<input type="select"  name="pais" id="pais" placeholder="" required>-->
-                            </p>
-                            <p>
-                                <label for="oficio">Oficio:</label>
+                            </div>
+                            
+                            <label class="col-sm-2 col-form-label" for="oficio">Oficio:</label>
+                            <div class="col-sm-10">
                                 <input type="text"  name="oficio" id="oficio" placeholder="" required>
-                            </p>
-                            <p>
-                                <label for="contacto_telefono">Teléfono de contacto:</label>
+                            </div>
+                            
+                            <label class="col-sm-2 col-form-label" for="contacto_telefono">Teléfono de contacto:</label>
+                            <div class="col-sm-10">
                                 <input type="text"  name="contacto_telefono" id="contacto_telefono" placeholder="" required>
-                            </p>
-                            <p>
-                                <label for="nivel_educativo">Nivel educativo:</label>
+                            </div>
+                            
+                            <label class="col-sm-2 col-form-label" for="nivel_educativo">Nivel educativo:</label>
+                            <div class="col-sm-10">
                                 <select name="nivel_educativo" id="niveles_educativos"></select>
                                 <!--<input type="select"  name="nivel_educativo" id="nivel_educativo" placeholder="" required>-->
-                            </p>
-                            <p>
-                                <label for="situacion_familiar">Situación familiar:</label>
+                            </div>
+                            
+                            <label class="col-sm-2 col-form-label" for="situacion_familiar">Situación familiar:</label>
+                            <div class="col-sm-10">
                                 <select name="situacion_familiar" id="situaciones_familiares"></select>
                                 <!--<input type="select"  name="situacion_familiar" id="situacion_familiar" placeholder="" required>-->
-                            </p>
-                            <p>
-                                <label for="causa_migracion">Causa de migración:</label>
+                            </div>
+                            
+                            <label class="col-sm-2 col-form-label" for="causa_migracion">Causa de migración:</label>
+                            <div class="col-sm-10">
                                 <select name="causa_migracion" id="causas_migracion"></select>
                                 <!--<input type="select"  name="causa_migracion" id="causa_migracion" placeholder="" required>-->
-                            </p>
+                            </div>
                             <p>
                                 <input type="hidden" id="f_migrantes_action" name="f_migrantes_action" value="default_action">
                             </p>
