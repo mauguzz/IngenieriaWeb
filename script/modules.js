@@ -72,6 +72,33 @@ function table_generate_rowsandcols(thead, tbody, rows, columns, columnwidths){
     let first;
     thead.innerHTML="";
     tbody.innerHTML="";
+
+
+    
+        
+    th_row= document.createElement('tr');
+    th_row.setAttribute('class','row');
+    thead.appendChild(th_row);
+    
+       
+        
+
+    Object.entries(columns).forEach(([colname,col],ind)=>{ //colname es un key de Object, col es un value de Object
+        
+            th_col.push(document.createElement('th'));
+            th_col[ind].setAttribute('class',columnwidths[ind])
+            th_col[ind].innerHTML=`${colname}`;
+            //th_row.appendChild(th_col);  
+    })
+    
+        
+    
+
+
+
+
+
+/*
     Object.entries(rows).forEach(([rowname,row]) => { //rowname es un key de Object, row es un value de Object
         if(th_row===undefined){
             th_row= document.createElement('tr');
@@ -97,6 +124,7 @@ function table_generate_rowsandcols(thead, tbody, rows, columns, columnwidths){
         if(first)thead.appendChild(th_row);
         tbody.appendChild(td_row);
     });
+    */
 
     th_col.forEach((col)=>{
         th_row.appendChild(col);
