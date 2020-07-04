@@ -101,6 +101,7 @@ function table_generate_rowsandcols(thead, tbody, rows, columns, columnwidths){
     Object.entries(rows).forEach(([rowname,row]) => { //rowname es un key de Object, row es un value de Object
          
         let td_row = document.createElement('tr');
+        td_row.setAttribute('class','row')
 
         Object.entries(columns).forEach(([colname,col],ind)=>{ //colname es un key de Object, col es un value de Object
             
