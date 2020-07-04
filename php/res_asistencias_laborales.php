@@ -90,7 +90,7 @@ function res_delete($id){
     return $result;
 }
 
-
+session_start();/*Continuamos la sesión*/
 //CÓDIGO EJECUTADO AL MOMENTO DE LLAMAR AL ARCHIVO PHP
 $uri=explode("/",$uri);
 $uri=array_slice($uri,3); //Elimina las primeras tres partes irrelevantes de la uri (""/"projectfolder"/"php")
