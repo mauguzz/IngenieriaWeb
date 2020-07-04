@@ -674,7 +674,23 @@ public static function Eliminar_Asistencia_Oferta_Laboral($mysqli, $ID_Migrante,
                         $_SESSION['USERNAME']=$res[0]["Nombre"];
                         $_SESSION['USERID']=$res[0]["Id_Funcionario"];
                         $_SESSION['POINTID']=$res[0]["Id_Punto_Control"];
-                        header("location:http://localhost/IngenieriaWeb/migrantes.html");  
+
+                        //Agregado por Mau GTZ:
+                        try{
+                        $Point=$res[0]["Id_Punto_Control"];
+                        $ControlPointName=$Conexion->prepare("SELECT Nombre FROM Puntos_De_Control WHERE Id_Punto_Control='".$Point."'");
+                        $ControlPointName->execute();
+                        $ControlPointName=$ControlPointName->fetchAll(PDO::FETCH_ASSOC);
+                        $_SESSION['POINTNAME']=$ControlPointName[0]['Nombre'];
+                        
+                        }catch (PDOException $e){
+                            return ["error"=>e.getMessage()];
+                            
+                        }
+
+                        header("location:http://localhost/IngenieriaWeb/migrantes.html"); 
+                        
+                        
                         //header('Content-Type: text/html; charset=utf-8');
                         //header("Location: "."../../migrantes.html");  
                     }            

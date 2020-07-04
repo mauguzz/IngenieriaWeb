@@ -672,6 +672,10 @@ export function Iniciar_Sesion(formJson){
             console.log("F 1");
             window.location.href = response.url;
         }
+        return response.text();
+    })
+    .then(json=>{
+        console.log(json);
     })
     .catch(e=>{
         console.log(e);
@@ -684,12 +688,17 @@ export function Validar_Sesion(){
     .then(handleHttpErrors)
     .then(res=>res.json())
     .then(resjson=>{
+        console.log(resjson);
         if (resjson.USERID==null){       
             alert("Primero Inicie sesión");
             window.location.href ="http://localhost/IngenieriaWeb/index.html";
         }else{
+            
             console.log("Bienvenido,");
         }
+        
+            document.getElementById('UserName').innerHTML=resjson.USERNAME;
+            document.getElementById('ControlPointName').innerHTML=resjson.POINTNAME;
     })
     .catch(e=>{
         console.log(e);
