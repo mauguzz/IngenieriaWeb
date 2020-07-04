@@ -334,7 +334,7 @@ class DataBase{
             $LastPointID=DataBase::$Conexion_Alt->prepare($query);
             $LastPointID->execute();
             $LastPointID=$LastPointID->fetchAll(PDO::FETCH_ASSOC);
-            if($_SESSION['POINTID']!=$LastPointID[0][0]){
+            if($_SESSION['POINTID']!=$LastPointID[0]['Id_Punto_Control']){
                 header('HTTP/1.1 401 Unauthorized'); //El migrante no está en el punto de control desde el que se solicita la inscripción a actividad
                 return ["POST"=>"Incorrecto. El migrante no está en este punto de control"];
             }
@@ -371,7 +371,7 @@ class DataBase{
             $LastPointID=DataBase::$Conexion_Alt->prepare($query);
             $LastPointID->execute();
             $LastPointID=$LastPointID->fetchAll(PDO::FETCH_ASSOC);
-            if($_SESSION['POINTID']!=$LastPointID[0][0]){
+            if($_SESSION['POINTID']!=$LastPointID[0]['Id_Punto_Control']){
                 header('HTTP/1.1 401 Unauthorized'); //El migrante no está en el punto de control desde el que se solicita la inscripción a actividad
                 return ["POST"=>"Incorrecto. El migrante no está en este punto de control"];
             }
