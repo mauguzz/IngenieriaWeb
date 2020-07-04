@@ -20,7 +20,7 @@ class DataBase{
 
         //$mysqli = new DataBase(); //Inicializo mi objeto
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-        $query="SELECT * FROM Migrantes_Todos LIMIT 1";//Introduzco la consulta
+        $query="SELECT * FROM Migrantes_Todos";//Introduzco la consulta
         $result = $Conexion->prepare($query); //Agrego variables (Si es el caso)
         $result->execute();  //Ejecuto la consulta
         //return ['Migrantes'=>$result->fetchAll(PDO::FETCH_ASSOC)] //Retorno la matriz en el formato

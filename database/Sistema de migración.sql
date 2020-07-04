@@ -2835,7 +2835,7 @@ create view Migrantes_Todos As
 		Puntos_De_Control.Id_Punto_Control=Registro.Id_Punto_Control/*Cambiar el nombre del ID de estados*/
         inner join Estados ON
         Estados.Id=Puntos_De_Control.Id_Estado
-        /*group by Migrante.Id_Migrante*/
+        group by Migrante.Id_Migrante
         order by Registro.Fecha_Entrada DESC; /*Con base en la última fecha visitada se toma el punto de control actual o último*/		
 select * from Migrantes_Todos where Id_Migrante=1;
 
