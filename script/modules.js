@@ -106,7 +106,7 @@ function table_generate_rowsandcols(thead, tbody, rows, columns, columnwidths){
         Object.entries(columns).forEach(([colname,col],ind)=>{ //colname es un key de Object, col es un value de Object
             
             let td_col = document.createElement('td');
-            
+            td_col.setAttribute('class',columnwidths[ind]);
             td_col.innerHTML=`${row[col]}`;
             td_row.appendChild(td_col);
         })
