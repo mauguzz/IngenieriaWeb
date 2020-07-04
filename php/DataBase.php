@@ -681,8 +681,8 @@ public static function Eliminar_Asistencia_Oferta_Laboral($mysqli, $ID_Migrante,
                         $ControlPointName=$ControlPointName-fetchAll(PDO::FETCH_ASSOC);
                         $_SESION['POINTNAME']=$ControlPointName[0]['Nombre'];
                         }catch (Exception $e){
-                            $result=["error"=>e.getMessage()];
-                            return;
+                            return ["error"=>e.getMessage()];
+                            
                         }
 
                         header("location:http://localhost/IngenieriaWeb/migrantes.html");  
