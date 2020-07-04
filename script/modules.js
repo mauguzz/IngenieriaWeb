@@ -682,7 +682,7 @@ export function Iniciar_Sesion(formJson){
 export function Validar_Sesion(){
     fetch("php/res_sesion.php",{ method: 'GET'})
     .then(handleHttpErrors)
-    .then(res=>res.json())
+    .then(res=>res.text())
     .then(resjson=>{
         console.log(resjson);
         if (resjson.USERID==null){       
