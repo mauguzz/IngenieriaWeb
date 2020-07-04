@@ -102,7 +102,7 @@
       
         <!--Ventana modal bootstrap correspondiente a los detalles del migrante-->
         <div class="modal fade" id="modal_migrantes_details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Detalles del migrante</h5>
@@ -112,29 +112,36 @@
                     </div>
                     <div class="modal-body">
                         <!--Tabla de información general del migrante-->
+                        <h5 style="text-align:center;">Información general</h5>
                         <table id="t_general">
                             <thead id="thead">
                             </thead>     
                             <tbody id="tbody">
                             </tbody>
                         </table>
+                        <p></p>
                         <!--Tabla de ofertas laborales en las que participa el migrante-->
-                        <table id="t_laborales">
-                            <thead id="thead">
+                        <h5 style="text-align:center;">Actividades laborales</h5>
+                        <table id="t_laborales" class="table table-striped">
+                            <thead id="thead" class="thead-light">
                             </thead>
                             <tbody id="tbody">
                             </tbody>
                         </table>
+                        <p></p>
                         <!--Tabla de actividades culturales en las que participa el migrante-->
-                        <table id="t_culturales">
-                            <thead id="thead">
+                        <h5 style="text-align:center;">Actividades culturales</h5>
+                        <table id="t_culturales" class="table table-striped">
+                            <thead id="thead" class="thead-light">
                             </thead>
                             <tbody id="tbody">  
                             </tbody>
                         </table>
+                        <p></p>
                         <!--Tabla de registros en puntos de control en los que ha estado el migrante-->
-                        <table id="t_registros">
-                            <thead id="thead">
+                        <h5 style="text-align:center;">Historial de puntos de control</h5>
+                        <table id="t_registros" class="table table-striped">
+                            <thead id="thead" class="thead-light">
                             </thead>
                             <tbody id="tbody">  
                             </tbody>
