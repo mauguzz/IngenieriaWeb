@@ -666,12 +666,16 @@ export function Iniciar_Sesion(formJson){
     fetch("php/res_sesion.php",{method: 'POST', body: formJson})   ///
     .then(handleHttpErrors)
     .then(response=>{
-        console.log(response.text());
+        console.log(response);
         console.log("F 2");
         if (response.redirected) {
             console.log("F 1");
             window.location.href = response.url;
         }
+        return response.text();
+    })
+    .then(json=>{
+        console.log(json);
     })
     .catch(e=>{
         console.log(e);
