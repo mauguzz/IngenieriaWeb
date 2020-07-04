@@ -15,6 +15,7 @@ function res_get(){
              $result->USERID=$_SESSION['USERID'];
              $result->USERNAME=$_SESSION['USERNAME'];
              $result->POINTID=$_SESSION['POINTID'];
+             $result->POINTNAME=$_SESSION['POINTNAME'];
              if(!empty($_SESSION['ADMIN'])){
                 $result->ADMIN=$_SESSION['ADMIN'];
              }else{

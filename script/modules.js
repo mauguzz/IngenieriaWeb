@@ -694,7 +694,7 @@ export function Validar_Sesion(){
         }
         
             document.getElementById('UserName').innerHTML=resjson.USERNAME;
-            document.getElementById('ControlPointName').innerHTML=resjson.POINTID;
+            document.getElementById('ControlPointName').innerHTML=resjson.POINTNAME;
     })
     .catch(e=>{
         console.log(e);
