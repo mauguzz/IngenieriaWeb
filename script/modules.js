@@ -84,8 +84,8 @@ function table_generate_rowsandcols(thead, tbody, rows, columns, columnwidths){
         Object.entries(columns).forEach(([colname,col],ind)=>{ //colname es un key de Object, col es un value de Object
             if(first){
                 th_col.push(document.createElement('th'));
-                th_col.setAttribute('class',columnwidths[ind])
-                th_col.innerHTML=`${colname}`;
+                th_col[ind].setAttribute('class',columnwidths[ind])
+                th_col[ind].innerHTML=`${colname}`;
                 //th_row.appendChild(th_col);
             }
             let td_col = document.createElement('td');
@@ -96,7 +96,7 @@ function table_generate_rowsandcols(thead, tbody, rows, columns, columnwidths){
         if(first)thead.appendChild(th_row);
         tbody.appendChild(td_row);
     });
-    
+
     th_col.forEach((col)=>{
         th_row.appendChild(col);
     })
