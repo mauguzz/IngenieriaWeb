@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
                         {
-                            text:"Añadir a act. cultural", 
+                            text:"Actividad cultural +", 
                             extend: "selected",
                             attr:{
                                 "data-toggle": "modal",
@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         },
 
                         {
-                            text:"Añadir a act. laboral", 
+                            text:"Actividad laboral +", 
                             extend: "selected",
                             attr:{
                                 "data-toggle": "modal",
