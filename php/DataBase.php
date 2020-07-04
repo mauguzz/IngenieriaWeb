@@ -77,8 +77,9 @@ class DataBase{
     }
 
     public static function Mostrar_Actividades_Culturales($mysqli){
+       
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-        $query="SELECT Id_Actividad,Nombre,Fecha,Direccion,Detalles,Activo FROM Actividades";//Introduzco la consulta
+        $query="SELECT Id_Actividad,Nombre,Fecha,Direccion,Detalles,Activo FROM Actividades where Id_Punto_Control='". $_SESSION['POINTID']."';";//Introduzco la consulta
         $Actividades = $Conexion->prepare($query); //
         $Actividades->execute();  //Ejecuto la consulta
         return ['culturales'=>$Actividades->fetchAll(PDO::FETCH_ASSOC)];
@@ -96,7 +97,8 @@ class DataBase{
 
     public static function Mostrar_Ofertas_de_Trabajo($mysqli){
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-        $query="SELECT Id_Trabajo, Nombre, Direccion, Requisitos, Detalles FROM Ofertas_de_Trabajo";//Introduzco la consulta
+        
+        $query="SELECT Id_Trabajo, Nombre, Direccion, Requisitos, Detalles FROM Ofertas_de_Trabajo where Id_Punto_Control='". $_SESSION['POINTID']."';";//Introduzco la consulta
         $Ofertas_de_Trabajo = $Conexion->prepare($query); //
         $Ofertas_de_Trabajo->execute();  //Ejecuto la consulta
         return ['laborales'=>$Ofertas_de_Trabajo->fetchAll(PDO::FETCH_ASSOC)];

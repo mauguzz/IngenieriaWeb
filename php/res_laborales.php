@@ -15,8 +15,7 @@ function res_get(){
     $conexion= new Database();
 
     if (count($args)==1){
-        //Se pasó el id. //CASO: Obtener una única oferta laboral
-        
+        //Se pasó el id. //CASO: Obtener una única oferta laboral      
         //OJO: Prototipo del array a pasar, verificar que el resultado del método correspondiente en DataBase.php devuelva un array con la misma estructura
         $result=$conexion->Mostrar_Ofertas_de_Trabajo($conexion);
     }else{

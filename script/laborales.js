@@ -91,7 +91,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 form_laborales_registrar.onsubmit = function(e){
     e.preventDefault();
-
     let formData = new FormData(form_laborales_registrar);
     let formJson = JSON.stringify(Object.fromEntries(formData));
     console.log(formJson);
@@ -99,13 +98,25 @@ form_laborales_registrar.onsubmit = function(e){
     if(form_laborales_action.value=="create"){
         laborales_registrar(formJson)
         .then(result=>{
+            $("#modal_laborales_form").modal('hide');
             laborales_consultar_todos('#t_laborales', false)
+        })
+        .catch(e=>{
+            form_culturales_registrar.reset();
+            $("#modal_laborales_form").modal('hide');
         });
+
     }else if(form_laborales_action.value=="modify"){
         laborales_modificar(id, formJson)
         .then(result=>{
+            $("#modal_laborales_form").modal('hide');
             laborales_consultar_todos('#t_laborales', false)
-        });
+        })
+        .catch(e=>{            
+            form_culturales_registrar.reset();
+            $("#modal_laborales_form").modal('hide');
+        })
+        ;
     }
 
 }

@@ -96,12 +96,23 @@ form_culturales_registrar.onsubmit = function(e){
     if(form_culturales_action.value=="create"){
         culturales_registrar(formJson)
         .then(result=>{
+            $("#modal_culturales_form").modal('hide');
+            form_culturales_registrar.reset();
             culturales_consultar_todos('#t_culturales', false)
+        })
+        .catch(e=>{
+            form_culturales_registrar.reset();
+            $("#modal_culturales_form").modal('hide');
         });
     }else if(form_culturales_action.value=="modify"){
         culturales_modificar(id, formJson)
         .then(result=>{
+            form_culturales_registrar.reset();
             culturales_consultar_todos('#t_culturales', false)
+            .catch(e=>{
+                form_culturales_registrar.reset();
+                $("#modal_culturales_form").modal('hide');
+            })
         });
     }
 
