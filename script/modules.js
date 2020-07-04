@@ -282,20 +282,20 @@ export function migrante_consultar(id, prompt, t_general, t_culturales, t_labora
                 'Fecha':'Fecha', 
                 'Trabajo':'Actividad',  
                 'Direccion':'Direccion'
-            }, ['col-sm-2', 'col-sm-4', 'col-sm-4']);
+            }, ['col-sm-2', 'col-sm-4', 'col-sm-6']);
     
             table_generate_rowsandcols(t_culturales.children['thead'], t_culturales.children['tbody'], culturales, {
                 'Fecha':'Fecha', 
                 'Actividad Cultural':'Actividad', 
                 'Direccion':'Direccion', 
-            },['col-sm-2', 'col-sm-4', 'col-sm-4'])
+            },['col-sm-2', 'col-sm-4', 'col-sm-6'])
     
             table_generate_rowsandcols(t_registros.children['thead'], t_registros.children['tbody'], registros, {
                 'Punto de control':'Punto_de_Control', 
                 'Fecha de Entrada':'Fecha_Entrada', 
                 'Fecha de salida': 'Fecha_Salida', 
                 'Alimentación':'Alimentacion'
-            }, ['col-sm-4', 'col-sm-2', 'col-sm-2', 'col-sm-2'])
+            }, ['col-sm-6', 'col-sm-2', 'col-sm-2', 'col-sm-2'])
             resolve("Consulta correcta");
         })
         .catch(e=>reject(e));
