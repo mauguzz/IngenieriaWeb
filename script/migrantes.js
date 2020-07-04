@@ -148,6 +148,43 @@ document.addEventListener("DOMContentLoaded", function(event) {
             });
             datatable.buttons(1, null).container().appendTo( '#datatable_single_buttons_container' );  
 
+
+
+
+            new $.fn.dataTable.Buttons(datatable, { 
+                buttons: 
+                    [
+
+                        {
+                            text:"Marcar Entrada", 
+                            extend: "selectedSingle",
+                            action: ()=>{
+                                id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                registros_registrar(id, JSON.stringify({"id_migrante": id}));
+                                
+                            },   
+                        },
+
+                        {
+                            text:"Marcar Salida", 
+                            extend: "selectedSingle",
+                            action: ()=>{
+                                id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                registros_modificar(id, JSON.stringify({"id_migrante": id}));
+                                
+                            },   
+                        },
+                        
+                    ]
+                });
+
+                datatable.buttons(2,null).container().appendTo( '#datatable_controlpoint_buttons_container'); 
+
+
+
+
+
+
             new $.fn.dataTable.Buttons(datatable, { 
                 buttons: 
                     [
@@ -193,7 +230,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     ]
                 });
 
-                datatable.buttons(2,null).container().appendTo( '#datatable_multiple_buttons_container' ); 
+                datatable.buttons(3,null).container().appendTo( '#datatable_multiple_buttons_container' ); 
 
 
 
