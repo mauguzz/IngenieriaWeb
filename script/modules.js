@@ -267,13 +267,13 @@ export function migrante_consultar(id, prompt, t_general, t_culturales, t_labora
                 'Fecha':'Fecha', 
                 'Trabajo':'Actividad',  
                 'Direccion':'Direccion'
-            }, ['col-sm-2', 'col-sm-4', 'col-sm-6']);
+            }, ['col-sm-4', 'col-sm-8', 'col-sm-12']);
     
             table_generate_rowsandcols(t_culturales.children['thead'], t_culturales.children['tbody'], culturales, {
                 'Fecha':'Fecha', 
                 'Actividad Cultural':'Actividad', 
                 'Direccion':'Direccion', 
-            },['col-sm-2', 'col-sm-4', 'col-sm-6'])
+            },['col-sm-4', 'col-sm-8', 'col-sm-12'])
     
             table_generate_rowsandcols(t_registros.children['thead'], t_registros.children['tbody'], registros, {
                 'Punto de control':'Punto_de_Control', 
