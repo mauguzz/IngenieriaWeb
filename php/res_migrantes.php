@@ -54,8 +54,8 @@ function res_post(){
         $data=json_decode($json);
         $conexion= new Database();
 
-        $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $Llave=substr(str_shuffle($permitted_chars), 0, 10);
+        $permitted_chars = '123456789abcdefghijkmnpqrstuwxyzABCDEFGHJKLMNPQRSTWXYZ';
+        $Llave=substr(str_shuffle($permitted_chars), 0, 8);
 
         //$Llave = "123456"; //Crear una llave de migrante aleatoria
         //Datos derivados en la BD, que no es necesario insertar: ID_Migrante, Edad, Id_Estado (migrando o establecido).
