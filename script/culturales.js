@@ -22,6 +22,7 @@ let id;
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
+    
     Validar_Sesion()
     culturales_consultar_todos('#t_culturales', true)
     .then(datatable=>{

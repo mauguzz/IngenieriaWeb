@@ -16,6 +16,7 @@ const form_laborales_action = document.getElementById('f_laborales_action');
 const B_Cerrar_Sesion=document.getElementById('B_Cerrar_Sesion');
 
 
+
 let id;
 
 document.addEventListener("DOMContentLoaded", function(event) {

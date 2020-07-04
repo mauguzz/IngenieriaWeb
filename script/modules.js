@@ -662,6 +662,7 @@ export function llenar_opciones_selector(selectors_ids){
 
 /*------------------------------------------------Sesiones----------------------------------------------------*/
 
+
 export function Iniciar_Sesion(formJson){
     fetch("php/res_sesion.php",{method: 'POST', body: formJson})   ///
     .then(handleHttpErrors)

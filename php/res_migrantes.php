@@ -46,6 +46,7 @@ function res_get(){
 return $result;
 }
 
+
 //MÉTODO HTTP POST
 function res_post(){
     //USO: No es necesario pasar argumentos, la función lee el contenido del body de la solicitud HTTP y trata los datos para hacer la inserción en la BD

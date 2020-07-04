@@ -647,6 +647,7 @@ public static function Eliminar_Asistencia_Oferta_Laboral($mysqli, $ID_Migrante,
 }
 
 
+
 /*------------------------------------------------Sesiones--------------------------------------------------*/
     public static function IniciarSesion ($mysqli,$User, $Pass){
         

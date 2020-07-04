@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
     Validar_SesionA()
 
+    
     funcionarios_consultar('#t_funcionarios', true)
     .then(datatable=>{
         new $.fn.dataTable.Buttons(datatable, { 
