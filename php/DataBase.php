@@ -678,7 +678,7 @@ public static function Eliminar_Asistencia_Oferta_Laboral($mysqli, $ID_Migrante,
                         $Point=$res[0]["Id_Punto_Control"];
                         $ControlPointName=$Conexion->prepare("SELECT Nombre FROM Puntos_De_Control WHERE Id_Punto_Control='".$Point."'");
                         $ControlPointName->execute();
-                        $ControlPointName=$ControlPointName-fetchAll(PDO::FETCH_ASSOC);
+                        $ControlPointName=$ControlPointName->fetchAll(PDO::FETCH_ASSOC);
                         $_SESION['POINTNAME']=$ControlPointName[0]['Nombre'];
                         }catch (PDOException $e){
                             return ["error"=>e.getMessage()];
