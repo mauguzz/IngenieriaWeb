@@ -266,7 +266,7 @@ export function migrante_consultar(id, prompt, t_general, t_culturales, t_labora
     
             t_general.children['tbody'].innerHTML="";
     
-            let fieldNames=['Id del migrante', 'Nombre', 'Apellido Paterno', 'Apellido Materno', 'País', 'Ciudad', 'Edad', 'Nivel educativo', 'Teléfono de contacto', 'Causa de migración'];
+            let fieldNames=['Id del migrante:', 'Nombre(s):', 'Apellido Paterno:', 'Apellido Materno:', 'País de origen:', 'Ciudad de origen:', 'Edad:', 'Nivel educativo:', 'Teléfono de contacto:', 'Causa de migración:'];
             Object.entries(general).forEach(([key, value],ind)=>{
                 let row_general = document.createElement('tr');
                 let var_general = document.createElement('td');
