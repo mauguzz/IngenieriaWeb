@@ -682,8 +682,9 @@ export function Iniciar_Sesion(formJson){
 export function Validar_Sesion(){
     fetch("php/res_sesion.php",{ method: 'GET'})
     .then(handleHttpErrors)
-    .then(res=>res.json())
+    .then(res=>res.text())
     .then(resjson=>{
+        console.log(resjson);
         if (resjson.USERID==null){       
             alert("Primero Inicie sesión");
             window.location.href ="http://localhost/IngenieriaWeb/index.html";
@@ -691,7 +692,7 @@ export function Validar_Sesion(){
             
             console.log("Bienvenido,");
         }
-        console.log(resjson);
+        
             document.getElementById('UserName').innerHTML=resjson.USERNAME;
             document.getElementById('ControlPointName').innerHTML=resjson.POINTID;
     })
