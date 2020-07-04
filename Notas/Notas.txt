@@ -13,7 +13,7 @@ MysqlServer
 
 Database: SistemaMigratorio
 User: WebApplication
-Password: 123456git 
+Password: 123456git git
 
 Otros datos: Default
 

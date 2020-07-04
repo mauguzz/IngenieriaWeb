@@ -1,5 +1,6 @@
 //import {} from './modules.js';
-import {laborales_consultar_todos, laborales_eliminar, laborales_modificar, laborales_registrar,Validar_Sesion,Cerrar_Sesion} from './modules.js';
+import {laborales_consultar_todos, laborales_eliminar, laborales_modificar, laborales_registrar,
+    asistencias_laborales_consultar_todos,Validar_Sesion,Cerrar_Sesion} from './modules.js';
 
 /*------------------------------------------------Tablas------------------------------------------------------*/
 
@@ -61,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         },
                         action: ()=>{
                             id=datatable.rows( { selected: true } ).data()[0][0]; 
+                            asistencias_laborales_consultar_todos(id,'#t_laborales', false);
                         }
                     },
                     ,
@@ -71,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             id=datatable.rows( { selected: true } ).data()[0][0]; 
                             laborales_eliminar(id)
                             .then(result=>{
-                                laborales_consultar_todos('#t_culturales', false)
+                                laborales_consultar_todos('#t_laborales', false)
                             })
                         }   
                     }
@@ -98,12 +100,12 @@ form_laborales_registrar.onsubmit = function(e){
     if(form_laborales_action.value=="create"){
         laborales_registrar(formJson)
         .then(result=>{
+            form_culturales_registrar.reset();
             $("#modal_laborales_form").modal('hide');
             laborales_consultar_todos('#t_laborales', false)
         })
         .catch(e=>{
-            form_culturales_registrar.reset();
-            $("#modal_laborales_form").modal('hide');
+           alert("Error al registrar la actividad");
         });
 
     }else if(form_laborales_action.value=="modify"){
@@ -113,8 +115,7 @@ form_laborales_registrar.onsubmit = function(e){
             laborales_consultar_todos('#t_laborales', false)
         })
         .catch(e=>{            
-            form_culturales_registrar.reset();
-            $("#modal_laborales_form").modal('hide');
+            alert("Error al registrar la actividad");
         })
         ;
     }

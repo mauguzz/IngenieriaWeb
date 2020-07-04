@@ -101,8 +101,7 @@ form_culturales_registrar.onsubmit = function(e){
             culturales_consultar_todos('#t_culturales', false)
         })
         .catch(e=>{
-            form_culturales_registrar.reset();
-            $("#modal_culturales_form").modal('hide');
+            alert("Error al registrar la actividad");
         });
     }else if(form_culturales_action.value=="modify"){
         culturales_modificar(id, formJson)
@@ -110,8 +109,7 @@ form_culturales_registrar.onsubmit = function(e){
             form_culturales_registrar.reset();
             culturales_consultar_todos('#t_culturales', false)
             .catch(e=>{
-                form_culturales_registrar.reset();
-                $("#modal_culturales_form").modal('hide');
+                alert("Error al registrar la actividad");
             })
         });
     }

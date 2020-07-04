@@ -396,9 +396,9 @@ export function funcionarios_consultar(table, init){  //thead_culturales, tbody_
 //FUNCIONES DE FUNCIONARIOS//
 
 //FUNCIONES DE TABLA MIGRANTES-CULTURALES//
-export function asistencias_culturales_consultar_todos(table, init){  //thead_migrantes, tbody_migrantes
+export function asistencias_culturales_consultar_todos(id, table, init){  //thead_migrantes, tbody_migrantes
     return new Promise((resolve, reject)=>{
-        datatable_consultar_todos("php/res_asistencias_culturales.php", "asistencias_culturales", table, init, {
+        datatable_consultar_todos("php/res_asistencias_culturales.php"+id, "asistencias_culturales", table, init, {
             //Hace falta obtener el ID desde el View de MySQL, para poder hacer tratamientos posteriores
             'ID Actividad' : "Id_Actividad",
             'Nombre Actividad':'Actividad', 
@@ -672,10 +672,6 @@ export function Iniciar_Sesion(formJson){
             console.log("F 1");
             window.location.href = response.url;
         }
-        return response.text();
-    })
-    .then(json=>{
-        console.log(json);
     })
     .catch(e=>{
         console.log(e);
@@ -688,17 +684,12 @@ export function Validar_Sesion(){
     .then(handleHttpErrors)
     .then(res=>res.json())
     .then(resjson=>{
-        console.log(resjson);
         if (resjson.USERID==null){       
             alert("Primero Inicie sesión");
             window.location.href ="http://localhost/IngenieriaWeb/index.html";
         }else{
-            
             console.log("Bienvenido,");
         }
-        
-            document.getElementById('UserName').innerHTML=resjson.USERNAME;
-            document.getElementById('ControlPointName').innerHTML=resjson.POINTNAME;
     })
     .catch(e=>{
         console.log(e);

@@ -88,7 +88,7 @@ class DataBase{
     //ESTA POSIBLEMENTE NO SE UTILICE, YA QUE SE HACE UNA CONSULTA SELECTIVA EN DETALLES DEL MIGRANTE//
     public static function Mostrar_Asistencia_Actividad_Cultural($mysqli){
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-        $query="SELECT * FROM Asistencia_Actividad_Cultural_View";//Introduzco la consulta
+        $query="SELECT  FROM Asistencia_Actividad_Cultural_View";//Introduzco la consulta
         $Asistencia_Actividad_Cultural = $Conexion->prepare($query); //
         $Asistencia_Actividad_Cultural->execute();  //Ejecuto la consulta
         return ['asistencias_culturales'=>$Asistencia_Actividad_Cultural->fetchAll(PDO::FETCH_ASSOC)];

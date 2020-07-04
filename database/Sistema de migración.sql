@@ -2879,10 +2879,9 @@ select
         
 select Id_Punto_Control,'Punto_de_control',Fecha_Entrada,Fecha_Salida,Alimentacion from Migrantes_Registro where Id_Migrante=1;
 
-create view Asistencia_Actividad_Cultural_View as 
+alter view Asistencia_Actividad_Cultural_View as 
 select 
       Actividades.Id_Actividad,
-	  Migrante.Id_Migrante,
 	  Actividades.Nombre As 'Actividad',
       Migrante.Nombre,
       Migrante.Apellido_Paterno,
@@ -2898,15 +2897,15 @@ select
 select *from Asistencia_Actividad_Cultural_View where Id_Migrante=1; /*Vista de asistencia de actividades*/
 select Id_Actividad,Actividad,Direccion,fECHA FROM Asistencia_Actividad_Cultural_View where Id_Migrante=1; /*VISTA PARA DETALLE MIGRANTE*/
 
-create view Asistencia_Oferta_Laboral_View as 
+alter view Asistencia_Oferta_Laboral_View as /*--------------Para consultar por actividad--------------------*/
 select 
       Asistencia_Oferta_Laboral.Id_Trabajo,
-	  Migrante.Id_Migrante,
 	  Ofertas_de_Trabajo.Nombre As 'Actividad',
+	  Ofertas_de_Trabajo.Direccion,
+      Migrante.Id_Migrante,
       Migrante.Nombre,
       Migrante.Apellido_Paterno,
       Migrante.Apellido_Materno,
-      Ofertas_de_Trabajo.Direccion,
       Asistencia_Oferta_Laboral.Fecha
       from Asistencia_Oferta_Laboral
       inner join Migrante ON
@@ -2934,30 +2933,28 @@ select
       inner join Estados ON
       Estados.Id=Puntos_de_control.Id_Estado;
 	
-      select * from Registro;
-      select curdate();
-      select Id_Migrante from Migrante where Llave='123456' and Nombre='José Ricardo';
-      
-	SELECT * FROM Migrante;
-      
-      select *from Migrante where Llave='tpDx27Xehv' and Nombre='El chema';
-      
+/*      
+select * from Registro;
+select curdate();
+select Id_Migrante from Migrante where Llave='123456' and Nombre='José Ricardo';
+select *from Migrante where Llave='tpDx27Xehv' and Nombre='El chema';
+*/      
 
 insert into Registro values ('1','2','1999-05-06',NULL,0 );
 insert into Registro values ('2','3','1999-05-06',NULL,0 );
 insert into Registro values ('3','4','1999-05-06',NULL,0 );
 
 SELECT* FROM Registro;
-	  ALTER TABLE Funcionario
-	  MODIFY Contrasenia varchar (100);
+ALTER TABLE Funcionario
+MODIFY Contrasenia varchar (100);
       
-		  update Funcionario 
-		  set Contrasenia='$2y$10$W8meY..MFwROZEnsOYzgr.qX6CjI.bLKbffmLmpL2BhnZof2lYjXm'
-		  where Id_Funcionario=1;
+update Funcionario 
+set Contrasenia='$2y$10$W8meY..MFwROZEnsOYzgr.qX6CjI.bLKbffmLmpL2BhnZof2lYjXm'
+where Id_Funcionario=1;
           
-			  update Administrador
-			  set Contraseña='$2y$10$W8meY..MFwROZEnsOYzgr.qX6CjI.bLKbffmLmpL2BhnZof2lYjXm'
-			  where Id_Administrador=1;
+update Administrador
+set Contraseña='$2y$10$W8meY..MFwROZEnsOYzgr.qX6CjI.bLKbffmLmpL2BhnZof2lYjXm'
+where Id_Administrador=1;
 
 
 UPDATE Migrante
@@ -2996,13 +2993,5 @@ Direccion='Cabecera municipal de Tenabo',
 Detalles='Clases para todos'
 where Id_Actividad='1';
 
-SELECT * FROM ACTIVIDADES;
-
-
-select * from Mostrar_Funcionarios;
-
-select * from Funcionario;
-select * from Migrante;
-
-
-
+SELECT * FROM Asistencia_Oferta_Laboral_View;
+SELECT * FROM Asistencia_Actividad_cultural_View;
