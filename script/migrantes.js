@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 buttons: 
                     [
                         {
-                            text:"Añadir Migrante", 
+                            text:"Nuevo registro", 
                             attr:{
                                 "data-toggle": "modal",
                                 "data-target": "#modal_migrantes_form"
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 buttons: 
                     [
                         {
-                            text:"Registrar Entrada", 
+                            text:"Marcar Entrada", 
                             extend: "selectedSingle",
                             action: ()=>{
                                 id=datatable.rows( { selected: true } ).data()[0][0]; 
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         },
 
                         {
-                            text:"Registrar Salida", 
+                            text:"Marcar Salida", 
                             extend: "selectedSingle",
                             action: ()=>{
                                 id=datatable.rows( { selected: true } ).data()[0][0]; 
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         },
 
                         {
-                            text:"Ver Detalles", 
+                            text:"Detalles", 
                             extend: "selectedSingle",
                             attr: {
                                 "data-toggle":"modal",
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         },
 
                         {
-                            text:"Modificar Datos Generales",
+                            text:"Modificar",
                             extend: "selectedSingle",
                             attr:{
                                 "data-toggle": "modal",
