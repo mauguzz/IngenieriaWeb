@@ -301,7 +301,7 @@ export function migrante_consultar(id, prompt, t_general, t_culturales, t_labora
                 'Fecha':'Fecha', 
                 'Actividad Cultural':'Actividad', 
                 'Direccion':'Direccion', 
-            },['col-sm-2', 'col-sm-2', 'col-sm-4'])
+            },['col-sm-2', 'col-sm-4', 'col-sm-4'])
     
             table_generate_rowsandcols(t_registros.children['thead'], t_registros.children['tbody'], registros, {
                 'Punto de control':'Punto_de_Control', 
