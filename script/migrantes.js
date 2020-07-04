@@ -140,7 +140,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             extend: "selectedSingle",
                             action: ()=>{
                                 id=datatable.rows( { selected: true } ).data()[0][0]; 
-                                registros_registrar(id, JSON.stringify({"id_migrante": id}));
+                                registros_registrar(id, JSON.stringify({"id_migrante": id}))
+                                .then(result=>{
+                                    migrante_consultar_todos('#t_migrantes', false)
+                                });
                                 
                             },   
                         },
@@ -150,7 +153,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             extend: "selectedSingle",
                             action: ()=>{
                                 id=datatable.rows( { selected: true } ).data()[0][0]; 
-                                registros_modificar(id, JSON.stringify({"id_migrante": id}));
+                                registros_modificar(id, JSON.stringify({"id_migrante": id}))
+                                .then(result=>{
+                                    migrante_consultar_todos('#t_migrantes', false)
+                                });
                                 
                             },   
                         },
