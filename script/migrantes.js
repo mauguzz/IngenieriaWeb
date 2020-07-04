@@ -253,10 +253,16 @@ form_select_actividad_cultural.onsubmit = function(e){
     .catch(e=>{
         $("#migrante_culturales_modal").modal('hide');
 
-        //Falta agregar el caso Unauthorized (Punto de control inválido)
-        alert(`
-        Uno o varios de los migrantes seleccionados no fueron añadidos a la lista.
-        Es posible que algunos de los migrantes seleccionados ya estén en la lista.`);
+        if(e.message=='Conflict'){
+            alert(`
+            Uno o varios de los migrantes seleccionados no fueron añadidos a la lista.
+            Es posible que algunos de los migrantes seleccionados ya estén en la lista.`);
+        }else if(e.message=='Unauthorized'){
+            alert(`Uno o varios de los migrantes seleccionados no fueron añadidos a la lista.
+            Es posible que algunos de los migrantes seleccionados no estén registrados en el
+            punto de control actual. Primero haga un registro de entrada.`)
+        }
+        
     })
 }
 form_select_actividad_laboral.onsubmit = function(e){
@@ -270,10 +276,16 @@ form_select_actividad_laboral.onsubmit = function(e){
     })
     .catch(e=>{
         $("#migrante_laborales_modal").modal('hide');
-        //Falta agregar el caso Unauthorized (Punto de control inválido)
-        alert(`
-        Uno o varios de los migrantes seleccionados no fueron añadidos a la lista.
-        Es posible que algunos de los migrantes seleccionados ya estén en la lista.`);
+        
+        if(e.message=='Conflict'){
+            alert(`
+            Uno o varios de los migrantes seleccionados no fueron añadidos a la lista.
+            Es posible que algunos de los migrantes seleccionados ya estén en la lista.`);
+        }else if(e.message=='Unauthorized'){
+            alert(`Uno o varios de los migrantes seleccionados no fueron añadidos a la lista.
+            Es posible que algunos de los migrantes seleccionados no estén registrados en el
+            punto de control actual. Primero haga un registro de entrada.`)
+        }
     })
 }
 
