@@ -83,26 +83,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 buttons: 
                     [
                         {
-                            text:"Marcar Entrada", 
-                            extend: "selectedSingle",
-                            action: ()=>{
-                                id=datatable.rows( { selected: true } ).data()[0][0]; 
-                                registros_registrar(id, JSON.stringify({"id_migrante": id}));
-                                
-                            },   
-                        },
-
-                        {
-                            text:"Marcar Salida", 
-                            extend: "selectedSingle",
-                            action: ()=>{
-                                id=datatable.rows( { selected: true } ).data()[0][0]; 
-                                registros_modificar(id, JSON.stringify({"id_migrante": id}));
-                                
-                            },   
-                        },
-
-                        {
                             text:"Detalles", 
                             extend: "selectedSingle",
                             attr: {
