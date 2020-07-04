@@ -75,6 +75,7 @@ function table_generate_rowsandcols(thead, tbody, rows, columns, columnwidths){
     Object.entries(rows).forEach(([rowname,row]) => { //rowname es un key de Object, row es un value de Object
         if(th_row===undefined){
             th_row= document.createElement('tr');
+            th_row.setAttribute('class','row');
             first=true;
         }else{
             first=false;
@@ -266,13 +267,13 @@ export function migrante_consultar(id, prompt, t_general, t_culturales, t_labora
                 'Fecha':'Fecha', 
                 'Trabajo':'Actividad',  
                 'Direccion':'Direccion'
-            }, ['col-sm', 'col-sm-4', 'col-sm-6']);
+            }, ['col-sm-2', 'col-sm-4', 'col-sm-6']);
     
             table_generate_rowsandcols(t_culturales.children['thead'], t_culturales.children['tbody'], culturales, {
                 'Fecha':'Fecha', 
                 'Actividad Cultural':'Actividad', 
                 'Direccion':'Direccion', 
-            },['col-sm', 'col-sm-4', 'col-sm-6'])
+            },['col-sm-2', 'col-sm-4', 'col-sm-6'])
     
             table_generate_rowsandcols(t_registros.children['thead'], t_registros.children['tbody'], registros, {
                 'Punto de control':'Punto_de_Control', 
