@@ -88,11 +88,14 @@ function table_generate_rowsandcols(thead, tbody, rows, columns, columnwidths){
             th_col.push(document.createElement('th'));
             th_col[ind].setAttribute('class',columnwidths[ind])
             th_col[ind].innerHTML=`${colname}`;
-            //th_row.appendChild(th_col);  
+            th_row.appendChild(th_col[ind]);  
     })
     
-        
-    
+    /*
+    th_col.forEach((col)=>{
+        th_row.appendChild(col);
+    })
+    */
 
 
 
@@ -126,9 +129,7 @@ function table_generate_rowsandcols(thead, tbody, rows, columns, columnwidths){
     });
     */
 
-    th_col.forEach((col)=>{
-        th_row.appendChild(col);
-    })
+    
 
 }
 
