@@ -685,7 +685,9 @@ public static function Eliminar_Asistencia_Oferta_Laboral($mysqli, $ID_Migrante,
                             
                         }
 
-                        header("location:http://localhost/IngenieriaWeb/migrantes.html");  
+                        //header("location:http://localhost/IngenieriaWeb/migrantes.html"); 
+                        
+                        
                         //header('Content-Type: text/html; charset=utf-8');
                         //header("Location: "."../../migrantes.html");  
                     }            
