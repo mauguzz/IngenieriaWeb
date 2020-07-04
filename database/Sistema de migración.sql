@@ -2831,7 +2831,7 @@ create view Migrantes_Todos As
 		Pais.Id_Pais=Migrante.Id_Pais
         inner join Registro ON	
 		Registro.Id_Migrante=Migrante.Id_Migrante
-        AND Registro.Fecha_Entrada = SELECT MAX (Registro.Fecha_Entrada) FROM Registro WHERE Registro.Id_Migrante = Migrante.Id_Migrante
+        AND Registro.Fecha_Entrada = (SELECT MAX (Registro.Fecha_Entrada) FROM Registro WHERE Registro.Id_Migrante = Migrante.Id_Migrante)
 		inner join Puntos_De_Control ON
 		Puntos_De_Control.Id_Punto_Control=Registro.Id_Punto_Control/*Cambiar el nombre del ID de estados*/
         inner join Estados ON
