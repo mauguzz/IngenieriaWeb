@@ -688,6 +688,8 @@ export function Validar_Sesion(){
             alert("Primero Inicie sesión");
             window.location.href ="http://localhost/IngenieriaWeb/index.html";
         }else{
+            document.getElementById('UserName').innerHTML=resjson.USERNAME;
+            document.getElementById('ControlPointName').innerHTML=resjson.POINTD;
             console.log("Bienvenido,");
         }
     })
