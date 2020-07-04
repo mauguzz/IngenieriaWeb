@@ -59,10 +59,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         text:"Revisar Asistencia", 
                         extend: "selectedSingle",
                         attr: {
+                            "data-toggle":"modal",
+                            "data-target":"#Asistencia_laborales_modal"
                         },
                         action: ()=>{
-                            id=datatable.rows( { selected: true } ).data()[0][0]; 
-                            asistencias_laborales_consultar_todos(id,'#t_laborales', false);
+                            id=datatable.rows( { selected: true } ).data()[0][0];                            
+                            asistencias_laborales_consultar_todos(id,'#t_laborales_Asistencia', false);
                         }
                     },
                     ,
@@ -99,23 +101,24 @@ form_laborales_registrar.onsubmit = function(e){
 
     if(form_laborales_action.value=="create"){
         laborales_registrar(formJson)
-        .then(result=>{
-            form_culturales_registrar.reset();
+        .then(result=>{            
             $("#modal_laborales_form").modal('hide');
+            form_culturales_registrar.reset();
             laborales_consultar_todos('#t_laborales', false)
         })
         .catch(e=>{
-           alert("Error al registrar la actividad");
+           //alert("Error al registrar la actividad");
         });
 
     }else if(form_laborales_action.value=="modify"){
         laborales_modificar(id, formJson)
         .then(result=>{
+            form_culturales_registrar.reset();
             $("#modal_laborales_form").modal('hide');
             laborales_consultar_todos('#t_laborales', false)
         })
         .catch(e=>{            
-            alert("Error al registrar la actividad");
+            //alert("Error al registrar la actividad");
         })
         ;
     }

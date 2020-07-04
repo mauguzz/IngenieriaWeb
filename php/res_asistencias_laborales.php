@@ -15,12 +15,12 @@ function res_get(){
     $conexion= new Database();
 
     if (count($args)==1){
-        //Se pasó el id. //CASO: Obtener una única actividad cultural
-        $result=$conexion->Mostrar_Asistencia_Oferta_Laboral($conexion);
+        //Para mostrar por Actividad
+        $result=$conexion->Mostrar_Asistencia_Oferta_Laboral_Act($conexion,$args);
         
     }else{
-        //No se pasó el id. //CASO: Obtener todos las actividades culturales
-        $result=$conexion->Mostrar_Asistencia_Oferta_Laboral($conexion);
+        //Para mostrar por Migrante
+        $result=$conexion->Mostrar_Asistencia_Oferta_Laboral_Act($conexion,$args);
         
     }
 

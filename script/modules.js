@@ -444,9 +444,9 @@ export function asistencias_culturales_eliminar(id){
 }
 
 //FUNCIONES DE TABLA MIGRANTES-LABORALES//
-export function asistencias_laborales_consultar_todos(table, init){  //thead_migrantes, tbody_migrantes
+export function asistencias_laborales_consultar_todos(id,table, init){  //thead_migrantes, tbody_migrantes
     return new Promise((resolve, reject)=>{
-        datatable_consultar_todos("php/res_asistencias_laborales.php", "asistencias_laborales", table, init, {
+        datatable_consultar_todos("php/res_asistencias_laborales.php/"+id, "asistencias_laborales", table, init, {
             //Hace falta obtener el ID desde el View de MySQL, para poder hacer tratamientos posteriores
             'ID Actividad' : "Id_Trabajo",
             'Nombre Actividad':'Actividad', 
@@ -689,6 +689,8 @@ export function Validar_Sesion(){
             window.location.href ="http://localhost/IngenieriaWeb/index.html";
         }else{
             console.log("Bienvenido,");
+            document.getElementById('UserName').innerHTML=resjson.USERNAME;
+            document.getElementById('ControlPointName').innerHTML=resjson.POINTNAME;
         }
     })
     .catch(e=>{

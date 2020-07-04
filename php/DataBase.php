@@ -105,9 +105,9 @@ class DataBase{
     }
  
     //ESTA POSIBLEMENTE NO SE UTILICE, YA QUE SE HACE UNA CONSULTA SELECTIVA EN DETALLES DEL MIGRANTE//
-    public static function Mostrar_Asistencia_Oferta_Laboral($mysqli){
+    public static function Mostrar_Asistencia_Oferta_Laboral_Act($mysqli,$Id_Oferta){
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-        $query="SELECT * FROM Asistencia_Oferta_Laboral_View";//Introduzco la consulta
+        $query="SELECT * FROM Asistencia_Oferta_Laboral_View where Id_Trabajo='".$Id_Oferta."';";//Introduzco la consulta
         $Asistencia_Oferta_Laboral = $Conexion->prepare($query); //
         $Asistencia_Oferta_Laboral->execute();  //Ejecuto la consulta
         return ['asistencias_laborales'=>$Asistencia_Oferta_Laboral->fetchAll(PDO::FETCH_ASSOC)];
