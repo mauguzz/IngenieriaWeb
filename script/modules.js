@@ -91,43 +91,28 @@ function table_generate_rowsandcols(thead, tbody, rows, columns, columnwidths){
             th_row.appendChild(th_col[ind]);  
     })
     
-    /*
-    th_col.forEach((col)=>{
-        th_row.appendChild(col);
-    })
-    */
+   
 
 
 
 
 
-/*
+
     Object.entries(rows).forEach(([rowname,row]) => { //rowname es un key de Object, row es un value de Object
-        if(th_row===undefined){
-            th_row= document.createElement('tr');
-            th_row.setAttribute('class','row');
-            first=true;
-        }else{
-            first=false;
-        } 
+         
         let td_row = document.createElement('tr');
 
         Object.entries(columns).forEach(([colname,col],ind)=>{ //colname es un key de Object, col es un value de Object
-            if(first){
-                th_col.push(document.createElement('th'));
-                th_col[ind].setAttribute('class',columnwidths[ind])
-                th_col[ind].innerHTML=`${colname}`;
-                //th_row.appendChild(th_col);
-            }
+            
             let td_col = document.createElement('td');
             
             td_col.innerHTML=`${row[col]}`;
             td_row.appendChild(td_col);
         })
-        if(first)thead.appendChild(th_row);
+        
         tbody.appendChild(td_row);
     });
-    */
+    
 
     
 
