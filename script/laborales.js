@@ -65,14 +65,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         },
                         action: ()=>{
                             id=datatable.rows( { selected: true } ).data()[0][0];                                                
-                            asistencias_laborales_consultar_todos(id,'#t_laborales_Asistencia', false)
-                            .then (result=>{
-                                laborales_consultar_todos('#t_laborales', false)
-                            })
-                            .catch(result=>{
-                                console.log("Error");
-                                console.log(result)
-                            })
+                            asistencias_laborales_consultar_todos(id,'#t_laborales_Asistencia', true);
                         }
                     },
                     ,

@@ -43,7 +43,7 @@ import {migrante_consultar,Iniciar_Sesion, migrante_consultar_todos, migrante_re
             console.log(reason.message);
  
             if(reason.message=="Unauthorized"){
-                
+          
                 llave=false;
                 alert("Llave incorrecta. Verifique que la llave proporcionada sea correcta.")
                 

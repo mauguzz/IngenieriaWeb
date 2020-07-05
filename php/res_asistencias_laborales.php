@@ -12,18 +12,21 @@ function res_get($id){
     //USO: Pasar un único argumento entero id si se va a aplicar la acción a un elemento específico
     //Si no, no es necesario pasar argumentos.
     $args=func_get_args();
+    if($json=file_get_contents('php://input')){
+        $data=json_decode($json);
+    }
+
     $conexion= new Database();
 
     if (count($args)==1){
         //Para mostrar por Actividad
-        $result=$conexion->Mostrar_Asistencia_Oferta_Laboral_Act($conexion,$args);
+        $result=$conexion->Mostrar_Asistencia_Oferta_Laboral_Act($conexion,$id);
         
     }else{
         //Para mostrar por Migrante
-        $result=$conexion->Mostrar_Asistencia_Oferta_Laboral_Act($conexion,$args);
+        $result=$conexion->Mostrar_Asistencia_Oferta_Laboral_Act($conexion,$id);
         
     }
-
 return $result;
 }
 

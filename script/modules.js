@@ -181,6 +181,8 @@ function datatable_consultar_todos(uri, rowsindex, table, init, columns){
         .then(handleHttpErrors)
         .then(res=>res.json())
         .then(res_json=>{
+            console.log("Aquí");
+            console.log(res_json);
             let rows=res_json[rowsindex]; 
             console.log(res_json);
             datatable=table_generate_datatables(table, init, rows, columns);
@@ -399,7 +401,7 @@ export function funcionarios_consultar(table, init){  //thead_culturales, tbody_
 //FUNCIONES DE TABLA MIGRANTES-CULTURALES//
 export function asistencias_culturales_consultar_todos(id, table, init){  //thead_migrantes, tbody_migrantes
     return new Promise((resolve, reject)=>{
-        datatable_consultar_todos("php/res_asistencias_culturales.php/"+id, "asistencias_culturales", table, init, {
+        datatable_consultar_todos("php/res_asistencias_culturales.php/actividad/"+id, "asistencias_culturales", table, init, {
             //Hace falta obtener el ID desde el View de MySQL, para poder hacer tratamientos posteriores
             'ID Actividad' : "Id_Actividad",
             'Nombre Actividad':'Actividad', 
@@ -447,7 +449,7 @@ export function asistencias_culturales_eliminar(id){
 //FUNCIONES DE TABLA MIGRANTES-LABORALES//
 export function asistencias_laborales_consultar_todos(id,table, init){  //thead_migrantes, tbody_migrantes
     return new Promise((resolve, reject)=>{
-        datatable_consultar_todos("php/res_asistencias_laborales.php/"+id, "asistencias_laborales", table, init, {
+        datatable_consultar_todos("php/res_asistencias_laborales.php/actividad/"+id,"asistencias_laborales", table, init, {
             //Hace falta obtener el ID desde el View de MySQL, para poder hacer tratamientos posteriores
             'ID Actividad' : "Id_Trabajo",
             'Nombre Actividad':'Actividad', 
@@ -456,8 +458,7 @@ export function asistencias_laborales_consultar_todos(id,table, init){  //thead_
             'Nombre Asistente':'Nombre', 
             'Apellido Paterno':'Apellido_Paterno', 
             'Apellido Materno':'Apellido_Materno',
-            'Fecha de Registro':'Fecha', 
-            
+            'Fecha de Registro':'Fecha'            
         })
         .then(datatable=>{resolve(datatable)})
         .catch(e=>{reject(e)})

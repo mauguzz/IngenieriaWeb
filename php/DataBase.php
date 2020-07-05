@@ -86,9 +86,9 @@ class DataBase{
     }
    
     //ESTA POSIBLEMENTE NO SE UTILICE, YA QUE SE HACE UNA CONSULTA SELECTIVA EN DETALLES DEL MIGRANTE//
-    public static function Mostrar_Asistencia_Actividad_Cultural($mysqli){
+    public static function Mostrar_Asistencia_Actividad_Cultural($mysqli,$id){
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-        $query="SELECT  FROM Asistencia_Actividad_Cultural_View";//Introduzco la consulta
+        $query="SELECT * FROM Asistencia_Actividad_Cultural_View where Id_Actividad='.$id.';";//Introduzco la consulta
         $Asistencia_Actividad_Cultural = $Conexion->prepare($query); //
         $Asistencia_Actividad_Cultural->execute();  //Ejecuto la consulta
         return ['asistencias_culturales'=>$Asistencia_Actividad_Cultural->fetchAll(PDO::FETCH_ASSOC)];
@@ -105,12 +105,13 @@ class DataBase{
  
     //ESTA POSIBLEMENTE NO SE UTILICE, YA QUE SE HACE UNA CONSULTA SELECTIVA EN DETALLES DEL MIGRANTE//
     public static function Mostrar_Asistencia_Oferta_Laboral_Act($mysqli,$Id_Oferta){
+
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-        $query="SELECT * FROM Asistencia_Oferta_Laboral_View where Id_Trabajo=".$Id_Oferta.";";//Introduzco la consulta
+        $query="SELECT * FROM Asistencia_Oferta_Laboral_View  where Id_Trabajo=".$Id_Oferta.";";//Introduzco la consulta
         $Asistencia_Oferta_Laboral = $Conexion->prepare($query); //
         $Asistencia_Oferta_Laboral->execute();  //Ejecuto la consulta
-        echo("Error");
         return ['asistencias_laborales'=>$Asistencia_Oferta_Laboral->fetchAll(PDO::FETCH_ASSOC)];
+
     }
 
     public static function Mostrar_Funcionario($mysqli){
@@ -424,12 +425,19 @@ class DataBase{
 
 /*----------------------------------------------Modificaciones------------------------------------------------ */
 
-public static function Modificar_Migrante ($mysqli,$id, $Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion){
+public static function Modificar_Migrante ($mysqli,$id, $Nombre, $Apellido_Paterno, $Apellido_Materno, $Fecha_Nacimiento, $Ciudad, $Pais, $Oficio, $Contacto_Telefono, $Nivel_Educativo, $Situacion_Familiar, $Causa_Migracion,$llave){
 
+   
     $Estado_Por_Defecto= 1;
     $Tabla='Migrante';
     try {
-        $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+        //$Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
+        if(!isset(DataBase::$Conexion_Alt)){
+            DataBase::$Conexion_Alt=DataBase::Conectar();
+        }else{
+            $Conexion=DataBase::$Conexion_Alt;
+        }
+
         $Conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $query="
         UPDATE ".$Tabla."

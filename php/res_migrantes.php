@@ -16,7 +16,7 @@ function res_get(){
     $conexion= new Database();
 
     if (count($args)==1){
-        //Se pasó el id. //CASO: Obtener detalles de un migrante
+        //Se pasó el id. //CASO: Obtener detalles de un migrante   
         if(isset($_SESSION['USERID'])){ //$sesion->USERID!=NULL
             $result=$conexion->Mostrar_Migrante_Detalle($conexion, $args[0]); //Descomentar para version final
         }elseif (isset($_SERVER['PHP_AUTH_PW'])) { //Esta variable está seteada cuando en frontend se utiliza le cabecera Authorization
@@ -92,6 +92,9 @@ function res_put($id){
         $data=json_decode($json);
         $conexion= new Database();
 
+        $llave=$conexion->Consultar_Llave_Migrante($conexion, $id);
+        if ($llave["migrante"][0]["Llave"]==$data->llave){
+
         $result = $conexion->Modificar_Migrante(
             $conexion,
             $id,
@@ -105,9 +108,16 @@ function res_put($id){
             $data->contacto_telefono, 
             $data->nivel_educativo, 
             $data->situacion_familiar, 
-            $data->causa_migracion
+            $data->causa_migracion,
+            $data->llave);
+
+        }
+        else{     
+            $result = ["Error"=>"No se enviaron todos los parametros correctamente"];
+            header("HTTP/1.1 401 Unauthorized");
+            return $result;
+        }
             
-        );
 
     }else{
         $result = ["Error"=>"No se enviaron todos los parametros correctamente"];

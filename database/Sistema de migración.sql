@@ -2879,14 +2879,15 @@ select
         
 select Id_Punto_Control,'Punto_de_control',Fecha_Entrada,Fecha_Salida,Alimentacion from Migrantes_Registro where Id_Migrante=1;
 
-alter view Asistencia_Actividad_Cultural_View as 
+create view Asistencia_Actividad_Cultural_View as 
 select 
       Actividades.Id_Actividad,
 	  Actividades.Nombre As 'Actividad',
+      Actividades.Direccion,
+      Migrante.Id_Migrante,
       Migrante.Nombre,
       Migrante.Apellido_Paterno,
       Migrante.Apellido_Materno,
-      Actividades.Direccion,
       Asistencia_Actividad_Cultural.Fecha
       from Asistencia_Actividad_Cultural
       inner join Migrante ON
@@ -2897,7 +2898,9 @@ select
 select *from Asistencia_Actividad_Cultural_View where Id_Migrante=1; /*Vista de asistencia de actividades*/
 select Id_Actividad,Actividad,Direccion,fECHA FROM Asistencia_Actividad_Cultural_View where Id_Migrante=1; /*VISTA PARA DETALLE MIGRANTE*/
 
-alter view Asistencia_Oferta_Laboral_View as /*--------------Para consultar por actividad--------------------*/
+SELECT * FROM Asistencia_Actividad_Cultural_View where Id_Actividad=1;
+
+create view Asistencia_Oferta_Laboral_View as /*--------------Para consultar por actividad--------------------*/
 select 
       Asistencia_Oferta_Laboral.Id_Trabajo,
 	  Ofertas_de_Trabajo.Nombre As 'Actividad',
@@ -2912,12 +2915,13 @@ select
 	  Migrante.Id_Migrante=Asistencia_Oferta_Laboral.Id_Migrante
       inner join Ofertas_de_Trabajo ON
       Ofertas_de_Trabajo.Id_Trabajo=Asistencia_Oferta_Laboral.Id_Trabajo;
-      select * from funn
+
       
-select *from Asistencia_Oferta_Laboral_View where Id_Migrante=1; /*Vista de asistencia de actividades*/
+select *from Asistencia_Oferta_Laboral_View where Id_Trabajo='8'; /*Vista de asistencia de actividades*/
+
 select Id_Trabajo,Actividad,Direccion,fecha FROM Asistencia_Oferta_Laboral_View where Id_Migrante=1; /*VISTA PARA DETALLE MIGRANTE*/
 
-	
+
 create view Mostrar_Funcionarios as 
 select 
 	  Funcionario.Id_Funcionario,

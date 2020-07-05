@@ -1,5 +1,6 @@
 //import {} from './modules.js';
-import {culturales_consultar_todos, culturales_eliminar, culturales_modificar, culturales_registrar,Validar_Sesion,Cerrar_Sesion} 
+import {culturales_consultar_todos, culturales_eliminar, culturales_modificar, 
+    asistencias_culturales_consultar_todos,culturales_registrar,Validar_Sesion,Cerrar_Sesion} 
 from './modules.js';
 
 /*------------------------------------------------Tablas------------------------------------------------------*/
@@ -61,10 +62,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         text:"Revisar Asistencia", 
                         extend: "selectedSingle",
                         attr: {
+                            "data-toggle":"modal",
+                            "data-target":"#Asistencia_culturales_modal"
                         },
                         action: ()=>{
                             id=datatable.rows( { selected: true } ).data()[0][0]; 
-                            //Se va a redireccionar a otra página
+                            asistencias_culturales_consultar_todos(id, '#t_culturales_Asistencia',true)
                         }
                     },
                     {

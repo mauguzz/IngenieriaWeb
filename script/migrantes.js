@@ -102,9 +102,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                 "data-target": "#modal_migrantes_form"
                             },
                             action: ()=>{
-                                id=datatable.rows( { selected: true } ).data()[0][0]; 
+                                id=datatable.rows( { selected: true } ).data()[0][0];  
                                 form_migrantes_action.value="modify";
-                                form_migrantes_submit.value="Guardar cambios";                                
+                                form_migrantes_submit.value="Guardar cambios";
+                                             
                             }     
                         },
 
@@ -292,9 +293,10 @@ form_select_actividad_laboral.onsubmit = function(e){
 
 form_migrantes.onsubmit = function(e){
     e.preventDefault();
-
-    
     let formData = new FormData(form_migrantes);
+    let FromJsonModify =Object.fromEntries(formData);
+
+
     let formJson = JSON.stringify(Object.fromEntries(formData));
     console.log(formJson);
 
@@ -312,13 +314,20 @@ form_migrantes.onsubmit = function(e){
             alert("Error al insertar migrante");
         });
     }else if(form_migrantes_action.value=="modify"){
-        migrante_modificar(id, formJson)
+        let llave=prompt("Ingrese la llave del migrante","");
+        if (llave!=null){     
+        FromJsonModify.llave=llave;
+        migrante_modificar(id, JSON.stringify(FromJsonModify))
         .then(result=>{
+            $("#modal_migrantes_form").modal('hide');
+            form_migrantes.reset();
             migrante_consultar_todos('#t_migrantes', false);
         })
         .catch(e=>{
             alert("Error al modificar migrante");
         });
+        
+        }   
     }
     
 }

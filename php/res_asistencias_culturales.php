@@ -9,19 +9,25 @@ $result = "";
 
 
 //MÉTODO HTTP GET
-function res_get(){
+function res_get($id){
     //USO: Pasar un único argumento entero id si se va a aplicar la acción a un elemento específico
     //Si no, no es necesario pasar argumentos.
+   
     $args=func_get_args();
+    if($json=file_get_contents('php://input')){
+        $data=json_decode($json);
+    }
+    
     $conexion= new Database();
+
 
     if (count($args)==1){
         //Se pasó el id. //CASO: Obtener una única actividad cultural
-        $result=$conexion->Mostrar_Asistencia_Actividad_Cultural($conexion);
+        $result=$conexion->Mostrar_Asistencia_Actividad_Cultural($conexion,$id);
         
     }else{
         //No se pasó el id. //CASO: Obtener todos las actividades culturales
-        $result=$conexion->Mostrar_Asistencia_Actividad_Cultural($conexion);
+        $result=$conexion->Mostrar_Asistencia_Actividad_Cultural($conexion,$id);
         
     }
 
@@ -123,7 +129,7 @@ if($uri[0] == 'res_asistencias_culturales.php'){
     switch($method){
        
         case 'GET':
-            $id_specified ? ($result=res_get($id)) : ($result=res_get());
+            $id_specified ? ($result=res_get($id)) : ($result=res_get($id));
         break;
         case 'POST':
             $id_specified ? ($result=res_post($id)) : header('HTTP/1.1 400 Bad Request');
