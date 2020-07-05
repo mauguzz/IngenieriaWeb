@@ -2898,6 +2898,9 @@ select
 select *from Asistencia_Actividad_Cultural_View where Id_Migrante=1; /*Vista de asistencia de actividades*/
 select Id_Actividad,Actividad,Direccion,fECHA FROM Asistencia_Actividad_Cultural_View where Id_Migrante=1; /*VISTA PARA DETALLE MIGRANTE*/
 
+select * from migrante where llave="123456";
+
+
 SELECT * FROM Asistencia_Actividad_Cultural_View where Id_Actividad=1;
 
 create view Asistencia_Oferta_Laboral_View as /*--------------Para consultar por actividad--------------------*/
