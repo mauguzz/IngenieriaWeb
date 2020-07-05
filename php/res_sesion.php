@@ -9,6 +9,7 @@ $result = "";
 //MÉTODO HTTP GET
 function res_get(){
 
+    
         session_start();/*Continuamos la sesión*/
         $result=new stdclass();
         if (!empty($_SESSION['USERID']) and !empty($_SESSION['USERNAME'])){

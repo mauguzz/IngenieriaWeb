@@ -8,7 +8,7 @@ $result = "";
 
 
 //MÉTODO HTTP GET
-function res_get(){
+function res_get($id){
     //USO: Pasar un único argumento entero id si se va a aplicar la acción a un elemento específico
     //Si no, no es necesario pasar argumentos.
     $args=func_get_args();
@@ -90,6 +90,7 @@ function res_delete($id){
     return $result;
 }
 
+
 session_start();/*Continuamos la sesión*/
 //CÓDIGO EJECUTADO AL MOMENTO DE LLAMAR AL ARCHIVO PHP
 $uri=explode("/",$uri);
@@ -115,7 +116,7 @@ if($uri[0] == 'res_asistencias_laborales.php'){
     
     switch($method){
         case 'GET':
-            $id_specified ? ($result=res_get($id)) : ($result=res_get());
+            $id_specified ? ($result=res_get($id)) : ($result=res_get($id));
         break;
         case 'POST':
             $id_specified ? ($result=res_post($id)) : header('HTTP/1.1 400 Bad Request');

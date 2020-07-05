@@ -186,7 +186,8 @@ function datatable_consultar_todos(uri, rowsindex, table, init, columns){
             datatable=table_generate_datatables(table, init, rows, columns);
             resolve(datatable);
         })
-        .catch(e=>{console.log(e); reject(e);})
+        .catch(e=>{console.log(e);reject(e);})
+
     })
      
 }
@@ -398,7 +399,7 @@ export function funcionarios_consultar(table, init){  //thead_culturales, tbody_
 //FUNCIONES DE TABLA MIGRANTES-CULTURALES//
 export function asistencias_culturales_consultar_todos(id, table, init){  //thead_migrantes, tbody_migrantes
     return new Promise((resolve, reject)=>{
-        datatable_consultar_todos("php/res_asistencias_culturales.php"+id, "asistencias_culturales", table, init, {
+        datatable_consultar_todos("php/res_asistencias_culturales.php/"+id, "asistencias_culturales", table, init, {
             //Hace falta obtener el ID desde el View de MySQL, para poder hacer tratamientos posteriores
             'ID Actividad' : "Id_Actividad",
             'Nombre Actividad':'Actividad', 
@@ -661,6 +662,7 @@ export function llenar_opciones_selector(selectors_ids){
 }
 
 /*------------------------------------------------Sesiones----------------------------------------------------*/
+
 
 export function Iniciar_Sesion(formJson){
     fetch("php/res_sesion.php",{method: 'POST', body: formJson})   ///

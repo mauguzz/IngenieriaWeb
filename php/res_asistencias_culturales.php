@@ -7,6 +7,7 @@ $uri=$_SERVER['REQUEST_URI'];       //Capturar URI utilizada
 $result = "";
 
 
+
 //MÉTODO HTTP GET
 function res_get(){
     //USO: Pasar un único argumento entero id si se va a aplicar la acción a un elemento específico

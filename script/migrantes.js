@@ -30,7 +30,6 @@ let ids=[];
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
-
         Validar_Sesion()
 
         llenar_opciones_selector(
@@ -276,7 +275,7 @@ form_select_actividad_laboral.onsubmit = function(e){
     })
     .catch(e=>{
         $("#migrante_laborales_modal").modal('hide');
-        
+
         if(e.message=='Conflict'){
             alert(`
             Uno o varios de los migrantes seleccionados no fueron añadidos a la lista.

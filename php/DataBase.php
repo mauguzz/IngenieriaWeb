@@ -96,8 +96,7 @@ class DataBase{
  
 
     public static function Mostrar_Ofertas_de_Trabajo($mysqli){
-        $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-        
+        $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos     
         $query="SELECT Id_Trabajo, Nombre, Direccion, Requisitos, Detalles FROM Ofertas_de_Trabajo where Id_Punto_Control='". $_SESSION['POINTID']."';";//Introduzco la consulta
         $Ofertas_de_Trabajo = $Conexion->prepare($query); //
         $Ofertas_de_Trabajo->execute();  //Ejecuto la consulta
@@ -107,9 +106,10 @@ class DataBase{
     //ESTA POSIBLEMENTE NO SE UTILICE, YA QUE SE HACE UNA CONSULTA SELECTIVA EN DETALLES DEL MIGRANTE//
     public static function Mostrar_Asistencia_Oferta_Laboral_Act($mysqli,$Id_Oferta){
         $Conexion = $mysqli ->Conectar(); //Me conecto a la base de datos
-        $query="SELECT * FROM Asistencia_Oferta_Laboral_View where Id_Trabajo='".$Id_Oferta."';";//Introduzco la consulta
+        $query="SELECT * FROM Asistencia_Oferta_Laboral_View where Id_Trabajo=".$Id_Oferta.";";//Introduzco la consulta
         $Asistencia_Oferta_Laboral = $Conexion->prepare($query); //
         $Asistencia_Oferta_Laboral->execute();  //Ejecuto la consulta
+        echo("Error");
         return ['asistencias_laborales'=>$Asistencia_Oferta_Laboral->fetchAll(PDO::FETCH_ASSOC)];
     }
 
@@ -647,6 +647,7 @@ public static function Eliminar_Asistencia_Oferta_Laboral($mysqli, $ID_Migrante,
         return ["DELETE"=>$e->getMessage()];
     }
 }
+
 
 
 /*------------------------------------------------Sesiones--------------------------------------------------*/

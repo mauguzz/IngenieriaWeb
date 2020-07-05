@@ -2,6 +2,7 @@
 
 require_once('DataBase.php');
 
+
      /*Continuamos la sesión*/
      session_start();
     $result=new stdclass();

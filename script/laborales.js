@@ -17,6 +17,7 @@ const form_laborales_action = document.getElementById('f_laborales_action');
 const B_Cerrar_Sesion=document.getElementById('B_Cerrar_Sesion');
 
 
+
 let id;
 
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -63,8 +64,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             "data-target":"#Asistencia_laborales_modal"
                         },
                         action: ()=>{
-                            id=datatable.rows( { selected: true } ).data()[0][0];                            
-                            asistencias_laborales_consultar_todos(id,'#t_laborales_Asistencia', false);
+                            id=datatable.rows( { selected: true } ).data()[0][0];                                                
+                            asistencias_laborales_consultar_todos(id,'#t_laborales_Asistencia', false)
+                            .then (result=>{
+                                laborales_consultar_todos('#t_laborales', false)
+                            })
+                            .catch(result=>{
+                                console.log("Error");
+                                console.log(result)
+                            })
                         }
                     },
                     ,

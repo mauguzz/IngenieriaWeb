@@ -7,6 +7,7 @@ $uri=$_SERVER['REQUEST_URI'];       //Capturar URI utilizada
 $result = "";
 
 
+
 //MÉTODO HTTP GET
 function res_get(){
     $conexion= new Database();

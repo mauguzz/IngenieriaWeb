@@ -15,7 +15,8 @@ import {migrante_consultar,Iniciar_Sesion, migrante_consultar_todos, migrante_re
     const B_Iniciar_Sesion=document.getElementById("B_Iniciar_Sesion");
 
 
-      
+     
+    
 
     
     let id =0; //Variable de prueba, id de migrante que se aplica la acción

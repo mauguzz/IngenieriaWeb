@@ -2912,6 +2912,7 @@ select
 	  Migrante.Id_Migrante=Asistencia_Oferta_Laboral.Id_Migrante
       inner join Ofertas_de_Trabajo ON
       Ofertas_de_Trabajo.Id_Trabajo=Asistencia_Oferta_Laboral.Id_Trabajo;
+      select * from funn
       
 select *from Asistencia_Oferta_Laboral_View where Id_Migrante=1; /*Vista de asistencia de actividades*/
 select Id_Trabajo,Actividad,Direccion,fecha FROM Asistencia_Oferta_Laboral_View where Id_Migrante=1; /*VISTA PARA DETALLE MIGRANTE*/
