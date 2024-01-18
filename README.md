@@ -1,4 +1,5 @@
 > **_NOTA:_** SOBRE EL CÓDIGO DE MI PROYECTO TERMINAL DE INGENIERÍA TELEMÁTICA.
+> 
 > El código de dicho proyecto se encuentra en un repositorio de mi otra cuenta de GitHub: github.com/mauguzmor. Sin embargo, es un repositorio protegido.
 > 
 > Si está interesado en conocer una muestra de dicho código, contácteme al correo mauricio.guzz@outlook.com.
