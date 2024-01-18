@@ -1,4 +1,4 @@
-> **_NOTA SOBRE EL CÓDIGO DE MI PROYECTO TERMINAL DE INGENIERÍA TELEMÁTICA: **
+> ##NOTA SOBRE EL CÓDIGO DE MI PROYECTO TERMINAL DE INGENIERÍA TELEMÁTICA:
 > 
 > El código de dicho proyecto se encuentra en un repositorio de mi otra cuenta de GitHub: github.com/mauguzmor. Sin embargo, es un repositorio protegido.
 > 
